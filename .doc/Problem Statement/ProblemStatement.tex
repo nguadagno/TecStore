@@ -216,32 +216,44 @@ A ciò si aggiunge un \emph{backend} con più viste, riservate al personale, che
 
 \newpage
 \section{Requisiti funzionali}
-\subsection{Registrazione}
+\subsection{Clienti}
+\subsubsection{Registrazione}
 Il sistema deve permettere la registrazione a qualsiasi utente che lo desideri, mantenendo l'univocità dell'indirizzo email e assicurandosi che ogni password rispetti dei requisiti minimi di sicurezza come una lunghezza minima di 12 caratteri e l'utilizzo di più caratteri alfanumerici.
 
-\subsection{Autenticazione}
+\subsubsection{Autenticazione}
 Ad un utente registrato deve essere fornita la possibilità di effettuare il login con l'indirizzo email e la password scelti durante la registrazione. In caso di smarrimento della password, all'utente deve essere fornita la possibilità di cambiarla, ma non di recuperare la password attualmente impostata per motivi di  \hyperref[sec:security]{sicurezza}. All'utente deve essere fornita anche la possibilità di cambiarla in qualsiasi momento, ma non deve essere possibile modificare l'indirizzo email.
 
-\subsection{Possibilità di acquisto di articoli solo per utenti registrati}
+\subsubsection{Possibilità di acquisto di articoli solo per utenti registrati}
 Il sistema deve permettere l'acquisto di articoli e la vendita di essi solo ad utenti pienamente registrati. Un utente non registrato deve solo poter consultare il catalogo ed effettuare la registrazione.
 
-\subsection{Controllo di ogni articolo introdotto dall'utenza}
-Per ogni articolo inserito nella piattaforma, un sistema automatico e un centralinista devono approvare il testo, per evitare oscenità e altri contenuti indesiderati.
-
-\subsection{Possibilità per ogni utente di vendere articoli}
+\subsubsection{Possibilità per ogni utente di vendere articoli}
 Per ogni utente registrato deve essere possibile introdurre articoli nel catalogo, se passano i controlli.
 
-\subsection{Gestione del personale da un account dedicato}
-Il sistema deve essere provvisto di almeno un account con accesso all'interfaccia per la gestione degli account del personale e prevedere inserimento, rimozione e modifica degli stessi account.
+\subsubsection{Possibilità di contatto del servizio clienti}
+Il sistema deve rendere possibile la comunicazione con l'assistenza clienti, per evitare che un cliente non soddisfatto dai servizi diffonda cattiva pubblicità. Ciò è gestito attraverso il meccanismo dei \textit{ticket}.
 
-\subsection{Gestione del catalogo da un account dedicato}
-Il sistema deve essere provvisto di almeno un account con accesso all'interfaccia per la gestione del catalogo e permettere l'inserimento, rimozione e modifica di articoli nel catalogo stesso.
+\subsubsection{Modifica informazioni profilo}
+All'utente deve essere permesso di cambiare password, email, indirizzo, numero di carta di credito.
 
-\subsection{Account magazziniere}
+\subsubsection{Recupero password}
+All'utente deve essere permesso di recuperare la sua password in caso di smarrimento, anche se non è correntemente autenticato.
+
+\subsection{Gestione piattaforma}
+
+\subsubsection{Gestione ordini}
 Il sistema deve essere provvisto di almeno un account dedicato ai magazzinieri, che si occupano dell'imballaggio e spedizione degli articoli ordinati. Un magazziniere deve avere la possibilità di annullare un ordine in caso di problemi di spedizione. L'interfaccia per il magazzino deve eventualmente prevedere una modalità "touch" per l'utilizzo semplificato con dispositivi mobile come tablet.
 
-\subsection{Account centralinista}
+\subsubsection{Gestione ticket}
 Il sistema deve essere provvisto di almeno un account dedicato ai centralinisti, che si occupano di gestire i rapporti con l'utenza, sia per la gestione dei ticket e quindi la risoluzione dei problemi, ma anche l'accettazione di nuovi articoli messi in vendita da un utente.
+
+\subsubsection{Controllo di ogni articolo introdotto dall'utenza}
+Per ogni articolo inserito nella piattaforma, un sistema automatico e un centralinista devono approvare il testo, per evitare oscenità e altri contenuti indesiderati.
+
+\subsubsection{Gestione del personale da un account dedicato}
+Il sistema deve essere provvisto di almeno un account con accesso all'interfaccia per la gestione degli account del personale e prevedere inserimento, rimozione e modifica degli stessi account.
+
+\subsubsection{Gestione del catalogo da un account dedicato}
+Il sistema deve essere provvisto di almeno un account con accesso all'interfaccia per la gestione del catalogo e permettere l'inserimento, rimozione e modifica di articoli nel catalogo stesso.
 
 \section{Requisiti non funzionali}
 \subsection{Sicurezza e privacy}
@@ -253,9 +265,6 @@ In caso di tentativo di accesso a schermate riservate da parte di un utente cons
 % \subsection{Semplicità di uso delle interfacce}
 % Per evitare tempi di addestramento del personale troppo lunghi, le schermate riservate devono essere semplici da utilizzare, con soltanto le funzioni essenziali.
 % Allo stesso modo, per evitare confusione e potenziale perdita di clienti, le interfacce per il pubblico devono essere quanto più intuitive possibile.
-
-\subsection{Possibilità di contatto del servizio clienti}
-Il sistema deve rendere possibile la comunicazione con l'assistenza clienti, per evitare che un cliente non soddisfatto dai servizi diffonda cattiva pubblicità. Ciò è gestito attraverso il meccanismo dei \textit{ticket}.
 
 \subsection{Affidabilità}
 Il sistema deve garantire un \emph{uptime} di almeno il 99.9\%, ovvero un \textit{downtime} annualizzato di meno di 9 ore. Ciò è cruciale per far sì che l'utenza non venga scoraggiata dall'utilizzo di TecStore come negozio primario, creando perdite potenziali molto alte. \footnote{https://www.the20.com/blog/the-cost-of-it-downtime/}
