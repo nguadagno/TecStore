@@ -11,6 +11,7 @@
 
 \author{Natale Guadagno, Paolo Patrone}
 \title{Problem Statement - TecStore}
+\renewcommand{\contentsname}{Contenuti}
 
 \usepackage{hyperref}
 \hypersetup{
@@ -29,6 +30,8 @@
 \tableofcontents
 \newpage
 
+% TODO tabella partecipanti
+
 \section{Dominio del problema}
 Il commercio on-line è una delle attività che sono divenute possibili solo con l'avvento di Internet. Nato alla fine degli anni '90, è ormai il punto di forza di aziende che hanno alcuni dei fatturati annuali più alti in assoluto. Prendendo l'anno 2020 come riferimento, aziende come Amazon (386 miliardi di dollari USA\footnote{https://finance.yahoo.com/quote/AMZN/financials?p=AMZN}), il gruppo Alibaba (112 miliardi complessivi in dollari USA\footnote{https://finance.yahoo.com/quote/BABA/financials?p=BABA}), eBay (10 miliardi di dollari USA\footnote{https://finance.yahoo.com/quote/EBAY/financials?p=EBAY}) e altre ancora hanno registrato incassi record.
 
@@ -38,6 +41,10 @@ Ci si propone quindi come obiettivo la realizzazione di una piattaforma di e-com
 Il funzionamento previsto non è dissimile da altre piattaforme esistenti, con un \emph{frontend} riservato all'utenza che permette agli utenti non registrati di consultare il catalogo di articoli messi in vendita dalla piattaforma o da altri utenti e, per gli utenti registrati di acquistare articoli, una funzionalità di "carrello" che permetta agli utenti di continuare gli acquisti in un momento successivo e, la possibilità, per utenti che lo desiderano, di mettere in vendita articoli.
 
 A ciò si aggiunge un \emph{backend} con più viste, riservate al personale, che permette la gestione degli ordini per i magazzinieri, la gestione delle richieste dell'utenza (\emph{ticket}) per i centralinisti, la modifica del personale per l'addetto al personale, la gestione del catalogo per l'addetto alla merce.
+
+
+$ TODO $
+
 
 \newpage
 \section{Scenari}
@@ -224,12 +231,12 @@ Il sistema deve prevedere tutte le pratiche di sicurezza fondamentali, come l'ut
 In accordo con il Regolamento UE 2016/679, anche noto come General Data Protection Regulation, "GDPR", all'utente sarà descritto l'utilizzo che si farà dei dati raccolti durante il suo uso della piattaforma e sarà possibile la cancellazione totale di tutti i dati pertinenti, meno i dati necessari al mantenimento di un inventario accurato. \\
 In caso di tentativo di accesso a schermate riservate da parte di un utente consumatore o viceversa, ovvero un utente del personale che cerca di accedere al catalogo, deve essere previsto un avviso e un \textit{redirect} ad una pagina correttamente accessibile da quel tipo di utente.
 
-\subsection{Semplicità di uso delle interfacce}
-Per evitare tempi di addestramento del personale troppo lunghi, le schermate riservate devono essere semplici da utilizzare, con soltanto le funzioni essenziali.
-Allo stesso modo, per evitare confusione e potenziale perdita di clienti, le interfacce per il pubblico devono essere quanto più intuitive possibile.
+% \subsection{Semplicità di uso delle interfacce}
+% Per evitare tempi di addestramento del personale troppo lunghi, le schermate riservate devono essere semplici da utilizzare, con soltanto le funzioni essenziali.
+% Allo stesso modo, per evitare confusione e potenziale perdita di clienti, le interfacce per il pubblico devono essere quanto più intuitive possibile.
 
-\subsection{Facilità di contatto del servizio clienti}
-Il sistema deve rendere semplice la comunicazione con l'assistenza clienti, per evitare che un cliente non soddisfatto dai servizi diffonda cattiva pubblicità. Ciò è gestito attraverso il meccanismo dei \textit{ticket}.
+\subsection{Possibilità di contatto del servizio clienti}
+Il sistema deve rendere possibile la comunicazione con l'assistenza clienti, per evitare che un cliente non soddisfatto dai servizi diffonda cattiva pubblicità. Ciò è gestito attraverso il meccanismo dei \textit{ticket}.
 
 \subsection{Affidabilità}
 Il sistema deve garantire un \emph{uptime} di almeno il 99.9\%, ovvero un \textit{downtime} annualizzato di meno di 9 ore. Ciò è cruciale per far sì che l'utenza non venga scoraggiata dall'utilizzo di TecStore come negozio primario, creando perdite potenziali molto alte. \footnote{https://www.the20.com/blog/the-cost-of-it-downtime/}
@@ -245,6 +252,21 @@ Sarà utilizzata un'architettura Three-Tier per separare la gestione dei dati, i
 Sarà utilizzata la tecnologia JSP con servlet su server Tomcat per la presentazione delle pagine web all'utente , un database MariaDB per la memorizzazione dei dati e ogni utente utilizzerà un comune browser web per accedere al sistema.
 
 \section{Ambiente di destinazione}
+
+Trattandosi di un'applicazione orientata all'utilizzo tramite Internet, il sistema sarà accessibile da qualsiasi dispositivo munito di un browser e una connessione Internet attiva, inclusi Personal Computer e smartphone.
+
 \section{Consegne e scadenze}
 
+\begin{center}
+\begin{tabular} {| c | c |}
+\hline
+\textbf{Documento} & \textbf{Consegne} \\
+\hline
+Problem Statement & 1 dicembre 2021 \\
+Requirements Analysis Document & 10 dicembre 2021 \\
+System Design Document & 5 gennaio 2022 \\
+Implementazione e testing & 27 gennaio 2022 \\
+\hline
+\end{tabular}
+\end{center}
 \end{document}
