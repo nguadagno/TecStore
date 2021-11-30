@@ -30,7 +30,32 @@
 \tableofcontents
 \newpage
 
-% TODO tabella partecipanti
+\section*{Partecipanti}
+\begin{center}
+\begin{tabular} {|c|c|}
+\hline
+\textbf{Nome} & \textbf{Matricola} \\
+\hline
+Guadagno Natale & 0512106546 \\
+Patrone Paolo & 0512106153 \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\section*{Revision History}
+\begin{center}
+\begin{tabular} {|c|c|c|}
+\hline
+\textbf{Data} & \textbf{Versione} & \textbf{Descrizione} \\
+\hline
+24/10/2021 & 0.1 & Prima stesura \\
+30/11/2021 & 0.2 & Revisione generale \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
 
 \section{Dominio del problema}
 Il commercio on-line è una delle attività che sono divenute possibili solo con l'avvento di Internet. Nato alla fine degli anni '90, è ormai il punto di forza di aziende che hanno alcuni dei fatturati annuali più alti in assoluto. Prendendo l'anno 2020 come riferimento, aziende come Amazon (386 miliardi di dollari USA\footnote{https://finance.yahoo.com/quote/AMZN/financials?p=AMZN}), il gruppo Alibaba (112 miliardi complessivi in dollari USA\footnote{https://finance.yahoo.com/quote/BABA/financials?p=BABA}), eBay (10 miliardi di dollari USA\footnote{https://finance.yahoo.com/quote/EBAY/financials?p=EBAY}) e altre ancora hanno registrato incassi record.
@@ -41,9 +66,6 @@ Ci si propone quindi come obiettivo la realizzazione di una piattaforma di e-com
 Il funzionamento previsto non è dissimile da altre piattaforme esistenti, con un \emph{frontend} riservato all'utenza che permette agli utenti non registrati di consultare il catalogo di articoli messi in vendita dalla piattaforma o da altri utenti e, per gli utenti registrati di acquistare articoli, una funzionalità di "carrello" che permetta agli utenti di continuare gli acquisti in un momento successivo e, la possibilità, per utenti che lo desiderano, di mettere in vendita articoli.
 
 A ciò si aggiunge un \emph{backend} con più viste, riservate al personale, che permette la gestione degli ordini per i magazzinieri, la gestione delle richieste dell'utenza (\emph{ticket}) per i centralinisti, la modifica del personale per l'addetto al personale, la gestione del catalogo per l'addetto alla merce.
-
-
-$ TODO $
 
 
 \newpage
@@ -203,11 +225,8 @@ Ad un utente registrato deve essere fornita la possibilità di effettuare il log
 \subsection{Possibilità di acquisto di articoli solo per utenti registrati}
 Il sistema deve permettere l'acquisto di articoli e la vendita di essi solo ad utenti pienamente registrati. Un utente non registrato deve solo poter consultare il catalogo ed effettuare la registrazione.
 
-\subsection{Controllo di ogni contenuto introdotto dall'utenza}
-Per ogni recensione o articolo inserito nella piattaforma, un sistema automatico e un centralinista devono approvare il testo, per evitare oscenità e altri contenuti indesiderati.
-
-\subsection{Possibilità di recensione dei prodotti}
-Per ogni utente registrato deve essere possibile recensire soltanto gli articoli acquistati.
+\subsection{Controllo di ogni articolo introdotto dall'utenza}
+Per ogni articolo inserito nella piattaforma, un sistema automatico e un centralinista devono approvare il testo, per evitare oscenità e altri contenuti indesiderati.
 
 \subsection{Possibilità per ogni utente di vendere articoli}
 Per ogni utente registrato deve essere possibile introdurre articoli nel catalogo, se passano i controlli.
@@ -222,7 +241,7 @@ Il sistema deve essere provvisto di almeno un account con accesso all'interfacci
 Il sistema deve essere provvisto di almeno un account dedicato ai magazzinieri, che si occupano dell'imballaggio e spedizione degli articoli ordinati. Un magazziniere deve avere la possibilità di annullare un ordine in caso di problemi di spedizione. L'interfaccia per il magazzino deve eventualmente prevedere una modalità "touch" per l'utilizzo semplificato con dispositivi mobile come tablet.
 
 \subsection{Account centralinista}
-Il sistema deve essere provvisto di almeno un account dedicato ai centralinisti, che si occupano di gestire i rapporti con l'utenza, sia per la gestione dei ticket e quindi la risoluzione dei problemi, ma anche l'accettazione di contenuti inseriti dall'utenza, che siano recensioni o nuovi articoli.
+Il sistema deve essere provvisto di almeno un account dedicato ai centralinisti, che si occupano di gestire i rapporti con l'utenza, sia per la gestione dei ticket e quindi la risoluzione dei problemi, ma anche l'accettazione di nuovi articoli messi in vendita da un utente.
 
 \section{Requisiti non funzionali}
 \subsection{Sicurezza e privacy}
