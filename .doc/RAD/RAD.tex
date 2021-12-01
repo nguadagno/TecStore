@@ -1,0 +1,329 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage[table]{xcolor}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+
+
+\author{Natale Guadagno, Paolo Patrone}
+\title{Requisites Analysis Document - TecStore}
+\renewcommand{\contentsname}{Contenuti}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+        citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue,
+    linktocpage
+}
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\newgeometry{top=0.5in,bottom=0.5in,right=0.5in,left=0.5in}
+\section*{Partecipanti}
+\begin{center}
+\begin{tabular} {|c|c|}
+\hline
+\textbf{Nome} & \textbf{Matricola} \\
+\hline
+Guadagno Natale & 0512106546 \\
+Patrone Paolo & 0512106153 \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\section*{Revision History}
+\begin{center}
+\begin{tabular} {|c|c|c|}
+\hline
+\textbf{Data} & \textbf{Versione} & \textbf{Descrizione} \\
+01/12/2021 & 0.1 & Prima stesura \\
+\hline
+
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\section{Introduzione}
+
+\subsection{Scopo del sistema}
+Il sistema si pone l'obiettivo di facilitare le operazioni di gestione e controllo di operazioni di compravendita e di operazioni gestionali che non sono a carico dell'utenza, come la gestione del personale e dell'inventario. Sono previste viste e interfacce distinte per le varie operazioni per semplificare l'utilizzo ed evitare confusione.
+
+\subsection{Ambito del sistema}
+TecStore è una piattaforma web che permette ad utenti di comprare e vendere materiale tecnologico, che può essere messo in vendita da altri utenti o dalla piattaforma stessa. Trattandosi di un negozio piccolo, il catalogo è relativamente limitato, ma si punta a creare utenza attraverso prezzi vantaggiosi e un servizio clienti di qualità.
+L'utenza della piattaforma si divide in:
+\begin{itemize}
+\item Clienti, che, una volta registrati ed autenticati, possono acquistare articoli
+\item Venditori, che mettono articoli in vendita
+\item Centralinisti, che gestiscono i \emph{ticket}
+\item Magazzinieri, che gestiscono le spedizioni degli articoli
+\item Amministratori catalogo, che gestiscono gli articoli messi in vendita dalla piattaforma
+\item Amministratori personale, che gestiscono la presenza nel sistema dei dipendenti
+\end{itemize}
+
+\subsection{Obiettivi del progetto}
+ TODO
+
+\subsection{Definizioni, acronimi ed abbreviazioni}
+ TODO
+
+\section{Sistema proposto}
+ TODO
+ 
+\subsection{Identificazione attori}
+ TODO
+ 
+\subsection{Requisiti funzionali}
+ TODO
+
+\subsection{Requisiti non funzionali}
+ TODO
+ 
+\subsection{Scenari}
+ TODO
+
+\section{Use case}
+\subsection{Clienti}
+\subsubsection{Registrazione di un cliente}
+\label{UC:1}
+\begin{tabular}{|c|p{12cm}|}
+\hline
+\textbf{ID} & UC1 Registrazione \\
+\hline
+\textbf{Nome} & Registrazione di un nuovo utente \\
+\hline
+\textbf{Partecipanti} & Utente non registrato \\
+\hline
+\textbf{Condizione d'ingresso} & Un nuovo utente visita il sito per la prima volta. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Utente} & \textbf{Sistema} \\
+Si collega al sito, nella homepage fa click sul tasto "Registrati" & \\
+& Mostra all'utente il form per la registrazione in cui inserire tutti i dati personali, incluso nome, cognome, indirizzo, numero di carta di credito. \\
+Inserisce tutti i suoi dati, fa click su "Registrati". & \\
+& Se le credenziali sono corrette, invia all'utente una mail di conferma e chiede all'utente di utilizzare il link per confermare l'account. \\
+\end{tabular}
+\end{minipage} \\
+
+\hline
+\textbf{Condizione d'uscita} & L'utente si registra. \\
+
+\hline
+\end{tabular}
+
+\subsubsection{Autenticazione di un utente}
+\label{UC:2}
+\begin{tabular}{|c|p{12cm}|}
+\hline
+\textbf{ID} & UC2 Login \\
+\hline
+\textbf{Nome} & Login di un utente \\
+\hline
+\textbf{Partecipanti} & Utente registrato \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente della piattaforma visita il sito da un nuovo dispositivo. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Utente} & \textbf{Sistema} \\
+Si collega al sito, nella homepage fa click sul tasto "Login" & \\
+& Mostra all'utente il form per il login, chiedendo email e password. \\
+Inserisce tutti i suoi dati, fa click su "Login". & \\
+& Se le credenziali sono corrette, reindirizza l'utente alla homepage. \\
+\end{tabular}
+\end{minipage} \\
+
+\hline
+\textbf{Condizione d'uscita} & L'utente effettua il login. \\
+\hline
+\end{tabular}
+
+\subsubsection{Possibilità di acquisto per utenti registrati}
+\label{UC:3}
+\begin{tabular}{|c|p{12cm}|}
+\hline
+\textbf{ID} & UC3 Acquisto \\
+\hline
+\textbf{Nome} & Possibilità di acquisto per utenti registrati \\
+\hline
+\textbf{Partecipanti} & Utente registrato, utente magazziniere \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente della piattaforma vuole acquistare un articolo. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{4cm} p{4cm} p{3cm}}
+\textbf{Utente} & \textbf{Sistema} & \textbf{Magazziniere}\\
+Si collega al sito, nella homepage inserisce il nome dell'articolo desiderato nella barra di ricerca fa click sul tasto ``Cerca". & \\
+& Mostra all'utente un elenco di articoli corrispondenti alla parola cercata. \\
+Fa click su uno degli articoli. \\
+& Reindirizza l'utente ad una pagina con i dettagli dell'articolo. \\
+Aggiunge l'articolo al carrello. \\
+& Reindirizza l'utente alla pagina del carrello. \\
+Fa click sul tasto "Acquista". \\
+& Reindirizza l'utente alla pagina di conferma dell'ordine. \\
+Fa click sul tasto "Conferma". \\
+& Invia una notifica di nuovo ordine ad un magazziniere. \\
+& & Riceve la notifica di nuovo ordine, procura l'articolo dal magazzino, stampa la bolla di spedizione, prenota il corriere e conferma la spedizione. \\
+& Invia all'utente una conferma di spedizione dell'articolo. \\
+\end{tabular}
+\end{minipage} \\
+
+\hline
+\textbf{Condizione d'uscita} & L'utente ha acquistato un articolo. \\
+
+\hline
+\end{tabular}
+
+\subsubsection{Possibilità per ogni utente di vendere articoli}
+\label{UC:4}
+\begin{tabular}{|c|p{12cm}|}
+\hline
+\textbf{ID} & UC4 Vendita \\
+\hline
+\textbf{Nome} & Vendita di un articolo sulla piattaforma \\
+\hline
+\textbf{Partecipanti} & Utente registrato \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente della piattaforma decide di vendere un articolo. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Utente} & \textbf{Sistema} \\
+Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Vendi". \\
+& Reindirizza l'utente al form per l'inserimento dei dati dell'articolo da vendere. \\
+Inserisce nome, prezzo, descrizione e foto dell'articolo. \\
+& Reindirizza l'utente ad una pagina di conferma. \\
+Conferma la vendita. \\
+\end{tabular}
+\end{minipage} \\
+
+\hline
+\textbf{Condizione d'uscita} & L'articolo viene messo in vendita sulla piattaforma. \\
+\hline
+\end{tabular}
+
+\subsubsection{Possibilità di contatto del servizio clienti}
+\label{UC:5}
+\begin{tabular}{|c|p{12cm}|}
+\hline
+\textbf{ID} & UC5 Assistenza \\
+\hline
+\textbf{Nome} & Contatto servizio clienti \\
+\hline
+\textbf{Partecipanti} & Utente registrato, centralinista \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente della piattaforma ha necessità di assistenza. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{4cm} p{4cm} p{3cm}}
+\textbf{Utente} & \textbf{Sistema} & \textbf{Centralinista} \\
+Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Servizio clienti". \\
+& Reindirizza l'utente al form per la scrittura di un messaggio per l'assistenza clienti. \\
+Scrive il messaggio.  \\
+& Inoltra il messaggio ad un centralinista. \\
+& & Risponde al messaggio. \\
+& Inoltra la risposta. \\
+\vdots & \vdots & \vdots \\
+Chiude il ticket. \\
+\end{tabular}
+\end{minipage} \\
+
+\hline
+\textbf{Condizione d'uscita} & Il problema dell'utente viene dichiarato risolto e il ticket viene chiuso. \\
+\hline
+\end{tabular}
+
+\subsubsection{Modifica informazioni profilo}
+\label{UC:6}
+\begin{tabular}{|c|p{12cm}|}
+\hline
+\textbf{ID} & UC6 ModificaProfilo \\
+\hline
+\textbf{Nome} & Modifica informazioni profilo \\
+\hline
+\textbf{Partecipanti} & Utente registrato \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente della piattaforma ha necessità di modificare le informazioni del suo profilo. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Utente} & \textbf{Sistema} \\
+Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Profilo". \\
+& Reindirizza l'utente alla contenente tutte le informazioni di quel cliente. \\
+Fa click su ``Modifica".  \\
+& Reindirizza il cliente ad una pagina con un form per la modifica dei dati personali. \\
+Inserisce i dati modificati. \\
+& Salva le modifiche. \\
+\end{tabular}
+\end{minipage} \\
+
+\hline
+\textbf{Condizione d'uscita} & Le vecchie informazioni vengono sovrascritte. \\
+\hline
+\end{tabular}
+
+\subsubsection{Recupero password}
+\label{UC:7}
+\begin{tabular}{|c|p{12cm}|}
+\hline
+\textbf{ID} & UC7 RecuperoPassword \\
+\hline
+\textbf{Nome} & Recupero password smarrita \\
+\hline
+\textbf{Partecipanti} & Utente registrato \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente della piattaforma ha dimenticato la sua password e vuole recuperarla. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Utente} & \textbf{Sistema} \\
+Dalla pagina del login (\ref{UC:1}), fa click su ``Password smarrita?".
+& Reindirizza l'utente al form per l'inserimento della propria email. \\
+Inserisce la propria email.  \\
+& Invia un link per il recupero della password. \\
+Apre la casella email e utilizza quel link. \\
+&  Reindirizza l'utente ad un form per il ripristino della password. \\
+Inserisce la nuova password. \\
+& Reindirizza l'utente al form di login, con un messaggio che lo informa della modifica effettuata. \\
+\end{tabular}
+\end{minipage} \\
+
+\hline
+\textbf{Condizione d'uscita} & La password dell'utente viene sovrascritta. \\
+\hline
+\end{tabular}
+
+\section{Class Diagram}
+
+\section{Statechart Diagram}
+
+\section{Activity Diagram}
+
+\section{Navigational Path}
+
+\section{Mock up}
+
+\end{document}
