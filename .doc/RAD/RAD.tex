@@ -9,6 +9,7 @@
 \usepackage{array}
 \usepackage[table]{xcolor}
 \usepackage{xcolor,colortbl}
+\usepackage{multirow}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 
 
@@ -90,7 +91,30 @@ L'utenza della piattaforma si divide in:
  TODO
  
 \subsection{Requisiti funzionali}
- TODO
+\begin{center}
+\begin{tabular}{|c|l|c|}
+\hline
+\rowcolor[gray]{0.8}
+\textbf{Raggruppamento} & \textbf{Requisito} & \textbf{Priorità} \\
+\hline
+\multirow{8}{*}{Clienti} & 3.1.1 Registrazione & Alta \\
+& 3.1.2 Autenticazione & Alta \\
+& 3.1.3 Acquisto & Alta \\
+& 3.1.4 Annullamento & Media \\
+& 3.1.5 Vendita & Media \\
+& 3.1.6 Assistenza & Alta \\
+& 3.1.7 ModificaProfilo & Bassa \\
+& 3.1.8 RecuperoPassword & Media \\
+\hline
+\multirow{5}{*}{Gestione} & 3.2.1 GestioneOrdini & Alta \\
+& 3.2.2 GestioneTicket & Alta \\
+& 3.2.3 ControlloArticoli & Alta \\
+& 3.2.4 GestionePersonale & Alta \\
+& 3.2.5 GestioneCatalogo & Alta \\
+
+\hline
+\end{tabular} 
+\end{center}
 
 \subsection{Requisiti non funzionali}
  TODO
