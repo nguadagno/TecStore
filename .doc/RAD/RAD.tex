@@ -12,6 +12,14 @@
 \usepackage{multirow}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
 \author{Natale Guadagno, Paolo Patrone}
 \title{Requisites Analysis Document - TecStore}
@@ -53,6 +61,7 @@ Patrone Paolo & 0512106153 \\
 \hline
 \textbf{Data} & \textbf{Versione} & \textbf{Descrizione} \\
 01/12/2021 & 0.1 & Prima stesura \\
+02/12/2021 & 0.2 & Requisiti funzionali \\
 \hline
 
 \hline
@@ -95,7 +104,7 @@ L'utenza della piattaforma si divide in:
 \begin{tabular}{|c|l|c|}
 \hline
 \rowcolor[gray]{0.8}
-\textbf{Raggruppamento} & \textbf{Requisito} & \textbf{Priorità} \\
+\textbf{Funzionalità} & \textbf{Requisito} & \textbf{Priorità} \\
 \hline
 \multirow{8}{*}{Clienti} & 3.1.1 Registrazione & Alta \\
 & 3.1.2 Autenticazione & Alta \\
@@ -113,7 +122,156 @@ L'utenza della piattaforma si divide in:
 & 3.2.5 GestioneCatalogo & Alta \\
 
 \hline
-\end{tabular} 
+\end{tabular}
+\end{center}
+
+\subsubsection{Clienti}
+Questa funzionalità racchiude tutte le operazioni fornite agli utenti.
+
+\paragraph*{Registrazione}
+\begin{center}
+\begin{tabular}{|c|c|}
+\rowcolor[gray]{0.8}
+\hline
+\textbf{Attore} & \textbf{Funzionalità} \\
+Utente non registrato & Permette di registrarsi. \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph*{Autenticazione}
+\begin{center}
+\begin{tabular}{|c|c|}
+\rowcolor[gray]{0.8}
+\hline
+\textbf{Attore} & \textbf{Funzionalità} \\
+Utente registrato & Permette di autenticarsi. \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph*{Acquisto}
+\begin{center}
+\begin{tabular}{|c|c|}
+\rowcolor[gray]{0.8}
+\hline
+\textbf{Attore} & \textbf{Funzionalità} \\
+Utente registrato & Permette di acquistare un articolo. \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph*{Annullamento}
+\begin{center}
+\begin{tabular}{|c|c|}
+\rowcolor[gray]{0.8}
+\hline
+\textbf{Attore} & \textbf{Funzionalità} \\
+Utente registrato & Permette di annullare un ordine. \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph*{Vendita}
+\begin{center}
+\begin{tabular}{|c|c|}
+\rowcolor[gray]{0.8}
+\hline
+\textbf{Attore} & \textbf{Funzionalità} \\
+Utente registrato & Permette di vendere un articolo. \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph*{Assistenza}
+\begin{center}
+\begin{tabular}{|c|c|}
+\rowcolor[gray]{0.8}
+\hline
+\textbf{Attore} & \textbf{Funzionalità} \\
+Utente registrato & Permette di richiedere assistenza. \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph*{ModificaProfilo}
+\begin{center}
+\begin{tabular}{|c|c|}
+\rowcolor[gray]{0.8}
+\hline
+\textbf{Attore} & \textbf{Funzionalità} \\
+Utente registrato & Permette di modificare informazioni del profilo come password, carta di credito e indirizzo. \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph*{RecuperoPassword}
+\begin{center}
+\begin{tabular}{|c|c|}
+\rowcolor[gray]{0.8}
+\hline
+\textbf{Attore} & \textbf{Funzionalità} \\
+Utente registrato & Permette di modificare la password se la si è dimenticata. \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Gestione}
+Questa funzionalità racchiude tutte le operazioni fornite al personale per la gestione della piattaforma.
+
+\paragraph*{GestioneOrdini}
+\begin{center}
+\begin{tabular}{|c|c|}
+\rowcolor[gray]{0.8}
+\hline
+\textbf{Attore} & \textbf{Funzionalità} \\
+Magazziniere & Permette di confermare la spedizione di un ordine o di annullarlo. \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph*{GestioneTicket}
+\begin{center}
+\begin{tabular}{|c|c|}
+\rowcolor[gray]{0.8}
+\hline
+\textbf{Attore} & \textbf{Funzionalità} \\
+Centralinista & Permette di interagire con gli utenti per risolvere un problema. \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph*{ControlloArticoli}
+\begin{center}
+\begin{tabular}{|c|c|}
+\rowcolor[gray]{0.8}
+\hline
+\textbf{Attore} & \textbf{Funzionalità} \\
+Centralinista & Permette di filtrare quali articoli messi in vendita vengono accettati. \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph*{GestionePersonale}
+\begin{center}
+\begin{tabular}{|c|c|}
+\rowcolor[gray]{0.8}
+\hline
+\textbf{Attore} & \textbf{Funzionalità} \\
+Amministratore personale & Permette di aggiungere, rimuovere e modificare account per i dipendenti. \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph*{GestioneCatalogo}
+\begin{center}
+\begin{tabular}{|c|c|}
+\rowcolor[gray]{0.8}
+\hline
+\textbf{Attore} & \textbf{Funzionalità} \\
+Amministratore catalogo & Permette di aggiungere, rimuovere e modificare articoli venduti da TecStore. \\
+\hline
+\end{tabular}
 \end{center}
 
 \subsection{Requisiti non funzionali}
