@@ -8,6 +8,7 @@
 \usepackage{hyperref}
 \usepackage{array}
 \usepackage[table]{xcolor}
+\usepackage{xcolor,colortbl}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 
 
@@ -101,11 +102,11 @@ L'utenza della piattaforma si divide in:
 \subsection{Clienti}
 \subsubsection{Registrazione di un cliente}
 \label{UC:1}
-\begin{tabular}{|c|p{12cm}|}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
 \textbf{ID} & UC1 Registrazione \\
 \hline
-\textbf{Nome} & Registrazione di un nuovo utente \\
+\textbf{Nome} & Registrazione di un nuovo utente. \\
 \hline
 \textbf{Partecipanti} & Utente non registrato \\
 \hline
@@ -130,11 +131,11 @@ Inserisce tutti i suoi dati, fa click su "Registrati". & \\
 
 \subsubsection{Autenticazione di un utente}
 \label{UC:2}
-\begin{tabular}{|c|p{12cm}|}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
 \textbf{ID} & UC2 Login \\
 \hline
-\textbf{Nome} & Login di un utente \\
+\textbf{Nome} & Login di un utente. \\
 \hline
 \textbf{Partecipanti} & Utente registrato \\
 \hline
@@ -158,11 +159,11 @@ Inserisce tutti i suoi dati, fa click su "Login". & \\
 
 \subsubsection{Possibilità di acquisto per utenti registrati}
 \label{UC:3}
-\begin{tabular}{|c|p{12cm}|}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
 \textbf{ID} & UC3 Acquisto \\
 \hline
-\textbf{Nome} & Possibilità di acquisto per utenti registrati \\
+\textbf{Nome} & Possibilità di acquisto per utenti registrati. \\
 \hline
 \textbf{Partecipanti} & Utente registrato, utente magazziniere \\
 \hline
@@ -195,11 +196,11 @@ Fa click sul tasto "Conferma". \\
 
 \subsubsection{Possibilità per ogni utente di vendere articoli}
 \label{UC:4}
-\begin{tabular}{|c|p{12cm}|}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
 \textbf{ID} & UC4 Vendita \\
 \hline
-\textbf{Nome} & Vendita di un articolo sulla piattaforma \\
+\textbf{Nome} & Vendita di un articolo sulla piattaforma. \\
 \hline
 \textbf{Partecipanti} & Utente registrato \\
 \hline
@@ -207,13 +208,15 @@ Fa click sul tasto "Conferma". \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
-\begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Utente} & \textbf{Sistema} \\
+\begin{tabular}{p{4cm} p{4cm} p{3cm}}
+\textbf{Utente} & \textbf{Sistema} & \textbf{Centralinista} \\
 Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Vendi". \\
 & Reindirizza l'utente al form per l'inserimento dei dati dell'articolo da vendere. \\
 Inserisce nome, prezzo, descrizione e foto dell'articolo. \\
 & Reindirizza l'utente ad una pagina di conferma. \\
 Conferma la vendita. \\
+& Inoltra la richiesta ad un centralinista. \\
+& & Analizza il contenuto e approva la vendita. \\
 \end{tabular}
 \end{minipage} \\
 
@@ -224,11 +227,11 @@ Conferma la vendita. \\
 
 \subsubsection{Possibilità di contatto del servizio clienti}
 \label{UC:5}
-\begin{tabular}{|c|p{12cm}|}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
 \textbf{ID} & UC5 Assistenza \\
 \hline
-\textbf{Nome} & Contatto servizio clienti \\
+\textbf{Nome} & Contatto servizio clienti. \\
 \hline
 \textbf{Partecipanti} & Utente registrato, centralinista \\
 \hline
@@ -256,11 +259,11 @@ Chiude il ticket. \\
 
 \subsubsection{Modifica informazioni profilo}
 \label{UC:6}
-\begin{tabular}{|c|p{12cm}|}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
 \textbf{ID} & UC6 ModificaProfilo \\
 \hline
-\textbf{Nome} & Modifica informazioni profilo \\
+\textbf{Nome} & Modifica informazioni profilo. \\
 \hline
 \textbf{Partecipanti} & Utente registrato \\
 \hline
@@ -286,11 +289,11 @@ Inserisce i dati modificati. \\
 
 \subsubsection{Recupero password}
 \label{UC:7}
-\begin{tabular}{|c|p{12cm}|}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
 \textbf{ID} & UC7 RecuperoPassword \\
 \hline
-\textbf{Nome} & Recupero password smarrita \\
+\textbf{Nome} & Recupero password smarrita. \\
 \hline
 \textbf{Partecipanti} & Utente registrato \\
 \hline
@@ -300,7 +303,7 @@ Inserisce i dati modificati. \\
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
 \textbf{Utente} & \textbf{Sistema} \\
-Dalla pagina del login (\ref{UC:1}), fa click su ``Password smarrita?".
+Dalla pagina del login (\ref{UC:1}), fa click su ``Password smarrita?". \\
 & Reindirizza l'utente al form per l'inserimento della propria email. \\
 Inserisce la propria email.  \\
 & Invia un link per il recupero della password. \\
@@ -315,6 +318,84 @@ Inserisce la nuova password. \\
 \textbf{Condizione d'uscita} & La password dell'utente viene sovrascritta. \\
 \hline
 \end{tabular}
+
+\newpage
+
+\subsection{Gestione piattaforma}
+\subsubsection{Gestione ordini}
+\label{UC:8}
+Fare riferimento a \ref{UC:3}.
+
+\subsubsection{Gestione ticket}
+\label{UC:9}
+Fare riferimento a \ref{UC:5}.
+
+\subsubsection{Controllo di ogni articolo introdotto dall'utenza}
+\label{UC:10}
+Fare riferimento a \ref{UC:4}.
+
+\subsubsection{Gestione del personale da un account dedicato}
+\label{UC:11}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC11 GestionePersonale \\
+\hline
+\textbf{Nome} & Modifica di informazioni relative al personale. \\
+\hline
+\textbf{Partecipanti} & Amministratore personale \\
+\hline
+\textbf{Condizione d'ingresso} & I dati di un dipendente devono essere modificati o deve essere aggiunto o rimosso un nuovo dipendente. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Amministratore} & \textbf{Sistema} \\
+Dalla pagina dedicata al personale, effettua il login con le sue credenziali. \\
+& Reindirizza l'amministratore alla pagina dedicata alla gestione del personale.  \\
+Fa click sul tasto opportuno per l'operazione da effettuare. \\
+& Reindirizza l'amministratore alla pagina opportuna. \\
+Inserisce i dati richiesti. \\
+& Chiede conferma dell'operazione. \\
+Conferma l'operazione. \\
+\end{tabular}
+\end{minipage} \\
+
+\hline
+\textbf{Condizione d'uscita} & La modifica delle informazioni del personale viene memorizzata. \\
+\hline
+\end{tabular}
+
+\subsubsection{Gestione del catalogo da un account dedicato}
+\label{UC:12}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC11 GestioneCatalogo \\
+\hline
+\textbf{Nome} & Modifica di informazioni relative al catalogo. \\
+\hline
+\textbf{Partecipanti} & Amministratore catalogo \\
+\hline
+\textbf{Condizione d'ingresso} & I dati di un dipendente devono essere modificati o deve essere aggiunto o rimosso un nuovo dipendente. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Amministratore} & \textbf{Sistema} \\
+Dalla pagina dedicata al personale, effettua il login con le sue credenziali. \\
+& Reindirizza l'amministratore alla pagina dedicata alla gestione del catalogo.  \\
+Fa click sul tasto opportuno per l'operazione da effettuare. \\
+& Reindirizza l'amministratore alla pagina opportuna. \\
+Inserisce i dati richiesti. \\
+& Chiede conferma dell'operazione. \\
+Conferma l'operazione. \\
+\end{tabular}
+\end{minipage} \\
+
+\hline
+\textbf{Condizione d'uscita} & La modifica delle informazioni del catalogo viene memorizzata. \\
+\hline
+\end{tabular}
+
 
 \section{Class Diagram}
 
