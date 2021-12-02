@@ -133,7 +133,7 @@ Inserisce tutti i suoi dati, fa click su "Registrati". & \\
 \label{UC:2}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC2 Login \\
+\textbf{ID} & UC2 Autenticazione \\
 \hline
 \textbf{Nome} & Login di un utente. \\
 \hline
@@ -194,11 +194,42 @@ Fa click sul tasto "Conferma". \\
 \hline
 \end{tabular}
 
-\subsubsection{Possibilità per ogni utente di vendere articoli}
+\subsubsection{Possibilità di annullare un ordine prima che venga spedito}
 \label{UC:4}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC4 Vendita \\
+\textbf{ID} & UC4 Annullamento \\
+\hline
+\textbf{Nome} & Annullamento di un ordine. \\
+\hline
+\textbf{Partecipanti} & Utente registrato \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente della piattaforma decide di annullare un ordine. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{4cm} p{4cm} p{3cm}}
+\textbf{Utente} & \textbf{Sistema} & \textbf{Magazziniere} \\
+Dopo aver effettuato un ordine (\ref{UC:3}), fa click sul tasto ``Storico ordini". \\
+& Reindirizza l'utente all'elenco degli ordini effettuati. \\
+Fa click su ``Annulla" in corrispondenza dell'articolo interessato. \\
+& Reindirizza l'utente ad una pagina di conferma. \\
+Conferma l'annullamento. \\
+& Cancella l'articolo dall'elenco degli articoli da spedire. \\
+& & Disdice la prenotazione del corriere e ripone l'articolo sullo scaffale. \\
+\end{tabular}
+\end{minipage} \\
+
+\hline
+\textbf{Condizione d'uscita} & L'articolo non viene spedito e viene rimesso in vendita. \\
+\hline
+\end{tabular}
+
+\subsubsection{Possibilità per ogni utente di vendere articoli}
+\label{UC:5}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC5 Vendita \\
 \hline
 \textbf{Nome} & Vendita di un articolo sulla piattaforma. \\
 \hline
@@ -210,7 +241,7 @@ Fa click sul tasto "Conferma". \\
 \begin{minipage}{12cm}
 \begin{tabular}{p{4cm} p{4cm} p{3cm}}
 \textbf{Utente} & \textbf{Sistema} & \textbf{Centralinista} \\
-Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Vendi". \\
+Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Vendi su TecStore". \\
 & Reindirizza l'utente al form per l'inserimento dei dati dell'articolo da vendere. \\
 Inserisce nome, prezzo, descrizione e foto dell'articolo. \\
 & Reindirizza l'utente ad una pagina di conferma. \\
@@ -226,10 +257,10 @@ Conferma la vendita. \\
 \end{tabular}
 
 \subsubsection{Possibilità di contatto del servizio clienti}
-\label{UC:5}
+\label{UC:6}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC5 Assistenza \\
+\textbf{ID} & UC6 Assistenza \\
 \hline
 \textbf{Nome} & Contatto servizio clienti. \\
 \hline
@@ -241,7 +272,7 @@ Conferma la vendita. \\
 \begin{minipage}{12cm}
 \begin{tabular}{p{4cm} p{4cm} p{3cm}}
 \textbf{Utente} & \textbf{Sistema} & \textbf{Centralinista} \\
-Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Servizio clienti". \\
+Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Assistenza clienti". \\
 & Reindirizza l'utente al form per la scrittura di un messaggio per l'assistenza clienti. \\
 Scrive il messaggio.  \\
 & Inoltra il messaggio ad un centralinista. \\
@@ -258,10 +289,10 @@ Chiude il ticket. \\
 \end{tabular}
 
 \subsubsection{Modifica informazioni profilo}
-\label{UC:6}
+\label{UC:7}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC6 ModificaProfilo \\
+\textbf{ID} & UC7 ModificaProfilo \\
 \hline
 \textbf{Nome} & Modifica informazioni profilo. \\
 \hline
@@ -273,7 +304,7 @@ Chiude il ticket. \\
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
 \textbf{Utente} & \textbf{Sistema} \\
-Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Profilo". \\
+Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Modifica profilo". \\
 & Reindirizza l'utente alla contenente tutte le informazioni di quel cliente. \\
 Fa click su ``Modifica".  \\
 & Reindirizza il cliente ad una pagina con un form per la modifica dei dati personali. \\
@@ -288,10 +319,10 @@ Inserisce i dati modificati. \\
 \end{tabular}
 
 \subsubsection{Recupero password}
-\label{UC:7}
+\label{UC:8}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC7 RecuperoPassword \\
+\textbf{ID} & UC8 RecuperoPassword \\
 \hline
 \textbf{Nome} & Recupero password smarrita. \\
 \hline
@@ -323,22 +354,22 @@ Inserisce la nuova password. \\
 
 \subsection{Gestione piattaforma}
 \subsubsection{Gestione ordini}
-\label{UC:8}
+\label{UC:9}
 Fare riferimento a \ref{UC:3}.
 
 \subsubsection{Gestione ticket}
-\label{UC:9}
-Fare riferimento a \ref{UC:5}.
+\label{UC:10}
+Fare riferimento a \ref{UC:6}.
 
 \subsubsection{Controllo di ogni articolo introdotto dall'utenza}
-\label{UC:10}
-Fare riferimento a \ref{UC:4}.
+\label{UC:11}
+Fare riferimento a \ref{UC:5}.
 
 \subsubsection{Gestione del personale da un account dedicato}
-\label{UC:11}
+\label{UC:12}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC11 GestionePersonale \\
+\textbf{ID} & UC12 GestionePersonale \\
 \hline
 \textbf{Nome} & Modifica di informazioni relative al personale. \\
 \hline
@@ -366,10 +397,10 @@ Conferma l'operazione. \\
 \end{tabular}
 
 \subsubsection{Gestione del catalogo da un account dedicato}
-\label{UC:12}
+\label{UC:13}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC11 GestioneCatalogo \\
+\textbf{ID} & UC13 GestioneCatalogo \\
 \hline
 \textbf{Nome} & Modifica di informazioni relative al catalogo. \\
 \hline
