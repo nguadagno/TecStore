@@ -145,7 +145,7 @@ Utente non registrato & Permette di registrarsi. \\
 \rowcolor[gray]{0.8}
 \hline
 \textbf{Attore} & \textbf{Funzionalità} \\
-Utente registrato & Permette di autenticarsi. \\
+Cliente registrato & Permette di autenticarsi. \\
 \hline
 \end{tabular}
 \end{center}
@@ -156,7 +156,7 @@ Utente registrato & Permette di autenticarsi. \\
 \rowcolor[gray]{0.8}
 \hline
 \textbf{Attore} & \textbf{Funzionalità} \\
-Utente registrato & Permette di acquistare un articolo. \\
+Cliente registrato & Permette di acquistare un articolo. \\
 \hline
 \end{tabular}
 \end{center}
@@ -167,7 +167,7 @@ Utente registrato & Permette di acquistare un articolo. \\
 \rowcolor[gray]{0.8}
 \hline
 \textbf{Attore} & \textbf{Funzionalità} \\
-Utente registrato & Permette di annullare un ordine. \\
+Cliente registrato & Permette di annullare un ordine. \\
 \hline
 \end{tabular}
 \end{center}
@@ -178,7 +178,7 @@ Utente registrato & Permette di annullare un ordine. \\
 \rowcolor[gray]{0.8}
 \hline
 \textbf{Attore} & \textbf{Funzionalità} \\
-Utente registrato & Permette di vendere un articolo. \\
+Cliente registrato & Permette di vendere un articolo. \\
 \hline
 \end{tabular}
 \end{center}
@@ -189,7 +189,7 @@ Utente registrato & Permette di vendere un articolo. \\
 \rowcolor[gray]{0.8}
 \hline
 \textbf{Attore} & \textbf{Funzionalità} \\
-Utente registrato & Permette di richiedere assistenza. \\
+Cliente registrato & Permette di richiedere assistenza. \\
 \hline
 \end{tabular}
 \end{center}
@@ -200,7 +200,7 @@ Utente registrato & Permette di richiedere assistenza. \\
 \rowcolor[gray]{0.8}
 \hline
 \textbf{Attore} & \textbf{Funzionalità} \\
-Utente registrato & Permette di modificare informazioni del profilo come password, carta di credito e indirizzo. \\
+Cliente registrato & Permette di modificare informazioni del profilo come password, carta di credito e indirizzo. \\
 \hline
 \end{tabular}
 \end{center}
@@ -211,7 +211,7 @@ Utente registrato & Permette di modificare informazioni del profilo come passwor
 \rowcolor[gray]{0.8}
 \hline
 \textbf{Attore} & \textbf{Funzionalità} \\
-Utente registrato & Permette di modificare la password se la si è dimenticata. \\
+Cliente registrato & Permette di modificare la password se la si è dimenticata. \\
 \hline
 \end{tabular}
 \end{center}
@@ -311,7 +311,7 @@ Inserisce tutti i suoi dati, fa click su "Registrati". & \\
 \hline
 \end{tabular}
 
-\subsubsection{Autenticazione di un utente}
+\subsubsection{Autenticazione di un cliente}
 \label{UC:2}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
@@ -319,7 +319,7 @@ Inserisce tutti i suoi dati, fa click su "Registrati". & \\
 \hline
 \textbf{Nome} & Login di un utente. \\
 \hline
-\textbf{Partecipanti} & Utente registrato \\
+\textbf{Partecipanti} & Cliente registrato \\
 \hline
 \textbf{Condizione d'ingresso} & Un cliente della piattaforma visita il sito da un nuovo dispositivo. \\
 \hline
@@ -339,7 +339,7 @@ Inserisce tutti i suoi dati, fa click su "Login". & \\
 \hline
 \end{tabular}
 
-\subsubsection{Possibilità di acquisto per utenti registrati}
+\subsubsection{Possibilità di acquisto per clienti registrati}
 \label{UC:3}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
@@ -347,7 +347,7 @@ Inserisce tutti i suoi dati, fa click su "Login". & \\
 \hline
 \textbf{Nome} & Possibilità di acquisto per utenti registrati. \\
 \hline
-\textbf{Partecipanti} & Utente registrato, utente magazziniere \\
+\textbf{Partecipanti} & Cliente registrato, utente magazziniere \\
 \hline
 \textbf{Condizione d'ingresso} & Un cliente della piattaforma vuole acquistare un articolo. \\
 \hline
@@ -384,7 +384,7 @@ Fa click sul tasto "Conferma". \\
 \hline
 \textbf{Nome} & Annullamento di un ordine. \\
 \hline
-\textbf{Partecipanti} & Utente registrato \\
+\textbf{Partecipanti} & Cliente registrato \\
 \hline
 \textbf{Condizione d'ingresso} & Un cliente della piattaforma decide di annullare un ordine. \\
 \hline
@@ -415,7 +415,7 @@ Conferma l'annullamento. \\
 \hline
 \textbf{Nome} & Vendita di un articolo sulla piattaforma. \\
 \hline
-\textbf{Partecipanti} & Utente registrato \\
+\textbf{Partecipanti} & Cliente registrato \\
 \hline
 \textbf{Condizione d'ingresso} & Un cliente della piattaforma decide di vendere un articolo. \\
 \hline
@@ -446,7 +446,7 @@ Conferma la vendita. \\
 \hline
 \textbf{Nome} & Contatto servizio clienti. \\
 \hline
-\textbf{Partecipanti} & Utente registrato, centralinista \\
+\textbf{Partecipanti} & Cliente registrato, centralinista \\
 \hline
 \textbf{Condizione d'ingresso} & Un cliente della piattaforma ha necessità di assistenza. \\
 \hline
@@ -478,7 +478,7 @@ Chiude il ticket. \\
 \hline
 \textbf{Nome} & Modifica informazioni profilo. \\
 \hline
-\textbf{Partecipanti} & Utente registrato \\
+\textbf{Partecipanti} & Cliente registrato \\
 \hline
 \textbf{Condizione d'ingresso} & Un cliente della piattaforma ha necessità di modificare le informazioni del suo profilo. \\
 \hline
@@ -508,7 +508,7 @@ Inserisce i dati modificati. \\
 \hline
 \textbf{Nome} & Recupero password smarrita. \\
 \hline
-\textbf{Partecipanti} & Utente registrato \\
+\textbf{Partecipanti} & Cliente registrato \\
 \hline
 \textbf{Condizione d'ingresso} & Un cliente della piattaforma ha dimenticato la sua password e vuole recuperarla. \\
 \hline
