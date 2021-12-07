@@ -30,5 +30,6 @@ hs_err_pid*
 *.toc
 
 # Visual Paradigm
-.vpp.bak*
-.vpp.lck*
+*.vpp.bak*
+*.vpp.lck*
+
