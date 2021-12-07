@@ -134,7 +134,7 @@ Questa funzionalità racchiude tutte le operazioni fornite agli utenti.
 \rowcolor[gray]{0.8}
 \hline
 \textbf{Attore} & \textbf{Funzionalità} \\
-Utente non registrato & Permette di registrarsi. \\
+Cliente non registrato & Permette di registrarsi. \\
 \hline
 \end{tabular}
 \end{center}
@@ -288,25 +288,25 @@ Amministratore catalogo & Permette di aggiungere, rimuovere e modificare articol
 \hline
 \textbf{ID} & UC1 Registrazione \\
 \hline
-\textbf{Nome} & Registrazione di un nuovo utente. \\
+\textbf{Nome} & Registrazione di un nuovo cliente. \\
 \hline
 \textbf{Partecipanti} & Utente non registrato \\
 \hline
-\textbf{Condizione d'ingresso} & Un nuovo utente visita il sito per la prima volta. \\
+\textbf{Condizione d'ingresso} & Un nuovo cliente visita il sito per la prima volta. \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Utente} & \textbf{Sistema} \\
+\textbf{Cliente} & \textbf{Sistema} \\
 Si collega al sito, nella homepage fa click sul tasto "Registrati" & \\
-& Mostra all'utente il form per la registrazione in cui inserire tutti i dati personali, incluso nome, cognome, indirizzo, numero di carta di credito. \\
+& Mostra al cliente il form per la registrazione in cui inserire tutti i dati personali, incluso nome, cognome, indirizzo, numero di carta di credito. \\
 Inserisce tutti i suoi dati, fa click su "Registrati". & \\
-& Se le credenziali sono corrette, invia all'utente una mail di conferma e chiede all'utente di utilizzare il link per confermare l'account. \\
+& Se le credenziali sono corrette, invia al cliente una mail di conferma e chiede al cliente di utilizzare il link per confermare l'account. \\
 \end{tabular}
 \end{minipage} \\
 
 \hline
-\textbf{Condizione d'uscita} & L'utente si registra. \\
+\textbf{Condizione d'uscita} & Il cliente si registra. \\
 
 \hline
 \end{tabular}
@@ -317,7 +317,7 @@ Inserisce tutti i suoi dati, fa click su "Registrati". & \\
 \hline
 \textbf{ID} & UC2 Autenticazione \\
 \hline
-\textbf{Nome} & Login di un utente. \\
+\textbf{Nome} & Login di un cliente. \\
 \hline
 \textbf{Partecipanti} & Cliente registrato \\
 \hline
@@ -326,16 +326,16 @@ Inserisce tutti i suoi dati, fa click su "Registrati". & \\
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Utente} & \textbf{Sistema} \\
+\textbf{Cliente} & \textbf{Sistema} \\
 Si collega al sito, nella homepage fa click sul tasto "Login" & \\
-& Mostra all'utente il form per il login, chiedendo email e password. \\
+& Mostra al cliente il form per il login, chiedendo email e password. \\
 Inserisce tutti i suoi dati, fa click su "Login". & \\
-& Se le credenziali sono corrette, reindirizza l'utente alla homepage. \\
+& Se le credenziali sono corrette, reindirizza il cliente alla homepage. \\
 \end{tabular}
 \end{minipage} \\
 
 \hline
-\textbf{Condizione d'uscita} & L'utente effettua il login. \\
+\textbf{Condizione d'uscita} & Il cliente effettua il login. \\
 \hline
 \end{tabular}
 
@@ -347,31 +347,31 @@ Inserisce tutti i suoi dati, fa click su "Login". & \\
 \hline
 \textbf{Nome} & Possibilità di acquisto per utenti registrati. \\
 \hline
-\textbf{Partecipanti} & Cliente registrato, utente magazziniere \\
+\textbf{Partecipanti} & Cliente registrato, magazziniere \\
 \hline
 \textbf{Condizione d'ingresso} & Un cliente della piattaforma vuole acquistare un articolo. \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{4cm} p{4cm} p{3cm}}
-\textbf{Utente} & \textbf{Sistema} & \textbf{Magazziniere}\\
+\textbf{Cliente} & \textbf{Sistema} & \textbf{Magazziniere}\\
 Si collega al sito, nella homepage inserisce il nome dell'articolo desiderato nella barra di ricerca fa click sul tasto ``Cerca". & \\
-& Mostra all'utente un elenco di articoli corrispondenti alla parola cercata. \\
+& Mostra al cliente un elenco di articoli corrispondenti alla parola cercata. \\
 Fa click su uno degli articoli. \\
-& Reindirizza l'utente ad una pagina con i dettagli dell'articolo. \\
+& Reindirizza il cliente ad una pagina con i dettagli dell'articolo. \\
 Aggiunge l'articolo al carrello. \\
-& Reindirizza l'utente alla pagina del carrello. \\
+& Reindirizza il cliente alla pagina del carrello. \\
 Fa click sul tasto "Acquista". \\
-& Reindirizza l'utente alla pagina di conferma dell'ordine. \\
+& Reindirizza il cliente alla pagina di conferma dell'ordine. \\
 Fa click sul tasto "Conferma". \\
 & Invia una notifica di nuovo ordine ad un magazziniere. \\
 & & Riceve la notifica di nuovo ordine, procura l'articolo dal magazzino, stampa la bolla di spedizione, prenota il corriere e conferma la spedizione. \\
-& Invia all'utente una conferma di spedizione dell'articolo. \\
+& Invia al cliente una conferma di spedizione dell'articolo. \\
 \end{tabular}
 \end{minipage} \\
 
 \hline
-\textbf{Condizione d'uscita} & L'utente ha acquistato un articolo. \\
+\textbf{Condizione d'uscita} & Il cliente ha acquistato un articolo. \\
 
 \hline
 \end{tabular}
@@ -391,11 +391,11 @@ Fa click sul tasto "Conferma". \\
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{4cm} p{4cm} p{3cm}}
-\textbf{Utente} & \textbf{Sistema} & \textbf{Magazziniere} \\
+\textbf{Cliente} & \textbf{Sistema} & \textbf{Magazziniere} \\
 Dopo aver effettuato un ordine (\ref{UC:3}), fa click sul tasto ``Storico ordini". \\
-& Reindirizza l'utente all'elenco degli ordini effettuati. \\
+& Reindirizza il cliente all'elenco degli ordini effettuati. \\
 Fa click su ``Annulla" in corrispondenza dell'articolo interessato. \\
-& Reindirizza l'utente ad una pagina di conferma. \\
+& Reindirizza il cliente ad una pagina di conferma. \\
 Conferma l'annullamento. \\
 & Cancella l'articolo dall'elenco degli articoli da spedire. \\
 & & Disdice la prenotazione del corriere e ripone l'articolo sullo scaffale. \\
@@ -407,7 +407,7 @@ Conferma l'annullamento. \\
 \hline
 \end{tabular}
 
-\subsubsection{Possibilità per ogni utente di vendere articoli}
+\subsubsection{Possibilità per ogni cliente di vendere articoli}
 \label{UC:5}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
@@ -422,11 +422,11 @@ Conferma l'annullamento. \\
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{4cm} p{4cm} p{3cm}}
-\textbf{Utente} & \textbf{Sistema} & \textbf{Centralinista} \\
+\textbf{Cliente} & \textbf{Sistema} & \textbf{Centralinista} \\
 Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Vendi su TecStore". \\
-& Reindirizza l'utente al form per l'inserimento dei dati dell'articolo da vendere. \\
+& Reindirizza il cliente al form per l'inserimento dei dati dell'articolo da vendere. \\
 Inserisce nome, prezzo, descrizione e foto dell'articolo. \\
-& Reindirizza l'utente ad una pagina di conferma. \\
+& Reindirizza il cliente ad una pagina di conferma. \\
 Conferma la vendita. \\
 & Inoltra la richiesta ad un centralinista. \\
 & & Analizza il contenuto e approva la vendita. \\
@@ -453,9 +453,9 @@ Conferma la vendita. \\
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{4cm} p{4cm} p{3cm}}
-\textbf{Utente} & \textbf{Sistema} & \textbf{Centralinista} \\
+\textbf{Cliente} & \textbf{Sistema} & \textbf{Centralinista} \\
 Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Assistenza clienti". \\
-& Reindirizza l'utente al form per la scrittura di un messaggio per l'assistenza clienti. \\
+& Reindirizza il cliente al form per la scrittura di un messaggio per l'assistenza clienti. \\
 Scrive il messaggio.  \\
 & Inoltra il messaggio ad un centralinista. \\
 & & Risponde al messaggio. \\
@@ -466,7 +466,7 @@ Chiude il ticket. \\
 \end{minipage} \\
 
 \hline
-\textbf{Condizione d'uscita} & Il problema dell'utente viene dichiarato risolto e il ticket viene chiuso. \\
+\textbf{Condizione d'uscita} & Il problema il cliente viene dichiarato risolto e il ticket viene chiuso. \\
 \hline
 \end{tabular}
 
@@ -487,7 +487,7 @@ Chiude il ticket. \\
 \begin{tabular}{p{5.5cm} p{5.5cm}}
 \textbf{Utente} & \textbf{Sistema} \\
 Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Modifica profilo". \\
-& Reindirizza l'utente alla contenente tutte le informazioni di quel cliente. \\
+& Reindirizza il cliente alla contenente tutte le sue informazioni. \\
 Fa click su ``Modifica".  \\
 & Reindirizza il cliente ad una pagina con un form per la modifica dei dati personali. \\
 Inserisce i dati modificati. \\
@@ -515,20 +515,20 @@ Inserisce i dati modificati. \\
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Utente} & \textbf{Sistema} \\
+\textbf{Cliente} & \textbf{Sistema} \\
 Dalla pagina del login (\ref{UC:1}), fa click su ``Password smarrita?". \\
-& Reindirizza l'utente al form per l'inserimento della propria email. \\
+& Reindirizza il cliente al form per l'inserimento della propria email. \\
 Inserisce la propria email.  \\
 & Invia un link per il recupero della password. \\
 Apre la casella email e utilizza quel link. \\
-&  Reindirizza l'utente ad un form per il ripristino della password. \\
+&  Reindirizza il cliente ad un form per il ripristino della password. \\
 Inserisce la nuova password. \\
-& Reindirizza l'utente al form di login, con un messaggio che lo informa della modifica effettuata. \\
+& Reindirizza il cliente al form di login, con un messaggio che lo informa della modifica effettuata. \\
 \end{tabular}
 \end{minipage} \\
 
 \hline
-\textbf{Condizione d'uscita} & La password dell'utente viene sovrascritta. \\
+\textbf{Condizione d'uscita} & La password del cliente viene sovrascritta. \\
 \hline
 \end{tabular}
 
