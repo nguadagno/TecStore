@@ -355,33 +355,55 @@ Inserisce tutti i suoi dati, fa click su "Login". & \\
 \hline
 \end{tabular}
 
-\subsubsection{Possibilità di acquisto per clienti registrati}
+\subsubsection{Possibilità di aggiungere articoli al carrello}
 \label{UC:3}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC3 Acquisto \\
+\textbf{ID} & UC3 AggiuntaCarrello \\
 \hline
-\textbf{Nome} & Possibilità di acquisto per utenti registrati. \\
+\textbf{Nome} & Inserimento di un articolo nel carrello. \\
 \hline
-\textbf{Partecipanti} & Cliente registrato, magazziniere \\
+\textbf{Partecipanti} & Cliente registrato \\
 \hline
-\textbf{Condizione d'ingresso} & Un cliente della piattaforma vuole acquistare un articolo. \\
+\textbf{Condizione d'ingresso} & Un cliente della piattaforma vuole aggiungere un articolo al carrello, intenzionato ad acquistarlo. \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
-\begin{tabular}{p{4cm} p{4cm} p{3cm}}
-\textbf{Cliente} & \textbf{Sistema} & \textbf{Magazziniere}\\
-Si collega al sito, nella homepage inserisce il nome dell'articolo desiderato nella barra di ricerca fa click sul tasto ``Cerca". & \\
-& Mostra al cliente un elenco di articoli corrispondenti alla parola cercata. \\
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Dopo aver effettuato il login (\ref{UC:1}), ricerca l'articolo desiderato dalla barra di ricerca. \\
+& Reindirizza il cliente all'elenco degli articoli corrispondenti alla parola cercata. \\
 Fa click su uno degli articoli. \\
-& Reindirizza il cliente ad una pagina con i dettagli dell'articolo. \\
-Aggiunge l'articolo al carrello. \\
+& Reindirizza il cliente ad una pagina con i dettagli dell'articolo selezionato. \\
+Fa click su ``Aggiungi al carrello". \\
+& Mostra un messaggio di conferma. \\
+\end{tabular}
+\end{minipage} \\
+\end{tabular}
+
+\subsubsection{Possibilità di acquisto per clienti registrati}
+\label{UC:4}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC4 Acquisto \\
+\hline
+\textbf{Nome} & Possibilità di acquisto per utenti registrati. \\
+\hline
+\textbf{Partecipanti} & Cliente registrato \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente della piattaforma vuole acquistare un articolo già presente nel suo carrello. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema}\\
+Fa click su ``Carrello" \\
 & Reindirizza il cliente alla pagina del carrello. \\
-Fa click sul tasto "Acquista". \\
+Fa click sul tasto ``Acquista". \\
 & Reindirizza il cliente alla pagina di conferma dell'ordine. \\
-Fa click sul tasto "Conferma". \\
+Fa click sul tasto ``Conferma". \\
 & Invia una notifica di nuovo ordine ad un magazziniere. \\
-& & Riceve la notifica di nuovo ordine, procura l'articolo dal magazzino, stampa la bolla di spedizione, prenota il corriere e conferma la spedizione. \\
+& \begin{center} \vdots \end{center} \\
 & Invia al cliente una conferma di spedizione dell'articolo. \\
 \end{tabular}
 \end{minipage} \\
@@ -393,10 +415,10 @@ Fa click sul tasto "Conferma". \\
 \end{tabular}
 
 \subsubsection{Possibilità di annullare un ordine prima che venga spedito}
-\label{UC:4}
+\label{UC:5}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC4 Annullamento \\
+\textbf{ID} & UC5 Annullamento \\
 \hline
 \textbf{Nome} & Annullamento di un ordine. \\
 \hline
@@ -406,15 +428,16 @@ Fa click sul tasto "Conferma". \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
-\begin{tabular}{p{4cm} p{4cm} p{3cm}}
-\textbf{Cliente} & \textbf{Sistema} & \textbf{Magazziniere} \\
-Dopo aver effettuato un ordine (\ref{UC:3}), fa click sul tasto ``Storico ordini". \\
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Dopo aver effettuato un ordine (\ref{UC:4U}), fa click sul tasto ``Storico ordini". \\
 & Reindirizza il cliente all'elenco degli ordini effettuati. \\
 Fa click su ``Annulla" in corrispondenza dell'articolo interessato. \\
 & Reindirizza il cliente ad una pagina di conferma. \\
 Conferma l'annullamento. \\
 & Cancella l'articolo dall'elenco degli articoli da spedire. \\
-& & Disdice la prenotazione del corriere e ripone l'articolo sullo scaffale. \\
+& \vdots \\
+& Invia un messaggio di conferma all'utente. \\
 \end{tabular}
 \end{minipage} \\
 
@@ -424,12 +447,15 @@ Conferma l'annullamento. \\
 \end{tabular}
 
 \subsubsection{Possibilità per ogni cliente di vendere articoli}
-\label{UC:5}
+\label{UC:6}
+
+Fare riferimento a \ref{UC:12}.
+
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC5 Vendita \\
+\textbf{ID} & UC6 Vendita \\
 \hline
-\textbf{Nome} & Vendita di un articolo sulla piattaforma. \\
+\textbf{Nome} & Un utente richiede di vendere un articolo sulla piattaforma. \\
 \hline
 \textbf{Partecipanti} & Cliente registrato \\
 \hline
@@ -437,15 +463,16 @@ Conferma l'annullamento. \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
-\begin{tabular}{p{4cm} p{4cm} p{3cm}}
-\textbf{Cliente} & \textbf{Sistema} & \textbf{Centralinista} \\
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
 Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Vendi su TecStore". \\
 & Reindirizza il cliente al form per l'inserimento dei dati dell'articolo da vendere. \\
 Inserisce nome, prezzo, descrizione e foto dell'articolo. \\
 & Reindirizza il cliente ad una pagina di conferma. \\
 Conferma la vendita. \\
 & Inoltra la richiesta ad un centralinista. \\
-& & Analizza il contenuto e approva la vendita. \\
+& \vdots \\
+& Riceve una notifica dell'esito.
 \end{tabular}
 \end{minipage} \\
 
@@ -455,10 +482,13 @@ Conferma la vendita. \\
 \end{tabular}
 
 \subsubsection{Possibilità di contatto del servizio clienti}
-\label{UC:6}
+\label{UC:7}
+
+Fare riferimento a \ref{UC:11}.\\
+
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC6 Assistenza \\
+\textbf{ID} & UC7 Assistenza \\
 \hline
 \textbf{Nome} & Contatto servizio clienti. \\
 \hline
@@ -468,15 +498,20 @@ Conferma la vendita. \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
-\begin{tabular}{p{4cm} p{4cm} p{3cm}}
-\textbf{Cliente} & \textbf{Sistema} & \textbf{Centralinista} \\
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema}\\
 Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Assistenza clienti". \\
-& Reindirizza il cliente al form per la scrittura di un messaggio per l'assistenza clienti. \\
+& Reindirizza il cliente al form per l'invio di un messaggio per l'assistenza clienti. \\
 Scrive il messaggio.  \\
 & Inoltra il messaggio ad un centralinista. \\
-& & Risponde al messaggio. \\
+\vdots & \vdots \\
 & Inoltra la risposta. \\
-\vdots & \vdots & \vdots \\
+\vdots & \vdots \\
+Risponde. \\
+\vdots & \vdots \\
+& Inoltra la risposta. \\
+\vdots & \vdots \\
+\vdots & \vdots \\
 Chiude il ticket. \\
 \end{tabular}
 \end{minipage} \\
@@ -487,10 +522,10 @@ Chiude il ticket. \\
 \end{tabular}
 
 \subsubsection{Modifica informazioni profilo}
-\label{UC:7}
+\label{UC:8}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC7 ModificaProfilo \\
+\textbf{ID} & UC8 ModificaProfilo \\
 \hline
 \textbf{Nome} & Modifica informazioni profilo. \\
 \hline
@@ -517,10 +552,10 @@ Inserisce i dati modificati. \\
 \end{tabular}
 
 \subsubsection{Recupero password}
-\label{UC:8}
+\label{UC:9}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC8 RecuperoPassword \\
+\textbf{ID} & UC9 RecuperoPassword \\
 \hline
 \textbf{Nome} & Recupero password smarrita. \\
 \hline
@@ -552,19 +587,105 @@ Inserisce la nuova password. \\
 
 \subsection{Gestione piattaforma}
 \subsubsection{Gestione ordini}
-\label{UC:9}
-Fare riferimento a \ref{UC:3}.
+\label{UC:10}
+Fare riferimento a \ref{UC:3} e \ref{UC:4}. \\
+
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC10 SpedizioneOrdine \\
+\hline
+\textbf{Nome} & Un ordine viene spedito dal magazzino. \\
+\hline
+\textbf{Partecipanti} & Magazziniere \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente della piattaforma acquista un articolo che ora deve essere spedito. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Magazziniere} & \textbf{Sistema} \\
+Dopo aver effettuato il login (\ref{UC:1}), fa click su ``Visualizza ordini" per visualizzare l'elenco degli ordini da spedire. \\
+& Mostra l'elenco degli ordini. \\
+Procura l'articolo dal magazzino, lo imballa, stampa la bolla di spedizione e prenota il ritiro del corriere. \\
+\vdots & \vdots \\
+Fa click su ``\checkmark".
+& Reindirizza il magazziniere ad una pagina di conferma. \\
+Fa click su ``Conferma". \\
+& Invia una notifica al cliente. \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & L'articolo viene spedito. \\
+\hline
+\end{tabular}
 
 \subsubsection{Gestione ticket}
-\label{UC:10}
-Fare riferimento a \ref{UC:6}.
+\label{UC:11}
+Fare riferimento a \ref{UC:7}. \\
+
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC11 AssistenzaClienti \\
+\hline
+\textbf{Nome} & Un cliente apre un ticket. \\
+\hline
+\textbf{Partecipanti} & Centralinista \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente della piattaforma segnala un problema e un centralinista cerca di aiutarlo. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Centralinista} & \textbf{Sistema} \\
+Dopo aver effettuato il login (\ref{UC:1}), fa click su ``Visualizza ticket" per visualizzare l'elenco dei ticket in attesa di risposta. \\
+& Mostra l'elenco dei ticket. \\
+Fa click su uno dei ticket. \\
+& Mostra lo storico dei messaggi per quel ticket. \\
+Scrive una risposta e preme su ``Invia".
+& Inoltra il messaggio. \\
+\vdots & \vdots \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il cliente chiude il ticket e dichiara il problema risolto. \\
+\hline
+\end{tabular}
 
 \subsubsection{Controllo di ogni articolo introdotto dall'utenza}
-\label{UC:11}
-Fare riferimento a \ref{UC:5}.
+\label{UC:12}
+Fare riferimento a \ref{UC:6}. \\
+
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC12 AutorizzazioneVendita \\
+\hline
+\textbf{Nome} & Un centralinista approva la vendita di un articolo. \\
+\hline
+\textbf{Partecipanti} & Centralinista \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente della piattaforma richiede di vendere una articolo. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Centralinista} & \textbf{Sistema} \\
+Dopo aver effettuato il login (\ref{UC:1}), fa click su ``Visualizza vendite" per visualizzare l'elenco delle vendite in attesa di autorizzazione. \\
+& Mostra l'elenco delle vendite in attesa. \\
+Fa click su una delle vendite. \\
+& Mostra i dettagli della vendita. \\
+Fa click su \checkmark.
+& Inoltra invia una notifica al cliente. \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il cliente chiude il ticket e dichiara il problema risolto. \\
+\hline
+\end{tabular}
+
+
 
 \subsubsection{Gestione del personale da un account dedicato}
-\label{UC:12}
+\label{UC:13}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
 \textbf{ID} & UC12 GestionePersonale \\
@@ -595,10 +716,10 @@ Conferma l'operazione. \\
 \end{tabular}
 
 \subsubsection{Gestione del catalogo da un account dedicato}
-\label{UC:13}
+\label{UC:14}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC13 GestioneCatalogo \\
+\textbf{ID} & UC14 GestioneCatalogo \\
 \hline
 \textbf{Nome} & Modifica di informazioni relative al catalogo. \\
 \hline
