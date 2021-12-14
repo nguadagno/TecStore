@@ -788,6 +788,131 @@ Conferma l'operazione. \\
 \section{Class Diagram}
 e\includegraphics[width=\textwidth]{diagrammadiclasse}
 
+\newpage
+\section{Sequence Diagram}
+\subsection{Registrazione di un cliente}
+
+Fare riferimento a \ref{UC:1}.
+
+\includegraphics[height=200px]{Registrazione}
+
+\begin{enumerate}
+\item Un nuovo cliente della piattaforma desidera registrarsi al sito e fa click sul tasto ``Registrati".
+\item Il boundary ``Pagina Iniziale" inoltra la richiesta al control Registrazione, che reindirizza l'utente al boundary con il modulo per la registrazione.
+\item L'utente inserisce i dati richiesti e conferma la registrazione.
+\item Il ``controlModuloRegistrazione" inoltra i dati al ``managerAccount" per verificare che i dati siano corretti e non duplicati.
+\item Se i dati sono corretti, chiede al manager di registrare l'utente.
+\item Il control effettua il login per l'utente e lo reindirizza alla pagina iniziale.
+\end{enumerate}
+
+\newpage
+
+\subsection{Acquisto}
+
+Fare riferimento a \ref{UC:4}.
+
+\includegraphics[width=\textwidth]{Acquisto}
+
+\begin{enumerate}
+\item Un utente ha precedentemente aggiunto un articolo al carrello ed ha deciso di effettuare l'ordine. Dal boundary ``Carrello" fa click su ``Acquista".
+\item Il contenuto del carrello viene inoltrato al controlCarrello, che reindirizza l'utente ad un boundary in cui viene chiesto all'utente di confermare i dati dell'acquisto.
+\item Se l'utente conferma, l'elenco viene inoltrato al controlCreazioneOrdine che comunica al managerOrdine di memorizzare gli articoli richiesti.
+\item All'utente viene mostrato l'esito della creazione dell'ordine.
+\end{enumerate}
+
+\newpage
+
+\subsection{Annullamento}
+
+Fare riferimento a \ref{UC:5}.
+
+\includegraphics[height=200px]{Annullamento}
+
+\begin{enumerate}
+\item Dalla pagina dello storico degli ordini, il cliente fa click sul tasto ``Annulla" per l'ordine interessato.
+\item La richiesta viene inoltrata al controlElencoOrdini che verifica che l'ordine non sia stato già spedito. Se non lo è, cambia lo stato dell'ordine.
+\item Il controlElencoOrdini visualizza una conferma all'utente.
+\end{enumerate}
+
+\subsection{Vendita}
+
+Fare riferimento a \ref{UC:6}.
+
+\includegraphics[height=180px]{Vendita}
+
+\begin{enumerate}
+\item Un utente vuole vendere un articolo. Dalla pagina iniziale fa click sul tasto per creare una nuova vendita.
+\item Il controlPaginaCreazione reindirizza l'utente al modulo per l'inserimento dei dati necessari.
+\item L'utente inserisce i dati e conferma.
+\item I dati vengono inoltrato al controlModuloNuovoArticolo che, dopo aver verificato che non ci siano problemi coi dati, chiede al manager di memorizzare il nuovo ordine.
+\item L'ordine rimarrà nello stato "In attesa" finché un centralinista non effettua un'ulteriore verifica manuale.
+\end{enumerate}
+
+\subsection{Creazione ticket}
+
+Fare riferimento a \ref{UC:7}.
+
+\includegraphics[height=200px]{CreazioneTicket}
+
+\begin{enumerate}
+\item Un cliente che ha necessità di comunicare con il centro assistenza visita la pagina dedicata e fa click su ``Nuovo ticket".
+\item Scrive il messaggio e fa click su ``Conferma".
+\item Il messaggio viene inoltrato attraverso il controlAssistenza al managerAssistenza che verifica che il contenuto del messaggio non sia volgare o offensivo.
+\item Se non lo è, memorizza il nuovo messaggio nel database.
+\end{enumerate}
+
+\subsection{Spedizione ordine}
+
+Fare riferimento a \ref{UC:10}.
+
+\includegraphics[height=200px]{SpedizioneOrdine}
+
+\begin{enumerate}
+\item Dall'elenco degli ordini, il magazziniere vede un nuovo ordine da spedire.
+\item Dopo aver effettuato le dovute procedure, come imballaggio, prenotazione corriere, stampa dell'etichetta, conferma la spedizione.
+\item Il controlElencoOrdini inoltra il cambio di stato al managerOrdine.
+\end{enumerate}
+
+\subsection{Autorizzazione vendita}
+
+Fare riferimento a \ref{UC:12}.
+
+\includegraphics[height=250px]{AutorizzazioneVendita}
+
+\begin{enumerate}
+\item Dall'elenco degli articoli in attesa di conferma, un centralinista sceglie uno degli articoli.
+\item Il centralinista viene reindirizzato ad una pagina con i dettagli della vendita.
+\item Se tutto risulta in regola, il centralinista conferma la vendita e il controlGestioneVendita inoltra la richiesta al managerVendita.
+\end{enumerate}
+
+\newpage
+
+\subsection{Gestione del personale}
+
+Fare riferimento a \ref{UC:13}.
+
+\includegraphics[height=250px]{GestionePersonale}
+
+\begin{enumerate}
+\item Dall'elenco dei dipendenti, un amministratore fa click sul dipendente di cui vuole modificare i dati.
+\item Attraverso il controlElencoPersonale, l'amministratore viene reindirizzato ad un modulo in cui modificare i dati.
+\item Una volta confermati i dati, il controlElencoPersonale inoltra la richiesta di modifica al managerPersonale, che salva le nuove informazioni nel database.
+\end{enumerate}
+
+\newpage
+
+\subsection{Gestione del catalogo}
+
+Fare riferimento a \ref{UC:14}.
+
+\includegraphics[height=250px]{GestioneCatalogo}
+
+\begin{enumerate}
+\item Dall'elenco degli articoli, un amministratore fa click su quello di cui vuole modificare i dati.
+\item Attraverso il controlCatalogo, l'amministratore viene reindirizzato ad un modulo in cui modificare i dati.
+\item Una volta confermati i dati, il controlCatalogo inoltra la richiesta di modifica al managerCatalogo, che salva le nuove informazioni nel database.
+\end{enumerate}
+
 \section{Statechart Diagram}
 
 \section{Activity Diagram}
