@@ -327,6 +327,13 @@ Inserisce tutti i suoi dati, fa click su "Registrati". & \\
 \hline
 \end{tabular}
 
+
+\bigskip
+\bigskip
+\label{UC:1d}
+
+\includegraphics[width=\textwidth]{GestioneAccount}
+
 \subsubsection{Autenticazione di un cliente}
 \label{UC:2}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
@@ -354,6 +361,10 @@ Inserisce tutti i suoi dati, fa click su "Login". & \\
 \textbf{Condizione d'uscita} & Il cliente effettua il login. \\
 \hline
 \end{tabular}
+\\ 
+
+\bigskip
+Fare riferimento alla tabella \ref{UC:1d}.
 
 \subsubsection{Possibilità di aggiungere articoli al carrello}
 \label{UC:3}
@@ -379,7 +390,10 @@ Fa click su ``Aggiungi al carrello". \\
 & Mostra un messaggio di conferma. \\
 \end{tabular}
 \end{minipage} \\
+\hline
 \end{tabular}
+
+\newpage
 
 \subsubsection{Possibilità di acquisto per clienti registrati}
 \label{UC:4}
@@ -414,6 +428,14 @@ Fa click sul tasto ``Conferma". \\
 \hline
 \end{tabular}
 
+
+\label{UC:4d}
+\bigskip
+\bigskip
+\includegraphics[height=250px]{GestioneOrdini}
+
+\newpage
+
 \subsubsection{Possibilità di annullare un ordine prima che venga spedito}
 \label{UC:5}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
@@ -430,7 +452,7 @@ Fa click sul tasto ``Conferma". \\
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
 \textbf{Cliente} & \textbf{Sistema} \\
-Dopo aver effettuato un ordine (\ref{UC:4U}), fa click sul tasto ``Storico ordini". \\
+Dopo aver effettuato un ordine (\ref{UC:4}), fa click sul tasto ``Storico ordini". \\
 & Reindirizza il cliente all'elenco degli ordini effettuati. \\
 Fa click su ``Annulla" in corrispondenza dell'articolo interessato. \\
 & Reindirizza il cliente ad una pagina di conferma. \\
@@ -446,10 +468,12 @@ Conferma l'annullamento. \\
 \hline
 \end{tabular}
 
+Fare riferimento al diagramma \ref{UC:4d}.
+
 \subsubsection{Possibilità per ogni cliente di vendere articoli}
 \label{UC:6}
 
-Fare riferimento a \ref{UC:12}.
+Fare riferimento a \ref{UC:12}. \\
 
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
@@ -488,7 +512,7 @@ Fare riferimento a \ref{UC:11}.\\
 
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC7 Assistenza \\
+\textbf{ID} & UC7 CreazioneTicket \\
 \hline
 \textbf{Nome} & Contatto servizio clienti. \\
 \hline
@@ -521,6 +545,13 @@ Chiude il ticket. \\
 \hline
 \end{tabular}
 
+\bigskip
+\bigskip
+
+\label{UC:7d}
+
+\includegraphics[height=200px]{GestioneTicket}
+
 \subsubsection{Modifica informazioni profilo}
 \label{UC:8}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
@@ -550,6 +581,8 @@ Inserisce i dati modificati. \\
 \textbf{Condizione d'uscita} & Le vecchie informazioni vengono sovrascritte. \\
 \hline
 \end{tabular}
+
+Fare riferimento alla tabella \ref{UC:1d}.
 
 \subsubsection{Recupero password}
 \label{UC:9}
@@ -586,7 +619,7 @@ Inserisce la nuova password. \\
 \newpage
 
 \subsection{Gestione piattaforma}
-\subsubsection{Gestione ordini}
+\subsubsection{Spedizione ordini}
 \label{UC:10}
 Fare riferimento a \ref{UC:3} e \ref{UC:4}. \\
 
@@ -625,7 +658,7 @@ Fare riferimento a \ref{UC:7}. \\
 
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC11 AssistenzaClienti \\
+\textbf{ID} & UC11 RispostaTicket \\
 \hline
 \textbf{Nome} & Un cliente apre un ticket. \\
 \hline
@@ -641,7 +674,7 @@ Dopo aver effettuato il login (\ref{UC:1}), fa click su ``Visualizza ticket" per
 & Mostra l'elenco dei ticket. \\
 Fa click su uno dei ticket. \\
 & Mostra lo storico dei messaggi per quel ticket. \\
-Scrive una risposta e preme su ``Invia".
+Scrive una risposta e preme su ``Invia". \\
 & Inoltra il messaggio. \\
 \vdots & \vdots \\
 \end{tabular}
@@ -650,6 +683,11 @@ Scrive una risposta e preme su ``Invia".
 \textbf{Condizione d'uscita} & Il cliente chiude il ticket e dichiara il problema risolto. \\
 \hline
 \end{tabular}
+\bigskip
+\bigskip
+
+Fare riferimento al diagramma \ref{UC:7d}.
+
 
 \subsubsection{Controllo di ogni articolo introdotto dall'utenza}
 \label{UC:12}
@@ -683,7 +721,6 @@ Fa click su \checkmark.
 \end{tabular}
 
 
-
 \subsubsection{Gestione del personale da un account dedicato}
 \label{UC:13}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
@@ -714,6 +751,8 @@ Conferma l'operazione. \\
 \textbf{Condizione d'uscita} & La modifica delle informazioni del personale viene memorizzata. \\
 \hline
 \end{tabular}
+
+Fare riferimento alla tabella \ref{UC:1d}.
 
 \subsubsection{Gestione del catalogo da un account dedicato}
 \label{UC:14}
@@ -746,8 +785,8 @@ Conferma l'operazione. \\
 \hline
 \end{tabular}
 
-
 \section{Class Diagram}
+e\includegraphics[width=\textwidth]{diagrammadiclasse}
 
 \section{Statechart Diagram}
 
