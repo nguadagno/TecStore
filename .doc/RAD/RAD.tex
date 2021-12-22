@@ -1183,13 +1183,15 @@ Fare riferimento a \ref{UC:7}. \\
 \item Il ticket viene dichiarato chiuso.
 \end{enumerate}
 
+\newpage
+
 \subsection{Centralinista}
 
 \subsubsection{Centralinista elenca ticket}
 \label{SD:centralinistaelencaticket}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaElencaTicket}
+\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaApreElencoTicket}
 \end{center}
 
 \begin{enumerate}
@@ -1220,7 +1222,48 @@ Fare riferimento a \ref{UC:7}. \\
 \item Gli viene quindi mostrato un modulo per inserire un nuovo messaggio in risposta al ticket.
 \end{enumerate}
 
-% TODO gestione vendite
+\subsubsection{Centralinista visualizza elenco vendite}
+\label{SD:elencovenditecentralinista}
+
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaApreElencoVendite}
+\end{center}
+
+\begin{enumerate}
+\item Dopo essersi autenticato (\ref{SD:login}), il centralinista verrà rimandato alla sua homepage. Da lì potrà scegliere di visualizzare l'elenco delle vendite in attesa di risposta.
+\end{enumerate}
+
+\subsubsection{Centralinista seleziona una vendita}
+\label{SD:selezionevenditacentralinista}
+
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaSelezionaVendita}
+\end{center}
+
+\begin{enumerate}
+\item Dall'elenco dei ticket (\ref{SD:centralinistaelencaticket}), il centralinista fa click su una delle vendite attualmente in attesa di conferma.
+\item Vengono visualizzati tutti i dettagli di quella vendita.
+\end{enumerate}
+
+\subsubsection{Centralinista autorizza una vendita}
+\label{SD:centralinistaautorizza}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaAutorizzaVendita}
+\end{center}
+
+\begin{enumerate}
+\item Dopo aver selezionato un ticket (\ref{SD:selezionevenditacentralinista}), il centralinista può scegliere se autorizzare o rifiutare la vendita.
+\end{enumerate}
+
+\subsubsection{Centralinista rifiuta una vendita}
+\label{SD:centralinistaautorizza}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaRifiutaVendita}
+\end{center}
+
+\begin{enumerate}
+\item Dopo aver selezionato un ticket (\ref{SD:selezionevenditacentralinista}), il centralinista può scegliere se autorizzare o rifiutare la vendita.
+\end{enumerate}
 
 \subsection{Magazziniere}
 
