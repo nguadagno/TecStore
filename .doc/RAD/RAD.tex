@@ -931,135 +931,180 @@ Conferma l'operazione. \\
 \hline
 \end{tabular}
 
+\newpage
+
 \section{Class Diagram}
-e\includegraphics[width=\textwidth]{diagrammadiclasse}
+\includegraphics[width=\textwidth]{diagrammadiclasse}
 
 \newpage
+
 \section{Sequence Diagram}
-\subsection{Registrazione di un cliente}
+\subsection{Cliente}
+\subsubsection{Registrazione}
+\label{SD:1}
 
-Fare riferimento a \ref{UC:1}.
+Fare riferimento a \ref{UC:1}. \\
 
-\includegraphics[height=200px]{SequenceDiagram/Registrazione}
-
-\begin{enumerate}
-\item Un nuovo cliente della piattaforma desidera registrarsi al sito e fa click sul tasto ``Registrati".
-\item Il boundary ``Pagina Iniziale" inoltra la richiesta al control Registrazione, che reindirizza l'utente al boundary con il modulo per la registrazione.
-\item L'utente inserisce i dati richiesti e conferma la registrazione.
-\item Il ``controlModuloRegistrazione" inoltra i dati al ``managerAccount" per verificare che i dati siano corretti e non duplicati.
-\item Se i dati sono corretti, chiede al manager di registrare l'utente.
-\item Il control effettua il login per l'utente e lo reindirizza alla pagina iniziale.
-\end{enumerate}
-
-\newpage
-
-\subsection{Acquisto}
-
-Fare riferimento a \ref{UC:4}.
-
-\includegraphics[width=\textwidth]{SequenceDiagram/Acquisto}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteRegistrazione}
+\end{center}
 
 \begin{enumerate}
-\item Un utente ha precedentemente aggiunto un articolo al carrello ed ha deciso di effettuare l'ordine. Dal boundary ``Carrello" fa click su ``Acquista".
-\item Il contenuto del carrello viene inoltrato al controlCarrello, che reindirizza l'utente ad un boundary in cui viene chiesto all'utente di confermare i dati dell'acquisto.
-\item Se l'utente conferma, l'elenco viene inoltrato al controlCreazioneOrdine che comunica al managerOrdine di memorizzare gli articoli richiesti.
-\item All'utente viene mostrato l'esito della creazione dell'ordine.
+\item Un cliente non registrato che visita il sito per la prima volta, una volta deciso di registrarsi, potrà fare click su ``Registrati'' dalla pagina iniziale.
+\item Gli verrà presentato un form in cui inserire i dati richiesti per la registrazione, tra cui nome, cognome, email e password.
+\item I dati verranno controllati e, se privi di errori, l'utente verrà registrato.
 \end{enumerate}
 
-\newpage
+\subsubsection{Autenticazione}
+\label{SD:2}
 
-\subsection{Annullamento}
+Fare riferimento a \ref{UC:2}. \\
 
-Fare riferimento a \ref{UC:5}.
-
-\includegraphics[height=200px]{SequenceDiagram/Annullamento}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteAutenticazione}
+\end{center}
 
 \begin{enumerate}
-\item Dalla pagina dello storico degli ordini, il cliente fa click sul tasto ``Annulla" per l'ordine interessato.
-\item La richiesta viene inoltrata al controlElencoOrdini che verifica che l'ordine non sia stato già spedito. Se non lo è, cambia lo stato dell'ordine.
-\item Il controlElencoOrdini visualizza una conferma all'utente.
+\item Dopo la registrazione (\ref{SD:1}, \ref{UC:1}), l'utente potrà usare le credenziali scelte per autenticarsi cliccando sul tasto ``Autenticati''.
+\item Gli verrà presentato quindi un modulo per l'inserimento di email e password.
+\item Se le credenziali saranno corrette e corrisponderanno a quelle memorizzate nel sistema, all'utente viene consentito l'accesso.
 \end{enumerate}
 
-\subsection{Vendita}
+\subsubsection{Ricerca di un articolo}
+\label{SD:3}
 
-Fare riferimento a \ref{UC:6}.
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteCercaArticolo}
+\end{center}
 
-\includegraphics[height=180px]{SequenceDiagram/Vendita}
+\item A prescindere dallo stato dell'autenticazione (\ref{SD:1}, \ref{UC:1}, all'utente sarà permesso ricercare articoli nel sito. Usando la barra di ricerca presente nella pagina principale, potrà inserire dei termini da ricercare.
+\item Una volta premuto sul tasto ``Cerca'', gli verrà presentato un elenco di articoli corrispondenti.
+
+\subsubsection{Visualizzazione dettagli di un articolo}
+\label{SD:4}
+
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteSelezionaArticolo}
+\end{center}
 
 \begin{enumerate}
-\item Un utente vuole vendere un articolo. Dalla pagina iniziale fa click sul tasto per creare una nuova vendita.
-\item Il controlPaginaCreazione reindirizza l'utente al modulo per l'inserimento dei dati necessari.
-\item L'utente inserisce i dati e conferma.
-\item I dati vengono inoltrato al controlModuloNuovoArticolo che, dopo aver verificato che non ci siano problemi coi dati, chiede al manager di memorizzare il nuovo ordine.
-\item L'ordine rimarrà nello stato "In attesa" finché un centralinista non effettua un'ulteriore verifica manuale.
+\item Dopo aver effettuato una ricerca (\ref{SD:3}), l'utente potrà scegliere uno degli articoli e cliccare sul nome o sull'immagine per selezionarlo.
+\item All'utente verrà quindi presentata una pagina con i dettagli dell'articolo scelto.
 \end{enumerate}
 
-\subsection{Creazione ticket}
+\subsubsection{Aggiunta articolo al carrello}
+\label{SD:5}
 
-Fare riferimento a \ref{UC:7}.
+Fare riferimento a \ref{UC:3}. \\
 
-\includegraphics[height=200px]{SequenceDiagram/CreazioneTicket}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteAggiungeAlCarrello}
+\end{center}
 
 \begin{enumerate}
-\item Un cliente che ha necessità di comunicare con il centro assistenza visita la pagina dedicata e fa click su ``Nuovo ticket".
-\item Scrive il messaggio e fa click su ``Conferma".
-\item Il messaggio viene inoltrato attraverso il controlAssistenza al managerAssistenza che verifica che il contenuto del messaggio non sia volgare o offensivo.
-\item Se non lo è, memorizza il nuovo messaggio nel database.
+\item Dopo aver effettuato una ricerca (\ref{SD:3}) e aver selezionato un articolo (\ref{SD:4}), un utente autenticato potrà aggiungere un articolo al carrello utilizzando il tasto dedicato.
+\item Una volta premuto, la sua aggiunta verrà registrata per mantenere il carrello attraverso browser e dispositivi diversi.
 \end{enumerate}
 
-\subsection{Spedizione ordine}
+\subsubsection{Acquisto articoli nel carrello}
+\label{SD:6}
 
-Fare riferimento a \ref{UC:10}.
-
-\includegraphics[height=200px]{SequenceDiagram/SpedizioneOrdine}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteAcquistaArticolo}
+\end{center}
 
 \begin{enumerate}
-\item Dall'elenco degli ordini, il magazziniere vede un nuovo ordine da spedire.
-\item Dopo aver effettuato le dovute procedure, come imballaggio, prenotazione corriere, stampa dell'etichetta, conferma la spedizione.
-\item Il controlElencoOrdini inoltra il cambio di stato al managerOrdine.
+\item Dopo aver aggiunto almeno un articolo al carrello (\ref{SD:5}), l'utente avrà la possibilità di ordinare gli articoli nel carrello stesso.
+\item Dopo aver premuto su ``Acquista'', gli verrà chiesta un'ulteriore conferma contenente tutte le informazioni relative all'ordine.
+\item Una volta ricevuta la conferma, l'ordine verrà registrato e sarà visualizzabile da un magazziniere %TODO REF
 \end{enumerate}
 
-\subsection{Autorizzazione vendita}
+\subsubsection{Annullamento ordine}
+\label{SD:7}
 
-Fare riferimento a \ref{UC:12}.
+Fare riferimento a \ref{UC:5}. \\
 
-\includegraphics[height=250px]{SequenceDiagram/AutorizzazioneVendita}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteAnnullaOrdine}
+\end{center}
 
 \begin{enumerate}
-\item Dall'elenco degli articoli in attesa di conferma, un centralinista sceglie uno degli articoli.
-\item Il centralinista viene reindirizzato ad una pagina con i dettagli della vendita.
-\item Se tutto risulta in regola, il centralinista conferma la vendita e il controlGestioneVendita inoltra la richiesta al managerVendita.
+\item Dopo aver effettuato un ordine e prima che venga spedito, ad un cliente sarà permesso annullare un ordine.
+\item Dall'elenco degli ordini avrà la possibilità di richiedere l'annullamento. Se lo stato nel sistema sarà ancora ``Non spedito'' l'ordine verrà effettivamente annullato immediatamente e sparirà dalla visualizzazione dei magazzinieri %TODO REF
 \end{enumerate}
 
-\newpage
 
-\subsection{Gestione del personale}
+\subsubsection{Cliente visualizza elenco vendite}
+\label{SD:8}
 
-Fare riferimento a \ref{UC:13}.
-
-\includegraphics[height=250px]{SequenceDiagram/GestionePersonale}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteElencoVendite}
+\end{center}
 
 \begin{enumerate}
-\item Dall'elenco dei dipendenti, un amministratore fa click sul dipendente di cui vuole modificare i dati.
-\item Attraverso il controlElencoPersonale, l'amministratore viene reindirizzato ad un modulo in cui modificare i dati.
-\item Una volta confermati i dati, il controlElencoPersonale inoltra la richiesta di modifica al managerPersonale, che salva le nuove informazioni nel database.
+\item Dalla pagina iniziale, l'utente potrà selezionare la voce ``Vendi su TecStore" per visualizzare la pagina dedicata alla gestione delle vendite.
+\item Al caricamento della pagina, verranno caricate le vendite create più recentemente, ovvero nei 60 giorni precedenti.
 \end{enumerate}
 
-\newpage
+\subsubsection{Cliente vende articolo}
+\label{SD:9}
 
-\subsection{Gestione del catalogo}
+Fare riferimento a \ref{UC:6}. \\
 
-Fare riferimento a \ref{UC:14}.
-
-\includegraphics[height=250px]{SequenceDiagram/GestioneCatalogo}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteVendeNuovoArticolo}
+\end{center}
 
 \begin{enumerate}
-\item Dall'elenco degli articoli, un amministratore fa click su quello di cui vuole modificare i dati.
-\item Attraverso il controlCatalogo, l'amministratore viene reindirizzato ad un modulo in cui modificare i dati.
-\item Una volta confermati i dati, il controlCatalogo inoltra la richiesta di modifica al managerCatalogo, che salva le nuove informazioni nel database.
+\item All'utente sarà concessa la possibilità di vendere articoli sulla piattaforma. Dall'elenco delle vendite (\ref{SD:8}), sarà sufficiente utilizzare il tasto ``Inserisci nuova vendita".
+\item Verrà richiesto all'utente di compilare un modulo con i dati necessari.
+\item La nuova vendita verrà quindi inserita nel sistema in uno stato di attesa finché un centralinista non verificherà le informazioni della vendita stessa. ( %TODO REF )
 \end{enumerate}
 
-\newpage
+
+\subsubsection{Cliente modifica vendita}
+\label{SD:10}
+
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteModificaVendita}
+\end{center}
+
+\begin{enumerate}
+\item Dopo aver inserito una vendita (\ref{SD:9}) e dopo che è stata accettata ( %TODO REF %, all'utente sarà permesso di modificare i dettagli della vendita.
+\item Dall'elenco delle vendite, se lo stato è ancora ``In vendita", sarà presente un tasto ``Modifica vendita".
+\item Se l'utente lo utilizza, verrà rimandato ad un modulo per la modifica della vendita. La vendita tornerà quindi in uno stato di attesa finché un centralinista non verificherà i dati inseriti % TODO REF
+
+\end{enumerate}
+
+\subsubsection{Cliente annulla vendita}
+\label{SD:11}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteAnnullaVendita}
+\end{center}
+
+\begin{enumerate}
+\item Dopo aver creato una vendita (\ref{SD:9}) e finché lo stato è ``In vendita", all'utente sarà concessa la possibilità di annullare una vendita.
+\item Dall'elenco delle vendite sarà presente quindi un tasto ``Annulla vendita".
+\end{enumerate}
+
+% TODO stati ticket cliente
+
+\subsection{Centralinista}
+
+% TODO gestione ticket
+% TODO gestione vendite
+
+\subsection{Magazziniere}
+
+% TODO modifiche stati vendita
+
+\subsection{Amministratore catalogo}
+
+% TODO aggiunta modifica e rimozione articoli
+
+\subsection{Amministratore personale}
+
+% TODO aggiunta modifica e rimozione personale
 
 \section{Statechart Diagram}
 
