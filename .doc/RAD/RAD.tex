@@ -940,8 +940,8 @@ Conferma l'operazione. \\
 
 \section{Sequence Diagram}
 \subsection{Cliente}
-\subsubsection{Registrazione}
-\label{SD:1}
+\subsubsection{Cliente si registra}
+\label{SD:registrazione}
 
 Fare riferimento a \ref{UC:1}. \\
 
@@ -955,8 +955,8 @@ Fare riferimento a \ref{UC:1}. \\
 \item I dati verranno controllati e, se privi di errori, l'utente verrà registrato.
 \end{enumerate}
 
-\subsubsection{Autenticazione}
-\label{SD:2}
+\subsubsection{Cliente si autentica}
+\label{SD:login}
 
 Fare riferimento a \ref{UC:2}. \\
 
@@ -965,35 +965,39 @@ Fare riferimento a \ref{UC:2}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo la registrazione (\ref{SD:1}, \ref{UC:1}), l'utente potrà usare le credenziali scelte per autenticarsi cliccando sul tasto ``Autenticati''.
+\item Dopo la registrazione (\ref{SD:registrazione}, \ref{UC:1}), l'utente potrà usare le credenziali scelte per autenticarsi cliccando sul tasto ``Autenticati''.
 \item Gli verrà presentato quindi un modulo per l'inserimento di email e password.
 \item Se le credenziali saranno corrette e corrisponderanno a quelle memorizzate nel sistema, all'utente viene consentito l'accesso.
 \end{enumerate}
 
-\subsubsection{Ricerca di un articolo}
-\label{SD:3}
+\subsubsection{Cliente ricerca un articolo}
+\label{SD:ricerca}
 
 \begin{center}
 \includegraphics[width=\textwidth]{SequenceDiagram/ClienteCercaArticolo}
 \end{center}
 
-\item A prescindere dallo stato dell'autenticazione (\ref{SD:1}, \ref{UC:1}, all'utente sarà permesso ricercare articoli nel sito. Usando la barra di ricerca presente nella pagina principale, potrà inserire dei termini da ricercare.
-\item Una volta premuto sul tasto ``Cerca'', gli verrà presentato un elenco di articoli corrispondenti.
+\begin{enumerate}
+\item A prescindere dallo stato dell'autenticazione (\ref{SD:registrazione}, \ref{UC:1}, all'utente sarà permesso ricercare articoli nel sito. Usando la barra di ricerca presente nella pagina principale, potrà inserire dei termini da ricercare.
+\item Una volta premuto sul tasto ``Cerca'', gli verrà presentato un elenco di articoli corrispondenti.:
+\end{enumerate}
 
-\subsubsection{Visualizzazione dettagli di un articolo}
-\label{SD:4}
+\subsubsection{Cliente visualizza dettagli di un articolo}
+\label{SD:dettagli}
 
 \begin{center}
 \includegraphics[width=\textwidth]{SequenceDiagram/ClienteSelezionaArticolo}
 \end{center}
 
 \begin{enumerate}
-\item Dopo aver effettuato una ricerca (\ref{SD:3}), l'utente potrà scegliere uno degli articoli e cliccare sul nome o sull'immagine per selezionarlo.
+\item Dopo aver effettuato una ricerca (\ref{SD:ricerca}), l'utente potrà scegliere uno degli articoli e cliccare sul nome o sull'immagine per selezionarlo.
 \item All'utente verrà quindi presentata una pagina con i dettagli dell'articolo scelto.
 \end{enumerate}
 
-\subsubsection{Aggiunta articolo al carrello}
-\label{SD:5}
+\newpage
+
+\subsubsection{Cliente aggiunge un articolo al carrello}
+\label{SD:aggiunta}
 
 Fare riferimento a \ref{UC:3}. \\
 
@@ -1002,25 +1006,41 @@ Fare riferimento a \ref{UC:3}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo aver effettuato una ricerca (\ref{SD:3}) e aver selezionato un articolo (\ref{SD:4}), un utente autenticato potrà aggiungere un articolo al carrello utilizzando il tasto dedicato.
+\item Dopo aver effettuato una ricerca (\ref{SD:ricerca}) e aver selezionato un articolo (\ref{SD:dettagli}), un utente autenticato potrà aggiungere un articolo al carrello utilizzando il tasto dedicato.
 \item Una volta premuto, la sua aggiunta verrà registrata per mantenere il carrello attraverso browser e dispositivi diversi.
 \end{enumerate}
 
-\subsubsection{Acquisto articoli nel carrello}
-\label{SD:6}
+\subsubsection{Cliente rimuove un articolo dal carrello}
+\label{SD:rimozione}
+
+Fare riferimento a \ref{UC:3}. \\
+
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteAggiungeAlCarrello}
+\end{center}
+
+\begin{enumerate}
+\item Dopo aver effettuato una ricerca (\ref{SD:ricerca}) e aver selezionato un articolo (\ref{SD:dettagli}), un utente autenticato potrà aggiungere un articolo al carrello utilizzando il tasto dedicato.
+\item Una volta premuto, la sua aggiunta verrà registrata per mantenere il carrello attraverso browser e dispositivi diversi.
+\end{enumerate}
+
+\newpage
+
+\subsubsection{Cliente acquista articoli dal carrello}
+\label{SD:acquista}
 
 \begin{center}
 \includegraphics[width=\textwidth]{SequenceDiagram/ClienteAcquistaArticolo}
 \end{center}
 
 \begin{enumerate}
-\item Dopo aver aggiunto almeno un articolo al carrello (\ref{SD:5}), l'utente avrà la possibilità di ordinare gli articoli nel carrello stesso.
+\item Dopo aver aggiunto almeno un articolo al carrello (\ref{SD:aggiunta}), l'utente avrà la possibilità di ordinare gli articoli nel carrello stesso.
 \item Dopo aver premuto su ``Acquista'', gli verrà chiesta un'ulteriore conferma contenente tutte le informazioni relative all'ordine.
-\item Una volta ricevuta la conferma, l'ordine verrà registrato e sarà visualizzabile da un magazziniere %TODO REF
+\item Una volta ricevuta la conferma, l'ordine verrà registrato e sarà visualizzabile da un magazziniere % TODO REF
 \end{enumerate}
 
-\subsubsection{Annullamento ordine}
-\label{SD:7}
+\subsubsection{Cliente annulla ordine}
+\label{SD:annull}
 
 Fare riferimento a \ref{UC:5}. \\
 
@@ -1035,7 +1055,7 @@ Fare riferimento a \ref{UC:5}. \\
 
 
 \subsubsection{Cliente visualizza elenco vendite}
-\label{SD:8}
+\label{SD:elencovendite}
 
 \begin{center}
 \includegraphics[width=\textwidth]{SequenceDiagram/ClienteElencoVendite}
@@ -1047,7 +1067,7 @@ Fare riferimento a \ref{UC:5}. \\
 \end{enumerate}
 
 \subsubsection{Cliente vende articolo}
-\label{SD:9}
+\label{SD:creazionevendita}
 
 Fare riferimento a \ref{UC:6}. \\
 
@@ -1056,42 +1076,150 @@ Fare riferimento a \ref{UC:6}. \\
 \end{center}
 
 \begin{enumerate}
-\item All'utente sarà concessa la possibilità di vendere articoli sulla piattaforma. Dall'elenco delle vendite (\ref{SD:8}), sarà sufficiente utilizzare il tasto ``Inserisci nuova vendita".
+\item Dall'elenco delle vendite (\ref{SD:elencovendite}), sarà sufficiente utilizzare il tasto ``Inserisci nuova vendita".
 \item Verrà richiesto all'utente di compilare un modulo con i dati necessari.
 \item La nuova vendita verrà quindi inserita nel sistema in uno stato di attesa finché un centralinista non verificherà le informazioni della vendita stessa. ( %TODO REF )
 \end{enumerate}
 
+\subsubsection{Cliente seleziona vendita}
+\label{SD:selezionavenditacliente}
+
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteSelezionaVendita}
+\end{center}
+
+\begin{enumerate}
+\item Dall'elenco delle vendite (\ref{SD:elencovendite}), il cliente ne seleziona una.
+\item Gli viene mostrata una pagina con i dettagli della vendita.
+\end{enumerate}
 
 \subsubsection{Cliente modifica vendita}
-\label{SD:10}
+\label{SD:modificavendita}
 
 \begin{center}
 \includegraphics[width=\textwidth]{SequenceDiagram/ClienteModificaVendita}
 \end{center}
 
 \begin{enumerate}
-\item Dopo aver inserito una vendita (\ref{SD:9}) e dopo che è stata accettata ( %TODO REF %, all'utente sarà permesso di modificare i dettagli della vendita.
-\item Dall'elenco delle vendite, se lo stato è ancora ``In vendita", sarà presente un tasto ``Modifica vendita".
-\item Se l'utente lo utilizza, verrà rimandato ad un modulo per la modifica della vendita. La vendita tornerà quindi in uno stato di attesa finché un centralinista non verificherà i dati inseriti % TODO REF
+\item Nella pagina dei dettagli di una vendita, se lo stato è ancora ``In vendita", sarà presente un tasto ``Modifica vendita".
+\item L'utente potrà cliccarlo per visualizzare un modulo per la modifica della vendita. 
+\item La vendita tornerà quindi in uno stato di attesa finché un centralinista non verificherà i dati inseriti % TODO REF
 
 \end{enumerate}
 
 \subsubsection{Cliente annulla vendita}
-\label{SD:11}
+\label{SD:annullavendita}
+
 \begin{center}
 \includegraphics[width=\textwidth]{SequenceDiagram/ClienteAnnullaVendita}
 \end{center}
 
 \begin{enumerate}
-\item Dopo aver creato una vendita (\ref{SD:9}) e finché lo stato è ``In vendita", all'utente sarà concessa la possibilità di annullare una vendita.
+\item Dopo aver creato una vendita (\ref{SD:creazionevendita}) e finché lo stato è ``In vendita", all'utente sarà concessa la possibilità di annullare una vendita.
 \item Dall'elenco delle vendite sarà presente quindi un tasto ``Annulla vendita".
 \end{enumerate}
 
-% TODO stati ticket cliente
+\newpage
+
+\subsubsection{Cliente elenca ticket}
+\label{SD:elencoticket}
+Fare riferimento a \ref{UC:7}. \\
+
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteApreElencoTicket}
+\end{center}
+
+\begin{enumerate}
+\item Un utente autenticato (\ref{SD:login}) che si trova nella pagina iniziale può utilizzare la funzione ``Assistenza Clienti".
+\item Gli viene quindi mostrato l'elenco dei ticket attualmente in attesa di risoluzione.
+\end{enumerate}
+
+\subsubsection{Cliente apre ticket}
+\label{SD:aperturaticket}
+
+\begin{center}
+\includegraphics[trim={0 32cm 0 0},clip,width=\textwidth]{SequenceDiagram/ClienteCreaTicket}
+\end{center}
+
+\begin{enumerate}
+\item Dall'elenco dei ticket (\ref{SD:elencoticket}), l'utente usa la funzione ``Crea Ticket".
+\item Gli viene mostrato un modulo per l'inserimento del messaggio.
+\item Il messaggio viene controllato e, se non ci sono problemi, all'utente viene mostrata una conferma.
+\end{enumerate}
+
+\subsubsection{Cliente seleziona un ticket}
+\label{SD:selezioneticketcliente}
+
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteSelezionaTicket}
+\end{center}
+
+\begin{enumerate}
+\item Dall'elenco dei ticket (\ref{SD:elencoticket}), l'utente fa click su uno dei ticket attualmente aperti.
+\item Gli vengono mostrati tutti i messaggi inviati fino a quel momento.
+\end{enumerate}
+
+\subsubsection{Cliente risponde ad un ticket}
+\label{SD:rispostaticketcliente}
+
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteRispondeTicket}
+\end{center}
+
+\begin{enumerate}
+\item Dopo aver selezionato un ticket (\ref{SD:selezioneticketcliente}), l'utente usa il tasto ``Rispondi".
+\item Gli viene quindi mostrato un modulo per inserire un nuovo messaggio in risposta al ticket.
+\end{enumerate}
+
+\subsubsection{Cliente chiude ticket}
+\label{SD:chiusuraticket}
+
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteChiusuraTicket}
+\end{center}
+
+\begin{enumerate}
+\item Dopo aver selezionato un ticket (\ref{SD:selezioneticketcliente}), l'utente usa il tasto ``Chiudi".
+\item Il ticket viene dichiarato chiuso.
+\end{enumerate}
 
 \subsection{Centralinista}
 
-% TODO gestione ticket
+\subsubsection{Centralinista elenca ticket}
+\label{SD:centralinistaelencaticket}
+
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaElencaTicket}
+\end{center}
+
+\begin{enumerate}
+\item Dopo essersi autenticato (\ref{SD:login}), il centralinista verrà rimandato alla sua homepage. Da lì potrà scegliere di visualizzare l'elenco dei ticket in attesa di risposta.
+\end{enumerate}
+
+\subsubsection{Centralinista seleziona un ticket}
+\label{SD:selezioneticketcentralinista}
+
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaSelezionaTicket}
+\end{center}
+
+\begin{enumerate}
+\item Dall'elenco dei ticket (\ref{SD:centralinistaelencaticket}), il centralinista fa click su uno dei ticket attualmente aperti.
+\item Gli vengono mostrati tutti i messaggi inviati fino a quel momento.
+\end{enumerate}
+
+\subsubsection{Centralinista risponde ad un ticket}
+\label{SD:rispostaticketcentralinista}
+
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaRispondeTicket}
+\end{center}
+
+\begin{enumerate}
+\item Dopo aver selezionato un ticket (\ref{SD:selezioneticketcentralinista}), il centralinista usa il tasto ``Rispondi".
+\item Gli viene quindi mostrato un modulo per inserire un nuovo messaggio in risposta al ticket.
+\end{enumerate}
+
 % TODO gestione vendite
 
 \subsection{Magazziniere}
