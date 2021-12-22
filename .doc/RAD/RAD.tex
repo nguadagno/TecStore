@@ -1265,13 +1265,85 @@ Fare riferimento a \ref{UC:7}. \\
 \item Dopo aver selezionato un ticket (\ref{SD:selezionevenditacentralinista}), il centralinista può scegliere se autorizzare o rifiutare la vendita.
 \end{enumerate}
 
-\subsection{Magazziniere}
+\newpage
 
-% TODO modifiche stati vendita
+\subsection{Magazziniere}
+\subsubsection{Magazziniere elenca ordini}
+\label{SD:magazzinierevisualizzaelenco}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/MagazziniereVisualizzaElenco}
+\end{center}
+
+\begin{enumerate}
+\item Dopo essersi autenticato (\ref{SD:login}), il magazziniere verrà rimandato all'elenco degli ordini in attesa di spedizione.
+\end{enumerate}
+
+\subsubsection{Magazziniere spedisce ordine}
+\label{SD:magazzinierespedisce}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/MagazziniereSpedisceOrdine}
+\end{center}
+
+\begin{enumerate}
+\item Dall'elenco degli ordini (\ref{SD:magazzinierevisualizzaelenco}), il magazziniere potrà accettare (\checkmark) un ordine.
+\end{enumerate}
+
+\subsubsection{Magazziniere annulla ordine}
+\label{SD:magazzinierespedisce}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/MagazziniereAnnullaOrdine}
+\end{center}
+
+\begin{enumerate}
+\item Dall'elenco degli ordini (\ref{SD:magazzinierevisualizzaelenco}), il magazziniere potrà annullare ($\times$) un ordine.
+\end{enumerate}
+
+\newpage
 
 \subsection{Amministratore catalogo}
 
-% TODO aggiunta modifica e rimozione articoli
+\subsubsection{Amministratore catalogo visualizza elenco}
+\label{SD:amcatvisualizzaelenco}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratoreCatalogoVisualizzaElenco}
+\end{center}
+
+\begin{enumerate}
+\item Dopo essersi autenticato (\ref{SD:login}), l'amministratore del catalogo verrà rimandato all'elenco degli articoli in vendita.
+\end{enumerate}
+
+\subsubsection{Amministratore catalogo seleziona articolo}
+\label{SD:amcatselezionaarticolo}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratoreCatalogoSelezionaArticolo}
+\end{center}
+
+\begin{enumerate}
+\item Dall'elenco (\ref{SD:amcatvisualizzaelenco}), l'amministratore del catalogo potrà selezionare uno degli articoli per visualizzarne i dettagli.
+\end{enumerate}
+
+\subsubsection{Amministratore catalogo inserisce articolo}
+\label{SD:amcatinseriscearticolo}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratoreCatalogoInserisceNuovoArticolo}
+\end{center}
+
+\begin{enumerate}
+\item Dall'elenco (\ref{SD:amcatvisualizzaelenco}), l'amministratore del catalogo potrà inserire un nuovo articolo.
+% TODO
+\end{enumerate}
+
+\subsubsection{Amministratore catalogo modifica articolo}
+\label{SD:amcatmodificaarticolo}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratoreCatalogoModificaArticolo}
+\end{center}
+
+\begin{enumerate}
+\item Dalla pagina dei dettagli di un articolo (\ref{SD:amcatselezionaarticolo}), l'amministratore del catalogo potrà usare il 
+% TODO
+\end{enumerate}
+
 
 \subsection{Amministratore personale}
 
