@@ -28,6 +28,7 @@ hs_err_pid*
 *.out
 *.synctex.gz
 *.toc
+*.dvi
 
 # Visual Paradigm
 *.vpp.bak*
