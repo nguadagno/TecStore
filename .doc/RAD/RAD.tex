@@ -297,6 +297,7 @@ Sarà utilizzata la tecnologia JSP con servlet su server Tomcat per la presentaz
 
 \newpage
 \subsection{Scenari}
+%TODO
 \subsubsection{Un utente non registrato vuole acquistare un articolo}
 \textbf{Attore:} Luca Garibaldi, utente non registrato e Massimo Boni, magazziniere \\
 \noindent
@@ -447,6 +448,7 @@ Sarà utilizzata la tecnologia JSP con servlet su server Tomcat per la presentaz
 
 \newpage
 \section{Use case}
+%TODO
 \subsection{Clienti}
 \subsubsection{Registrazione di un cliente}
 \label{UC:1}
@@ -950,9 +952,9 @@ Fare riferimento a \ref{UC:1}. \\
 \end{center}
 
 \begin{enumerate}
-\item Un cliente non registrato che visita il sito per la prima volta, una volta deciso di registrarsi, potrà fare click su ``Registrati'' dalla pagina iniziale.
-\item Gli verrà presentato un form in cui inserire i dati richiesti per la registrazione, tra cui nome, cognome, email e password.
-\item I dati verranno controllati e, se privi di errori, l'utente verrà registrato.
+\item Un cliente non registrato che visita il sito per la prima volta, una volta deciso di registrarsi, può fare click su ``Registrati'' dalla pagina iniziale.
+\item Gli viene presentato un form in cui inserire i dati richiesti per la registrazione, tra cui nome, cognome, email e password.
+\item I dati vengono controllati e, se privi di errori, l'utente viene registrato.
 \end{enumerate}
 
 \subsubsection{Cliente si autentica}
@@ -965,9 +967,9 @@ Fare riferimento a \ref{UC:2}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo la registrazione (\ref{SD:registrazione}, \ref{UC:1}), l'utente potrà usare le credenziali scelte per autenticarsi cliccando sul tasto ``Autenticati''.
-\item Gli verrà presentato quindi un modulo per l'inserimento di email e password.
-\item Se le credenziali saranno corrette e corrisponderanno a quelle memorizzate nel sistema, all'utente viene consentito l'accesso.
+\item Dopo la registrazione (\ref{SD:registrazione}, \ref{UC:1}), l'utente può usare le credenziali scelte per autenticarsi cliccando sul tasto ``Autenticati''.
+\item Gli viene presentato quindi un modulo per l'inserimento di email e password.
+\item Se le credenziali sono corrette e corrispondono a quelle memorizzate nel sistema, all'utente viene consentito l'accesso.
 \end{enumerate}
 
 \subsubsection{Cliente ricerca un articolo}
@@ -978,8 +980,8 @@ Fare riferimento a \ref{UC:2}. \\
 \end{center}
 
 \begin{enumerate}
-\item A prescindere dallo stato dell'autenticazione (\ref{SD:registrazione}, \ref{UC:1}, all'utente sarà permesso ricercare articoli nel sito. Usando la barra di ricerca presente nella pagina principale, potrà inserire dei termini da ricercare.
-\item Una volta premuto sul tasto ``Cerca'', gli verrà presentato un elenco di articoli corrispondenti.:
+\item A prescindere dallo stato dell'autenticazione (\ref{SD:registrazione}, \ref{UC:1}, all'utente è permesso ricercare articoli nel sito. Usando la barra di ricerca presente nella pagina principale, può inserire dei termini da ricercare.
+\item Una volta premuto sul tasto ``Cerca'', gli viene presentato un elenco di articoli corrispondenti.
 \end{enumerate}
 
 \subsubsection{Cliente visualizza dettagli di un articolo}
@@ -990,8 +992,8 @@ Fare riferimento a \ref{UC:2}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo aver effettuato una ricerca (\ref{SD:ricerca}), l'utente potrà scegliere uno degli articoli e cliccare sul nome o sull'immagine per selezionarlo.
-\item All'utente verrà quindi presentata una pagina con i dettagli dell'articolo scelto.
+\item Dopo aver effettuato una ricerca (\ref{SD:ricerca}), l'utente può scegliere uno degli articoli e cliccare sul nome o sull'immagine per selezionarlo.
+\item All'utente viene quindi presentata una pagina con i dettagli dell'articolo scelto.
 \end{enumerate}
 
 \newpage
@@ -1006,8 +1008,8 @@ Fare riferimento a \ref{UC:3}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo aver effettuato una ricerca (\ref{SD:ricerca}) e aver selezionato un articolo (\ref{SD:dettagli}), un utente autenticato potrà aggiungere un articolo al carrello utilizzando il tasto dedicato.
-\item Una volta premuto, la sua aggiunta verrà registrata per mantenere il carrello attraverso browser e dispositivi diversi.
+\item Dopo essersi autenticato (\ref{SD:login}), una ricerca (\ref{SD:ricerca}) e aver selezionato un articolo (\ref{SD:dettagli}) può aggiungere un articolo al carrello utilizzando il tasto dedicato.
+\item Una volta premuto, la sua aggiunta viene registrata per mantenere il carrello attraverso browser e dispositivi diversi e all'utente viene mostrata una pagina di conferma.
 \end{enumerate}
 
 \subsubsection{Cliente rimuove un articolo dal carrello}
@@ -1020,8 +1022,8 @@ Fare riferimento a \ref{UC:3}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo aver effettuato una ricerca (\ref{SD:ricerca}) e aver selezionato un articolo (\ref{SD:dettagli}), un utente autenticato potrà aggiungere un articolo al carrello utilizzando il tasto dedicato.
-\item Una volta premuto, la sua aggiunta verrà registrata per mantenere il carrello attraverso browser e dispositivi diversi.
+\item Dopo aver aggiunto un articolo al carrello (\ref{SD:aggiunta}), all'utente è consentita la rimozione degli articoli dal carrello usando il tasto dedicato.
+\item Una volta premuto, la sua modifica viene registrata e all'utente viene mostrata una pagina di conferma.
 \end{enumerate}
 
 \newpage
@@ -1034,9 +1036,9 @@ Fare riferimento a \ref{UC:3}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo aver aggiunto almeno un articolo al carrello (\ref{SD:aggiunta}), l'utente avrà la possibilità di ordinare gli articoli nel carrello stesso.
-\item Dopo aver premuto su ``Acquista'', gli verrà chiesta un'ulteriore conferma contenente tutte le informazioni relative all'ordine.
-\item Una volta ricevuta la conferma, l'ordine verrà registrato e sarà visualizzabile da un magazziniere % TODO REF
+\item Dopo aver aggiunto almeno un articolo al carrello (\ref{SD:aggiunta}), l'utente ha la possibilità di ordinare gli articoli nel carrello stesso.
+\item Dopo aver premuto su ``Acquista'', gli viene chiesta un'ulteriore conferma contenente tutte le informazioni relative all'ordine.
+\item Una volta ricevuta la conferma, l'ordine viene registrato ed è visualizzabile da un magazziniere  (\ref{SD:magazzinierespedisce}).
 \end{enumerate}
 
 \subsubsection{Cliente annulla ordine}
@@ -1050,9 +1052,8 @@ Fare riferimento a \ref{UC:5}. \\
 
 \begin{enumerate}
 \item Dopo aver effettuato un ordine e prima che venga spedito, ad un cliente sarà permesso annullare un ordine.
-\item Dall'elenco degli ordini avrà la possibilità di richiedere l'annullamento. Se lo stato nel sistema sarà ancora ``Non spedito'' l'ordine verrà effettivamente annullato immediatamente e sparirà dalla visualizzazione dei magazzinieri %TODO REF
+\item Dall'elenco degli ordini avrà la possibilità di richiedere l'annullamento. Se lo stato nel sistema sarà ancora ``Non spedito'' l'ordine verrà effettivamente annullato immediatamente e sparirà dalla visualizzazione dei magazzinieri (\ref{SD:magazzinierespedisce}).
 \end{enumerate}
-
 
 \subsubsection{Cliente visualizza elenco vendite}
 \label{SD:elencovendite}
@@ -1078,7 +1079,7 @@ Fare riferimento a \ref{UC:6}. \\
 \begin{enumerate}
 \item Dall'elenco delle vendite (\ref{SD:elencovendite}), sarà sufficiente utilizzare il tasto ``Inserisci nuova vendita".
 \item Verrà richiesto all'utente di compilare un modulo con i dati necessari.
-\item La nuova vendita verrà quindi inserita nel sistema in uno stato di attesa finché un centralinista non verificherà le informazioni della vendita stessa. ( %TODO REF )
+\item La nuova vendita verrà quindi inserita nel sistema in uno stato di attesa finché un centralinista non verificherà le informazioni della vendita stessa (\ref{SD:centralinistaautorizza}).
 \end{enumerate}
 
 \subsubsection{Cliente seleziona vendita}
@@ -1089,7 +1090,7 @@ Fare riferimento a \ref{UC:6}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dall'elenco delle vendite (\ref{SD:elencovendite}), il cliente ne seleziona una.
+\item Dall'elenco delle vendite (\ref{SD:elencovendite}), il cliente ne può selezionare una.
 \item Gli viene mostrata una pagina con i dettagli della vendita.
 \end{enumerate}
 
@@ -1102,9 +1103,8 @@ Fare riferimento a \ref{UC:6}. \\
 
 \begin{enumerate}
 \item Nella pagina dei dettagli di una vendita, se lo stato è ancora ``In vendita", sarà presente un tasto ``Modifica vendita".
-\item L'utente potrà cliccarlo per visualizzare un modulo per la modifica della vendita. 
-\item La vendita tornerà quindi in uno stato di attesa finché un centralinista non verificherà i dati inseriti % TODO REF
-
+\item L'utente può cliccarlo per visualizzare un modulo per la modifica della vendita. 
+\item La vendita torna quindi in uno stato di attesa finché un centralinista non verificherà i dati inseriti (\ref{SD:centralinistaautorizza}).
 \end{enumerate}
 
 \subsubsection{Cliente annulla vendita}
@@ -1115,8 +1115,9 @@ Fare riferimento a \ref{UC:6}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo aver creato una vendita (\ref{SD:creazionevendita}) e finché lo stato è ``In vendita", all'utente sarà concessa la possibilità di annullare una vendita.
-\item Dall'elenco delle vendite sarà presente quindi un tasto ``Annulla vendita".
+\item Dopo aver creato una vendita (\ref{SD:creazionevendita}) e finché lo stato è ``In vendita", all'utente è concessa la possibilità di annullare una vendita.
+\item Dall'elenco delle vendite è presente quindi un tasto ``Annulla vendita".
+\item All'utente viene mostrata una pagina di conferma.
 \end{enumerate}
 
 \newpage
@@ -1131,7 +1132,7 @@ Fare riferimento a \ref{UC:7}. \\
 
 \begin{enumerate}
 \item Un utente autenticato (\ref{SD:login}) che si trova nella pagina iniziale può utilizzare la funzione ``Assistenza Clienti".
-\item Gli viene quindi mostrato l'elenco dei ticket attualmente in attesa di risoluzione.
+\item Gli viene quindi mostrato l'elenco dei ticket attualmente in attesa di risoluzione e che non sono attualmente visualizzati da altri centralinisti.
 \end{enumerate}
 
 \subsubsection{Cliente apre ticket}
@@ -1144,7 +1145,7 @@ Fare riferimento a \ref{UC:7}. \\
 \begin{enumerate}
 \item Dall'elenco dei ticket (\ref{SD:elencoticket}), l'utente usa la funzione ``Crea Ticket".
 \item Gli viene mostrato un modulo per l'inserimento del messaggio.
-\item Il messaggio viene controllato e, se non ci sono problemi, all'utente viene mostrata una conferma.
+\item Il messaggio viene controllato e all'utente viene mostrata una conferma.
 \end{enumerate}
 
 \subsubsection{Cliente seleziona un ticket}
@@ -1195,7 +1196,8 @@ Fare riferimento a \ref{UC:7}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo essersi autenticato (\ref{SD:login}), il centralinista verrà rimandato alla sua homepage. Da lì potrà scegliere di visualizzare l'elenco dei ticket in attesa di risposta.
+\item Dopo essersi autenticato (\ref{SD:login}), il centralinista viene rimandato alla pagina principale dedicata ai centralinisti. 
+\item Da lì può scegliere di visualizzare l'elenco dei ticket in attesa di risposta, ordinati per data crescente.
 \end{enumerate}
 
 \subsubsection{Centralinista seleziona un ticket}
@@ -1206,9 +1208,12 @@ Fare riferimento a \ref{UC:7}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dall'elenco dei ticket (\ref{SD:centralinistaelencaticket}), il centralinista fa click su uno dei ticket attualmente aperti.
+\item Dall'elenco dei ticket (\ref{SD:centralinistaelencaticket}), il centralinista fa click su uno dei ticket attualmente aperti che sono in attesa di risposta e non sono attualmente visualizzati da altri centralinisti.
+\item Lo stato di quel ticket viene cambiato a "In elaborazione".
 \item Gli vengono mostrati tutti i messaggi inviati fino a quel momento.
 \end{enumerate}
+
+\newpage
 
 \subsubsection{Centralinista risponde ad un ticket}
 \label{SD:rispostaticketcentralinista}
@@ -1220,6 +1225,7 @@ Fare riferimento a \ref{UC:7}. \\
 \begin{enumerate}
 \item Dopo aver selezionato un ticket (\ref{SD:selezioneticketcentralinista}), il centralinista usa il tasto ``Rispondi".
 \item Gli viene quindi mostrato un modulo per inserire un nuovo messaggio in risposta al ticket.
+\item Dopo aver inviato il messaggio, lo stato passa da "In elaborazione" a "In attesa del cliente".
 \end{enumerate}
 
 \subsubsection{Centralinista visualizza elenco vendite}
@@ -1230,7 +1236,8 @@ Fare riferimento a \ref{UC:7}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo essersi autenticato (\ref{SD:login}), il centralinista verrà rimandato alla sua homepage. Da lì potrà scegliere di visualizzare l'elenco delle vendite in attesa di risposta.
+\item Dopo essersi autenticato (\ref{SD:login}), il centralinista viene rimandato alla sua homepage. 
+\item Da lì potrà scegliere di visualizzare l'elenco delle vendite in attesa di risposta, ordinate per data crescente.
 \end{enumerate}
 
 \subsubsection{Centralinista seleziona una vendita}
@@ -1242,6 +1249,7 @@ Fare riferimento a \ref{UC:7}. \\
 
 \begin{enumerate}
 \item Dall'elenco dei ticket (\ref{SD:centralinistaelencaticket}), il centralinista fa click su una delle vendite attualmente in attesa di conferma.
+\item Lo stato della vendita passa a "In elaborazione".
 \item Vengono visualizzati tutti i dettagli di quella vendita.
 \end{enumerate}
 
@@ -1252,7 +1260,7 @@ Fare riferimento a \ref{UC:7}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo aver selezionato un ticket (\ref{SD:selezionevenditacentralinista}), il centralinista può scegliere se autorizzare o rifiutare la vendita.
+\item Dopo aver selezionato una vendita (\ref{SD:selezionevenditacentralinista}), il centralinista può autorizzare una vendita.
 \end{enumerate}
 
 \subsubsection{Centralinista rifiuta una vendita}
@@ -1262,7 +1270,7 @@ Fare riferimento a \ref{UC:7}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo aver selezionato un ticket (\ref{SD:selezionevenditacentralinista}), il centralinista può scegliere se autorizzare o rifiutare la vendita.
+\item Dopo aver selezionato una vendita (\ref{SD:selezionevenditacentralinista}), il centralinista può rifiutare una vendita.
 \end{enumerate}
 
 \newpage
@@ -1275,7 +1283,7 @@ Fare riferimento a \ref{UC:7}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo essersi autenticato (\ref{SD:login}), il magazziniere verrà rimandato all'elenco degli ordini in attesa di spedizione.
+\item Dopo essersi autenticato (\ref{SD:login}), il magazziniere viene rimandato all'elenco degli ordini in attesa di spedizione.
 \end{enumerate}
 
 \subsubsection{Magazziniere spedisce ordine}
@@ -1285,7 +1293,7 @@ Fare riferimento a \ref{UC:7}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dall'elenco degli ordini (\ref{SD:magazzinierevisualizzaelenco}), il magazziniere potrà accettare (\checkmark) un ordine.
+\item Dall'elenco degli ordini (\ref{SD:magazzinierevisualizzaelenco}), il magazziniere può accettare (\checkmark) un ordine.
 \end{enumerate}
 
 \subsubsection{Magazziniere annulla ordine}
@@ -1295,7 +1303,7 @@ Fare riferimento a \ref{UC:7}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dall'elenco degli ordini (\ref{SD:magazzinierevisualizzaelenco}), il magazziniere potrà annullare ($\times$) un ordine.
+\item Dall'elenco degli ordini (\ref{SD:magazzinierevisualizzaelenco}), il magazziniere può annullare ($\times$) un ordine.
 \end{enumerate}
 
 \newpage
@@ -1309,7 +1317,7 @@ Fare riferimento a \ref{UC:7}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo essersi autenticato (\ref{SD:login}), l'amministratore del catalogo verrà rimandato all'elenco degli articoli in vendita.
+\item Dopo essersi autenticato (\ref{SD:login}), l'amministratore del catalogo viene rimandato all'elenco degli articoli in vendita.
 \end{enumerate}
 
 \subsubsection{Amministratore catalogo seleziona articolo}
@@ -1319,7 +1327,8 @@ Fare riferimento a \ref{UC:7}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dall'elenco (\ref{SD:amcatvisualizzaelenco}), l'amministratore del catalogo potrà selezionare uno degli articoli per visualizzarne i dettagli.
+\item Dall'elenco (\ref{SD:amcatvisualizzaelenco}), l'amministratore del catalogo può selezionare uno degli articoli per visualizzarne i dettagli.
+\item Viene rimandato a una pagina con i dettagli dell'articolo.
 \end{enumerate}
 
 \subsubsection{Amministratore catalogo inserisce articolo}
@@ -1329,8 +1338,9 @@ Fare riferimento a \ref{UC:7}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dall'elenco (\ref{SD:amcatvisualizzaelenco}), l'amministratore del catalogo potrà inserire un nuovo articolo.
-% TODO
+\item Dall'elenco (\ref{SD:amcatvisualizzaelenco}), l'amministratore del catalogo può inserire un nuovo articolo usando il tasto ``Nuovo articolo".
+\item Viene rimandato ad un modulo per l'inserimento dei dati necessari.
+\item L'articolo viene immediatamente messo in vendita.
 \end{enumerate}
 
 \subsubsection{Amministratore catalogo modifica articolo}
@@ -1340,14 +1350,75 @@ Fare riferimento a \ref{UC:7}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dalla pagina dei dettagli di un articolo (\ref{SD:amcatselezionaarticolo}), l'amministratore del catalogo potrà usare il 
-% TODO
+\item Dalla pagina dei dettagli di un articolo (\ref{SD:amcatselezionaarticolo}), l'amministratore del catalogo puuò modificare i dettagli di un articolo.
+\item Cliccando il tasto ``Modifica" visualizzerà una pagina con un modulo per la modifica delle informazioni.
 \end{enumerate}
 
+\subsubsection{Amministratore catalogo rimuove articolo}
+\label{SD:amcatrimuovearticolo}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratoreCatalogoRimuoveArticolo}
+\end{center}
+
+\begin{enumerate}
+\item Dalla pagina dei dettagli di un articolo (\ref{SD:amcatselezionaarticolo}), l'amministratore del catalogo può rimuovere un articolo usando il tasto ``Rimuovi".
+\end{enumerate}
 
 \subsection{Amministratore personale}
+%TODO
+%\subsubsection{Amministratore personale ricerca dipendente}
+%\label{SD:amcatvisualizzaelenco}
+%\begin{center}
+%\includegraphics[width=\textwidth]{SequenceDiagram/AmministratoreCatalogoVisualizzaElenco}
+%\end{center}
 
-% TODO aggiunta modifica e rimozione personale
+%\begin{enumerate}
+%\item Dopo essersi autenticato (\ref{SD:login}), l'amministratore del catalogo viene rimandato all'elenco degli articoli in vendita.
+%\end{enumerate}
+
+\subsubsection{Amministratore personale seleziona dipendente}
+\label{SD:amcatselezionaarticolo}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratorePersonaleSelezionaDipendenti}
+\end{center}
+
+\begin{enumerate}
+\item Dall'elenco (\ref{SD:amcatvisualizzaelenco}), l'amministratore del catalogo potrà selezionare uno dei dipendenti per visualizzarne i dettagli.
+\end{enumerate}
+
+\subsubsection{Amministratore personale inserisce articolo}
+\label{SD:amcatinseriscearticolo}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratorePersonaleInserisceNuovoDipendente}
+\end{center}
+
+\begin{enumerate}
+\item Dall'elenco (\ref{SD:amcatvisualizzaelenco}), l'amministratore del catalogo può inserire un nuovo articolo.
+\item Viene rimandato ad un modulo per l'inserimento dei dati richiesti.
+\end{enumerate}
+
+%TODO
+%\subsubsection{Amministratore personale modifica articolo}
+%\label{SD:amcatmodificaarticolo}
+%\begin{center}
+%\includegraphics[width=\textwidth]{SequenceDiagram/AmministratorePersonaleModificaDipendente}
+%\end{center}
+
+%\begin{enumerate}
+%\item Dalla pagina dei dettagli di un articolo (\ref{SD:amcatselezionaarticolo}), l'amministratore del catalogo potrà modificare i dettagli di un articolo.
+%\item Cliccando il tasto ``Modifica" visualizzerà una pagina con un modulo per la modifica delle informazioni.
+%\end{enumerate}
+
+\subsubsection{Amministratore personale rimuove articolo}
+\label{SD:amcatrimuovearticolo}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratorePersonaleRimuoveDipendente}
+\end{center}
+
+
+\begin{enumerate}
+\item Dalla pagina dei dettagli di un articolo (\ref{SD:amcatselezionaarticolo}), l'amministratore del catalogo può rimuovere un articolo usando il tasto ``Rimuovi".
+\end{enumerate}
 
 \section{Statechart Diagram}
 
