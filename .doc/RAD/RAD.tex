@@ -79,9 +79,8 @@ Il sistema si pone l'obiettivo di facilitare le operazioni di gestione e control
 TecStore è una piattaforma web che permette ad utenti di comprare e vendere materiale tecnologico, che può essere messo in vendita da altri utenti o dalla piattaforma stessa. Trattandosi di un negozio piccolo, il catalogo è relativamente limitato, ma si punta a creare utenza attraverso prezzi vantaggiosi e un servizio clienti di qualità.
 L'utenza della piattaforma si divide in:
 \begin{itemize}
-\item Clienti, che, una volta registrati ed autenticati, possono acquistare articoli
-\item Venditori, che mettono articoli in vendita
-\item Centralinisti, che gestiscono i \emph{ticket}
+\item Clienti, che, una volta registrati ed autenticati, possono acquistare e vendere articoli
+\item Centralinisti, che gestiscono i \emph{ticket} e autorizzano le vendite
 \item Magazzinieri, che gestiscono le spedizioni degli articoli
 \item Amministratori catalogo, che gestiscono gli articoli messi in vendita dalla piattaforma
 \item Amministratori personale, che gestiscono la presenza nel sistema dei dipendenti
@@ -393,7 +392,7 @@ Sarà utilizzata la tecnologia JSP con servlet su server Tomcat per la presentaz
 
 \newpage
 
-\item Viene quindi reindirizzato alla homepage, passa il mouse sul suo nome e clicka sul link "Vendi su TecStore".
+\item Viene quindi reindirizzato alla homepage, passa il mouse sul suo nome e clicka sul link "Area venditori".
 
 \includegraphics[width=\textwidth]{Mockup/homepage_login}
 
@@ -448,490 +447,1072 @@ Sarà utilizzata la tecnologia JSP con servlet su server Tomcat per la presentaz
 
 \newpage
 \section{Use case}
-%TODO
+\subsection{Comuni}
+\subsubsection{Autenticazione}
+\label{UC:autenticazione}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC0 Autenticazione \\
+\hline
+\textbf{Descrizione} & Un utente si autentica. \\
+\hline
+\textbf{Partecipanti} & Utente \\
+\hline
+\textbf{Condizione d'ingresso} & Un utente già registrato (\ref{UC:registrazione}) si connette al sito e vuole autenticarsi. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Si collega al sito e da una pagina qualsiasi fa click sul tasto ``Autenticati". & \\
+	& Mostra all'utente un modulo per l'inserimento di email e password. \\
+Inserisce i dati richiesti e fa click su ``Autenticati". & \\
+	& Se le credenziali sono corrette, rimanda l'utente alla pagina opportuna:
+	\begin{itemize}
+		\item alla pagina precedente per i clienti
+		\item alla pagina opportuna per i dipendenti
+	\end{itemize} \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & L'utente risulta autenticato per quella sessione. \\
+\hline
+\end {tabular}
+\\
+
+
 \subsection{Clienti}
-\subsubsection{Registrazione di un cliente}
-\label{UC:1}
+\subsubsection{Registrazione}
+\label{UC:registrazione}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
 \textbf{ID} & UC1 Registrazione \\
 \hline
-\textbf{Nome} & Registrazione di un nuovo cliente. \\
+\textbf{Descrizione} & Un nuovo cliente si registra. \\
 \hline
-\textbf{Partecipanti} & Utente non registrato \\
+\textbf{Partecipanti} & Cliente non registrato \\
 \hline
-\textbf{Condizione d'ingresso} & Un nuovo cliente visita il sito per la prima volta. \\
+\textbf{Condizione d'ingresso} & Un nuovo cliente visita il sito per la prima volta e vuole registrarsi. \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Cliente} & \textbf{Sistema} \\
-Si collega al sito, nella homepage fa click sul tasto "Registrati" & \\
-& Mostra al cliente il form per la registrazione in cui inserire tutti i dati personali, incluso nome, cognome, indirizzo, numero di carta di credito. \\
-Inserisce tutti i suoi dati, fa click su "Registrati". & \\
-& Se le credenziali sono corrette, invia al cliente una mail di conferma e chiede al cliente di utilizzare il link per confermare l'account. \\
+\textbf{Cliente non registrato} & \textbf{Sistema} \\
+Si collega al sito e da una pagina fa click sul tasto ``Registrati" & \\
+& Mostra al cliente il form per la registrazione in cui inserire tutti i dati personali, come nome, cognome, indirizzo, email e password. \\
+Inserisce tutti i dati richiesti e fa click su "Registrati". & \\
+& Invia al cliente una mail di conferma e visualizza al cliente un messaggio con l'esito della registrazione. \\
 \end{tabular}
 \end{minipage} \\
 
 \hline
-\textbf{Condizione d'uscita} & Il cliente si registra. \\
-
+\textbf{Condizione d'uscita} & Le informazioni del cliente vengono memorizzate nel sistema. \\
 \hline
-\end{tabular}
+\end {tabular}
+\\
 
 
-\bigskip
-\bigskip
-\label{UC:1d}
-
-\includegraphics[width=\textwidth]{UseCase/GestioneAccount}
-
-\subsubsection{Autenticazione di un cliente}
-\label{UC:2}
+\subsubsection{Ricerca}
+\label{UC:ricerca}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC2 Autenticazione \\
+\textbf{ID} & UC2 Ricerca \\
 \hline
-\textbf{Nome} & Login di un cliente. \\
+\textbf{Descrizione} & Un cliente ricerca una parola chiave. \\
 \hline
-\textbf{Partecipanti} & Cliente registrato \\
+\textbf{Partecipanti} & Cliente \\
 \hline
-\textbf{Condizione d'ingresso} & Un cliente della piattaforma visita il sito da un nuovo dispositivo. \\
+\textbf{Condizione d'ingresso} & Un cliente vuole scoprire il prezzo di un articolo. \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
 \textbf{Cliente} & \textbf{Sistema} \\
-Si collega al sito, nella homepage fa click sul tasto "Login" & \\
-& Mostra al cliente il form per il login, chiedendo email e password. \\
-Inserisce tutti i suoi dati, fa click su "Login". & \\
-& Se le credenziali sono corrette, reindirizza il cliente alla homepage. \\
+Da una pagina qualsiasi, digita il nome dell'articolo desiderato nella barra di ricerca e preme sul tasto ``Cerca". \\
+	& Mostra all'utente un elenco di risultati pertinenti alla parola cercata. \\
 \end{tabular}
 \end{minipage} \\
-
 \hline
-\textbf{Condizione d'uscita} & Il cliente effettua il login. \\
+\textbf{Condizione d'uscita} & All'utente viene mostrato un elenco di articoli in base alla parola chiave utilizzata. \\
 \hline
-\end{tabular}
-\\ 
+\end {tabular}
+\\
 
-\bigskip
-Fare riferimento alla tabella \ref{UC:1d}.
-
-\subsubsection{Possibilità di aggiungere articoli al carrello}
-\label{UC:3}
+\subsubsection{Selezione}
+\label{UC:selezione}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC3 AggiuntaCarrello \\
+\textbf{ID} & UC3 Selezione \\
 \hline
-\textbf{Nome} & Inserimento di un articolo nel carrello. \\
+\textbf{Descrizione} & Un cliente seleziona un articolo per visualizzarne i dettagli.  \\
 \hline
-\textbf{Partecipanti} & Cliente registrato \\
+\textbf{Partecipanti} & Cliente \\
 \hline
-\textbf{Condizione d'ingresso} & Un cliente della piattaforma vuole aggiungere un articolo al carrello, intenzionato ad acquistarlo. \\
+\textbf{Condizione d'ingresso} & Un cliente ha effettuato una ricerca (\ref{UC:ricerca}) e vuole più informazioni su uno dei risultati. \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
 \textbf{Cliente} & \textbf{Sistema} \\
-Dopo aver effettuato il login (\ref{UC:1}), ricerca l'articolo desiderato dalla barra di ricerca. \\
-& Reindirizza il cliente all'elenco degli articoli corrispondenti alla parola cercata. \\
-Fa click su uno degli articoli. \\
-& Reindirizza il cliente ad una pagina con i dettagli dell'articolo selezionato. \\
+Seleziona uno dei risultati. \\
+	& Visualizza i dettagli dell'articolo. \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & All'utente vengono mostrati i dettagli dell'articolo selezionato. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Aggiunta al carrello}
+\label{UC:carrelloadd}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC4 AggiuntaAlCarrello \\
+\hline
+\textbf{Descrizione} & Un cliente aggiunge un articolo al carrello.  \\
+\hline
+\textbf{Partecipanti} & Cliente \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) ha effettuato una ricerca (\ref{UC:ricerca}) ed ha selezionato un articolo (\ref{UC:selezione} ed è interessato ad acquistare. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
 Fa click su ``Aggiungi al carrello". \\
-& Mostra un messaggio di conferma. \\
+	& Mostra all'utente una pagina di conferma. \\
 \end{tabular}
 \end{minipage} \\
 \hline
-\end{tabular}
+\textbf{Condizione d'uscita} & L'aggiunta al carrello viene memorizzata. \\
+\hline
+\end {tabular}
+\\
 
-\newpage
-
-\subsubsection{Possibilità di acquisto per clienti registrati}
-\label{UC:4}
+\subsubsection{Acquisto}
+\label{UC:carrellobuy}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC4 Acquisto \\
+\textbf{ID} & UC5 Acquisto \\
 \hline
-\textbf{Nome} & Possibilità di acquisto per utenti registrati. \\
+\textbf{Descrizione} & Un cliente acquista gli articoli presenti nel suo carrello.  \\
 \hline
-\textbf{Partecipanti} & Cliente registrato \\
+\textbf{Partecipanti} & Cliente \\
 \hline
-\textbf{Condizione d'ingresso} & Un cliente della piattaforma vuole acquistare un articolo già presente nel suo carrello. \\
-\hline
-\textbf{Flusso di eventi} &
-\begin{minipage}{12cm}
-\begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Cliente} & \textbf{Sistema}\\
-Fa click su ``Carrello" \\
-& Reindirizza il cliente alla pagina del carrello. \\
-Fa click sul tasto ``Acquista". \\
-& Reindirizza il cliente alla pagina di conferma dell'ordine. \\
-Fa click sul tasto ``Conferma". \\
-& Invia una notifica di nuovo ordine ad un magazziniere. \\
-& \begin{center} \vdots \end{center} \\
-& Invia al cliente una conferma di spedizione dell'articolo. \\
-\end{tabular}
-\end{minipage} \\
-
-\hline
-\textbf{Condizione d'uscita} & Il cliente ha acquistato un articolo. \\
-
-\hline
-\end{tabular}
-
-
-\label{UC:4d}
-\bigskip
-\bigskip
-\includegraphics[height=250px]{UseCase/GestioneOrdini}
-
-\newpage
-
-\subsubsection{Possibilità di annullare un ordine prima che venga spedito}
-\label{UC:5}
-\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
-\hline
-\textbf{ID} & UC5 Annullamento \\
-\hline
-\textbf{Nome} & Annullamento di un ordine. \\
-\hline
-\textbf{Partecipanti} & Cliente registrato \\
-\hline
-\textbf{Condizione d'ingresso} & Un cliente della piattaforma decide di annullare un ordine. \\
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) ha aggiunto un articolo al carrello (\ref{UC:carrelloadd}). Ora vuole procedere con l'acquisto. \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
 \textbf{Cliente} & \textbf{Sistema} \\
-Dopo aver effettuato un ordine (\ref{UC:4}), fa click sul tasto ``Storico ordini". \\
-& Reindirizza il cliente all'elenco degli ordini effettuati. \\
-Fa click su ``Annulla" in corrispondenza dell'articolo interessato. \\
-& Reindirizza il cliente ad una pagina di conferma. \\
-Conferma l'annullamento. \\
-& Cancella l'articolo dall'elenco degli articoli da spedire. \\
-& \vdots \\
-& Invia un messaggio di conferma all'utente. \\
+Da una pagina qualsiasi, fa click su ``Carrello".
+	& Mostra all'utente il contenuto del carrello. \\
+Fa click su ``Acquista".
+	& Mostra all'utente una pagina di conferma con i dettagli dell'ordine, come prezzo totale, tempo stimato di spedizione, costo di spedizione. \\
+Fa click su ``Conferma".
+	& Crea un ordine nel sistema.
 \end{tabular}
 \end{minipage} \\
-
 \hline
-\textbf{Condizione d'uscita} & L'articolo non viene spedito e viene rimesso in vendita. \\
+\textbf{Condizione d'uscita} & L'ordine viene creato. \\
 \hline
-\end{tabular}
+\end {tabular}
+\\
 
-Fare riferimento al diagramma \ref{UC:4d}.
-
-\subsubsection{Possibilità per ogni cliente di vendere articoli}
-\label{UC:6}
-
-Fare riferimento a \ref{UC:12}. \\
-
+\subsubsection{Rimozione dal carrello}
+\label{UC:carrelloremove}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC6 Vendita \\
+\textbf{ID} & UC6 RimozioneDalCarrello \\
 \hline
-\textbf{Nome} & Un utente richiede di vendere un articolo sulla piattaforma. \\
+\textbf{Descrizione} & Un cliente rimuove uno degli articoli presenti nel suo carrello.  \\
 \hline
-\textbf{Partecipanti} & Cliente registrato \\
+\textbf{Partecipanti} & Cliente \\
 \hline
-\textbf{Condizione d'ingresso} & Un cliente della piattaforma decide di vendere un articolo. \\
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) ha aggiunto un articolo al carrello (\ref{UC:carrelloadd}). Ora vuole rimuoverlo. \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
 \textbf{Cliente} & \textbf{Sistema} \\
-Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Vendi su TecStore". \\
-& Reindirizza il cliente al form per l'inserimento dei dati dell'articolo da vendere. \\
-Inserisce nome, prezzo, descrizione e foto dell'articolo. \\
-& Reindirizza il cliente ad una pagina di conferma. \\
-Conferma la vendita. \\
-& Inoltra la richiesta ad un centralinista. \\
-& \vdots \\
-& Riceve una notifica dell'esito.
+Da una pagina qualsiasi, fa click su ``Carrello".
+	& Mostra all'utente il contenuto del carrello. \\
+Fa click su ``Rimuovi" per l'articolo interessato.
+	& Mostra all'utente una pagina di conferma. \\
 \end{tabular}
 \end{minipage} \\
-
 \hline
-\textbf{Condizione d'uscita} & L'articolo viene messo in vendita sulla piattaforma. \\
+\textbf{Condizione d'uscita} & L'articolo viene rimosso dal carrello. \\
 \hline
-\end{tabular}
+\end {tabular}
+\\
 
-\subsubsection{Possibilità di contatto del servizio clienti}
-\label{UC:7}
-
-Fare riferimento a \ref{UC:11}.\\
-
+\subsubsection{Annullamento di un ordine}
+\label{UC:annullamento}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC7 CreazioneTicket \\
+\textbf{ID} & UC7 AnnullamentoOrdine \\
 \hline
-\textbf{Nome} & Contatto servizio clienti. \\
+\textbf{Descrizione} & Un cliente vuole annullare un ordine effettuato in precedenza.  \\
 \hline
-\textbf{Partecipanti} & Cliente registrato, centralinista \\
+\textbf{Partecipanti} & Cliente \\
 \hline
-\textbf{Condizione d'ingresso} & Un cliente della piattaforma ha necessità di assistenza. \\
-\hline
-\textbf{Flusso di eventi} &
-\begin{minipage}{12cm}
-\begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Cliente} & \textbf{Sistema}\\
-Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Assistenza clienti". \\
-& Reindirizza il cliente al form per l'invio di un messaggio per l'assistenza clienti. \\
-Scrive il messaggio.  \\
-& Inoltra il messaggio ad un centralinista. \\
-\vdots & \vdots \\
-& Inoltra la risposta. \\
-\vdots & \vdots \\
-Risponde. \\
-\vdots & \vdots \\
-& Inoltra la risposta. \\
-\vdots & \vdots \\
-\vdots & \vdots \\
-Chiude il ticket. \\
-\end{tabular}
-\end{minipage} \\
-
-\hline
-\textbf{Condizione d'uscita} & Il problema il cliente viene dichiarato risolto e il ticket viene chiuso. \\
-\hline
-\end{tabular}
-
-\bigskip
-\bigskip
-
-\label{UC:7d}
-
-\includegraphics[height=200px]{UseCase/GestioneTicket}
-
-\subsubsection{Modifica informazioni profilo}
-\label{UC:8}
-\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
-\hline
-\textbf{ID} & UC8 ModificaProfilo \\
-\hline
-\textbf{Nome} & Modifica informazioni profilo. \\
-\hline
-\textbf{Partecipanti} & Cliente registrato \\
-\hline
-\textbf{Condizione d'ingresso} & Un cliente della piattaforma ha necessità di modificare le informazioni del suo profilo. \\
-\hline
-\textbf{Flusso di eventi} &
-\begin{minipage}{12cm}
-\begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Utente} & \textbf{Sistema} \\
-Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto ``Modifica profilo". \\
-& Reindirizza il cliente alla contenente tutte le sue informazioni. \\
-Fa click su ``Modifica".  \\
-& Reindirizza il cliente ad una pagina con un form per la modifica dei dati personali. \\
-Inserisce i dati modificati. \\
-& Salva le modifiche. \\
-\end{tabular}
-\end{minipage} \\
-
-\hline
-\textbf{Condizione d'uscita} & Le vecchie informazioni vengono sovrascritte. \\
-\hline
-\end{tabular}
-
-Fare riferimento alla tabella \ref{UC:1d}.
-
-\subsubsection{Recupero password}
-\label{UC:9}
-\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
-\hline
-\textbf{ID} & UC9 RecuperoPassword \\
-\hline
-\textbf{Nome} & Recupero password smarrita. \\
-\hline
-\textbf{Partecipanti} & Cliente registrato \\
-\hline
-\textbf{Condizione d'ingresso} & Un cliente della piattaforma ha dimenticato la sua password e vuole recuperarla. \\
+	\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) ha acquistato un articolo (\ref{UC:carrellobuy}). Ora vuole annullarlo e l'ordine non è ancora stato spedito (\ref{UC:magazzblocca}, \ref{UC:magazzconferma}).\\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
 \textbf{Cliente} & \textbf{Sistema} \\
-Dalla pagina del login (\ref{UC:1}), fa click su ``Password smarrita?". \\
-& Reindirizza il cliente al form per l'inserimento della propria email. \\
-Inserisce la propria email.  \\
-& Invia un link per il recupero della password. \\
-Apre la casella email e utilizza quel link. \\
-&  Reindirizza il cliente ad un form per il ripristino della password. \\
-Inserisce la nuova password. \\
-& Reindirizza il cliente al form di login, con un messaggio che lo informa della modifica effettuata. \\
+Da una pagina qualsiasi, fa click su ``Storico Ordini".
+	& Mostra all'utente tutti gli ordini che ha effettuato. \\
+Fa click su ``Annulla" per l'ordine.
+	& Mostra all'utente una pagina di conferma. \\
 \end{tabular}
 \end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & L'ordine viene annullato. \\
+\hline
+\end {tabular}
+\\
 
+\subsubsection{Elenco ticket}
+\label{UC:ticketlist}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{Condizione d'uscita} & La password del cliente viene sovrascritta. \\
+\textbf{ID} & UC8 ElencoTicket \\
 \hline
+\textbf{Descrizione} & Un cliente visualizza l'elenco dei ticket che non sono stati chiusi.  \\
+\hline
+\textbf{Partecipanti} & Cliente \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente è autenticato (\ref{UC:autenticazione}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Da una pagina qualsiasi, fa click su ``Servizio clienti". \\
+	& Mostra al cliente l'elenco dei suoi ticket che non sono ancora stati chiusi.
 \end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il cliente visualizza l'elenco. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Creazione di un ticket}
+\label{UC:ticketopen}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC9 CreazioneTicket \\
+\hline
+\textbf{Descrizione} & Un cliente ha necessità di contattare il servizio clienti.  \\
+\hline
+\textbf{Partecipanti} & Cliente \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) è nella pagina dell'elenco dei ticket.  \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Fa click su ``Nuovo ticket". \\
+	& Mostra al cliente un modulo per l'inserimento di un messaggio e la scelta della tipologia di ticket. \\
+Inserisce le informazioni richieste e fa click su ``Conferma". \\
+	& Mostra al cliente una pagina di conferma.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il ticket viene creato. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Selezione di un ticket}
+\label{UC:ticketdetail}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC10 SelezioneTicket \\
+\hline
+\textbf{Descrizione} & Un cliente visualizza l'elenco di messaggi relativi ad uno dei ticket.  \\
+\hline
+\textbf{Partecipanti} & Cliente \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) è nella pagina dell'elenco dei ticket. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Dall'elenco dei ticket (\ref{UC:ticketlist}), fa click su uno dei ticket. \\
+	& Mostra al cliente tutti i messaggi relativi a quel ticket. \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il cliente visualizza i messaggi del ticket. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Risposta ad un ticket}
+\label{UC:ticketreply}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC11 RispostaTicket \\
+\hline
+\textbf{Descrizione} & Un cliente aggiunge un messaggio ad un ticket esistente.  \\
+\hline
+\textbf{Partecipanti} & Cliente \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) è nella pagina dei dettagli di un ticket. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Fa click su ``Rispondi". \\
+	& Mostra al cliente un modulo per l'inserimento di un messaggio. \\
+Inserisce il messaggio e fa click su ``Conferma". \\
+	& Memorizza il messaggio.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Un nuovo messaggio viene registrato per il ticket. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Chiusura di un ticket}
+\label{UC:ticketreply}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC12 ChiusuraTicket \\
+\hline
+\textbf{Descrizione} & Un cliente ritiene che il problema sia stato risolto e decide di chiudere un ticket.  \\
+\hline
+\textbf{Partecipanti} & Cliente \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) è nella pagina dei dettagli di un ticket. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Fa click su ``Chiudi". \\
+	& Mostra all'utente una pagina di conferma.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Lo stato del ticket passa a ``Risolto". \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Elenco vendite}
+\label{UC:saleslist}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC13 ElencoVendite \\
+\hline
+\textbf{Descrizione} & Un cliente visualizza l'elenco degli articoli che ha attualmente in vendita.  \\
+\hline
+\textbf{Partecipanti} & Cliente \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) vuole visualizzare l'elenco degli articoli che ha attualmente in vendita. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Da una pagina qualsiasi, fa click su ``Area venditori". \\
+	& Mostra all'utente l'elenco degli articoli attualmente in vendita.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il cliente visualizza l'elenco degli articoli attualmente in vendita. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Vendita}
+\label{UC:salesnew}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC14 NuovaVendita \\
+\hline
+\textbf{Descrizione} & Un cliente inserisce un nuovo articolo in vendita sulla piattaforma.  \\
+\hline
+\textbf{Partecipanti} & Cliente \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) è nell'elenco degli articoli in vendita (\ref{UC:saleslist}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Fa click su ``Vendi". \\
+	& Mostra al cliente un modulo per l'inserimento dei dati necessari come nome, descrizione, prezzo, quantità disponibile e foto dell'articolo. \\
+Inserisce i dati richiesti e fa click su ``Conferma". \\
+	& Mostra una pagina di conferma.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Viene registrata una nuova vendita con stato ``In attesa di approvazione" (\ref{UC:centralinistavenditaautorizza}). \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Modifica vendita}
+\label{UC:salesedit}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC15 ModificaVendita \\
+\hline
+\textbf{Descrizione} & Un cliente modifica i dettagli di una vendita esistente.  \\
+\hline
+\textbf{Partecipanti} & Cliente \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) è nell'elenco degli articoli in vendita (\ref{UC:saleslist}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Fa click su ``Modifica" sulla riga corrispondente all'articolo interessato. \\
+	& Mostra all'utente un modulo per l'inserimento dei nuovi dati necessari come nome, descrizione, prezzo, quantità disponibile e foto dell'articolo. I campi sono preimpostati con i valori attuali. \\
+Inserisce i dati richiesti e fa click su ``Conferma". \\
+	& Mostra una pagina di conferma.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Viene registrata una nuova vendita con stato ``In attesa di approvazione" (\ref{UC:centralinistavenditaautorizza}). \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Annullamento vendita}
+\label{UC:salesdetails}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC16 AnnullamentoVendita \\
+\hline
+\textbf{Descrizione} & Un cliente annulla una vendita esistente.  \\
+\hline
+\textbf{Partecipanti} & Cliente \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) è nell'elenco degli articoli in vendita (\ref{UC:saleslist}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Fa click su ``Annulla" per l'articolo interessato. \\
+	& Mostra all'utente una pagina di conferma. \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & L'utente visualizza le informazioni su una vendita. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Dettagli vendita}
+\label{UC:salesdetails}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC17 DettagliVendita \\
+\hline
+\textbf{Descrizione} & Un cliente visualizza le informazioni su una vendita come quantità di articoli venduti e ricavato totale.  \\
+\hline
+\textbf{Partecipanti} & Cliente \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) è nell'elenco degli articoli in vendita (\ref{UC:saleslist}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Fa click sull'articolo interessato. \\
+	& Mostra all'utente le informazioni sull'andamento della vendita.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & L'utente visualizza le informazioni su una vendita. \\
+\hline
+\end {tabular}
+\\
 
 \newpage
 
-\subsection{Gestione piattaforma}
-\subsubsection{Spedizione ordini}
-\label{UC:10}
-Fare riferimento a \ref{UC:3} e \ref{UC:4}. \\
-
+\subsection{Centralinista}
+\subsubsection{Elenco Ticket}
+\label{UC:centralinistaticketelenco}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC10 SpedizioneOrdine \\
+\textbf{ID} & UC18 ElencoTicket \\
 \hline
-\textbf{Nome} & Un ordine viene spedito dal magazzino. \\
+\textbf{Descrizione} & Un centralinista visualizza l'elenco dei ticket attualmente in attesa di risposta.  \\
+\hline
+\textbf{Partecipanti} & Centralinista \\
+\hline
+\textbf{Condizione d'ingresso} & Un centralinista autenticato (\ref{UC:autenticazione}) è nella sua pagina principale. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Centralinista} & \textbf{Sistema} \\
+Fa click su ``Ticket". \\
+	& Mostra l'elenco dei ticket in attesa di risposta.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il centralinista visualizza l'elenco dei ticket in attesa di risposta. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Selezione Ticket}
+\label{UC:centralinistaticketselezione}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC19 SelezioneTicket \\
+\hline
+\textbf{Descrizione} & Un centralinista seleziona un ticket dall'elenco per visualizzare i messaggi.  \\
+\hline
+\textbf{Partecipanti} & Centralinista \\
+\hline
+\textbf{Condizione d'ingresso} & Un centralinista autenticato (\ref{UC:autenticazione}) è nella pagina dell'elenco dei ticket (\ref{UC:centralinistaticketelenco}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Centralinista} & \textbf{Sistema} \\
+Fa click sul ticket. \\
+	& Cambia lo stato del ticket a ``In elaborazione" e mostra tutti i messaggi relativi a quel ticket. \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il centralinista visualizza i messaggi relativi ad un ticket. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Risposta ad un ticket}
+\label{UC:centralinistaticketrisposta}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC20 RispostaTicket \\
+\hline
+\textbf{Descrizione} & Un centralinista aggiunge un messaggio ad un ticket esistente.  \\
+\hline
+\textbf{Partecipanti} & Centralinista \\
+\hline
+\textbf{Condizione d'ingresso} & Un centralinista è nella pagina dei dettagli di un ticket (\ref{UC:centralinistaticketselezione}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Centralinista} & \textbf{Sistema} \\
+Fa click su ``Rispondi". \\
+	& Mostra un modulo per l'inserimento di un messaggio. \\
+Inserisce il messaggio e fa click su ``Conferma". \\
+	& Memorizza il messaggio.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Un nuovo messaggio viene registrato per il ticket. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Elenco Vendite}
+\label{UC:centralinistavenditeelenco}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC21 ElencoVendite \\
+\hline
+\textbf{Descrizione} & Un centralinista visualizza l'elenco delle vendite attualmente in attesa di approvazione.  \\
+\hline
+\textbf{Partecipanti} & Centralinista \\
+\hline
+\textbf{Condizione d'ingresso} & Un centralinista autenticato (\ref{UC:autenticazione}) è nella sua pagina principale. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Centralinista} & \textbf{Sistema} \\
+Fa click su ``Vendite". \\
+	& Mostra l'elenco delle vendite in attesa.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il centralinista visualizza l'elenco delle vendite in attesa. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Selezione Vendita}
+\label{UC:centralinistavenditaselezione}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC22 SelezioneVendita \\
+\hline
+\textbf{Descrizione} & Un centralinista seleziona una vendita dall'elenco per visualizzare i dettagli.  \\
+\hline
+\textbf{Partecipanti} & Centralinista \\
+\hline
+\textbf{Condizione d'ingresso} & Un centralinista autenticato (\ref{UC:autenticazione}) è nella pagina dell'elenco delle vendite (\ref{UC:centralinistavenditeelenco}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Centralinista} & \textbf{Sistema} \\
+Fa click sulla vendita. \\
+	& Cambia lo stato della vendita a ``In elaborazione" e mostra i dettagli della vendita. \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il centralinista visualizza i dettagli di una vendita. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Autorizza Vendita}
+\label{UC:centralinistavenditaautorizza}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC23 AutorizzaVendita \\
+\hline
+\textbf{Descrizione} & Un centralinista autorizza una vendita.  \\
+\hline
+\textbf{Partecipanti} & Centralinista \\
+\hline
+\textbf{Condizione d'ingresso} & Un centralinista è nella pagina dei dettagli di una vendita (\ref{UC:centralinistavenditaselezione}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Centralinista} & \textbf{Sistema} \\
+Fa click su $\checkmark$. \\
+	& Mostra una pagina di conferma.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & La vendita è autorizzata. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Rifiuta Vendita}
+\label{UC:centralinistavenditaautorizza}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC24 RifiutaVendita \\
+\hline
+\textbf{Descrizione} & Un centralinista rifiuta una vendita.  \\
+\hline
+\textbf{Partecipanti} & Centralinista \\
+\hline
+\textbf{Condizione d'ingresso} & Un centralinista è nella pagina dei dettagli di una vendita (\ref{UC:centralinistavenditaselezione}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Centralinista} & \textbf{Sistema} \\
+Fa click su $\times$. \\
+	& Mostra una pagina di conferma.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & La vendita è rifiutata. \\
+\hline
+\end {tabular}
+\\
+
+\newpage
+
+\subsection{Magazziniere}
+\subsubsection{Elenco Ordini}
+\label{UC:magazzelenco}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC25 ElencoOrdini \\
+\hline
+\textbf{Descrizione} & Un magazziniere visualizza l'elenco degli ordini da spedire.  \\
 \hline
 \textbf{Partecipanti} & Magazziniere \\
 \hline
-\textbf{Condizione d'ingresso} & Un cliente della piattaforma acquista un articolo che ora deve essere spedito. \\
+\textbf{Condizione d'ingresso} & Un magazziniere si autentica (\ref{UC:autenticazione}). \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
 \textbf{Magazziniere} & \textbf{Sistema} \\
-Dopo aver effettuato il login (\ref{UC:1}), fa click su ``Visualizza ordini" per visualizzare l'elenco degli ordini da spedire. \\
-& Mostra l'elenco degli ordini. \\
-Procura l'articolo dal magazzino, lo imballa, stampa la bolla di spedizione e prenota il ritiro del corriere. \\
-\vdots & \vdots \\
-Fa click su ``\checkmark". \\
-& Reindirizza il magazziniere ad una pagina di conferma. \\
-Fa click su ``Conferma". \\
-& Invia una notifica al cliente. \\
+Fa click su ``Ordini". \\
+	& Mostra ordini il cui stato è ``In attesa". \\
 \end{tabular}
 \end{minipage} \\
 \hline
-\textbf{Condizione d'uscita} & L'articolo viene spedito. \\
+\textbf{Condizione d'uscita} & Il magazziniere visualizza l'elenco. \\
 \hline
-\end{tabular}
+\end {tabular}
+\\
 
-\subsubsection{Gestione ticket}
-\label{UC:11}
-Fare riferimento a \ref{UC:7}. \\
-
+\subsubsection{Elaborazione}
+\label{UC:magazzblocca}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC11 RispostaTicket \\
+\textbf{ID} & UC26 ElaborazioneOrdine \\
 \hline
-\textbf{Nome} & Un cliente apre un ticket. \\
+\textbf{Descrizione} & Un magazziniere cambia lo stato di un ordine a ``In elaborazione".  \\
 \hline
-\textbf{Partecipanti} & Centralinista \\
+\textbf{Partecipanti} & Magazziniere \\
 \hline
-\textbf{Condizione d'ingresso} & Un cliente della piattaforma segnala un problema e un centralinista cerca di aiutarlo. \\
+\textbf{Condizione d'ingresso} & Un magazziniere è nella pagina dell'elenco degli ordini in attesa (\ref{UC:magazzelenco}). \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Centralinista} & \textbf{Sistema} \\
-Dopo aver effettuato il login (\ref{UC:1}), fa click su ``Visualizza ticket" per visualizzare l'elenco dei ticket in attesa di risposta. \\
-& Mostra l'elenco dei ticket. \\
-Fa click su uno dei ticket. \\
-& Mostra lo storico dei messaggi per quel ticket. \\
-Scrive una risposta e preme su ``Invia". \\
-& Inoltra il messaggio. \\
-\vdots & \vdots \\
+\textbf{Magazziniere} & \textbf{Sistema} \\
+Fa click su ``Elabora". \\
+	& Cambia lo stato dell'ordine a ``In elaborazione". \\
 \end{tabular}
 \end{minipage} \\
 \hline
-\textbf{Condizione d'uscita} & Il cliente chiude il ticket e dichiara il problema risolto. \\
+\textbf{Condizione d'uscita} & Lo stato dell'ordine cambia a ``In elaborazione". \\
 \hline
-\end{tabular}
-\bigskip
-\bigskip
+\end {tabular}
+\\
 
-Fare riferimento al diagramma \ref{UC:7d}.
-
-
-\subsubsection{Controllo di ogni articolo introdotto dall'utenza}
-\label{UC:12}
-Fare riferimento a \ref{UC:6}. \\
-
+\subsubsection{Conferma}
+\label{UC:magazzconferma}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC12 AutorizzazioneVendita \\
+\textbf{ID} & UC27 ConfermaOrdine \\
 \hline
-\textbf{Nome} & Un centralinista approva la vendita di un articolo. \\
+\textbf{Descrizione} & Un magazziniere cambia lo stato di un ordine a ``Spedito".  \\
 \hline
-\textbf{Partecipanti} & Centralinista \\
+\textbf{Partecipanti} & Magazziniere \\
 \hline
-\textbf{Condizione d'ingresso} & Un cliente della piattaforma richiede di vendere una articolo. \\
+\textbf{Condizione d'ingresso} & Un magazziniere è nella pagina dell'elenco degli ordini in attesa (\ref{UC:magazzelenco}). \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Centralinista} & \textbf{Sistema} \\
-Dopo aver effettuato il login (\ref{UC:1}), fa click su ``Visualizza vendite" per visualizzare l'elenco delle vendite in attesa di autorizzazione. \\
-& Mostra l'elenco delle vendite in attesa. \\
-Fa click su una delle vendite. \\
-& Mostra i dettagli della vendita. \\
-Fa click su \checkmark. \\
-& Inoltra invia una notifica al cliente. \\
+\textbf{Magazziniere} & \textbf{Sistema} \\
+Fa click su ``$\checkmark$". \\
+	& Cambia lo stato dell'ordine a ``Spedito". \\
 \end{tabular}
 \end{minipage} \\
 \hline
-\textbf{Condizione d'uscita} & Il cliente chiude il ticket e dichiara il problema risolto. \\
+\textbf{Condizione d'uscita} & Lo stato dell'ordine cambia a ``Spedito". \\
 \hline
-\end{tabular}
+\end {tabular}
+\\
 
-
-\subsubsection{Gestione del personale da un account dedicato}
-\label{UC:13}
+\subsubsection{Annulla}
+\label{UC:magazzannulla}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC12 GestionePersonale \\
+\textbf{ID} & UC28 AnnullaOrdine \\
 \hline
-\textbf{Nome} & Modifica di informazioni relative al personale. \\
+\textbf{Descrizione} & Un magazziniere cambia lo stato di un ordine a ``Annullato".  \\
 \hline
-\textbf{Partecipanti} & Amministratore personale \\
+\textbf{Partecipanti} & Magazziniere \\
 \hline
-\textbf{Condizione d'ingresso} & I dati di un dipendente devono essere modificati o deve essere aggiunto o rimosso un nuovo dipendente. \\
+\textbf{Condizione d'ingresso} & Un magazziniere è nella pagina dell'elenco degli ordini in attesa (\ref{UC:magazzelenco}). \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Amministratore} & \textbf{Sistema} \\
-Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto opportuno per l'operazione da effettuare. \\
-& Reindirizza l'amministratore alla pagina opportuna. \\
-Inserisce i dati richiesti. \\
-& Chiede conferma dell'operazione. \\
-Conferma l'operazione. \\
+\textbf{Magazziniere} & \textbf{Sistema} \\
+Fa click su ``$\times$". \\
+	& Cambia lo stato dell'ordine a ``Annullato". \\
 \end{tabular}
 \end{minipage} \\
-
 \hline
-\textbf{Condizione d'uscita} & La modifica delle informazioni del personale viene memorizzata. \\
+\textbf{Condizione d'uscita} & Lo stato dell'ordine cambia a ``Annullato". \\
 \hline
-\end{tabular}
+\end {tabular}
+\\
 
-Fare riferimento alla tabella \ref{UC:1d}.
+\newpage
 
-\subsubsection{Gestione del catalogo da un account dedicato}
-\label{UC:14}
+\subsection{Amministratore catalogo}
+\subsubsection{Ricerca}
+\label{UC:amcatricerca}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC14 GestioneCatalogo \\
+\textbf{ID} & UC29 RicercaVendita \\
 \hline
-\textbf{Nome} & Modifica di informazioni relative al catalogo. \\
+\textbf{Descrizione} & Un amministratore del catalogo ricerca una vendita.  \\
+\hline
+\textbf{Partecipanti} & Amministratore Catalogo \\
+\hline
+\textbf{Condizione d'ingresso} & Un amministratore del catalogo è autenticato (\ref{UC:autenticazione}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Amministratore catalogo} & \textbf{Sistema} \\
+Digita una o più parole chiave nella barra di ricerca e fa click su ``Cerca". \\
+	& Mostra un elenco di articoli rilevanti.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & L'amministratore del catalogo visualizza i risultati della sua ricerca. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Nuova Vendita}
+\label{UC:amcatcrea}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC30 NuovaVendita \\
+\hline
+\textbf{Descrizione} & Un amministratore del catalogo inserisce un articolo in vendita.  \\
+\hline
+\textbf{Partecipanti} & Amministratore Catalogo \\
+\hline
+\textbf{Condizione d'ingresso} & Un amministratore del catalogo si è autenticato (\ref{UC:autenticazione}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Amministratore catalogo} & \textbf{Sistema} \\
+Fa click su ``Nuova vendita". \\
+	& Mostra un modulo per l'inserimento dei dati necessari come nome, descrizione, prezzo, quantità disponibile e foto dell'articolo. \\
+Inserisce i dati richiesti e fa click su ``Conferma". \\
+	& Mostra una pagina di conferma.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & L'articolo viene messo in vendita. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Modifica}
+\label{UC:amcatmodifica}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC31 ModificaVendita \\
+\hline
+\textbf{Descrizione} & Un amministratore del catalogo modifica una vendita.  \\
+\hline
+\textbf{Partecipanti} & Amministratore Catalogo \\
+\hline
+\textbf{Condizione d'ingresso} & Un amministratore del catalogo ha effettuato una ricerca (\ref{UC:amcatricerca}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Amministratore catalogo} & \textbf{Sistema} \\
+Fa click su ``Modifica" per l'articolo interessato. \\
+	& Mostra un modulo per l'inserimento dei nuovi dati necessari come nome, descrizione, prezzo, quantità disponibile e foto dell'articolo. I campi sono preimpostati con i valori attuali. \\
+Inserisce i nuovi dati. \\
+	& Visualizza una pagina di conferma. 
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & L'amministratore del catalogo visualizza i risultati della sua ricerca. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Rimozione}
+\label{UC:amcatrimuove}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC32 RimozioneVendita \\
+\hline
+\textbf{Descrizione} & Un amministratore del catalogo rimuove una vendita.  \\
+\hline
+\textbf{Partecipanti} & Amministratore Catalogo \\
+\hline
+\textbf{Condizione d'ingresso} & Un amministratore del catalogo ha effettuato una ricerca (\ref{UC:amcatricerca}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Amministratore catalogo} & \textbf{Sistema} \\
+Fa click su ``Rimuovi" per l'articolo interessato. \\
+	& Mostra una pagina di conferma. \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & La vendita viene rimossa. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Dettagli vendita}
+\label{UC:amcatdettagli}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC33 DettagliVendita \\
+\hline
+\textbf{Descrizione} & Un amministratore del catalogo visualizza le informazioni su una vendita come quantità di articoli venduti e ricavato totale.  \\
 \hline
 \textbf{Partecipanti} & Amministratore catalogo \\
 \hline
-\textbf{Condizione d'ingresso} & I dati di un dipendente devono essere modificati o deve essere aggiunto o rimosso un nuovo dipendente. \\
+\textbf{Condizione d'ingresso} & Un amministratore del catalogo ha effettuato una ricerca (\ref{UC:amcatricerca}). \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Amministratore} & \textbf{Sistema} \\
-Dopo aver effettuato il login (\ref{UC:1}), fa click sul tasto opportuno per l'operazione da effettuare. \\
-& Reindirizza l'amministratore alla pagina opportuna. \\
-Inserisce i dati richiesti. \\
-& Chiede conferma dell'operazione. \\
-Conferma l'operazione. \\
+\textbf{Amministratore catalogo} & \textbf{Sistema} \\
+Fa click sull'articolo interessato. \\
+	& Mostra le informazioni sull'andamento della vendita.
 \end{tabular}
 \end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & L'amministratore del catalogo visualizza le informazioni su una vendita. \\
+\hline
+\end {tabular}
+\\
 
+\subsection{Amministratore personale}
+\subsubsection{Ricerca dipendente}
+\label{UC:amperricerca}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{Condizione d'uscita} & La modifica delle informazioni del catalogo viene memorizzata. \\
+\textbf{ID} & UC34 RicercaDipendente \\
 \hline
+\textbf{Descrizione} & Un amministratore del personale ricerca un dipendente in base a vari parametri.  \\
+\hline
+\textbf{Partecipanti} & Amministratore personale \\
+\hline
+\textbf{Condizione d'ingresso} & Un amministratore del personale si è autenticato (\ref{UC:autenticazione}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Amministratore personale} & \textbf{Sistema} \\
+Digita una o più parole chiave nella barra di ricerca e fa click su ``Cerca". \\
+	& Mostra un elenco di dipendenti rilevanti.
 \end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & L'amministratore del personale visualizza i risultati della sua ricerca. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Nuovo dipendente}
+\label{UC:amperaggiunta}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC35 NuovoDipendente \\
+\hline
+\textbf{Descrizione} & Un amministratore del personale inserisce un nuovo dipendente.  \\
+\hline
+\textbf{Partecipanti} & Amministratore personale \\
+\hline
+\textbf{Condizione d'ingresso} & Un amministratore del personale si è autenticato (\ref{UC:autenticazione}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Amministratore personale} & \textbf{Sistema} \\
+Fa click su ``Modifica" per il dipendente interessato. \\
+	& Mostra un modulo per l'inserimento dei nuovi dati necessari come nome, cognome, password, indirizzo. I campi sono preimpostati con i valori attuali fatta eccezione per il campo ``password". \\
+Inserisce i nuovi dati. \\
+	& Visualizza una pagina di conferma. 
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Le modifiche effettuate vengono memorizzate. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Modifica dipendente}
+\label{UC:ampermodifica}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC36 ModificaDipendente \\
+\hline
+\textbf{Descrizione} & Un amministratore del personale modifica i dati di un dipendente.  \\
+\hline
+\textbf{Partecipanti} & Amministratore personale \\
+\hline
+\textbf{Condizione d'ingresso} & Un amministratore del personale ha ricercato un dipendente (\ref{UC:amperricerca}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Amministratore personale} & \textbf{Sistema} \\
+Fa click su ``Modifica" per il dipendente interessato. \\
+	& Mostra un modulo per l'inserimento dei nuovi dati necessari come nome, cognome, password, indirizzo. I campi sono preimpostati con i valori attuali fatta eccezione per il campo ``password". \\
+Inserisce i nuovi dati. \\
+	& Visualizza una pagina di conferma. 
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Le modifiche effettuate vengono memorizzate. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Rimozione dipendente}
+\label{UC:amperrimozione}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC37 RimozioneDipendente \\
+\hline
+\textbf{Descrizione} & Un amministratore del personale rimuove i dati di un dipendente.  \\
+\hline
+\textbf{Partecipanti} & Amministratore personale \\
+\hline
+\textbf{Condizione d'ingresso} & Un amministratore del personale ha ricercato un dipendente (\ref{UC:amperricerca}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Amministratore personale} & \textbf{Sistema} \\
+Fa click su ``Rimuovi" per il dipendente interessato. \\
+	& Visualizza una pagina di conferma. 
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & I dati del dipendente vengono rimossi. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Dettagli dipendente}
+\label{UC:amperdettagli}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC38 DettagliDipendente \\
+\hline
+\textbf{Descrizione} & Un amministratore del personale visualizza le statistiche di un dipendente.  \\
+\hline
+\textbf{Partecipanti} & Amministratore personale \\
+\hline
+\textbf{Condizione d'ingresso} & Un amministratore del personale ha ricercato un dipendente (\ref{UC:amperricerca}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Amministratore personale} & \textbf{Sistema} \\
+Fa click sul dipendente interessato. \\
+	& Visualizza informazioni sul dipendente,
+		\begin{itemize}
+				\item nel caso dei centralinisti, la quantità di ticket risolti e ordini autorizzati/negati
+				\item nel caso dei magazzinieri, la quantità di ordini spediti/annullati
+		\end{itemize}
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & I dati del dipendente vengono visualizzati. \\
+\hline
+\end {tabular}
+\\
 
 \newpage
 
@@ -945,7 +1526,7 @@ Conferma l'operazione. \\
 \subsubsection{Cliente si registra}
 \label{SD:registrazione}
 
-Fare riferimento a \ref{UC:1}. \\
+Fare riferimento a \ref{UC:registrazione}. \\
 
 \begin{center}
 \includegraphics[width=\textwidth]{SequenceDiagram/ClienteRegistrazione}
@@ -960,14 +1541,14 @@ Fare riferimento a \ref{UC:1}. \\
 \subsubsection{Cliente si autentica}
 \label{SD:login}
 
-Fare riferimento a \ref{UC:2}. \\
+Fare riferimento a \ref{UC:autenticazione}. \\
 
 \begin{center}
 \includegraphics[width=\textwidth]{SequenceDiagram/ClienteAutenticazione}
 \end{center}
 
 \begin{enumerate}
-\item Dopo la registrazione (\ref{SD:registrazione}, \ref{UC:1}), l'utente può usare le credenziali scelte per autenticarsi cliccando sul tasto ``Autenticati''.
+\item Dopo la registrazione (\ref{SD:registrazione}), l'utente può usare le credenziali scelte per autenticarsi cliccando sul tasto ``Autenticati''.
 \item Gli viene presentato quindi un modulo per l'inserimento di email e password.
 \item Se le credenziali sono corrette e corrispondono a quelle memorizzate nel sistema, all'utente viene consentito l'accesso.
 \end{enumerate}
@@ -976,11 +1557,11 @@ Fare riferimento a \ref{UC:2}. \\
 \label{SD:ricerca}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteCercaArticolo}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteArticoloRicerca}
 \end{center}
 
 \begin{enumerate}
-\item A prescindere dallo stato dell'autenticazione (\ref{SD:registrazione}, \ref{UC:1}, all'utente è permesso ricercare articoli nel sito. Usando la barra di ricerca presente nella pagina principale, può inserire dei termini da ricercare.
+\item A prescindere dallo stato dell'autenticazione (\ref{SD:login}), all'utente è permesso ricercare articoli nel sito. Usando la barra di ricerca presente nella pagina principale, può inserire dei termini da ricercare.
 \item Una volta premuto sul tasto ``Cerca'', gli viene presentato un elenco di articoli corrispondenti.
 \end{enumerate}
 
@@ -988,12 +1569,12 @@ Fare riferimento a \ref{UC:2}. \\
 \label{SD:dettagli}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteSelezionaArticolo}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteArticoloSeleziona}
 \end{center}
 
 \begin{enumerate}
-\item Dopo aver effettuato una ricerca (\ref{SD:ricerca}), l'utente può scegliere uno degli articoli e cliccare sul nome o sull'immagine per selezionarlo.
-\item All'utente viene quindi presentata una pagina con i dettagli dell'articolo scelto.
+\item Dopo aver effettuato una ricerca (\ref{SD:ricerca}), l'utente può scegliere uno degli articoli e selezionarlo per visualizzarne i dettagli.
+\item All'utente viene presentata una pagina con i dettagli dell'articolo scelto.
 \end{enumerate}
 
 \newpage
@@ -1001,108 +1582,110 @@ Fare riferimento a \ref{UC:2}. \\
 \subsubsection{Cliente aggiunge un articolo al carrello}
 \label{SD:aggiunta}
 
-Fare riferimento a \ref{UC:3}. \\
+Fare riferimento a \ref{UC:carrelloadd}. \\
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteAggiungeAlCarrello}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteCarrelloAggiunge}
 \end{center}
 
 \begin{enumerate}
-\item Dopo essersi autenticato (\ref{SD:login}), una ricerca (\ref{SD:ricerca}) e aver selezionato un articolo (\ref{SD:dettagli}) può aggiungere un articolo al carrello utilizzando il tasto dedicato.
-\item Una volta premuto, la sua aggiunta viene registrata per mantenere il carrello attraverso browser e dispositivi diversi e all'utente viene mostrata una pagina di conferma.
+\item Dopo essersi autenticato (\ref{SD:login}) e aver selezionato un articolo (\ref{SD:dettagli}) può aggiungere un articolo al carrello utilizzando il tasto ``Aggiungi al carrello".
+\item Una volta premuto, la sua aggiunta viene registrata nel sistema per mantenere il carrello attraverso browser e dispositivi diversi e all'utente viene mostrata una pagina di conferma.
 \end{enumerate}
 
 \subsubsection{Cliente rimuove un articolo dal carrello}
 \label{SD:rimozione}
 
-Fare riferimento a \ref{UC:3}. \\
+Fare riferimento a \ref{UC:carrelloremove}. \\
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteAggiungeAlCarrello}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteCarrelloRimuove}
 \end{center}
 
 \begin{enumerate}
-\item Dopo aver aggiunto un articolo al carrello (\ref{SD:aggiunta}), all'utente è consentita la rimozione degli articoli dal carrello usando il tasto dedicato.
+\item Dopo aver aggiunto un articolo al carrello (\ref{SD:aggiunta}), all'utente è consentita la rimozione degli articoli dal carrello usando il tasto ``Rimuovi".
 \item Una volta premuto, la sua modifica viene registrata e all'utente viene mostrata una pagina di conferma.
 \end{enumerate}
 
 \newpage
 
-\subsubsection{Cliente acquista articoli dal carrello}
+\subsubsection{Cliente acquista articoli}
 \label{SD:acquista}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteAcquistaArticolo}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteArticoloAcquista}
 \end{center}
 
 \begin{enumerate}
 \item Dopo aver aggiunto almeno un articolo al carrello (\ref{SD:aggiunta}), l'utente ha la possibilità di ordinare gli articoli nel carrello stesso.
-\item Dopo aver premuto su ``Acquista'', gli viene chiesta un'ulteriore conferma contenente tutte le informazioni relative all'ordine.
+\item Dopo aver premuto su ``Acquista'', gli viene chiesta un'ulteriore conferma in una pagina contenente tutte le informazioni relative all'ordine.
 \item Una volta ricevuta la conferma, l'ordine viene registrato ed è visualizzabile da un magazziniere  (\ref{SD:magazzinierespedisce}).
 \end{enumerate}
 
 \subsubsection{Cliente annulla ordine}
 \label{SD:annull}
 
-Fare riferimento a \ref{UC:5}. \\
+Fare riferimento a \ref{UC:annullamento}. \\
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteAnnullaOrdine}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteOrdineAnnulla}
 \end{center}
 
 \begin{enumerate}
-\item Dopo aver effettuato un ordine e prima che venga spedito, ad un cliente sarà permesso annullare un ordine.
-\item Dall'elenco degli ordini avrà la possibilità di richiedere l'annullamento. Se lo stato nel sistema sarà ancora ``Non spedito'' l'ordine verrà effettivamente annullato immediatamente e sparirà dalla visualizzazione dei magazzinieri (\ref{SD:magazzinierespedisce}).
+\item Dopo aver effettuato un ordine e prima che venga spedito, ad un cliente è permesso annullare un ordine.
+\item Dall'elenco degli ordini ha la possibilità di richiedere l'annullamento. Se lo stato nel sistema è ancora ``Non spedito'' l'ordine viene effettivamente annullato immediatamente e sparirà dalla visualizzazione dei magazzinieri (\ref{SD:magazzinierespedisce}). In caso contrario, non è possibile annullarlo.
 \end{enumerate}
+
+\newpage
 
 \subsubsection{Cliente visualizza elenco vendite}
 \label{SD:elencovendite}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteElencoVendite}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteVenditaElenco}
 \end{center}
 
 \begin{enumerate}
-\item Dalla pagina iniziale, l'utente potrà selezionare la voce ``Vendi su TecStore" per visualizzare la pagina dedicata alla gestione delle vendite.
-\item Al caricamento della pagina, verranno caricate le vendite create più recentemente, ovvero nei 60 giorni precedenti.
+\item Dalla pagina iniziale, l'utente può selezionare la voce ``Area venditori" per visualizzare la pagina dedicata alla gestione delle vendite.
+\item Al caricamento della pagina, vengono caricate le vendite create più recentemente, ovvero nei 60 giorni precedenti.
 \end{enumerate}
 
 \subsubsection{Cliente vende articolo}
 \label{SD:creazionevendita}
 
-Fare riferimento a \ref{UC:6}. \\
+Fare riferimento a \ref{UC:salesnew}. \\
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteVendeNuovoArticolo}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteVenditaCrea}
 \end{center}
 
 \begin{enumerate}
-\item Dall'elenco delle vendite (\ref{SD:elencovendite}), sarà sufficiente utilizzare il tasto ``Inserisci nuova vendita".
-\item Verrà richiesto all'utente di compilare un modulo con i dati necessari.
-\item La nuova vendita verrà quindi inserita nel sistema in uno stato di attesa finché un centralinista non verificherà le informazioni della vendita stessa (\ref{SD:centralinistaautorizza}).
+\item Dall'elenco delle vendite (\ref{SD:elencovendite}), è sufficiente utilizzare il tasto ``Inserisci nuova vendita".
+\item Viene richiesto all'utente di compilare un modulo con i dati necessari come nome, prezzo, descrizione, quantità disponibile e di inserire almeno 3 foto del prodotto.
+\item La nuova vendita viene quindi inserita nel sistema in uno stato di attesa finché un centralinista non verificherà le informazioni della vendita (\ref{SD:centralinistaautorizza}).
 \end{enumerate}
 
 \subsubsection{Cliente seleziona vendita}
 \label{SD:selezionavenditacliente}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteSelezionaVendita}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteVenditaSeleziona}
 \end{center}
 
 \begin{enumerate}
-\item Dall'elenco delle vendite (\ref{SD:elencovendite}), il cliente ne può selezionare una.
-\item Gli viene mostrata una pagina con i dettagli della vendita.
+\item Dall'elenco delle vendite (\ref{SD:elencovendite}), il cliente ne può selezionare una per visualizzarne i dettagli.
+\item Gli viene mostrata una pagina con informazioni sulla vendita come la quantità di articoli venduti e il ricavato totale.
 \end{enumerate}
 
 \subsubsection{Cliente modifica vendita}
 \label{SD:modificavendita}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteModificaVendita}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteVenditaModifica}
 \end{center}
 
 \begin{enumerate}
-\item Nella pagina dei dettagli di una vendita, se lo stato è ancora ``In vendita", sarà presente un tasto ``Modifica vendita".
+\item Nella pagina dei dettagli di una vendita, se lo stato è ``In vendita", è presente anche un tasto ``Modifica vendita".
 \item L'utente può cliccarlo per visualizzare un modulo per la modifica della vendita. 
 \item La vendita torna quindi in uno stato di attesa finché un centralinista non verificherà i dati inseriti (\ref{SD:centralinistaautorizza}).
 \end{enumerate}
@@ -1111,7 +1694,7 @@ Fare riferimento a \ref{UC:6}. \\
 \label{SD:annullavendita}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteAnnullaVendita}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteVenditaAnnulla}
 \end{center}
 
 \begin{enumerate}
@@ -1124,10 +1707,10 @@ Fare riferimento a \ref{UC:6}. \\
 
 \subsubsection{Cliente elenca ticket}
 \label{SD:elencoticket}
-Fare riferimento a \ref{UC:7}. \\
+Fare riferimento a \ref{UC:ticketlist}. \\
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteApreElencoTicket}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteTicketElenco}
 \end{center}
 
 \begin{enumerate}
@@ -1139,20 +1722,20 @@ Fare riferimento a \ref{UC:7}. \\
 \label{SD:aperturaticket}
 
 \begin{center}
-\includegraphics[trim={0 32cm 0 0},clip,width=\textwidth]{SequenceDiagram/ClienteCreaTicket}
+\includegraphics[clip,width=\textwidth]{SequenceDiagram/ClienteTicketCreazione}
 \end{center}
 
 \begin{enumerate}
 \item Dall'elenco dei ticket (\ref{SD:elencoticket}), l'utente usa la funzione ``Crea Ticket".
-\item Gli viene mostrato un modulo per l'inserimento del messaggio.
-\item Il messaggio viene controllato e all'utente viene mostrata una conferma.
+\item Gli viene mostrato un modulo per l'inserimento del messaggio per la scelta della tipologia del problema.
+\item All'utente viene mostrata una conferma.
 \end{enumerate}
 
 \subsubsection{Cliente seleziona un ticket}
 \label{SD:selezioneticketcliente}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteSelezionaTicket}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteTicketSeleziona}
 \end{center}
 
 \begin{enumerate}
@@ -1160,11 +1743,13 @@ Fare riferimento a \ref{UC:7}. \\
 \item Gli vengono mostrati tutti i messaggi inviati fino a quel momento.
 \end{enumerate}
 
+\newpage
+
 \subsubsection{Cliente risponde ad un ticket}
 \label{SD:rispostaticketcliente}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteRispondeTicket}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteTicketRisponde}
 \end{center}
 
 \begin{enumerate}
@@ -1176,12 +1761,13 @@ Fare riferimento a \ref{UC:7}. \\
 \label{SD:chiusuraticket}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteChiusuraTicket}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteTicketChiusura}
 \end{center}
 
 \begin{enumerate}
 \item Dopo aver selezionato un ticket (\ref{SD:selezioneticketcliente}), l'utente usa il tasto ``Chiudi".
 \item Il ticket viene dichiarato chiuso.
+\item All'utente viene mostrata una pagina di conferma.
 \end{enumerate}
 
 \newpage
@@ -1192,7 +1778,7 @@ Fare riferimento a \ref{UC:7}. \\
 \label{SD:centralinistaelencaticket}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaApreElencoTicket}
+\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaTicketElenco}
 \end{center}
 
 \begin{enumerate}
@@ -1204,13 +1790,13 @@ Fare riferimento a \ref{UC:7}. \\
 \label{SD:selezioneticketcentralinista}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaSelezionaTicket}
+\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaTicketSeleziona}
 \end{center}
 
 \begin{enumerate}
-\item Dall'elenco dei ticket (\ref{SD:centralinistaelencaticket}), il centralinista fa click su uno dei ticket attualmente aperti che sono in attesa di risposta e non sono attualmente visualizzati da altri centralinisti.
+\item Dall'elenco dei ticket (\ref{SD:centralinistaelencaticket}), il centralinista fa click su uno dei ticket attualmente aperti che nello stato di attesa.
 \item Lo stato di quel ticket viene cambiato a "In elaborazione".
-\item Gli vengono mostrati tutti i messaggi inviati fino a quel momento.
+\item Vengono mostrati tutti i messaggi inviati fino a quel momento.
 \end{enumerate}
 
 \newpage
@@ -1219,7 +1805,7 @@ Fare riferimento a \ref{UC:7}. \\
 \label{SD:rispostaticketcentralinista}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaRispondeTicket}
+\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaTicketRisponde}
 \end{center}
 
 \begin{enumerate}
@@ -1232,7 +1818,7 @@ Fare riferimento a \ref{UC:7}. \\
 \label{SD:elencovenditecentralinista}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaApreElencoVendite}
+\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaVenditeElenco}
 \end{center}
 
 \begin{enumerate}
@@ -1244,7 +1830,7 @@ Fare riferimento a \ref{UC:7}. \\
 \label{SD:selezionevenditacentralinista}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaSelezionaVendita}
+\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaVenditaSeleziona}
 \end{center}
 
 \begin{enumerate}
@@ -1256,7 +1842,7 @@ Fare riferimento a \ref{UC:7}. \\
 \subsubsection{Centralinista autorizza una vendita}
 \label{SD:centralinistaautorizza}
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaAutorizzaVendita}
+\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaVenditaAutorizza}
 \end{center}
 
 \begin{enumerate}
@@ -1266,7 +1852,7 @@ Fare riferimento a \ref{UC:7}. \\
 \subsubsection{Centralinista rifiuta una vendita}
 \label{SD:centralinistaautorizza}
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaRifiutaVendita}
+\includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaVenditaRifiuta}
 \end{center}
 
 \begin{enumerate}
@@ -1279,7 +1865,7 @@ Fare riferimento a \ref{UC:7}. \\
 \subsubsection{Magazziniere elenca ordini}
 \label{SD:magazzinierevisualizzaelenco}
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/MagazziniereVisualizzaElenco}
+\includegraphics[width=\textwidth]{SequenceDiagram/MagazziniereElencoVisualizza}
 \end{center}
 
 \begin{enumerate}
@@ -1289,7 +1875,7 @@ Fare riferimento a \ref{UC:7}. \\
 \subsubsection{Magazziniere spedisce ordine}
 \label{SD:magazzinierespedisce}
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/MagazziniereSpedisceOrdine}
+\includegraphics[width=\textwidth]{SequenceDiagram/MagazziniereOrdineSpedisce}
 \end{center}
 
 \begin{enumerate}
@@ -1299,7 +1885,7 @@ Fare riferimento a \ref{UC:7}. \\
 \subsubsection{Magazziniere annulla ordine}
 \label{SD:magazzinierespedisce}
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/MagazziniereAnnullaOrdine}
+\includegraphics[width=\textwidth]{SequenceDiagram/MagazziniereOrdineAnnulla}
 \end{center}
 
 \begin{enumerate}
@@ -1310,115 +1896,118 @@ Fare riferimento a \ref{UC:7}. \\
 
 \subsection{Amministratore catalogo}
 
-\subsubsection{Amministratore catalogo visualizza elenco}
+\subsubsection{Amministratore catalogo ricerca articolo}
 \label{SD:amcatvisualizzaelenco}
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/AmministratoreCatalogoVisualizzaElenco}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratoreCatalogoVenditaRicerca}
 \end{center}
 
 \begin{enumerate}
-\item Dopo essersi autenticato (\ref{SD:login}), l'amministratore del catalogo viene rimandato all'elenco degli articoli in vendita.
+\item L'amministratore del catalogo può effettuare una ricerca tra gli articoli messi in vendita dalla piattaforma.
 \end{enumerate}
 
 \subsubsection{Amministratore catalogo seleziona articolo}
 \label{SD:amcatselezionaarticolo}
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/AmministratoreCatalogoSelezionaArticolo}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratoreCatalogoVenditaSeleziona}
 \end{center}
 
 \begin{enumerate}
-\item Dall'elenco (\ref{SD:amcatvisualizzaelenco}), l'amministratore del catalogo può selezionare uno degli articoli per visualizzarne i dettagli.
+\item Dai risultati della ricerca (\ref{SD:amcatvisualizzaelenco}), l'amministratore del catalogo può selezionare uno degli articoli per visualizzarne i dettagli.
 \item Viene rimandato a una pagina con i dettagli dell'articolo.
 \end{enumerate}
 
 \subsubsection{Amministratore catalogo inserisce articolo}
 \label{SD:amcatinseriscearticolo}
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/AmministratoreCatalogoInserisceNuovoArticolo}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratoreCatalogoVenditaCrea}
 \end{center}
 
 \begin{enumerate}
 \item Dall'elenco (\ref{SD:amcatvisualizzaelenco}), l'amministratore del catalogo può inserire un nuovo articolo usando il tasto ``Nuovo articolo".
-\item Viene rimandato ad un modulo per l'inserimento dei dati necessari.
+\item Viene rimandato ad un modulo per l'inserimento dei dati necessari come nome, prezzo, quantità disponibile e foto.
 \item L'articolo viene immediatamente messo in vendita.
 \end{enumerate}
 
 \subsubsection{Amministratore catalogo modifica articolo}
 \label{SD:amcatmodificaarticolo}
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/AmministratoreCatalogoModificaArticolo}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratoreCatalogoVenditaModifica}
 \end{center}
 
 \begin{enumerate}
-\item Dalla pagina dei dettagli di un articolo (\ref{SD:amcatselezionaarticolo}), l'amministratore del catalogo puuò modificare i dettagli di un articolo.
+\item Dai risultati della ricerca (\ref{SD:amcatvisualizzaelenco}), l'amministratore del catalogo può modificare i dettagli di un articolo.
 \item Cliccando il tasto ``Modifica" visualizzerà una pagina con un modulo per la modifica delle informazioni.
 \end{enumerate}
 
 \subsubsection{Amministratore catalogo rimuove articolo}
 \label{SD:amcatrimuovearticolo}
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/AmministratoreCatalogoRimuoveArticolo}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratoreCatalogoVenditaRimuove}
 \end{center}
 
 \begin{enumerate}
-\item Dalla pagina dei dettagli di un articolo (\ref{SD:amcatselezionaarticolo}), l'amministratore del catalogo può rimuovere un articolo usando il tasto ``Rimuovi".
+\item Dai risultati della ricerca (\ref{SD:amcatvisualizzaelenco}), l'amministratore del catalogo può rimuovere un articolo usando il tasto ``Rimuovi".
 \end{enumerate}
+
+\newpage
 
 \subsection{Amministratore personale}
-%TODO
-%\subsubsection{Amministratore personale ricerca dipendente}
-%\label{SD:amcatvisualizzaelenco}
-%\begin{center}
-%\includegraphics[width=\textwidth]{SequenceDiagram/AmministratoreCatalogoVisualizzaElenco}
-%\end{center}
+\subsubsection{Amministratore personale ricerca dipendente}
+\label{SD:amperricerca}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratorePersonaleDipendenteRicerca}
+\end{center}
 
-%\begin{enumerate}
-%\item Dopo essersi autenticato (\ref{SD:login}), l'amministratore del catalogo viene rimandato all'elenco degli articoli in vendita.
-%\end{enumerate}
+\begin{enumerate}
+\item L'amministratore del personale può effettuare una ricerca tra i dipendenti.
+\end{enumerate}
 
 \subsubsection{Amministratore personale seleziona dipendente}
-\label{SD:amcatselezionaarticolo}
+\label{SD:amperselezione}
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/AmministratorePersonaleSelezionaDipendenti}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratorePersonaleDipendenteSeleziona}
 \end{center}
 
 \begin{enumerate}
-\item Dall'elenco (\ref{SD:amcatvisualizzaelenco}), l'amministratore del catalogo potrà selezionare uno dei dipendenti per visualizzarne i dettagli.
+\item Dall'elenco (\ref{SD:amcatvisualizzaelenco}), l'amministratore del personale potrà selezionare uno dei dipendenti per visualizzarne i dettagli e le statistiche come il numero di ordini spediti o il numero di ticket a cui hanno risposto, in base alla tipologia di dipendente.
 \end{enumerate}
 
-\subsubsection{Amministratore personale inserisce articolo}
-\label{SD:amcatinseriscearticolo}
+\subsubsection{Amministratore personale inserisce dipendente}
+\label{SD:amperinserisce}
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/AmministratorePersonaleInserisceNuovoDipendente}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratorePersonaleDipendenteInserisce}
 \end{center}
 
 \begin{enumerate}
-\item Dall'elenco (\ref{SD:amcatvisualizzaelenco}), l'amministratore del catalogo può inserire un nuovo articolo.
-\item Viene rimandato ad un modulo per l'inserimento dei dati richiesti.
+\item Dall'elenco (\ref{SD:amcatvisualizzaelenco}), l'amministratore del personale può inserire un nuovo dipendente.
+\item Viene rimandato ad un modulo per l'inserimento dei dati richiesti come nome, cognome, indirizzo e ruolo.
 \end{enumerate}
 
-%TODO
-%\subsubsection{Amministratore personale modifica articolo}
-%\label{SD:amcatmodificaarticolo}
-%\begin{center}
-%\includegraphics[width=\textwidth]{SequenceDiagram/AmministratorePersonaleModificaDipendente}
-%\end{center}
-
-%\begin{enumerate}
-%\item Dalla pagina dei dettagli di un articolo (\ref{SD:amcatselezionaarticolo}), l'amministratore del catalogo potrà modificare i dettagli di un articolo.
-%\item Cliccando il tasto ``Modifica" visualizzerà una pagina con un modulo per la modifica delle informazioni.
-%\end{enumerate}
-
-\subsubsection{Amministratore personale rimuove articolo}
-\label{SD:amcatrimuovearticolo}
+\subsubsection{Amministratore personale modifica dipendente}
+\label{SD:ampermodifica}
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/AmministratorePersonaleRimuoveDipendente}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratorePersonaleDipendenteModifica}
+\end{center}
+
+\begin{enumerate}
+\item Dalla pagina dei dettagli di un dipendente (\ref{SD:amperselezione}), l'amministratore del personale può modificare i dettagli di un dipendente usando il tasto ``Modifica".
+\item Visualizza una pagina con un modulo per la modifica delle informazioni.
+\end{enumerate}
+
+\subsubsection{Amministratore personale rimuove dipendente}
+\label{SD:amperrimuove}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/AmministratorePersonaleDipendenteRimuove}
 \end{center}
 
 
 \begin{enumerate}
 \item Dalla pagina dei dettagli di un articolo (\ref{SD:amcatselezionaarticolo}), l'amministratore del catalogo può rimuovere un articolo usando il tasto ``Rimuovi".
+\item Visualizza una pagina di conferma.
 \end{enumerate}
+
+\newpage
 
 \section{Statechart Diagram}
 
@@ -1437,52 +2026,52 @@ Fare riferimento a \ref{UC:7}. \\
 
 \subsection{Registrazione}
 \begin{center}
-\includegraphics[width=\textwidth]{ActivityDiagram/Registrazione}
+\includegraphics[width=\textwidth]{ActivityDiagram/ClienteRegistrazione}
 \end{center}
 
 \subsection{Acquisto}
 \begin{center}
-\includegraphics[width=\textwidth]{ActivityDiagram/AcquistoArticolo}
+\includegraphics[width=\textwidth]{ActivityDiagram/ClienteAcquistoArticolo}
 \end{center}
 
 \subsection{Annullamento}
 \begin{center}
-\includegraphics[width=\textwidth]{ActivityDiagram/AnnullamentoOrdine}
+\includegraphics[width=\textwidth]{ActivityDiagram/ClienteAnnullamentoOrdine}
 \end{center}
 
 \subsection{Aggiunta al carrello}
 \begin{center}
-\includegraphics[width=\textwidth]{ActivityDiagram/Carrello}
+\includegraphics[width=\textwidth]{ActivityDiagram/ClienteAggiungeAlCarrello}
 \end{center}
 
 \subsection{Vendita}
 \begin{center}
-\includegraphics[height=0.95\textheight]{ActivityDiagram/VenditaCliente}
+\includegraphics[height=0.95\textheight]{ActivityDiagram/ClienteVendita}
 \end{center}
 
 \subsection{Servizio Clienti}
 \begin{center}
-\includegraphics[width=\textwidth]{ActivityDiagram/CreazioneTicket}
+\includegraphics[width=\textwidth]{ActivityDiagram/ClienteCreazioneTicket}
 \end{center}
 
 \subsection{Spedizione Ordini}
 \begin{center}
-\includegraphics[height=0.95\textheight]{ActivityDiagram/SpedizioneOrdine}
+\includegraphics[width=\textwidth]{ActivityDiagram/MagazziniereSpedizioneOrdine}
 \end{center}
 
 \subsection{Autorizzazione vendita}
 \begin{center}
-\includegraphics[height=0.95\textheight]{ActivityDiagram/AutorizzazioneVendita}
+\includegraphics[scale=1.3]{ActivityDiagram/CentralinistaAutorizzazioneVendita}
 \end{center}
 
-\subsection{Gestione Personale}
+\subsection{Modifica personale}
 \begin{center}
-\includegraphics[height=0.95\textheight]{ActivityDiagram/GestionePersonale}
+\includegraphics[scale=1.50]{ActivityDiagram/AmministratorePersonaleModificaDipendente}
 \end{center}
 
-\subsection{Gestione Catalogo}
+\subsection{Modifica Catalogo}
 \begin{center}
-\includegraphics[height=0.95\textheight]{ActivityDiagram/GestioneCatalogo}
+\includegraphics[scale=1.55]{ActivityDiagram/AmministratoreCatalogoModificaArticoloCatalogo}
 \end{center}
 
 \newpage
