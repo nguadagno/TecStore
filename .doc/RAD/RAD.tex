@@ -1872,6 +1872,16 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 \item Dopo essersi autenticato (\ref{SD:login}), il magazziniere viene rimandato all'elenco degli ordini in attesa di spedizione.
 \end{enumerate}
 
+\subsubsection{Magazziniere blocca ordine}
+\label{SD:magazziniereblocca}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/MagazziniereOrdineBlocca}
+\end{center}
+
+\begin{enumerate}
+\item Dall'elenco degli ordini (\ref{SD:magazzinierevisualizzaelenco}), il magazziniere può cambiare lo stato di un ordine a ``In elaborazione", in modo che non venga visualizzato dagli altri magazzinieri.
+\end{enumerate}
+
 \subsubsection{Magazziniere spedisce ordine}
 \label{SD:magazzinierespedisce}
 \begin{center}
