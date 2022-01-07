@@ -297,153 +297,6 @@ Sarà utilizzata la tecnologia JSP con servlet su server Tomcat per la presentaz
 \newpage
 \subsection{Scenari}
 %TODO
-\subsubsection{Un utente non registrato vuole acquistare un articolo}
-\textbf{Attore:} Luca Garibaldi, utente non registrato e Massimo Boni, magazziniere \\
-\noindent
-\textbf{Flusso di eventi:}
-\begin{enumerate}
-\item Luca ha deciso di effettuare un upgrade al suo computer.
-
-\item Non convinto dai prezzi dei principali venditori, decide di cercare un negozio alternativo e si imbatte in TecStore.
-
-\item Cercando tra le CPU compatibili con la sua scheda madre, si imbatte nella CPU "Intel i5 10400f" a un prezzo scontato rispetto alla concorrenza e decide quindi di effettuare l'acquisto.
-
-\item Aggiunge il componente al carrello. \\
-
-\includegraphics[height=150px]{Mockup/carrello}
-
-\item Fa click sul tasto per effettuare l'ordine e gli viene chiesto di effettuare il login. Dato che non è ancora utente, fa click sul tasto "Registrazione".
-
-\includegraphics[height=150px]{Mockup/login}
-
-\item Inserisce quindi i suoi dati nel form, "Luca" in nome, "Garibaldi" in cognome, "lucagaribaldi@email.tld" in email, "password1" in password e in conferma password, "20/06/1991" nel campo data di nascita e fa click sul tasto "Conferma". \\
-
-\includegraphics[width=\textwidth]{Mockup/anagrafica}
-
-\newpage
-\item Gli vengono chiesti i dati della carta di credito e inserisce "4555133720756196" nel campo numero, 03/23 nel campo scadenza, 356 nel campo CVV, "Via Roma 1" nel campo indirizzo, "Torino 10123" nel campo città, e "Italia" nel campo nazione e fa click sul tasto "Conferma".
-
-\includegraphics[width=\textwidth]{Mockup/carta}
-
-\item Gli viene chiesta un'ultima conferma prima di effettuare l'ordine. \\
-\includegraphics[width=\textwidth]{Mockup/conferma}
-
-\item Al che Luca preme "Acquista".
-
-\item Il mattino dopo, Massimo arriva al lavoro, effettua il login con le credenziali "magazz1" e "0GfbwmXYCIERGT3aU7ja" come password. Vede l'ordine effettuato da Luca, reperisce l'articolo dal magazzino, lo impacchetta, stampa la bolla di spedizione e prenota il corriere per il ritiro dell'articolo.
-
-\includegraphics[width=\textwidth]{Mockup/magazzino}
-
-\item Tre giorni dopo un corriere gli consegna l'articolo acquistato.
-\end{enumerate}
-
-\newpage
-\subsubsection{Un utente apre una segnalazione all'assistenza}
-\textbf{Attori:} Carlo Cavour, utente e Lucia Pellegrino, centralinista \\
-\noindent
-\textbf{Flusso di eventi:}
-\begin{enumerate}
-\item 10 giorni fa Carlo ha ordinato un nuovo hard disk, ma non l'ha ancora ricevuto. Decide quindi di aprire un ticket su TecStore.
-
-\item Apre la homepage del sito. \\
-
-\includegraphics[width=\textwidth]{Mockup/homepage}
-
-\item Fa click sul tasto "Login" e viene riportato al form in cui gli viene chiesto di inserire email e password, inserisce rispettivamente \\ "carlocavour@email.tld" e "hunter2" e fa click sul tasto per confermare.
-
-\includegraphics[height=150px]{Mockup/login}
-
-\newpage
-\item Viene quindi reindirizzato all'interfaccia principale. Passa il mouse sul suo nome e fa click sul tasto "Assistenza clienti".
-
-\includegraphics[width=\textwidth]{Mockup/homepage_login}
-
-\item Viene portato nella pagina per la creazione di un nuovo ticket, sceglie "Problemi di spedizione" come tipologia e scrive "Non ho ricevuto il mio articolo dopo 10 giorni" nel campo descrizione. \\
-\includegraphics[width=\textwidth]{Mockup/assistenza}
-
-\newpage
-\item Lucia effettua il login, vede il nuovo ticket e risponde a Carlo che nei giorni precedenti ci sono stati problemi con il corriere che TecStore solitamente utilizza per spedire gli articoli e lo assicura che riceverà l'articolo entro le successive 48 ore.
-
-\includegraphics[width=\textwidth]{Mockup/centralino}
-
-\item La mattina del giorno dopo Carlo riceve l'articolo ordinato.
-\end{enumerate}
-
-\subsubsection{Un utente vuole mettere in vendita un articolo}
-\textbf{Attori:} Alfonso Siciliani, utente e Silvana Piazza, centralinista \\
-
-\noindent
-\textbf{Flusso di eventi:}
-
-\begin{enumerate}
-
-\item Alfonso ha un piccolo negozio di informatica e ha un surplus di monitor che non riesce a vendere nel suo negozio. Decide quindi di metterli in vendita online.
-
-\item Per ampliare la potenziale utenza, oltre a piattaforme più note, decide di inserirlo anche in qualche sito meno conosciuto e sceglie tra le possibili opzioni anche TecStore.
-\newpage
-
-\item Essendo un utente già registrato, apre la homepage, clicka sul link "Login".
-
-\includegraphics[width=\textwidth]{Mockup/homepage}
-
-\item Inserisce i suoi dati nel form, rispettivamente "alfonsosiciliani@email.tld" e "KDCH5GeWLBBus02fu6W4"
-
-\includegraphics[width=\textwidth]{Mockup/login}
-
-\newpage
-
-\item Viene quindi reindirizzato alla homepage, passa il mouse sul suo nome e clicka sul link "Area venditori".
-
-\includegraphics[width=\textwidth]{Mockup/homepage_login}
-
-\item Viene reindirizzato ad una pagina contenente il form per i dati dell'articolo e inserisce, in ordine, "Monitor AOC 22B2H", "Monitor 21.5'' 1080p 75Hz, VGA, HDMI Nero", "8" e "122.25€ e carica alcune foto del dispositivo.
-
-\includegraphics[width=\textwidth]{Mockup/vendita}
-
-\newpage
-\item Pochi istanti dopo, un sistema automatico effettua un controllo sommario sul contenuto dell'inserzione e, dato che non contiene profanità o altri contenuti indesiderati, Silvana riceve una notifica nella sua \textit{dashboard}, richiedendo una conferma manuale all'inserimento dell'ordine nel catalogo.
-
-\includegraphics[width=\textwidth]{Mockup/centralino}
-
-\item Dopo aver effettuato delle ulteriori verifiche, Silvana decide di accettare l'inserzione di Alfonso, che apparirà a tutti gli altri utenti.
-\end{enumerate}
-
-\newpage
-
-\subsubsection{Il responsabile del personale ha assunto un nuovo centralinista}
-\textbf{Attori:} Carlo Martello, responsabile del personale e Matilde Rossi, centralinista \\
-
-\noindent
-\textbf{Flusso di eventi:}
-\begin{enumerate}
-\item Dopo aver sostenuto un colloquio, Matilde è stata assunta come nuova centralinista. Carlo ha il compito di registrare l'identità di Matilde nel sistema, in modo che possa lavorare.
-
-\item Carlo effettua dalla homepage fa click sul pulsante "login" e inserisce le credenziali "HR1" e "waU9qGBrTQ3yXk21MZwo"
-
-\includegraphics[width=\textwidth]{Mockup/login}
-
-\newpage
-\item Viene reindirizzato alla pagina per la gestione del personale, dalla quale fa click sul pulsante per aggiungere un nuovo dipendente
-
-\includegraphics[width=\textwidth]{Mockup/personale}
-
-\item Viene reindirizzato al form per la creazione di un nuovo dipendente, in cui inserisce, in ordine, "Matilde", "Rossi", "21/04/1987", "Roma", "RSSMLD87D61H501M", "Roma", "Via Torino, 1", "IT18T0300203280984179265554", "Centralino" e fa click su conferma.
-
-\begin{center}
-\includegraphics[height=250px]{Mockup/nuovodipendente}
-\end{center}
-
-\newpage
-\item Viene mostrata una pagina contenente le informazioni di accesso per Matilde generate dal sistema, con un avviso di stampare i dati e conservarli in un luogo sicuro.
-
-\includegraphics[width=\textwidth]{Mockup/nuovodipendente2}
-
-\item Il lunedì successivo Matilde inizia il suo primo giorno di lavoro e utilizza le credenziali ricevute per accedere alla pagina del centralino.
-
-\includegraphics[width=\textwidth]{Mockup/centralino}
-
-\end{enumerate}
-
 
 \newpage
 \section{Use case}
@@ -664,9 +517,9 @@ Fa click su ``Rimuovi" per l'articolo interessato.
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
 \textbf{Cliente} & \textbf{Sistema} \\
-Da una pagina qualsiasi, fa click su ``Storico Ordini".
+Da una pagina qualsiasi, fa click su ``Storico Ordini". \\
 	& Mostra all'utente tutti gli ordini che ha effettuato. \\
-Fa click su ``Annulla" per l'ordine.
+Fa click su ``Annulla" per l'ordine. \\
 	& Mostra all'utente una pagina di conferma. \\
 \end{tabular}
 \end{minipage} \\
@@ -785,7 +638,7 @@ Inserisce il messaggio e fa click su ``Conferma". \\
 \\
 
 \subsubsection{Chiusura di un ticket}
-\label{UC:ticketreply}
+\label{UC:ticketclose}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
 \textbf{ID} & UC12 ChiusuraTicket \\
@@ -893,7 +746,7 @@ Inserisce i dati richiesti e fa click su ``Conferma". \\
 \\
 
 \subsubsection{Annullamento vendita}
-\label{UC:salesdetails}
+\label{UC:salesannull}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
 \textbf{ID} & UC16 AnnullamentoVendita \\
@@ -957,7 +810,7 @@ Fa click sull'articolo interessato. \\
 \hline
 \textbf{Partecipanti} & Centralinista \\
 \hline
-\textbf{Condizione d'ingresso} & Un centralinista autenticato (\ref{UC:autenticazione}) è nella sua pagina principale. \\
+\textbf{Condizione d'ingresso} & Un centralinista autenticato (\ref{UC:autenticazione}) è nella sua pagina iniziale. \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
@@ -1037,7 +890,7 @@ Inserisce il messaggio e fa click su ``Conferma". \\
 \hline
 \textbf{Partecipanti} & Centralinista \\
 \hline
-\textbf{Condizione d'ingresso} & Un centralinista autenticato (\ref{UC:autenticazione}) è nella sua pagina principale. \\
+\textbf{Condizione d'ingresso} & Un centralinista autenticato (\ref{UC:autenticazione}) è nella sua pagina iniziale. \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
@@ -1106,7 +959,7 @@ Fa click su $\checkmark$. \\
 \\
 
 \subsubsection{Rifiuta Vendita}
-\label{UC:centralinistavenditaautorizza}
+\label{UC:centralinistavenditarifiuta}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
 \textbf{ID} & UC24 RifiutaVendita \\
@@ -1561,7 +1414,7 @@ Fare riferimento a \ref{UC:autenticazione}. \\
 \end{center}
 
 \begin{enumerate}
-\item A prescindere dallo stato dell'autenticazione (\ref{SD:login}), all'utente è permesso ricercare articoli nel sito. Usando la barra di ricerca presente nella pagina principale, può inserire dei termini da ricercare.
+\item A prescindere dallo stato dell'autenticazione (\ref{SD:login}), all'utente è permesso ricercare articoli nel sito. Usando la barra di ricerca presente nella pagina iniziale, può inserire dei termini da ricercare.
 \item Una volta premuto sul tasto ``Cerca'', gli viene presentato un elenco di articoli corrispondenti.
 \end{enumerate}
 
@@ -1770,6 +1623,29 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 \item All'utente viene mostrata una pagina di conferma.
 \end{enumerate}
 
+\subsubsection{Cliente recupera password}
+\label{SD:recuperopw}
+
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteRecuperoPassword}
+\end{center}
+
+\begin{enumerate}
+\item Se un cliente dimentica la sua password, può richiedere di modificarla dalla pagina per l'autenticazione.
+\item Il sistema provvede a inviare una mail con un link temporaneo per creare una nuova password.
+\end{enumerate}
+
+\subsubsection{Cliente modifica password}
+\label{SD:modificapw}
+
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteModificaPassword}
+\end{center}
+
+\begin{enumerate}
+\item Se un cliente ha dimenticato la password (\ref{SD:recuperopw}) o se un cliente vuole modificarla per altri motivi, viene rimandato a questo modulo per la modifica.
+\item Il sistema provvede a criptare e memorizzare la nuova password per gli accessi futuri.
+\end{enumerate}
 \newpage
 
 \subsection{Centralinista}
@@ -1782,7 +1658,7 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo essersi autenticato (\ref{SD:login}), il centralinista viene rimandato alla pagina principale dedicata ai centralinisti. 
+\item Dopo essersi autenticato (\ref{SD:login}), il centralinista viene rimandato alla pagina iniziale dedicata ai centralinisti. 
 \item Da lì può scegliere di visualizzare l'elenco dei ticket in attesa di risposta, ordinati per data crescente.
 \end{enumerate}
 
@@ -1850,7 +1726,7 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 \end{enumerate}
 
 \subsubsection{Centralinista rifiuta una vendita}
-\label{SD:centralinistaautorizza}
+\label{SD:centralinistarifiuta}
 \begin{center}
 \includegraphics[width=\textwidth]{SequenceDiagram/CentralinistaVenditaRifiuta}
 \end{center}
@@ -1893,7 +1769,7 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 \end{enumerate}
 
 \subsubsection{Magazziniere annulla ordine}
-\label{SD:magazzinierespedisce}
+\label{SD:magazziniereannulla}
 \begin{center}
 \includegraphics[width=\textwidth]{SequenceDiagram/MagazziniereOrdineAnnulla}
 \end{center}
