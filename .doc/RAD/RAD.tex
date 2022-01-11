@@ -295,7 +295,153 @@ Sarà utilizzata la tecnologia JSP con servlet su server Tomcat per la presentaz
 
 \newpage
 \subsection{Scenari}
-%TODO
+\subsubsection{Cliente non registrato vuole acquistare un articolo}
+Un nuovo cliente, Mario Rossi, apre il sito per la prima volta.
+Inserisce nella barra di ricerca il nome dell'articolo a cui è interessato, ``Mouse".
+Dall'elenco dei risultati, sceglie quello che più gli interessa e fa click su di esso.
+Dalla pagina dei dettagli che viene caricata, convinto dalle specifiche del mouse, decide di acquistarlo e fa click su ``Aggiungi al carrello".
+Dato che non è autenticato viene chiesto di autenticarsi o registrarsi per proseguire con l'operazione.
+Decide di registrarsi, inserendo quindi email ``mariorossi@email.tld", password ``6GksD-3Sc", nome ``Mario", cognome ``Rossi", indirizzo ``Via Roma 1, Torino". Fa click su ``Conferma".
+Viene quindi rimandato alla pagina del carrello con il nuovo articolo appena inserito e fa click su ``Acquista" per proseguire con l'acquisto.
+Inserisce i dati della carta di credito, come numero  ``4485518752812161", scadenza "02/27", CVV ``458" e ``Italiana" come nazionalità e fa click su ``Conferma".
+Viene rimandato al riepilogo delle informazioni sull'ordine dove fa click su ``Conferma".
+L'ordine viene quindi inserito nel sistema in attesa di spedizione da parte di un magazziniere.
+Il giorno successivo Luigi Verdi, magazziniere, si connette al sistema, si autentica e dall'elenco degli ordini seleziona quello di Mario. Procura l'articolo dal magazzino, lo imballa, prenota il corriere per il ritiro, inserisce il codice del \emph{tracking} e conferma la spedizione dell'ordine.
+
+\subsubsection{Cliente registrato vuole acquistare un articolo}
+Un cliente già registrato, Mario Rossi apre il sito e inserisce nella barra di ricerca il nome dell'articolo a cui è interessato, ``Tastiera".
+Dall'elenco dei risultati, sceglie quella che più gli interessa e fa click su di esso.
+Dalla pagina dei dettagli che viene caricata, convinto dalle specifiche della tastiera, decide di acquistarla e fa click su ``Aggiungi al carrello".
+Dato che non è autenticato viene chiesto di autenticarsi o registrarsi per proseguire con l'operazione.
+Essendo già registrato, si autentica con email ``mariorossi@email.tld" e password ``6GksD-3Sc".
+Viene quindi rimandato alla pagina del carrello con il nuovo articolo appena inserito e fa click su ``Acquista" per proseguire con l'acquisto.
+Avendo già acquistato in precedenza, le informazioni della sua carta di credito sono già memorizzate nel sistema.
+Viene quindi rimandato al riepilogo delle informazioni sull'ordine dove fa click su ``Conferma".
+L'ordine viene quindi inserito nel sistema in attesa di spedizione da parte di un magazziniere.
+Il giorno successivo Luigi Verdi, magazziniere, si connette al sistema, si autentica e dall'elenco degli ordini seleziona quello di Mario. Procura l'articolo dal magazzino, lo imballa, prenota il corriere per il ritiro, inserisce il codice del \emph{tracking} e conferma la spedizione dell'ordine.
+
+\subsubsection{Cliente annulla ordine}
+Un cliente già registrato, Mario Rossi apre il sito e inserisce nella barra di ricerca il nome dell'articolo a cui è interessato, ``Tastiera".
+Dall'elenco dei risultati, sceglie quella che più gli interessa e fa click su di esso.
+Dalla pagina dei dettagli che viene caricata, convinto dalle specifiche della tastiera, decide di acquistarla e fa click su ``Aggiungi al carrello".
+Dato che non è autenticato viene chiesto di autenticarsi o registrarsi per proseguire con l'operazione.
+Essendo già registrato, si autentica con email ``mariorossi@email.tld" e password ``6GksD-3Sc".
+Avendo già acquistato in precedenza, le informazioni della sua carta di credito sono già memorizzate nel sistema.
+Viene quindi rimandato al riepilogo delle informazioni sull'ordine dove fa click su ``Conferma".
+L'ordine viene quindi inserito nel sistema in attesa di spedizione da parte di un magazziniere.
+Pochi minuti dopo, cambia idea sull'acquisto effettuato e decide di annullare l'ordine.
+Dalla pagina principale fa click su ``Storico ordini" e dall'elenco degli ordini fa click su ``Annulla" per la tastiera.
+Dato che non è ancora stato spedita, l'ordine viene annullato.
+
+\newpage
+
+\subsubsection{Cliente modifica informazioni profilo}
+Un cliente già registrato, Mario Rossi, si è appena trasferito. Per far sì che i nuovi ordini da lui effettuati vengano spediti alla sua nuova casa, decide di modificare le informazioni del suo profilo sulla piattaforma.
+Essendo già registrato, si autentica con email ``mariorossi@email.tld" e password ``6GksD-3Sc".
+Dalla pagina iniziale fa click su ``Modifica profilo".
+Nel modulo che gli viene presentato inserisce il nuovo indirizzo e fa click su ``Conferma".
+
+\subsubsection{Cliente modifica password}
+Un cliente già registrato, Mario Rossi, decide di modificare la sua password. 
+Si autentica con email ``mariorossi@email.tld" e password ``6GksD-3Sc".
+Dalla pagina iniziale fa click su ``Modifica profilo" e su ``Modifica password".
+Nel modulo che gli viene presentato inserisce la nuova password ``2eyccH4jj4a" e fa click su conferma.
+
+\subsubsection{Cliente recupera password}
+Un cliente già registrato, Mario Rossi, ha dimenticato la sua password.
+Dal modulo per l'autenticazione fa click su ``Password dimenticata?" e inserisce il suo indirizzo email.
+Usando il link che gli viene spedito, viene rimandato al modulo per la modifica della password. Inserisce quindi ``edNdnP48D7q" e fa click su ``Conferma".
+
+\subsubsection{Cliente apre ticket}
+Un cliente già registrato, Mario Rossi, non ha ricevuto il suo ordine dopo oltre due settimane di attesa. Decide quindi di comunicare con l'assistenza.
+Entra sul sito, fa click su ``Autenticati" e inserisce i suoi dati, email ``mariorossi@email.tld" e password ``edNdnP48D7q" e fa click su ``Autenticati".
+Fa quindi click su ``Servizio clienti" e su ``Nuovo ticket".
+Sceglie come tipologia ``Ordine effettuato" e inserisce come messaggio ``Non ho ricevuto il mio ordine dopo oltre due settimane".
+Qualche ora dopo Anna Bianchi, centralinista, si autentica e vede il ticket di Mario, lo apre e, dopo aver contattato il corriere per sollecitare la spedizione, cerca di rassicurare Mario, scrivendo ``Caro Signor Rossi, ho parlato personalmente con il corriere che mi ha assicurato che il pacco Le sarà recapitato entro le prossime 48 ore.".
+Il giorno successivo Mario riceve l'articolo e chiude il ticket.
+
+\subsubsection{Cliente vende un articolo}
+Un cliente già registrato, Carlo Neri, vuole vendere degli articoli. Dopo essersi autenticato con le credenziali ``carloneri@email.tld" e ``cVqFD4cSjRX", fa click su ``Area venditori".
+Da qui fa click su ``Nuova vendita" e inserisce nel modulo come nome ``Webcam 3.1 MP 1080p 30fps", ``5" come quantità disponibile e ``21.00" come prezzo, ``Webcam alta qualità universale USB, compatibile con tutti i computer e sistemi operativi" come descrizione e aggiunge alcune foto. Fa click su ``Conferma" e l'articolo viene inserito nel sistema in attesa di verifica da parte di un centralinista.
+Qualche ora dopo Anna Bianchi, centralinista, si autentica e vede la richiesta di vendita creata da Carlo. Dopo aver letto con cura le informazioni e guardato le foto, decide di accettare la vendita. L'articolo diventa quindi visualizzabile da chiunque ricerchi ``Webcam" sul sito.
+
+\subsubsection{Cliente modifica una vendita}
+Un cliente già registrato, Carlo Neri, vuole modificare i dettagli di una vendita. Dopo essersi autenticato con le credenziali ``carloneri@email.tld" e ``cVqFD4cSjRX", fa click su ``Area venditori" e fa click su ``Modifica" per la vendita interessata, ``Webcam".
+Nel modulo, cambia il nome da ``Webcam 3.1 MP 1080p 30fps" a ``Webcam 3.1 MP 1080p \textbf{60fps}". Fa click su ``Conferma".
+La vendita torna in attesa di verifica da parte di un centralinista.
+Qualche ora dopo Anna Bianchi, centralinista, si autentica e vede la richiesta di modifica creata da Carlo. Dopo aver letto con cura le informazioni, decide di accettare la vendita. L'articolo diventa quindi visualizzabile da chiunque ricerchi ``Webcam" sul sito.
+
+\subsubsection{Cliente annulla una vendita}
+Un cliente già registrato, Carlo Neri, vuole annullare una vendita. Dopo essersi autenticato con le credenziali ``carloneri@email.tld" e ``cVqFD4cSjRX", fa click su ``Area venditori" e fa click su ``Annulla" per la vendita interessata, ``Webcam".
+Dato che la vendita non è ancora stata accettata, viene immediatamente cancellata dal sito.
+
+\subsubsection{Amministratore personale aggiunge un dipendente}
+L'amministratore personale Alfonso Autori deve creare un nuovo account per il nuovo dipendente Carlo Abbamonti.
+Apre la pagina iniziale e fa click su ``Autenticati".
+Inserisce l'email: "alfosoautori@email.tld", e la password: "BWuCega2LV".
+Viene reindirizzato alla pagina principale per l'amministratore, clicca su "Aggiungi Nuovo Dipendente".
+Nella pagina di "Modulo nuovo dipendente" inserisce i dati del nuovo dipendente,
+Nome: ``Carlo" , Cognome: ``Abbamonti", 
+Email: ``carloabbamonti@email.tld",
+CodiceFiscale: ``BBMCRL82A10H703R"
+Via: `` Libertà", Numero civico: ``1", Città: ``Salerno", Provincia: ``SA", CAP: ``84122"
+Tipologia: ``Centralinista".
+Fa clic sul tasto "Conferma", gli appare la pagina di conferma contenente le informazioni di accesso per Carlo.
+
+\subsubsection{Amministratore personale modifica dipendente}
+L'amministratore personale Alfonso Autori deve modificare l'indirizzo del dipendente Carlo Abbamonti.
+Apre la pagina iniziale e fa click su ``Autenticati".
+Inserisce l'email: "alfosoautori@email.tld", e la password: "BWuCega2LV".
+Viene reindirizzato alla pagina principale per l'amministratore, 
+clicca sul campo di ricerca ed inserisce: ``Abbamonti".
+Gli vengono caricati tutti i risultati inerenti alla ricerca e trova il dipendente interessato. Alfonso fa click sul suo nome e visualizza i dettagli.
+Nella pagina dei dettagli clicca sulla voce ``Modifica Dipendente".
+Nalla sezione "Indirizzo" seleziona la voce ``Numero civico" ed inserisce "4" e in ``Via" inserisce ``Fiume".
+Conferma e gli viene mostrata la pagina di avvenuta modifica dei dati.
+
+\subsubsection{Amministratore personale rimuove dipendente}
+L'amministratore personale Alfonso Autori deve rimuovere l'account del dipendente Carlo Abbamonti.
+Apre la pagina iniziale e fa click su ``Autenticati".
+Inserisce l'email: "alfosoautori@email.tld", e la password: "BWuCega2LV".
+Viene reindirizzato alla pagina principale per l'amministratore, 
+clicca sul campo di ricerca ed inserisce: ``Abbamonti".
+Gli vengono caricati tutti i risultati inerenti alla ricerca e trova il dipendente interessato. Alfonso fa click sul suo nome e visualizza i dettagli.
+Fa quindi click sulla voce "Elimina Dipendente", conferma la scelta e gli appare la pagina di avvenuta rimozione del dipendente.
+
+\subsubsection{Amministratore catalogo inserisce nuovo articolo}
+L'amministratore del catalogo Tommaso Foggia deve inserire un nuovo articolo al catalogo.
+Tommaso, detto "Tommy", apre la pagina iniziale e fa click su ``Autenticati".
+Inserisce l'email: "tommyfoggia@email.tld", e la password: "tTV9wAKhJB".
+Viene reindirizzato alla pagina principale per l'amministratore.
+Clicca su "Inserisci Nuovo Articolo" e nel modulo per l'inserimento inserisce del campi, Nome: ``Tappetino RGB, Zero Gravity", Descrizione: ``Tappetino ultra leggero RGB, 2W/h, presa USB",
+Quantità: ``2", Prezzo ``30.00".
+Conferma, gli viene mostrata una pagina di conferma con messaggio ``Inserimento avvenuto con successo".
+
+\newpage
+
+\subsubsection{Amministratore catalogo modifica articolo}
+L'amministratore del catalogo Tommaso Foggia deve modificare un articolo dal catalogo.
+Tommaso, detto "Tommy", apre la pagina iniziale e fa click su ``Autenticati".
+Inserisce l'email: "tommyfoggia@email.tld", e la password: "tTV9wAKhJB".
+Viene reindirizzato alla pagina principale per l'amministratore.
+clicca sul campo di ricerca ed inserisce: "HP Pavillion".
+Gli vengono caricati tutti i risultati inerenti alla ricerca effettuata.
+L'amministratore seleziona l'articolo interessato ed apre i dettagli.
+Nella pagina dei dettagli clicca sulla voce ``Modifica Articolo",
+alla sezione ``Prezzo" seleziona ed inserisce ``799.00".
+Conferma e gli appare una pagina di conferma con messaggio ``Modifica effettuata con successo".
+
+\subsubsection{Amministratore catalogo rimuove articolo}
+L'amministratore del catalogo Tommaso Foggia deve rimuovere un articolo dal catalogo.
+Tommaso, detto "Tommy", apre la pagina iniziale e fa click su ``Autenticati".
+Inserisce l'email: "tommyfoggia@email.tld", e la password: "tTV9wAKhJB".
+Viene reindirizzato alla pagina principale per l'amministratore.
+clicca sul campo di ricerca ed inserisce: "HP Pavillion".
+Gli vengono caricati tutti i risultati inerenti alla ricerca effettuata.
+L'amministratore seleziona l'articolo interessato ed apre i dettagli.
+Nella pagina dei dettagli clicca sulla voce "Elimina Articolo",
+conferma la scelta e gli appare una pagina di conferma con messaggio ``Rimozione effettuata con successo".
+
 
 \newpage
 \section{Use case}
