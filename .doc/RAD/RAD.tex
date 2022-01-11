@@ -668,18 +668,20 @@ Fa click su ``Chiudi". \\
 \hline
 \textbf{ID} & UC13 ElencoVendite \\
 \hline
-\textbf{Descrizione} & Un cliente visualizza l'elenco degli articoli che ha attualmente in vendita.  \\
+\textbf{Descrizione} & Un cliente ricerca tra gli articoli che ha attualmente in vendita.  \\
 \hline
 \textbf{Partecipanti} & Cliente \\
 \hline
-\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) vuole visualizzare l'elenco degli articoli che ha attualmente in vendita. \\
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) vuole visualizzare informazioni sugli articoli che ha attualmente in vendita. \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
 \textbf{Cliente} & \textbf{Sistema} \\
 Da una pagina qualsiasi, fa click su ``Area venditori". \\
-	& Mostra all'utente l'elenco degli articoli attualmente in vendita.
+	& Mostra all'utente una barra di ricerca. \\
+Inserisce il testo da ricercare. \\
+	& Mostra all'utente tutte le vendite corrispondenti al testo inserito.
 \end{tabular}
 \end{minipage} \\
 \hline
@@ -688,7 +690,7 @@ Da una pagina qualsiasi, fa click su ``Area venditori". \\
 \end {tabular}
 \\
 
-\subsubsection{Vendita}
+\subsubsection{Nuova Vendita}
 \label{UC:salesnew}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
@@ -726,13 +728,13 @@ Inserisce i dati richiesti e fa click su ``Conferma". \\
 \hline
 \textbf{Partecipanti} & Cliente \\
 \hline
-\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) è nell'elenco degli articoli in vendita (\ref{UC:saleslist}). \\
+\textbf{Condizione d'ingresso} & Un cliente autenticato ha effettuato una ricerca (\ref{UC:saleslist}) e ha selezionato un articolo per visualizzarne i dettagli (\ref{UC:salesdetails}). \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
 \textbf{Cliente} & \textbf{Sistema} \\
-Fa click su ``Modifica" sulla riga corrispondente all'articolo interessato. \\
+Fa click su ``Modifica". \\
 	& Mostra all'utente un modulo per l'inserimento dei nuovi dati necessari come nome, descrizione, prezzo, quantità disponibile e foto dell'articolo. I campi sono preimpostati con i valori attuali. \\
 Inserisce i dati richiesti e fa click su ``Conferma". \\
 	& Mostra una pagina di conferma.
@@ -1147,7 +1149,7 @@ Inserisce i dati richiesti e fa click su ``Conferma". \\
 \end {tabular}
 \\
 
-\subsubsection{Modifica}
+\subsubsection{Modifica Vendita}
 \label{UC:amcatmodifica}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
@@ -1157,13 +1159,13 @@ Inserisce i dati richiesti e fa click su ``Conferma". \\
 \hline
 \textbf{Partecipanti} & Amministratore Catalogo \\
 \hline
-\textbf{Condizione d'ingresso} & Un amministratore del catalogo ha effettuato una ricerca (\ref{UC:amcatricerca}). \\
+\textbf{Condizione d'ingresso} & Un amministratore del catalogo ha effettuato una ricerca (\ref{UC:amcatricerca}) e ha selezionato un articolo (\ref{UC:amcatdettagli}). \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
 \textbf{Amministratore catalogo} & \textbf{Sistema} \\
-Fa click su ``Modifica" per l'articolo interessato. \\
+Fa click su ``Modifica". \\
 	& Mostra un modulo per l'inserimento dei nuovi dati necessari come nome, descrizione, prezzo, quantità disponibile e foto dell'articolo. I campi sono preimpostati con i valori attuali. \\
 Inserisce i nuovi dati. \\
 	& Visualizza una pagina di conferma. 
@@ -1175,7 +1177,7 @@ Inserisce i nuovi dati. \\
 \end {tabular}
 \\
 
-\subsubsection{Rimozione}
+\subsubsection{Rimozione Vendita}
 \label{UC:amcatrimuove}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
@@ -1402,7 +1404,7 @@ Fare riferimento a \ref{UC:autenticazione}. \\
 \begin{enumerate}
 \item Dopo la registrazione (\ref{SD:registrazione}), l'utente può usare le credenziali scelte per autenticarsi cliccando sul tasto ``Autenticati''.
 \item Gli viene presentato quindi un modulo per l'inserimento di email e password.
-\item Se le credenziali sono corrette e corrispondono a quelle memorizzate nel sistema, all'utente viene consentito l'accesso.
+\item Se le credenziali corrispondono a quelle memorizzate nel sistema, all'utente viene consentito l'accesso.
 \end{enumerate}
 
 \subsubsection{Cliente ricerca un articolo}
@@ -1413,7 +1415,7 @@ Fare riferimento a \ref{UC:autenticazione}. \\
 \end{center}
 
 \begin{enumerate}
-\item A prescindere dallo stato dell'autenticazione (\ref{SD:login}), all'utente è permesso ricercare articoli nel sito. Usando la barra di ricerca presente nella pagina iniziale, può inserire dei termini da ricercare.
+\item Ai clienti e agli utenti non autenticati è permesso ricercare articoli nel sito. Usando la barra di ricerca presente nella pagina iniziale, può inserire dei termini da ricercare.
 \item Una volta premuto sul tasto ``Cerca'', gli viene presentato un elenco di articoli corrispondenti.
 \end{enumerate}
 
@@ -1425,7 +1427,7 @@ Fare riferimento a \ref{UC:autenticazione}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo aver effettuato una ricerca (\ref{SD:ricerca}), l'utente può scegliere uno degli articoli e selezionarlo per visualizzarne i dettagli.
+\item Dopo aver effettuato una ricerca (\ref{SD:ricerca}), un utente può scegliere uno degli articoli e selezionarlo per visualizzarne i dettagli.
 \item All'utente viene presentata una pagina con i dettagli dell'articolo scelto.
 \end{enumerate}
 
@@ -1441,7 +1443,8 @@ Fare riferimento a \ref{UC:carrelloadd}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo essersi autenticato (\ref{SD:login}) e aver selezionato un articolo (\ref{SD:dettagli}) può aggiungere un articolo al carrello utilizzando il tasto ``Aggiungi al carrello".
+\item Dopo essersi autenticato (\ref{SD:login}) e aver selezionato un articolo (\ref{SD:dettagli}) può aggiungere un articolo al carrello utilizzando il tasto ``Aggiungi al carrello". Se non è autenticato, gli verrà chiesto di farlo.
+
 \item Una volta premuto, la sua aggiunta viene registrata nel sistema per mantenere il carrello attraverso browser e dispositivi diversi e all'utente viene mostrata una pagina di conferma.
 \end{enumerate}
 
@@ -1494,7 +1497,7 @@ Fare riferimento a \ref{UC:annullamento}. \\
 \label{SD:elencovendite}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteVenditaElenco}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteVenditaRicerca}
 \end{center}
 
 \begin{enumerate}
@@ -1525,7 +1528,7 @@ Fare riferimento a \ref{UC:salesnew}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dall'elenco delle vendite (\ref{SD:elencovendite}), il cliente ne può selezionare una per visualizzarne i dettagli.
+\item Dai risultati di ricerca per le vendite (\ref{SD:elencovendite}), il cliente ne può selezionare una per visualizzarne i dettagli.
 \item Gli viene mostrata una pagina con informazioni sulla vendita come la quantità di articoli venduti e il ricavato totale.
 \end{enumerate}
 
@@ -1626,7 +1629,7 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 \label{SD:recuperopw}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteRecuperoPassword}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClientePasswordRecupero}
 \end{center}
 
 \begin{enumerate}
@@ -1638,13 +1641,25 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 \label{SD:modificapw}
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteModificaPassword}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClientePasswordModifica}
 \end{center}
 
 \begin{enumerate}
 \item Se un cliente ha dimenticato la password (\ref{SD:recuperopw}) o se un cliente vuole modificarla per altri motivi, viene rimandato a questo modulo per la modifica.
 \item Il sistema provvede a criptare e memorizzare la nuova password per gli accessi futuri.
 \end{enumerate}
+
+\subsubsection{Cliente modifica profilo}
+\label{SD:modificaprofilo}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteProfiloModifica}
+\end{center}
+
+\begin{enumerate}
+\item Se un cliente vuole modificare le informazioni del suo profilo come indirizzo, numero di carta di credito o altro, può farlo dalla pagina iniziale con il tasto dedicato.
+\item Al cliente viene mostrato un modulo per la modifica dei dati, fatta eccezione per quelli cifrati come password e carta di credito, che possono essere soltanto sovrascritti.
+\end{enumerate}
+
 \newpage
 
 \subsection{Centralinista}
@@ -1740,21 +1755,21 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 \subsubsection{Magazziniere elenca ordini}
 \label{SD:magazzinierevisualizzaelenco}
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/MagazziniereElencoVisualizza}
+\includegraphics[width=\textwidth]{SequenceDiagram/MagazziniereOrdiniElenco}
 \end{center}
 
 \begin{enumerate}
 \item Dopo essersi autenticato (\ref{SD:login}), il magazziniere viene rimandato all'elenco degli ordini in attesa di spedizione.
 \end{enumerate}
 
-\subsubsection{Magazziniere blocca ordine}
+\subsubsection{Magazziniere elabora ordine}
 \label{SD:magazziniereblocca}
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/MagazziniereOrdineBlocca}
+\includegraphics[width=\textwidth]{SequenceDiagram/MagazziniereOrdineVisualizza}
 \end{center}
 
 \begin{enumerate}
-\item Dall'elenco degli ordini (\ref{SD:magazzinierevisualizzaelenco}), il magazziniere può cambiare lo stato di un ordine a ``In elaborazione", in modo che non venga visualizzato dagli altri magazzinieri.
+\item Dall'elenco degli ordini (\ref{SD:magazzinierevisualizzaelenco}), il magazziniere può visualizzare i dettagli di un ordine. Nel fare ciò cambia lo stato dell'ordine a ``In elaborazione", in modo che non appaia ad altri magazzinieri.
 \end{enumerate}
 
 \subsubsection{Magazziniere spedisce ordine}
@@ -1764,7 +1779,7 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dall'elenco degli ordini (\ref{SD:magazzinierevisualizzaelenco}), il magazziniere può accettare (\checkmark) un ordine.
+\item Dai dettagli di un ordine (\ref{SD:magazziniereblocca}), il magazziniere può accettare (\checkmark) un ordine.
 \end{enumerate}
 
 \subsubsection{Magazziniere annulla ordine}
@@ -1774,7 +1789,7 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dall'elenco degli ordini (\ref{SD:magazzinierevisualizzaelenco}), il magazziniere può annullare ($\times$) un ordine.
+\item Dai dettagli di un ordine (\ref{SD:magazziniereblocca}), il magazziniere può annullare ($\times$) un ordine.
 \end{enumerate}
 
 \newpage
