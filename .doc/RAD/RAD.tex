@@ -44,7 +44,7 @@
 \newpage
 \tableofcontents
 \newpage
-\newgeometry{top=0.5in,bottom=0.5in,right=0.5in,left=0.5in}
+\newgeometry{a4paper,textwidth=345pt,textheight=598pt}
 \section*{Partecipanti}
 \begin{center}
 \begin{tabular} {|c|c|}
@@ -111,6 +111,7 @@ L'utenza della piattaforma si divide in:
 \includegraphics[width=\textwidth]{IdentificazioneAttori}
 \end{center}
  
+\newgeometry{top=0.5in,bottom=0.5in,right=0.5in,left=0.5in}
 \subsection{Requisiti funzionali}
 \begin{center}
 \begin{tabular}{|c|l|c|}
@@ -211,6 +212,8 @@ Cliente registrato & Permette di richiedere assistenza. \\
 \begin{tabular}{|c|c|}
 \rowcolor[gray]{0.8}
 \hline
+
+% TODO
 \textbf{Attore} & \textbf{Funzionalità} \\
 Cliente registrato & Permette di modificare informazioni del profilo come password, carta di credito e indirizzo. \\
 \hline
@@ -288,6 +291,8 @@ Amministratore catalogo & Permette di aggiungere, rimuovere e modificare articol
 
 \newpage
 
+
+\newgeometry{a4paper,textwidth=345pt,textheight=598pt}
 \subsection{Requisiti non funzionali}
 \subsubsection{Sicurezza e privacy}
 Il sistema deve prevedere tutte le pratiche di sicurezza fondamentali, come l'utilizzo di SSL per la trasmissione dei dati, l'utilizzo di \textit{hashing} e \textit{salt} per le password memorizzate nel database, tutti i dati delle carte di credito e anagrafiche devono essere cifrati prima di essere inseriti nel database utilizzando una cifratura robusta con una chiave che non deve essere esposta pubblicamente per nessun motivo. \\
@@ -457,6 +462,8 @@ conferma la scelta e gli appare una pagina di conferma con messaggio ``Rimozione
 
 
 \newpage
+
+\newgeometry{top=0.5in,bottom=0.5in,right=0.5in,left=0.5in}
 \section{Use case}
 \subsection{Comuni}
 \subsubsection{Autenticazione}
@@ -1744,6 +1751,7 @@ Fa click sul dipendente interessato. \\
 
 \newpage
 
+\newgeometry{a4paper,textwidth=345pt,textheight=598pt}
 \section{Sequence Diagram}
 \subsection{Cliente}
 \subsubsection{Cliente si registra}
@@ -2361,17 +2369,17 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 
 \subsection{Autorizzazione vendita}
 \begin{center}
-\includegraphics[scale=1.3]{ActivityDiagram/CentralinistaAutorizzazioneVendita}
+\includegraphics[width=\textwidth]{ActivityDiagram/CentralinistaAutorizzazioneVendita}
 \end{center}
 
 \subsection{Modifica personale}
 \begin{center}
-\includegraphics[scale=1.50]{ActivityDiagram/AmministratorePersonaleModificaDipendente}
+\includegraphics[width=\textwidth]{ActivityDiagram/AmministratorePersonaleModificaDipendente}
 \end{center}
 
 \subsection{Modifica Catalogo}
 \begin{center}
-\includegraphics[scale=1.55]{ActivityDiagram/AmministratoreCatalogoModificaArticoloCatalogo}
+\includegraphics[width=\textwidth]{ActivityDiagram/AmministratoreCatalogoModificaArticoloCatalogo}
 \end{center}
 
 \newpage
@@ -2383,7 +2391,7 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 
 \subsection{Centralinista}
 \begin{center}
-\includegraphics[height=300px]{NavigationalPath/Centralinista}
+\includegraphics[width=\textwidth]{NavigationalPath/Centralinista}
 \end{center}
 
 \subsection{Magazziniere}
