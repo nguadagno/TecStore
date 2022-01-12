@@ -1,0 +1,194 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage[table]{xcolor}
+\usepackage{xcolor,colortbl}
+\usepackage{multirow}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\author{Natale Guadagno, Paolo Patrone}
+\title{Requisites Analysis Document - TecStore}
+\renewcommand{\contentsname}{Contenuti}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+        citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue,
+    linktocpage
+}
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\newgeometry{top=0.5in,bottom=0.5in,right=0.5in,left=0.5in}
+\section*{Partecipanti}
+\begin{center}
+\begin{tabular} {|c|c|}
+\hline
+\textbf{Nome} & \textbf{Matricola} \\
+\hline
+Guadagno Natale & 0512106546 \\
+Patrone Paolo & 0512106153 \\
+\hline
+\end{tabular}
+\end{center}
+\newpage
+
+\section{Introduzione}
+\subsection{Scopo del sistema}
+Il sistema si propone come interfaccia unificata e semplificata per la gestione di una realtà complessa come un e-commerce.
+
+Le interfacce sono quindi pensate per essere di immediata lettura e accessibili anche per chi ha poca dimestichezza con sistemi informatici.
+
+\subsection{Obiettivi di design}
+Per garantire un livello di accessibilità universale sono previsti più test di usabilità per ogni interfaccia, in modo da evidenziare criticità risolvibili. \\
+Per facilitare l'utilizzo della piattaforma, ci si è posto anche l'obiettivo di avere un'interfaccia molto reattiva con tempi di risposta molto brevi e molti messaggi di conferma per assicurare gli utenti che le loro operazioni sono state effettuate.
+
+\subsubsection{Criteri prestazionali}
+\begin{tabular}{|p{4cm}|p{12cm}|}
+\hline
+\textbf{Tempi di risposta} & Il sistema si prepone l'obiettivo di essere il più possibile reattivo, ovvero di effettuare la maggioranza delle operazioni semplici come autenticazione, registrazione, risposta ad un ticket in meno di 1s e al più 10s per operazioni più complesse come la ricerca degli articoli. \\
+\hline
+\textbf{Throughput} & Il sistema si prepone l'obiettivo di gestire anche picchi improvvisi di utenza senza grossi rallentamenti. Sono previsti più webserver con \emph{load balancer} che permettono quindi di gestire molti più utenti. \\
+\hline
+\textbf{Memorizzazione di dati} & Il sistema utilizzerà un database MySQL per la memorizzazione di dati testuali (informazioni degli utenti, lista degli articoli, ...) e, per evitare di rendere i file del database troppo grandi, i file immagine saranno memorizzati su disco. Tutti questi dati riceveranno dei backup periodici con strategia 3-2-1, ovvero 3 copie dei dati, su 2 dispositivi fisici diversi e almeno 1 copia in un'altra posizione geografica. \\
+\hline
+\end{tabular}
+
+\subsubsection{Criteri di affidabilità}
+\begin{tabular}{|p{4cm}|p{12cm}|}
+\hline
+\textbf{Robustezza} & L'hardware scelto per il sistema deve essere di livello aziendale e resistente a eventuali problemi hardware come la rottura di un disco fisso, attraverso l'uso di tecnologia RAID, di un alimentatore, con alimentatori ridondanti, alla mancanza di corrente attraverso batterie e sistemi UPS. In nessun caso un singolo crash hardware deve compromettere l'accessibilità al sito.
+In più, ci si proteggerà da problematiche software usando versioni del webserver e del sistema operativo testate e senza problemi noti. \\
+\hline
+\t1extbf{Disponibilità} & Il sistema deve garantire un \emph{uptime} (tempo di attività) di almeno il 99.9\%, ovvero un \textit{downtime} (tempo di inattività) annualizzato di meno di 9 ore. Ciò è cruciale per far sì che l'utenza non venga scoraggiata dall'utilizzo di TecStore come negozio primario, creando perdite potenziali molto alte, soprattutto nei periodi di maggior afflusso di utenza. \\
+\hline
+\textbf{Tolleranza agli errori} & Il sistema deve garantire l'accessibilità anche in condizioni non ottimali, come il crash di uno dei webserver o un blackout. Ciò è garantito dai componenti ridondanti e dai backup. \\
+\hline
+\textbf{Sicurezza} & Il sistema deve prevedere tutte le pratiche di sicurezza fondamentali, come l'utilizzo di SSL per la trasmissione dei dati, l'utilizzo di \textit{hashing} e \textit{salt} per le password memorizzate nel database, tutti i dati delle carte di credito e anagrafiche devono essere cifrati prima di essere inseriti nel database utilizzando una cifratura robusta con una chiave che non deve essere esposta pubblicamente per nessun motivo.
+In caso di tentativo di accesso a schermate riservate da parte di un utente consumatore o viceversa, ovvero un utente del personale che cerca di accedere al catalogo, deve essere previsto un avviso e un \textit{redirect} ad una pagina correttamente accessibile da quel tipo di utente. \\
+\hline
+\end{tabular}
+
+\subsubsection{Criteri di manutenzione}
+Lo sviluppo del sistema sarà condotto in modo da facilitare l'estensione utilizzando linguaggi e tecnologie standard come HTML5, CSS3, Bootstrap e Java. Il codice deve essere quindi scritto in modo che sia facile intervenire, sia per risolvere eventuali bug, sia per aggiungere nuove funzionalità.
+
+\subsection{Definizioni, acronimi e abbreviazioni}
+\begin{itemize}
+\item TecStore: nome della piattaforma 
+\item Cliente: utente che può acquistare, vendere, richiedere assistenza
+\item Centralinista: utente che controlla le vendite e fornisce assistenza ai clienti
+\item Magazziniere: utente che controlla la spedizione degli ordini
+\item Amministratore catalogo: utente che gestisce le vendite da parte della piattaforma
+\item Amministratore personale: utente che gestisce gli account degli altri utenti, fatta eccezione per i clienti
+\item DBMS: Database Management System, sistema di gestione di una base di dati
+% TODO
+\end{itemize}
+
+\subsection{Panoramica}
+In questo documento sono descritti in dettaglio:
+
+\begin{itemize}
+\item Decomposizione in sottosistemi: in cui viene esposto come il sistema è suddiviso in sottosistemi e come ogni sottosistema interagisce con gli altri.
+\item Mapping hardware/software: in cui vengono descritti i requisiti hardware e software su cui il sistema dovrà girare.
+\item Gestione dei dati persistenti: in cui viene descritto come i dati verranno memorizzati dal sistema.
+\item Controllo degli accessi: in cui vengono descritte le funzionalità messe a disposizione per ogni utente.
+\item Condizioni di boundary: in cui verranno descritte le condizioni limite del sistema come avvio, spegnimento, manutenzione e gestione dei fallimenti.
+\end{itemize}
+
+\section{Sistema proposto}
+
+\subsection{Panoramica}
+L'architettura del sistema è di tipo client/server. Il server resta in attesa di richiesta da parte degli utenti e risponde nel minor tempo possibile.
+I motivi per la scelta di un'architettura client/server sono principalmente:
+\begin{itemize}
+\item Portabilità: il sistema è facilmente portabile ed accessibile da una varietà di dispositivi senza alcuna necessità di modifica.
+\item Performance: il sistema deve offrire buone prestazioni CPU e ottime prestazioni I/O per garantire una buona reattività.
+\item Scalabilità: il sistema è pensato per essere facilmente scalabile orizzontalmente.
+\item Affidabilità: il sistema prevede più ridondanze e backup per garantire l'accessibilità da parte degli utenti.
+\end{itemize}
+
+\subsection{Controllo degli accessi}
+
+
+
+\newgeometry{top=0.5in,bottom=0.5in,right=0.5in,left=0.1in}
+\begin{table}[]
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\textbf{} &
+  \textbf{Account} &
+  \textbf{Assistenza} &
+  \textbf{Autenticazione} &
+  \textbf{Carrello} &
+  \textbf{Ordine} &
+  \textbf{Vendita} \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{\begin{tabular}[c]{@{}l@{}}Utente \\ non autenticato\end{tabular}} &
+  {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Solo per\\ registrazione\end{tabular}} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{34FF34} $\checkmark$} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Solo per \\ ricerca e \\ visualizzazione \\ dettagli\end{tabular}} \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Cliente} &
+  {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Solo per\\ modifica\end{tabular}} &
+  {\color[HTML]{34FF34} $\checkmark$} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{34FF34} $\checkmark$} &
+  {\color[HTML]{34FF34} $\checkmark$} &
+  {\color[HTML]{34FF34} $\checkmark$} \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Centralinista} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Solo per \\ risposta\\ a ticket \\ esistenti\end{tabular}} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Solo per\\ cambiamenti\\ di stato per \\ una vendita\\ ``In attesa"\end{tabular}} \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{Magazziniere} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Solo per\\ cambiamenti\\ di stato per \\ un ordine\\ ``In attesa"\end{tabular}} &
+  {\color[HTML]{FE0000} $\times$} \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{\begin{tabular}[c]{@{}l@{}}Amministratore \\ Catalogo\end{tabular}} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{34FF34} $\checkmark$} \\ \hline
+\cellcolor[HTML]{C0C0C0}\textbf{\begin{tabular}[c]{@{}l@{}}Amministratore \\ Personale\end{tabular}} &
+  {\color[HTML]{34FF34} $\checkmark$} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{FE0000} $\times$} \\ \hline
+\end{tabular}
+\end{table}
+
+\newgeometry{top=0.5in,bottom=0.5in,right=0.5in,left=0.5in}
+
+\end{document}
