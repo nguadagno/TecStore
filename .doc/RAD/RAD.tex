@@ -16,6 +16,9 @@
 
 \setcounter{secnumdepth}{4}
 
+\newcounter{mycounter} 
+\newcommand\showmycounter{\stepcounter{mycounter}\themycounter}
+
 \titleformat{\paragraph}
 {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 \titlespacing*{\paragraph}
@@ -450,7 +453,7 @@ conferma la scelta e gli appare una pagina di conferma con messaggio ``Rimozione
 \label{UC:autenticazione}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC0 Autenticazione \\
+\textbf{ID} &UC\showmycounter \bigskip\showmycounter \bigskip Autenticazione \\
 \hline
 \textbf{Descrizione} & Un utente si autentica. \\
 \hline
@@ -465,11 +468,7 @@ conferma la scelta e gli appare una pagina di conferma con messaggio ``Rimozione
 Si collega al sito e da una pagina qualsiasi fa click sul tasto ``Autenticati". & \\
 	& Mostra all'utente un modulo per l'inserimento di email e password. \\
 Inserisce i dati richiesti e fa click su ``Autenticati". & \\
-	& Se le credenziali sono corrette, rimanda l'utente alla pagina opportuna:
-	\begin{itemize}
-		\item alla pagina precedente per i clienti
-		\item alla pagina opportuna per i dipendenti
-	\end{itemize} \\
+	& Se le credenziali sono corrette, rimanda l'utente alla pagina opportuna.
 \end{tabular}
 \end{minipage} \\
 \hline
@@ -484,7 +483,7 @@ Inserisce i dati richiesti e fa click su ``Autenticati". & \\
 \label{UC:registrazione}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC1 Registrazione \\
+\textbf{ID} &UC\showmycounter \bigskip\showmycounter \bigskip Registrazione \\
 \hline
 \textbf{Descrizione} & Un nuovo cliente si registra. \\
 \hline
@@ -514,7 +513,7 @@ Inserisce tutti i dati richiesti e fa click su "Registrati". & \\
 \label{UC:ricerca}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC2 Ricerca \\
+\textbf{ID} &UC\showmycounter \bigskip Ricerca \\
 \hline
 \textbf{Descrizione} & Un cliente ricerca una parola chiave. \\
 \hline
@@ -540,7 +539,7 @@ Da una pagina qualsiasi, digita il nome dell'articolo desiderato nella barra di 
 \label{UC:selezione}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC3 Selezione \\
+\textbf{ID} &UC\showmycounter \bigskip Selezione \\
 \hline
 \textbf{Descrizione} & Un cliente seleziona un articolo per visualizzarne i dettagli.  \\
 \hline
@@ -566,7 +565,7 @@ Seleziona uno dei risultati. \\
 \label{UC:carrelloadd}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC4 AggiuntaAlCarrello \\
+\textbf{ID} &UC\showmycounter \bigskip AggiuntaAlCarrello \\
 \hline
 \textbf{Descrizione} & Un cliente aggiunge un articolo al carrello.  \\
 \hline
@@ -592,7 +591,7 @@ Fa click su ``Aggiungi al carrello". \\
 \label{UC:carrellobuy}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC5 Acquisto \\
+\textbf{ID} &UC\showmycounter \bigskip Acquisto \\
 \hline
 \textbf{Descrizione} & Un cliente acquista gli articoli presenti nel suo carrello.  \\
 \hline
@@ -622,7 +621,7 @@ Fa click su ``Conferma".
 \label{UC:carrelloremove}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC6 RimozioneDalCarrello \\
+\textbf{ID} &UC\showmycounter \bigskip RimozioneDalCarrello \\
 \hline
 \textbf{Descrizione} & Un cliente rimuove uno degli articoli presenti nel suo carrello.  \\
 \hline
@@ -646,11 +645,89 @@ Fa click su ``Rimuovi" per l'articolo interessato.
 \end {tabular}
 \\
 
+\subsubsection{Storico ordini}
+\label{UC:storicoordini}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} &UC\showmycounter \bigskip StoricoOrdini \\
+\hline
+\textbf{Descrizione} & Un cliente visualizza lo storico degli ordini effettuati.  \\
+\hline
+\textbf{Partecipanti} & Cliente \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) è nella pagina iniziale. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Fa click su ``Storico ordini". \\
+	& Mostra all'utente una barra di ricerca per gli ordini. \\
+Inserisce la parola chiave interessata. \\
+	& Mostra all'utente un elenco di ordini corrispondenti. \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il cliente visualizza l'elenco degli ordini. \\
+\hline
+\end {tabular}
+
+\subsubsection{Dettagli ordine}
+\label{UC:dettagliordine}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} &UC\showmycounter \bigskip DettagliOrdine \\
+\hline
+\textbf{Descrizione} & Un cliente visualizza i dettagli di un ordine.  \\
+\hline
+\textbf{Partecipanti} & Cliente \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) è nello storico degli ordini (\ref{UC:storicoordini}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Fa click su ``Dettagli" per l'articolo interessato. \\
+	& Mostra all'utente i dettagli dell'ordine selezionato.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il cliente visualizza i dettagli dell'ordine selezionato. \\
+\hline
+\end {tabular}
+
+
+\subsubsection{Rimborso ordine}
+\label{UC:rimborso}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} &UC\showmycounter \bigskip RimborsoOrdine \\
+\hline
+\textbf{Descrizione} & Un cliente richiede il rimborso per un ordine.  \\
+\hline
+\textbf{Partecipanti} & Cliente \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) è nello storico degli ordini (\ref{UC:storicoordini}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Fa click su ``Rimborso" per l'articolo interessato. \\
+	& Mostra all'utente una pagina di conferma.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & L'ordine cambia stato in ``In attesa di rimborso". \\
+\hline
+\end {tabular}
+
 \subsubsection{Annullamento di un ordine}
 \label{UC:annullamento}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC7 AnnullamentoOrdine \\
+\textbf{ID} &UC\showmycounter \bigskip AnnullamentoOrdine \\
 \hline
 \textbf{Descrizione} & Un cliente vuole annullare un ordine effettuato in precedenza.  \\
 \hline
@@ -678,7 +755,7 @@ Fa click su ``Annulla" per l'ordine. \\
 \label{UC:ticketlist}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC8 ElencoTicket \\
+\textbf{ID} &UC\showmycounter \bigskip ElencoTicket \\
 \hline
 \textbf{Descrizione} & Un cliente visualizza l'elenco dei ticket che non sono stati chiusi.  \\
 \hline
@@ -704,7 +781,7 @@ Da una pagina qualsiasi, fa click su ``Servizio clienti". \\
 \label{UC:ticketopen}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC9 CreazioneTicket \\
+\textbf{ID} &UC\showmycounter \bigskip CreazioneTicket \\
 \hline
 \textbf{Descrizione} & Un cliente ha necessità di contattare il servizio clienti.  \\
 \hline
@@ -732,7 +809,7 @@ Inserisce le informazioni richieste e fa click su ``Conferma". \\
 \label{UC:ticketdetail}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC10 SelezioneTicket \\
+\textbf{ID} &UC\showmycounter \bigskip SelezioneTicket \\
 \hline
 \textbf{Descrizione} & Un cliente visualizza l'elenco di messaggi relativi ad uno dei ticket.  \\
 \hline
@@ -758,7 +835,7 @@ Dall'elenco dei ticket (\ref{UC:ticketlist}), fa click su uno dei ticket. \\
 \label{UC:ticketreply}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC11 RispostaTicket \\
+\textbf{ID} &UC\showmycounter \bigskip RispostaTicket \\
 \hline
 \textbf{Descrizione} & Un cliente aggiunge un messaggio ad un ticket esistente.  \\
 \hline
@@ -786,7 +863,7 @@ Inserisce il messaggio e fa click su ``Conferma". \\
 \label{UC:ticketclose}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC12 ChiusuraTicket \\
+\textbf{ID} &UC\showmycounter \bigskip ChiusuraTicket \\
 \hline
 \textbf{Descrizione} & Un cliente ritiene che il problema sia stato risolto e decide di chiudere un ticket.  \\
 \hline
@@ -812,7 +889,7 @@ Fa click su ``Chiudi". \\
 \label{UC:saleslist}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC13 ElencoVendite \\
+\textbf{ID} &UC\showmycounter \bigskip ElencoVendite \\
 \hline
 \textbf{Descrizione} & Un cliente ricerca tra gli articoli che ha attualmente in vendita.  \\
 \hline
@@ -836,11 +913,11 @@ Inserisce il testo da ricercare. \\
 \end {tabular}
 \\
 
-\subsubsection{Nuova Vendita}
+\subsubsection{Nuova vendita}
 \label{UC:salesnew}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC14 NuovaVendita \\
+\textbf{ID} &UC\showmycounter \bigskip NuovaVendita \\
 \hline
 \textbf{Descrizione} & Un cliente inserisce un nuovo articolo in vendita sulla piattaforma.  \\
 \hline
@@ -868,7 +945,7 @@ Inserisce i dati richiesti e fa click su ``Conferma". \\
 \label{UC:salesedit}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC15 ModificaVendita \\
+\textbf{ID} &UC\showmycounter \bigskip ModificaVendita \\
 \hline
 \textbf{Descrizione} & Un cliente modifica i dettagli di una vendita esistente.  \\
 \hline
@@ -896,7 +973,7 @@ Inserisce i dati richiesti e fa click su ``Conferma". \\
 \label{UC:salesannull}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC16 AnnullamentoVendita \\
+\textbf{ID} &UC\showmycounter \bigskip AnnullamentoVendita \\
 \hline
 \textbf{Descrizione} & Un cliente annulla una vendita esistente.  \\
 \hline
@@ -922,7 +999,7 @@ Fa click su ``Annulla" per l'articolo interessato. \\
 \label{UC:salesdetails}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC17 DettagliVendita \\
+\textbf{ID} &UC\showmycounter \bigskip DettagliVendita \\
 \hline
 \textbf{Descrizione} & Un cliente visualizza le informazioni su una vendita come quantità di articoli venduti e ricavato totale.  \\
 \hline
@@ -944,6 +1021,89 @@ Fa click sull'articolo interessato. \\
 \end {tabular}
 \\
 
+\subsubsection{Modifica profilo}
+\label{UC:modificaprofilo}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} &UC\showmycounter \bigskip ModificaProfilo \\
+\hline
+\textbf{Descrizione} & Un cliente vuole modificare le informazioni del suo profilo. \\
+\hline
+\textbf{Partecipanti} & Cliente \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) è nella pagina iniziale. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Fa click su ``Modifica profilo". \\
+	& Mostra all'utente un modulo per la modifica dei campi del profilo. Il modulo è precompilato con le informazioni attuali. \\
+Inserisce i nuovi dati e fa click su ``Conferma" \\
+	& Mostra una pagina di conferma.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Le nuove informazioni del cliente sono memorizzate. \\
+\hline
+\end {tabular}
+
+
+\subsubsection{Modifica password}
+\label{UC:modificapassword}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} &UC\showmycounter \bigskip ModificaPassword \\
+\hline
+\textbf{Descrizione} & Un cliente vuole modificare la sua password. \\
+\hline
+\textbf{Partecipanti} & Cliente \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente autenticato (\ref{UC:autenticazione}) è nella pagina di modifica dei dati personali (\ref{UC:modificaprofilo}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Fa click su ``Modifica password". \\
+	& Mostra all'utente un modulo per l'inserimento della nuova password. \\
+Inserisce la nuova password e fa click su ``Conferma".
+	& Mostra una pagina di conferma.
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & La nuova password viene memorizzata. \\
+\hline
+\end {tabular}
+
+\subsubsection{Recupero password}
+\label{UC:recuperopassword}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} &UC\showmycounter \bigskip RecuperoPassword \\
+\hline
+\textbf{Descrizione} & Un cliente vuole recuperare la sua password smarrita. \\
+\hline
+\textbf{Partecipanti} & Cliente \\
+\hline
+\textbf{Condizione d'ingresso} & Un cliente non autenticato è nella pagina di autenticazione (\ref{UC:autenticazione}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Cliente} & \textbf{Sistema} \\
+Fa click su ``Password dimenticata?". \\
+	& Mostra all'utente un modulo per l'inserimento della email. \\
+Inserisce la email e fa click su ``Conferma". \\
+	& Mostra una pagina di conferma e invia un link temporaneo via email. \\
+Usa il link ricevuto per accedere al modulo di modifica password (\ref{UC:modificapassword}).
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & La nuova password viene memorizzata. \\
+\hline
+\end {tabular}
+
 \newpage
 
 \subsection{Centralinista}
@@ -951,7 +1111,7 @@ Fa click sull'articolo interessato. \\
 \label{UC:centralinistaticketelenco}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC18 ElencoTicket \\
+\textbf{ID} &UC\showmycounter \bigskip ElencoTicket \\
 \hline
 \textbf{Descrizione} & Un centralinista visualizza l'elenco dei ticket attualmente in attesa di risposta.  \\
 \hline
@@ -977,7 +1137,7 @@ Fa click su ``Ticket". \\
 \label{UC:centralinistaticketselezione}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC19 SelezioneTicket \\
+\textbf{ID} &UC\showmycounter \bigskip SelezioneTicket \\
 \hline
 \textbf{Descrizione} & Un centralinista seleziona un ticket dall'elenco per visualizzare i messaggi.  \\
 \hline
@@ -1003,7 +1163,7 @@ Fa click sul ticket. \\
 \label{UC:centralinistaticketrisposta}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC20 RispostaTicket \\
+\textbf{ID} &UC\showmycounter \bigskip RispostaTicket \\
 \hline
 \textbf{Descrizione} & Un centralinista aggiunge un messaggio ad un ticket esistente.  \\
 \hline
@@ -1031,7 +1191,7 @@ Inserisce il messaggio e fa click su ``Conferma". \\
 \label{UC:centralinistavenditeelenco}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC21 ElencoVendite \\
+\textbf{ID} &UC\showmycounter \bigskip ElencoVendite \\
 \hline
 \textbf{Descrizione} & Un centralinista visualizza l'elenco delle vendite attualmente in attesa di approvazione.  \\
 \hline
@@ -1057,7 +1217,7 @@ Fa click su ``Vendite". \\
 \label{UC:centralinistavenditaselezione}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC22 SelezioneVendita \\
+\textbf{ID} &UC\showmycounter \bigskip SelezioneVendita \\
 \hline
 \textbf{Descrizione} & Un centralinista seleziona una vendita dall'elenco per visualizzare i dettagli.  \\
 \hline
@@ -1083,7 +1243,7 @@ Fa click sulla vendita. \\
 \label{UC:centralinistavenditaautorizza}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC23 AutorizzaVendita \\
+\textbf{ID} &UC\showmycounter \bigskip AutorizzaVendita \\
 \hline
 \textbf{Descrizione} & Un centralinista autorizza una vendita.  \\
 \hline
@@ -1109,7 +1269,7 @@ Fa click su $\checkmark$. \\
 \label{UC:centralinistavenditarifiuta}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC24 RifiutaVendita \\
+\textbf{ID} &UC\showmycounter \bigskip RifiutaVendita \\
 \hline
 \textbf{Descrizione} & Un centralinista rifiuta una vendita.  \\
 \hline
@@ -1134,24 +1294,25 @@ Fa click su $\times$. \\
 \newpage
 
 \subsection{Magazziniere}
+
 \subsubsection{Elenco Ordini}
 \label{UC:magazzelenco}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC25 ElencoOrdini \\
+\textbf{ID} &UC\showmycounter \bigskip ElencoOrdini \\
 \hline
 \textbf{Descrizione} & Un magazziniere visualizza l'elenco degli ordini da spedire.  \\
 \hline
 \textbf{Partecipanti} & Magazziniere \\
 \hline
-\textbf{Condizione d'ingresso} & Un magazziniere si autentica (\ref{UC:autenticazione}). \\
+\textbf{Condizione d'ingresso} & Un magazziniere è autenticato (\ref{UC:autenticazione}) e nella sua pagina iniziale. \\
 \hline
 \textbf{Flusso di eventi} &
 \begin{minipage}{12cm}
 \begin{tabular}{p{5.5cm} p{5.5cm}}
 \textbf{Magazziniere} & \textbf{Sistema} \\
-Fa click su ``Ordini". \\
-	& Mostra ordini il cui stato è ``In attesa". \\
+Dalla pagina iniziale click su ``Ordini". \\
+	& Mostra gli ordini il cui stato è ``In attesa". \\
 \end{tabular}
 \end{minipage} \\
 \hline
@@ -1164,7 +1325,7 @@ Fa click su ``Ordini". \\
 \label{UC:magazzblocca}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC26 ElaborazioneOrdine \\
+\textbf{ID} &UC\showmycounter \bigskip ElaborazioneOrdine \\
 \hline
 \textbf{Descrizione} & Un magazziniere cambia lo stato di un ordine a ``In elaborazione".  \\
 \hline
@@ -1186,11 +1347,11 @@ Fa click su ``Elabora". \\
 \end {tabular}
 \\
 
-\subsubsection{Conferma}
+\subsubsection{Conferma spedizione}
 \label{UC:magazzconferma}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC27 ConfermaOrdine \\
+\textbf{ID} &UC\showmycounter \bigskip ConfermaOrdine \\
 \hline
 \textbf{Descrizione} & Un magazziniere cambia lo stato di un ordine a ``Spedito".  \\
 \hline
@@ -1212,11 +1373,11 @@ Fa click su ``$\checkmark$". \\
 \end {tabular}
 \\
 
-\subsubsection{Annulla}
+\subsubsection{Annulla ordine}
 \label{UC:magazzannulla}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC28 AnnullaOrdine \\
+\textbf{ID} &UC\showmycounter \bigskip AnnullaOrdine \\
 \hline
 \textbf{Descrizione} & Un magazziniere cambia lo stato di un ordine a ``Annullato".  \\
 \hline
@@ -1238,6 +1399,58 @@ Fa click su ``$\times$". \\
 \end {tabular}
 \\
 
+\subsubsection{Elenco Rimborsi}
+\label{UC:magazzrimborsielenco}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} &UC\showmycounter \bigskip ElencoRimborsi \\
+\hline
+\textbf{Descrizione} & Un magazziniere visualizza l'elenco degli ordini in attesa di rimborso.  \\
+\hline
+\textbf{Partecipanti} & Magazziniere \\
+\hline
+\textbf{Condizione d'ingresso} & Un magazziniere è autenticato e nella sua pagina iniziale. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Magazziniere} & \textbf{Sistema} \\
+Dalla pagina iniziale click su ``Rimborso". \\
+	& Mostra gli ordini il cui stato è ``In attesa di rimborso". \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il magazziniere visualizza l'elenco. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Conferma rimborso}
+\label{UC:magazzconfermarimborso}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} &UC\showmycounter \bigskip ConfermaRimborso \\
+\hline
+\textbf{Descrizione} & Un magazziniere cambia lo stato di un ordine a ``Rimborsato".  \\
+\hline
+\textbf{Partecipanti} & Magazziniere \\
+\hline
+\textbf{Condizione d'ingresso} & Un magazziniere è dall'elenco degli ordini in attesa di rimborso (\ref{UC:magazzrimborsielenco}) ne seleziona uno (\ref{UC:magazzblocca}). \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Magazziniere} & \textbf{Sistema} \\
+Fa click su ``$\checkmark$". \\
+	& Cambia lo stato dell'ordine a ``Rimborsato". \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Lo stato dell'ordine cambia a ``Rimborsato". \\
+\hline
+\end {tabular}
+\\
+
 \newpage
 
 \subsection{Amministratore catalogo}
@@ -1245,7 +1458,7 @@ Fa click su ``$\times$". \\
 \label{UC:amcatricerca}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC29 RicercaVendita \\
+\textbf{ID} &UC\showmycounter \bigskip RicercaVendita \\
 \hline
 \textbf{Descrizione} & Un amministratore del catalogo ricerca una vendita.  \\
 \hline
@@ -1271,7 +1484,7 @@ Digita una o più parole chiave nella barra di ricerca e fa click su ``Cerca". \
 \label{UC:amcatcrea}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC30 NuovaVendita \\
+\textbf{ID} &UC\showmycounter \bigskip NuovaVendita \\
 \hline
 \textbf{Descrizione} & Un amministratore del catalogo inserisce un articolo in vendita.  \\
 \hline
@@ -1299,7 +1512,7 @@ Inserisce i dati richiesti e fa click su ``Conferma". \\
 \label{UC:amcatmodifica}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC31 ModificaVendita \\
+\textbf{ID} &UC\showmycounter \bigskip ModificaVendita \\
 \hline
 \textbf{Descrizione} & Un amministratore del catalogo modifica una vendita.  \\
 \hline
@@ -1327,7 +1540,7 @@ Inserisce i nuovi dati. \\
 \label{UC:amcatrimuove}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC32 RimozioneVendita \\
+\textbf{ID} &UC\showmycounter \bigskip RimozioneVendita \\
 \hline
 \textbf{Descrizione} & Un amministratore del catalogo rimuove una vendita.  \\
 \hline
@@ -1353,7 +1566,7 @@ Fa click su ``Rimuovi" per l'articolo interessato. \\
 \label{UC:amcatdettagli}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC33 DettagliVendita \\
+\textbf{ID} &UC\showmycounter \bigskip DettagliVendita \\
 \hline
 \textbf{Descrizione} & Un amministratore del catalogo visualizza le informazioni su una vendita come quantità di articoli venduti e ricavato totale.  \\
 \hline
@@ -1380,7 +1593,7 @@ Fa click sull'articolo interessato. \\
 \label{UC:amperricerca}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC34 RicercaDipendente \\
+\textbf{ID} &UC\showmycounter \bigskip RicercaDipendente \\
 \hline
 \textbf{Descrizione} & Un amministratore del personale ricerca un dipendente in base a vari parametri.  \\
 \hline
@@ -1406,7 +1619,7 @@ Digita una o più parole chiave nella barra di ricerca e fa click su ``Cerca". \
 \label{UC:amperaggiunta}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC35 NuovoDipendente \\
+\textbf{ID} &UC\showmycounter \bigskip NuovoDipendente \\
 \hline
 \textbf{Descrizione} & Un amministratore del personale inserisce un nuovo dipendente.  \\
 \hline
@@ -1434,7 +1647,7 @@ Inserisce i nuovi dati. \\
 \label{UC:ampermodifica}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC36 ModificaDipendente \\
+\textbf{ID} &UC\showmycounter \bigskip ModificaDipendente \\
 \hline
 \textbf{Descrizione} & Un amministratore del personale modifica i dati di un dipendente.  \\
 \hline
@@ -1462,7 +1675,7 @@ Inserisce i nuovi dati. \\
 \label{UC:amperrimozione}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC37 RimozioneDipendente \\
+\textbf{ID} &UC\showmycounter \bigskip RimozioneDipendente \\
 \hline
 \textbf{Descrizione} & Un amministratore del personale rimuove i dati di un dipendente.  \\
 \hline
@@ -1488,7 +1701,7 @@ Fa click su ``Rimuovi" per il dipendente interessato. \\
 \label{UC:amperdettagli}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
-\textbf{ID} & UC38 DettagliDipendente \\
+\textbf{ID} &UC\showmycounter \bigskip DettagliDipendente \\
 \hline
 \textbf{Descrizione} & Un amministratore del personale visualizza le statistiche di un dipendente.  \\
 \hline
@@ -1544,7 +1757,7 @@ Fare riferimento a \ref{UC:registrazione}. \\
 Fare riferimento a \ref{UC:autenticazione}. \\
 
 \begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClienteAutenticazione}
+\includegraphics[width=\textwidth]{SequenceDiagram/Autenticazione}
 \end{center}
 
 \begin{enumerate}
@@ -1622,6 +1835,19 @@ Fare riferimento a \ref{UC:carrelloremove}. \\
 \item Dopo aver premuto su ``Acquista'', gli viene chiesta un'ulteriore conferma in una pagina contenente tutte le informazioni relative all'ordine.
 \item Una volta ricevuta la conferma, l'ordine viene registrato ed è visualizzabile da un magazziniere  (\ref{SD:magazzinierespedisce}).
 \end{enumerate}
+
+\subsubsection{Cliente visualizza storico ordini}
+\label{SD:storicoordini}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/ClienteOrdiniRicerca}
+\end{center}
+
+\begin{enumerate}
+\item Se un cliente vuole visualizzare lo storico dei suoi ordini, può farlo usando il tasto ``Storico ordini" dalla pagina iniziale.
+\item Inserendo una o più parole chiave nella barra di ricerca che gli viene presentata può visualizzare un elenco di ordini corrispondenti.
+\end{enumerate}
+
+\newpage
 
 \subsubsection{Cliente annulla ordine}
 \label{SD:annull}
@@ -1809,7 +2035,6 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 \newpage
 
 \subsection{Centralinista}
-
 \subsubsection{Centralinista elenca ticket}
 \label{SD:centralinistaelencaticket}
 
@@ -1905,7 +2130,7 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dopo essersi autenticato (\ref{SD:login}), il magazziniere viene rimandato all'elenco degli ordini in attesa di spedizione.
+\item Dopo essersi autenticato (\ref{SD:login}), il magazziniere può usare il tasto ``Ordini" per essere rimandato all'elenco degli ordini in attesa di spedizione.
 \end{enumerate}
 
 \subsubsection{Magazziniere elabora ordine}
@@ -1935,13 +2160,32 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 \end{center}
 
 \begin{enumerate}
-\item Dai dettagli di un ordine (\ref{SD:magazziniereblocca}), il magazziniere può annullare ($\times$) un ordine.
+\item Dopo essersi autenticato (\ref{SD:login}), il magazziniere può usare il tasto ``Rimborsi" per essere rimandato all'elenco dei rimborsi in attesa di conferma.
+\end{enumerate}
+
+\subsubsection{Magazziniere elenca rimborsi}
+\label{SD:magazziniereblocca}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/MagazziniereRimborsoElenco}
+\end{center}
+
+\begin{enumerate}
+\item Dopo essersi autenticato (\ref{SD:login}), il magazziniere può usare il tasto ``Rimborsi" per essere rimandato all'elenco dei rimborsi in attesa di conferma.
+\end{enumerate}
+
+\subsubsection{Magazziniere accetta rimborso}
+\label{SD:magazzrimborsook}
+\begin{center}
+\includegraphics[width=\textwidth]{SequenceDiagram/magazziniereRimborsoAccetta}
+\end{center}
+
+\begin{enumerate}
+\item Dai dettagli di un ordine (\ref{SD:magazziniereblocca}), il magazziniere può confermare la ricezione di un ordine e cambiare lo stato di un ordine a ``Rimborsato".
 \end{enumerate}
 
 \newpage
 
 \subsection{Amministratore catalogo}
-
 \subsubsection{Amministratore catalogo ricerca articolo}
 \label{SD:amcatvisualizzaelenco}
 \begin{center}
