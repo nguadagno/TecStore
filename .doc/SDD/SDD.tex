@@ -22,7 +22,7 @@
 {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
 \author{Natale Guadagno, Paolo Patrone}
-\title{Requisites Analysis Document - TecStore}
+\title{System Design Document - TecStore}
 \renewcommand{\contentsname}{Contenuti}
 
 \usepackage{hyperref}
@@ -123,45 +123,42 @@ In questo documento sono descritti in dettaglio:
 L'architettura del sistema è di tipo client/server. Il server resta in attesa di richiesta da parte degli utenti e risponde nel minor tempo possibile.
 I motivi per la scelta di un'architettura client/server sono principalmente:
 \begin{itemize}
-\item Portabilità: il sistema è facilmente portabile ed accessibile da una varietà di dispositivi senza alcuna necessità di modifica.
 \item Performance: il sistema deve offrire buone prestazioni CPU e ottime prestazioni I/O per garantire una buona reattività.
 \item Scalabilità: il sistema è pensato per essere facilmente scalabile orizzontalmente.
 \item Affidabilità: il sistema prevede più ridondanze e backup per garantire l'accessibilità da parte degli utenti.
+\item Riusabilità: il sistema è facilmente riadattabile ad altre realtà di e-commerce.
+\item Tolleranza agli errori: il sistema prevede ridondanze sufficienti per restare operativo anche in caso di criticità di uno o più componenti.
+\item Riutilizzo di componenti: il sistema riutilizza più componenti in più punti per semplificare lo sviluppo.
+\item Basso costo: il sistema punta a ridurre i costi di sviluppo, manutenzione e gestione utilizzando metodologie di sviluppo e hardware minimale, pur rispettando i requisiti di tolleranza agli errori e affidabilità. 
 \end{itemize}
+
+\newpage
 
 \subsection{Controllo degli accessi}
 
-
-
-\newgeometry{top=0.5in,bottom=0.5in,right=0.5in,left=0.1in}
-\begin{table}[]
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
 \textbf{} &
   \textbf{Account} &
   \textbf{Assistenza} &
-  \textbf{Autenticazione} &
   \textbf{Carrello} &
   \textbf{Ordine} &
   \textbf{Vendita} \\ \hline
 \cellcolor[HTML]{C0C0C0}\textbf{\begin{tabular}[c]{@{}l@{}}Utente \\ non autenticato\end{tabular}} &
-  {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Solo per\\ registrazione\end{tabular}} &
+  {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Solo per\\ registrazione, \\ autenticazione \\ e recupero \\ password \end{tabular}} &
   {\color[HTML]{FE0000} $\times$} &
-  {\color[HTML]{34FF34} $\checkmark$} &
   {\color[HTML]{FE0000} $\times$} &
   {\color[HTML]{FE0000} $\times$} &
   {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Solo per \\ ricerca e \\ visualizzazione \\ dettagli\end{tabular}} \\ \hline
 \cellcolor[HTML]{C0C0C0}\textbf{Cliente} &
   {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Solo per\\ modifica\end{tabular}} &
   {\color[HTML]{34FF34} $\checkmark$} &
-  {\color[HTML]{FE0000} $\times$} &
   {\color[HTML]{34FF34} $\checkmark$} &
   {\color[HTML]{34FF34} $\checkmark$} &
-  {\color[HTML]{34FF34} $\checkmark$} \\ \hline
+  {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Fatta eccezione per \\ autorizzazione e  \\ rifiuto di una vendita \\\end{tabular}} \\ \hline
 \cellcolor[HTML]{C0C0C0}\textbf{Centralinista} &
   {\color[HTML]{FE0000} $\times$} &
-  {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Solo per \\ risposta\\ a ticket \\ esistenti\end{tabular}} &
-  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Solo per \\ risposta \\ e chiusura \\ di ticket \\ esistenti\end{tabular}} &
   {\color[HTML]{FE0000} $\times$} &
   {\color[HTML]{FE0000} $\times$} &
   {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Solo per\\ cambiamenti\\ di stato per \\ una vendita\\ ``In attesa"\end{tabular}} \\ \hline
@@ -169,26 +166,291 @@ I motivi per la scelta di un'architettura client/server sono principalmente:
   {\color[HTML]{FE0000} $\times$} &
   {\color[HTML]{FE0000} $\times$} &
   {\color[HTML]{FE0000} $\times$} &
-  {\color[HTML]{FE0000} $\times$} &
-  {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Solo per\\ cambiamenti\\ di stato per \\ un ordine\\ ``In attesa"\end{tabular}} &
+  {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Solo per\\ cambiamenti\\ di stato per \\ ordini \\ e rimborsi \\ ``In attesa"\end{tabular}} &
   {\color[HTML]{FE0000} $\times$} \\ \hline
 \cellcolor[HTML]{C0C0C0}\textbf{\begin{tabular}[c]{@{}l@{}}Amministratore \\ Catalogo\end{tabular}} &
   {\color[HTML]{FE0000} $\times$} &
   {\color[HTML]{FE0000} $\times$} &
   {\color[HTML]{FE0000} $\times$} &
   {\color[HTML]{FE0000} $\times$} &
-  {\color[HTML]{FE0000} $\times$} &
-  {\color[HTML]{34FF34} $\checkmark$} \\ \hline
+  {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Fatta eccezione per \\ autorizzazione e  \\ rifiuto di una vendita \\\end{tabular}} \\ \hline
 \cellcolor[HTML]{C0C0C0}\textbf{\begin{tabular}[c]{@{}l@{}}Amministratore \\ Personale\end{tabular}} &
-  {\color[HTML]{34FF34} $\checkmark$} &
-  {\color[HTML]{FE0000} $\times$} &
+  {\color[HTML]{34FF34} \begin{tabular}[c]{@{}l@{}}$\checkmark$\\ Solo per \\ creazione \\ e modifica \\ di account \\ di dipendenti \end{tabular}} &
   {\color[HTML]{FE0000} $\times$} &
   {\color[HTML]{FE0000} $\times$} &
   {\color[HTML]{FE0000} $\times$} &
   {\color[HTML]{FE0000} $\times$} \\ \hline
 \end{tabular}
-\end{table}
 
 \newgeometry{top=0.5in,bottom=0.5in,right=0.5in,left=0.5in}
+
+\section{Decomposizione in sottosistemi}
+Per realizzare il sistema è prevista un'architettura Three-Tier, con divisione in tre sottosistemi principali:
+\begin{itemize}
+\item Presentation Layer, composto da tutte le interfacce riservate agli utenti finali.
+\item Application Layer, composto da tutti gli oggetti che si occupano di gestire e manipolare le operazioni e i dati che provengono dal Presentation Layer.
+\item Storage Layer, composto dai sistemi di memorizzazione dei dati persistenti e dalle procedure di memorizzazione e recupero di dati. 
+\end{itemize}
+
+\subsection{Presentation Layer}
+Il Presentation Layer si suddivide a sua volta in:
+
+\begin{itemize}
+\item Sottosistema cliente, che include quasi tutte le funzionalità del sito, come registrazione, autenticazione, ricerca, aggiunta al carrello, acquisto, creazione e risposta a \emph{ticket}, vendita di articoli.
+\item Sottosistema centralinista, che si occupa dei \emph{ticket} e di autorizzare le vendite dei clienti.
+\item Sottosistema magazziniere, che si occupa di confermare la spedizione degli ordini e confermare la ricezione degli articoli per i quali i clienti richiedono un rimborso.
+\item Sottosistema amministratore personale, che si occupa di gestire l'inserimento e la modifica degli account riservati ai dipendenti della piattaforma.
+\item Sottosistema amministratore catalogo, che si occupa di gestire l'inserimento e la modifica degli articoli venduti dalla piattaforma.
+\end{itemize}
+
+\subsection{Application Layer}
+L'Application Layer si suddivide a sua volta in:
+
+\begin{itemize}
+\item GestioneAccount, che contiene tutte le operazioni riguardanti gli account degli utenti come registrazione, modifica e autenticazione.
+\item GestioneAssistenza, che contiene tutte le operazioni riguardanti i \emph{ticket} come creazione, risposta e chiusura.
+\item GestioneCarrello, che contiene tutte le operazioni riguardanti il carrello come aggiunta e rimozione.
+\item GestioneOrdine, che contiene tutte le operazioni riguardanti gli ordini come creazione, annullamento, rimborso.
+\item GestioneVendita, che contiene tutte le operazioni riguardanti le vendite, sia dei clienti che della piattaforma, come creazione, rimozione, visualizzazione e modifica.
+\end{itemize}
+
+\subsubsection{Utente non autenticato}
+
+\begin{center}
+\includegraphics[height=0.34\textheight]{UtenteNonAutenticato}
+\end{center}
+
+\begin{itemize}
+\item un utente non autenticato può accedere al sottosistema Account soltanto per autenticarsi, recuperare la password e per registrarsi.
+\item un utente non autenticato può accedere al sottosistema Vendita soltanto per ricercare un articolo e per visualizzare i dettagli di un articolo.
+\end{itemize}
+
+\newpage
+
+\subsubsection{Cliente}
+\begin{center}
+\includegraphics[height=0.34\textheight]{Cliente}
+\end{center}
+\begin{itemize}
+\item un cliente autenticato può accedere al sottosistema Account soltanto per la modifica delle proprie informazioni come indirizzo, dati della carta di credito o password.
+\item un cliente autenticato può accedere al sistema assistenza per effettuare tutte le operazioni previste per il sottosistema Assistenza, quindi creazione, risposta e chiusura di un ticket.
+\item un cliente autenticato può accedere al sistema assistenza per effettuare tutte le operazioni previste per il sottosistema Carrello, quindi inserimento e rimozione di articoli.
+\item un cliente autenticato può accedere al sistema assistenza per effettuare tutte le operazioni previste per il sottosistema Ordine, quindi creazione, annullamento e rimborso.
+\item un cliente autenticato può accedere al sistema assistenza per effettuare tutte le operazioni previste per il sottosistema Vendita, quindi creazione, modifica e annullamento, fatta eccezione per le operazioni riservate come autorizzazione e rifiuto vendita, che sono di competenza dei centralinisti. 
+\end{itemize}
+
+\subsubsection{Centralinista}
+\begin{center}
+\includegraphics[height=0.34\textheight]{Centralinista}
+\end{center}
+
+\begin{itemize}
+\item Un centralinista ha accesso al sottosistema Assistenza per le operazioni di risposta e chiusura di un ticket, ma non può crearne uno nuovo.
+\item un centralinista ha accesso al sottosistema Vendita solo per l'autorizzazione o il rifiuto di una vendita immessa da un cliente.
+\end{itemize}
+
+\subsubsection{Magazziniere}
+\begin{center}
+\includegraphics[height=0.34\textheight]{Magazziniere}
+\end{center}
+
+\begin{itemize}
+\item Un magazziniere ha accesso al sottosistema Ordine solo per il cambio di stato di un ordine in seguito ad una spedizione o al cambio di stato di un rimborso in seguito al ricevimento dell'articolo.
+\end{itemize}
+
+\subsubsection{Amministratore Personale}
+\begin{center}
+\includegraphics[height=0.34\textheight]{AmministratorePersonale}
+\end{center}
+
+\begin{itemize}
+\item Un amministratore del personale ha accesso al sottosistema Account solo per l'inserimento e la modifica degli account dei dipendenti.
+\end{itemize}
+
+\subsubsection{Amministratore Catalogo}
+\begin{center}
+\includegraphics[height=0.34\textheight]{AmministratoreCatalogo}
+\end{center}
+
+\begin{itemize}
+\item Un amministratore del catalogo ha accesso al sottosistema Vendita solo per l'inserimento e la modifica di articoli.
+\end{itemize}
+
+\subsection{Mapping Hardware/Software}
+\begin{center}
+\includegraphics[height=0.34\textheight]{MappingHardWare_Software}
+\end{center}
+
+\begin{itemize}
+\item \textbf{Webserver}: Il webserver utilizzato è Apache Tomcat % TODO versione
+\item \textbf{Interface Layer}: Gli utenti si interfacciano con il sistema mediante un comune browser HTTP.
+\item \textbf{Application Layer}: Tutte le funzionalità del sistema sono implementate in linguaggio Java utilizzando il componente Java Servlet.
+\item \textbf{Storage Layer}: Il sistema utilizza il DMBS MariaDB per la memorizzazione dei dati testuali (informazioni degli account, storico ordini, lista vendite, ...) e il filesystem ext4 per memorizzare le foto degli articoli.
+\end{itemize}
+
+\newpage
+
+\subsubsection{Class Diagram}
+\begin{center}
+\includegraphics[width=\textwidth]{../../RAD/img/diagrammadiclasse}
+\end{center}
+
+% tabelle SQL?
+
+\newpage
+
+\section{Boundary Condition}
+\subsection{Avvio del sistema}
+Per l'avvio del sistema è necessario che almeno un'istanza del webserver e del database siano attive.
+All'avvio del sistema operativo i due servizi devono essere quindi avviati automaticamente senza intervento manuale.
+
+\subsection{Spegnimento del sistema}
+Nell'eventualità in cui sia richiesto che uno dei server vada offline per qualsiasi motivo, deve essere previsto che almeno un'altra istanza del DBMS e del webserver siano attive. Se non lo sono, l'intero sistema può andare offline per un tempo indefinito.
+
+\subsection{Fallimenti del sistema}
+Ci sono più scenari in cui il sistema può subire un fallimento. Partendo da quelli non critici:
+\begin{enumerate}
+\item Fallimento o spegnimento di uno dei server, che può essere causato dalla perdita di connessione ad internet, blackout o un guasto hardware. Se le ridondanze sono attive, riduce le prestazioni del sistema se ci sono più utenti, ma non è un errore critico.
+\item Fallimento, spegnimento o perdita di connessione ad internet del dispositivo client, che deve essere correttamente gestito, quindi evitando, ad esempio, ordini duplicati. Il sistema deve mantenere le informazioni informazioni inserite dall'utente fino a quel momento.
+\end{enumerate}
+
+Tra i fallimenti critici ci sono:
+
+\begin{enumerate}
+\item Fallimento di uno o più server, sia per motivi hardware che software, che può essere fatale nel caso non ci siano più ridondanze sufficienti a gestire tutta l'utenza, peggiorando le prestazioni del sito al punto in cui può fallire del tutto. È necessario un intervento manuale per ripristinare almeno un'istanza del webserver e del DBMS per ripristinare la funzionalità del sistema.
+\item Fallimento dei backup, che può succedere in caso di spazio insufficiente per memorizzare i dati e che può rendere il sito inoperabile in seguito a un fallimento totale. È un errore che nella migliore delle ipotesi fa perdere qualche giorno di informazioni e, in casi catastrofici, può far perdere tutte le informazioni memorizzate nel sistema. L'ultimo caso è irrecuperabile.
+\end{enumerate}
+
+
+\subsection{Casi d'uso}
+\subsubsection{Configurazione di un nuovo sistema}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC1 NuovoServer \\
+\hline
+\textbf{Descrizione} & Un sysadmin aggiunge un nuovo server.  \\
+\hline
+\textbf{Partecipanti} & Sysadmin \\
+\hline
+\textbf{Condizione d'ingresso} & Un sysadmin ha accesso ad un nuovo server. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Sysadmin} & \textbf{Sistema} \\
+Dà i comandi per installare Java, Tomcat e MariaDB. \\
+	& Installa i software richiesti. \\
+Utilizza lo script ad-hoc per la configurazione di un nuovo server. \\
+	& Scarica e configura i sorgenti nelle cartelle opportune e imposta i servizi per essere avviati automaticamente all'avvio del sistema operativo. \\
+Aggiunge l'indirizzo IP del nuovo server al load balancer. \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il nuovo server è operativo e risponde alle richieste degli utenti. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Avvio di un server}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC2 AvvioServer \\
+\hline
+\textbf{Descrizione} & Un sysadmin avvia un server.  \\
+\hline
+\textbf{Partecipanti} & Sysadmin \\
+\hline
+\textbf{Condizione d'ingresso} & Un sysadmin accede al server. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Sysadmin} & \textbf{Sistema} \\
+Avvia il server attraverso il tasto dedicato. \\
+	& Avvia il sistema operativo, sincronizza il database con gli altri nodi e avvia i servizi necessari. \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il nuovo server è operativo e risponde alle richieste degli utenti. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Avvio del sistema}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC3 AvvioSistema \\
+\hline
+\textbf{Descrizione} & Un sysadmin avvia il sistema.  \\
+\hline
+\textbf{Partecipanti} & Sysadmin \\
+\hline
+\textbf{Condizione d'ingresso} & Un sysadmin accede a uno o più server. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Sysadmin} & \textbf{Sistema} \\
+Avvia uno o più server attraverso il tasto dedicato. \\
+	& Avvia il sistema operativo, sincronizza il database con gli altri nodi e avvia i servizi necessari. \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il sistema è operativo e risponde alle richieste degli utenti. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Spegnimento di un server}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC4 StopServer \\
+\hline
+\textbf{Descrizione} & Un sysadmin spegne un server.  \\
+\hline
+\textbf{Partecipanti} & Sysadmin \\
+\hline
+\textbf{Condizione d'ingresso} & Un sysadmin accede al server. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Sysadmin} & \textbf{Sistema} \\
+Spegne il server attraverso il tasto dedicato. \\
+	& Salva le informazioni temporanee su disco, disattiva i servizi e il sistema operativo. \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il server è offline. \\
+\hline
+\end {tabular}
+\\
+
+\subsubsection{Spegnimento del sistema}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
+\hline
+\textbf{ID} & UC5 StopSistema \\
+\hline
+\textbf{Descrizione} & Un sysadmin spegne il sistema.  \\
+\hline
+\textbf{Partecipanti} & Sysadmin \\
+\hline
+\textbf{Condizione d'ingresso} & Un sysadmin accede al server. \\
+\hline
+\textbf{Flusso di eventi} &
+\begin{minipage}{12cm}
+\begin{tabular}{p{5.5cm} p{5.5cm}}
+\textbf{Sysadmin} & \textbf{Sistema} \\
+Spegne tutti i server attraverso il tasto dedicato. \\
+	& Salva le informazioni temporanee su disco, disattiva i servizi e il sistema operativo. \\
+\end{tabular}
+\end{minipage} \\
+\hline
+\textbf{Condizione d'uscita} & Il sistema è offline. \\
+\hline
+\end {tabular}
+\\
+
+
 
 \end{document}
