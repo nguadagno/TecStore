@@ -298,13 +298,13 @@ Amministratore catalogo & Permette di aggiungere, rimuovere e modificare articol
 Il sistema deve prevedere tutte le pratiche di sicurezza fondamentali, come l'utilizzo di SSL per la trasmissione dei dati, l'utilizzo di \textit{hashing} e \textit{salt} per le password memorizzate nel database, tutti i dati delle carte di credito e anagrafiche devono essere cifrati prima di essere inseriti nel database utilizzando una cifratura robusta con una chiave che non deve essere esposta pubblicamente per nessun motivo. \\
 In caso di tentativo di accesso a schermate riservate da parte di un utente consumatore o viceversa, ovvero un utente del personale che cerca di accedere al catalogo, deve essere previsto un avviso e un \textit{redirect} ad una pagina correttamente accessibile da quel tipo di utente.
 
-\subsection{Affidabilità}
+\subsubsection{Affidabilità}
 Il sistema deve garantire un \emph{uptime} di almeno il 99.9\%, ovvero un \textit{downtime} annualizzato di meno di 9 ore. Ciò è cruciale per far sì che l'utenza non venga scoraggiata dall'utilizzo di TecStore come negozio primario, creando perdite potenziali molto alte. \footnote{https://www.the20.com/blog/the-cost-of-it-downtime/}
 
-\subsection{Performance}
+\subsubsection{Performance}
 Il sistema deve prevedere la possibilità di utilizzo di sistemi di \textit{load balancing} per distribuire il carico di utenza in caso di picchi improvvisi tra più server, in modo da garantire l'uso della piattaforma al maggior numero di clienti possibile.
 
-\subsection{Manutenibilità}
+\subsubsection{Manutenibilità}
 Il sistema sarà progettato secondo principi di sviluppo che ne garantiranno la semplicità di aggiornamento, ampliamento e modifica.
 Sarà utilizzata un'architettura Three-Tier per separare la gestione dei dati, il programma server e l'interfaccia utente.
 
