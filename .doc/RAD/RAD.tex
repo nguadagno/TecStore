@@ -10,6 +10,9 @@
 \usepackage[table]{xcolor}
 \usepackage{xcolor,colortbl}
 \usepackage{multirow}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{fancyvrb}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 
 \usepackage{titlesec}
@@ -2182,7 +2185,7 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 \end{enumerate}
 
 \subsubsection{Magazziniere elenca rimborsi}
-\label{SD:magazziniereblocca}
+\label{SD:magazziniereelencorimborsi}
 \begin{center}
 \includegraphics[width=\textwidth]{SequenceDiagram/MagazziniereRimborsoElenco}
 \end{center}
@@ -2415,6 +2418,804 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 \end{center}
 
 \newpage
+
+\newgeometry{top=0.5in,bottom=0.5in,right=0.5in,left=0.2in}
+
+\section{Form Data}
+
+\setlist{leftmargin=5.5mm}
+
+\subsection{Registrazione}
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+\begin{longtable}{|l|l|l|l|l|}
+\hline
+Modulo & Nome & Obbligatorio & Vincoli & Errori\\\hline
+\endhead
+\hline
+\textbf{Registrazione} & Nome & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 3 caratteri
+\item Lunghezza massima 24 caratteri
+\item Solo caratteri A-Z, a-z
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Caratteri non consentiti
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{Registrazione} & Cognome & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 3 caratteri
+\item Lunghezza massima 24 caratteri
+\item Solo caratteri A-Z, a-z
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Caratteri non consentiti
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{Registrazione} & Password & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 10 caratteri
+\item Lunghezza massima 64 caratteri
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{Registrazione} & Conferma Password & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 10 caratteri
+\item Lunghezza massima 64 caratteri
+\item Testo corrispondente al campo ``Password"
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\item Testo non corrispondente al campo ``Password"
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{Registrazione} & Email & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 10 caratteri
+\item Lunghezza massima 64 caratteri
+\item Testo contenente almeno un punto (U+002E) ed esattamente un carattere ``chiocciola" (U+0040), dei caratteri alfanumerici all'inizio, dei caratteri alfanumerici tra la chiocciola e il punto e una stringa dopo il punto, che deve rientrare nell'elenco dei Top Level Domain attualmente in uso
+\item Testo contenente unicamente i caratteri A-Z, a-z, 0-9 e i caratteri speciali che seguono \begin{verbatim}
+~!$%^&*_
+=+}{'?-.
+\end{verbatim}
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\item Formato inadeguato ad un indirizzo email
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{Registrazione} & Indirizzo & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 5 caratteri
+\item Lunghezza massima 64 caratteri
+\item Testo rispettante il formato previsto dal documento allegato
+\begin{verbatim}
+standard_
+composizione_
+indirizzi.pdf
+\end{verbatim} 
+
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\item Formato inadeguato
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{Registrazione} & Codice Fiscale & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza di 16 caratteri
+\item Testo rispettante il formato del codice fiscale, con 6 lettere, due cifre, una lettera, due cifre, cinque caratteri alfanumerici
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\item Formato inadeguato
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\end{longtable}
+\newpage
+
+\subsection{Autenticazione}
+
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+\begin{longtable}{|l|l|l|l|l|}
+\hline
+Modulo & Nome & Obbligatorio & Vincoli & Errori\\\hline
+\endhead
+\hline
+
+\textbf{Autenticazione} & Email & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 10 caratteri
+\item Lunghezza massima 64 caratteri
+\item Testo contenente almeno un punto (U+002E) ed esattamente un carattere ``chiocciola" (U+0040), dei caratteri alfanumerici all'inizio, dei caratteri alfanumerici tra la chiocciola e il punto e una stringa dopo il punto, che deve rientrare nell'elenco dei Top Level Domain attualmente in uso
+\item Testo contenente unicamente i caratteri A-Z, a-z, 0-9 e i caratteri speciali che seguono \begin{verbatim}
+~!$%^&*_
+=+}{'?-.
+\end{verbatim}
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\item Formato inadeguato ad un indirizzo email
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{Autenticazione} & Password & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 10 caratteri
+\item Lunghezza massima 64 caratteri
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\end{longtable}
+
+\subsection{Vendita}
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+\begin{longtable}{|l|l|l|l|l|}
+\hline
+Modulo & Nome & Obbligatorio & Vincoli & Errori\\\hline
+\endhead
+\hline
+\textbf{Vendita} & Nome & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 3 caratteri
+\item Lunghezza massima 24 caratteri
+\item Solo caratteri A-Z, a-z, 0-9
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Caratteri non consentiti
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{Vendita} & Prezzo & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Valore minimo 1€, con incrementi di 0.01€
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Valore minore di 1€
+\item Precisione troppo elevata
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{Vendita} & Quantità disponibile & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Valore minimo 1
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Valore minore di 1
+\item Valore decimale
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{Vendita} & Descrizione & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 20 caratteri
+\item Lunghezza massima 1024 caratteri
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{Vendita} & Rimborsabile & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Valore vero/falso
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Valore inadeguato
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{Vendita} & Foto & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item File di tipo png o jpeg
+\item Almeno 3 file per ogni vendita
+\item Massimo 10 file per vendita
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Numero inadeguato
+\item File di formato errato
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\end{longtable}
+
+\newpage
+\subsection{Modifica vendita}
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+\begin{longtable}{|l|l|l|l|l|}
+\hline
+Modulo & Nome & Obbligatorio & Vincoli & Errori\\\hline
+\endhead
+\hline
+\textbf{ModificaVendita} & Nome & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 3 caratteri
+\item Lunghezza massima 24 caratteri
+\item Solo caratteri A-Z, a-z, 0-9
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Caratteri non consentiti
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{ModificaVendita} & Prezzo & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Valore minimo 1€, con incrementi di 0.01€
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Valore minore di 1€
+\item Precisione troppo elevata
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{ModificaVendita} & Quantità disponibile & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Valore minimo 1
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Valore minore di 1
+\item Valore decimale
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{ModificaVendita} & Descrizione & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 20 caratteri
+\item Lunghezza massima 1024 caratteri
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{ModificaVendita} & Rimborsabile & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Valore vero/falso
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Valore inadeguato
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{ModificaVendita} & Foto & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item File di tipo png o jpeg
+\item Almeno 3 file per ogni vendita
+\item Massimo 10 file per vendita
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Numero inadeguato
+\item File di formato errato
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\end{longtable}
+
+\newpage
+\subsection{Inserimento dipendente}
+
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+\begin{longtable}{|l|l|l|l|l|}
+\hline
+Modulo & Nome & Obbligatorio & Vincoli & Errori\\\hline
+\endhead
+\hline
+\textbf{InserimentoDipendente} & Nome & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 3 caratteri
+\item Lunghezza massima 24 caratteri
+\item Solo caratteri A-Z, a-z
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Caratteri non consentiti
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{InserimentoDipendente} & Cognome & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 3 caratteri
+\item Lunghezza massima 24 caratteri
+\item Solo caratteri A-Z, a-z
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Caratteri non consentiti
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{InserimentoDipendente} & Email & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 10 caratteri
+\item Lunghezza massima 64 caratteri
+\item Testo contenente almeno un punto (U+002E) ed esattamente un carattere ``chiocciola" (U+0040), dei caratteri alfanumerici all'inizio, dei caratteri alfanumerici tra la chiocciola e il punto e una stringa dopo il punto, che deve rientrare nell'elenco dei Top Level Domain attualmente in uso
+\item Testo contenente unicamente i caratteri A-Z, a-z, 0-9 e i caratteri speciali che seguono \begin{verbatim}
+~!$%^&*_
+=+}{'?-.
+\end{verbatim}
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\item Formato inadeguato ad un indirizzo email
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{InserimentoDipendente} & Indirizzo & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 5 caratteri
+\item Lunghezza massima 64 caratteri
+\item Testo rispettante il formato previsto dal documento allegato
+\begin{verbatim}
+standard_
+composizione_
+indirizzi.pdf
+\end{verbatim} 
+
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\item Formato inadeguato
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{InserimentoDipendente} & Codice Fiscale & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza di 16 caratteri
+\item Testo rispettante il formato del codice fiscale, con 6 lettere, due cifre, una lettera, due cifre, cinque caratteri alfanumerici
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\item Formato inadeguato
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{InserimentoDipendente} & Ruolo & $\checkmark$ & \begin{minipage}{3.8cm}
+\vspace{5pt}
+\begin{itemize}
+\item Uno dei seguenti valori: \begin{verbatim}
+[ 
+'magazziniere',
+'centralinista',
+'amministratore
+personale',
+'amministratore
+catalogo' 
+]
+\end{verbatim}
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Valore invalido
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+\end{longtable}
+
+
+\newpage
+\subsection{Modifica dipendente}
+
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+\begin{longtable}{|l|l|l|l|l|}
+\hline
+Modulo & Nome & Obbligatorio & Vincoli & Errori\\\hline
+\endhead
+\hline
+\textbf{ModificaDipendente} & Nome & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 3 caratteri
+\item Lunghezza massima 24 caratteri
+\item Solo caratteri A-Z, a-z
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Caratteri non consentiti
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{ModificaDipendente} & Cognome & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 3 caratteri
+\item Lunghezza massima 24 caratteri
+\item Solo caratteri A-Z, a-z
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Caratteri non consentiti
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{ModificaDipendente} & Email & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 10 caratteri
+\item Lunghezza massima 64 caratteri
+\item Testo contenente almeno un punto (U+002E) ed esattamente un carattere ``chiocciola" (U+0040), dei caratteri alfanumerici all'inizio, dei caratteri alfanumerici tra la chiocciola e il punto e una stringa dopo il punto, che deve rientrare nell'elenco dei Top Level Domain attualmente in uso
+\item Testo contenente unicamente i caratteri A-Z, a-z, 0-9 e i caratteri speciali che seguono \begin{verbatim}
+~!$%^&*_
+=+}{'?-.
+\end{verbatim}
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\item Formato inadeguato ad un indirizzo email
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{ModificaDipendente} & Indirizzo & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima 5 caratteri
+\item Lunghezza massima 64 caratteri
+\item Testo rispettante il formato previsto dal documento allegato
+\begin{verbatim}
+standard_
+composizione_
+indirizzi.pdf
+\end{verbatim} 
+
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\item Formato inadeguato
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{ModificaDipendente} & Codice Fiscale & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza di 16 caratteri
+\item Testo rispettante il formato del codice fiscale, con 6 lettere, due cifre, una lettera, due cifre, cinque caratteri alfanumerici
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\item Formato inadeguato
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{ModificaDipendente} & Ruolo & $\checkmark$ & \begin{minipage}{3.8cm}
+\vspace{5pt}
+\begin{itemize}
+\item Uno dei seguenti valori: \begin{verbatim}
+[ 
+'magazziniere',
+'centralinista',
+'amministratore
+personale',
+'amministratore
+catalogo' 
+]
+\end{verbatim}
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Valore invalido
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+\end{longtable}
+
+\newpage
+\subsection{Creazione ticket}
+
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+\begin{longtable}{|l|l|l|l|l|}
+\hline
+Modulo & Nome & Obbligatorio & Vincoli & Errori\\\hline
+\endhead
+\hline
+\textbf{CreazioneTicket} & Tipologia & $\checkmark$ & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Uno dei seguenti valori: \begin{verbatim}
+[ 
+'spedizione',
+'pagamento',
+'amministrativo',
+'vendita',
+'altro' 
+]
+\end{verbatim}
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\item Formato inadeguato
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+
+\textbf{CreazioneTicket} & Messaggio & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima di 16 caratteri
+\item Lunghezza massima di 1024 caratteri
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+\end{longtable}
+
+\newpage
+\subsection{Risposta ticket}
+
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+\begin{longtable}{|l|l|l|l|l|}
+\hline
+Modulo & Nome & Obbligatorio & Vincoli & Errori\\\hline
+\endhead
+\hline
+\textbf{RispostaTicket} & Messaggio & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima di 16 caratteri
+\item Lunghezza massima di 1024 caratteri
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+\end{longtable}
+
+\newpage
+
+\subsection{Conferma ordine}
+
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+\begin{longtable}{|l|l|l|l|l|}
+\hline
+Modulo & Nome & Obbligatorio & Vincoli & Errori\\\hline
+\endhead
+\hline
+\textbf{ConfermaOrdine} & CodiceTracciamento & $\checkmark$ & \begin{minipage}{3.5cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza minima di 8 caratteri
+\item Lunghezza massima di 128 caratteri
+\end{itemize}
+\vspace{5pt}
+\end{minipage} & \begin{minipage}{4cm}
+\vspace{5pt}
+\begin{itemize}
+\item Lunghezza inadeguata
+\item Campo vuoto
+\end{itemize}
+\vspace{5pt}
+\end{minipage} \\ \hline
+\end{longtable}
+
+\newpage
+\newgeometry{a4paper,textwidth=345pt,textheight=598pt}
 \section{Mock up}
+
+\newpage
+
 
 \end{document}
