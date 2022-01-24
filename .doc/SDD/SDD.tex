@@ -193,15 +193,7 @@ Per realizzare il sistema è prevista un'architettura Three-Tier, con divisione 
 \end{itemize}
 
 \subsection{Presentation Layer}
-Il Presentation Layer si suddivide a sua volta in:
-
-\begin{itemize}
-\item Sottosistema cliente, che include quasi tutte le funzionalità del sito, come registrazione, autenticazione, ricerca, aggiunta al carrello, acquisto, creazione e risposta a \emph{ticket}, vendita di articoli.
-\item Sottosistema centralinista, che si occupa dei \emph{ticket} e di autorizzare le vendite dei clienti.
-\item Sottosistema magazziniere, che si occupa di confermare la spedizione degli ordini e confermare la ricezione degli articoli per i quali i clienti richiedono un rimborso.
-\item Sottosistema amministratore personale, che si occupa di gestire l'inserimento e la modifica degli account riservati ai dipendenti della piattaforma.
-\item Sottosistema amministratore catalogo, che si occupa di gestire l'inserimento e la modifica degli articoli venduti dalla piattaforma.
-\end{itemize}
+Il Presentation Layer include tutte le interfacca con cui gli utenti interagiscono.
 
 \subsection{Application Layer}
 L'Application Layer si suddivide a sua volta in:
@@ -214,67 +206,29 @@ L'Application Layer si suddivide a sua volta in:
 \item GestioneVendita, che contiene tutte le operazioni riguardanti le vendite, sia dei clienti che della piattaforma, come creazione, rimozione, visualizzazione e modifica.
 \end{itemize}
 
-\subsubsection{Utente non autenticato}
-
-\begin{center}
-\includegraphics[height=0.34\textheight]{UtenteNonAutenticato}
-\end{center}
-
-\begin{itemize}
-\item un utente non autenticato può accedere al sottosistema Account soltanto per autenticarsi, recuperare la password e per registrarsi.
-\item un utente non autenticato può accedere al sottosistema Vendita soltanto per ricercare un articolo e per visualizzare i dettagli di un articolo.
-\end{itemize}
-
 \newpage
 
-\subsubsection{Cliente}
 \begin{center}
-\includegraphics[height=0.34\textheight]{Cliente}
-\end{center}
-\begin{itemize}
-\item un cliente autenticato può accedere al sottosistema Account soltanto per la modifica delle proprie informazioni come indirizzo, dati della carta di credito o password.
-\item un cliente autenticato può accedere al sistema assistenza per effettuare tutte le operazioni previste per il sottosistema Assistenza, quindi creazione, risposta e chiusura di un ticket.
-\item un cliente autenticato può accedere al sistema assistenza per effettuare tutte le operazioni previste per il sottosistema Carrello, quindi inserimento e rimozione di articoli.
-\item un cliente autenticato può accedere al sistema assistenza per effettuare tutte le operazioni previste per il sottosistema Ordine, quindi creazione, annullamento e rimborso.
-\item un cliente autenticato può accedere al sistema assistenza per effettuare tutte le operazioni previste per il sottosistema Vendita, quindi creazione, modifica e annullamento, fatta eccezione per le operazioni riservate come autorizzazione e rifiuto vendita, che sono di competenza dei centralinisti. 
-\end{itemize}
-
-\subsubsection{Centralinista}
-\begin{center}
-\includegraphics[height=0.34\textheight]{Centralinista}
+\includegraphics[width=\textwidth]{GestioneAccount}
 \end{center}
 
-\begin{itemize}
-\item Un centralinista ha accesso al sottosistema Assistenza per le operazioni di risposta e chiusura di un ticket, ma non può crearne uno nuovo.
-\item un centralinista ha accesso al sottosistema Vendita solo per l'autorizzazione o il rifiuto di una vendita immessa da un cliente.
-\end{itemize}
-
-\subsubsection{Magazziniere}
 \begin{center}
-\includegraphics[height=0.34\textheight]{Magazziniere}
+\includegraphics[width=\textwidth]{GestioneAssistenza}
 \end{center}
 
-\begin{itemize}
-\item Un magazziniere ha accesso al sottosistema Ordine solo per il cambio di stato di un ordine in seguito ad una spedizione o al cambio di stato di un rimborso in seguito al ricevimento dell'articolo.
-\end{itemize}
-
-\subsubsection{Amministratore Personale}
 \begin{center}
-\includegraphics[height=0.34\textheight]{AmministratorePersonale}
+\includegraphics[width=\textwidth]{GestioneCarrello}
 \end{center}
 
-\begin{itemize}
-\item Un amministratore del personale ha accesso al sottosistema Account solo per l'inserimento e la modifica degli account dei dipendenti.
-\end{itemize}
-
-\subsubsection{Amministratore Catalogo}
 \begin{center}
-\includegraphics[height=0.34\textheight]{AmministratoreCatalogo}
+\includegraphics[width=\textwidth]{GestioneOrdine}
 \end{center}
 
-\begin{itemize}
-\item Un amministratore del catalogo ha accesso al sottosistema Vendita solo per l'inserimento e la modifica di articoli.
-\end{itemize}
+\begin{center}
+\includegraphics[width=\textwidth]{GestioneVendita}
+\end{center}
+
+\newpage
 
 \subsection{Mapping Hardware/Software}
 \begin{center}
@@ -292,10 +246,44 @@ L'Application Layer si suddivide a sua volta in:
 
 \subsubsection{Class Diagram}
 \begin{center}
-\includegraphics[width=\textwidth]{../../RAD/img/diagrammadiclasse}
+\includegraphics[width=\textwidth]{../../RAD/img/diagrammadiclasse} \\
 \end{center}
 
-% tabelle SQL?
+\noindent
+utente(\underline{CF}, nome, cognome, email, password, via, numeroCivico, citta, provincia, CAP, tipologia, cartaDiCredito)
+
+\noindent
+ticket(\underline{ID}, IDCliente(cliente), tipologia, stato)
+
+\noindent
+messaggio(IDTicket(ticket), CF(cliente), contenuto, data)
+
+\noindent
+ordine(ID, IDArticolo(articolo), quantità, data, stato, codiceTracciamento)
+
+\noindent
+articolo(ID, nome, descrizione, IDVenditore(utente), quantita, prezzo, stato, IDCentralinista(utente), data, rimborsabile)
+
+\noindent
+foto(ID, IDArticolo(articolo), path) \\
+
+
+\noindent
+Durante l'analisi si è scelto di usare un DBMS relazionale basato su MySQL per svariati motivi:
+
+\begin{itemize}
+\item Accesso ai dati tramite un linguaggio universale (SQL) e librerie per il linguaggio di programmazione scelto (Java)
+\item Accesso efficiente ai dati, grazie alle ottimizzazioni del DBMS.
+\item Atomicità delle operazioni, garantita dalle transazioni, che permette di eseguire un insieme di operazioni con la certezza che vengano tutte eseguite.
+\item Accesso concorrente ai dati, che permette a più utenti di utilizzare la piattaforma allo stesso tempo, anche per compiere operazioni diverse tra loro.
+\item Riservatezza dei dati, garantita dal DBMS attraverso diversi utenti che possono avere permessi di accesso diversi a tabelle diverse.
+\item Affidabilità dei dati, permessa dalla facilità di backup e ripristino dei dati.
+\end{itemize}
+
+% TODO ristrutturazione
+% articolo/vendita
+% separazione utenti
+% foto/articolo come file e non nel db e non come lista di path
 
 \newpage
 
@@ -321,8 +309,58 @@ Tra i fallimenti critici ci sono:
 \item Fallimento dei backup, che può succedere in caso di spazio insufficiente per memorizzare i dati e che può rendere il sito inoperabile in seguito a un fallimento totale. È un errore che nella migliore delle ipotesi fa perdere qualche giorno di informazioni e, in casi catastrofici, può far perdere tutte le informazioni memorizzate nel sistema. L'ultimo caso è irrecuperabile.
 \end{enumerate}
 
+\newpage
+
+\subsection{Servizi dei sottosistemi}
+\subsubsection{GestioneAccount}
+\begin{itemize}
+\item Registrazione
+\item Autenticazione
+\item Modifica profilo
+\item Recupero password
+\item Modifica password
+\item Ricerca profilo
+\item Dettagli profilo
+\end{itemize}
+
+\subsubsection{GestioneAssistenza}
+\begin{itemize}
+\item Creazione ticket
+\item Risposta ticket
+\item Chiusura ticket
+\item Visualizzazione ticket
+\item Elenco ticket in attesa
+\item Elenco ticket cliente
+\end{itemize}
+
+\subsubsection{GestioneCarrello}
+\begin{itemize}
+\item Visualizzazione carrello
+\item Aggiunta articolo
+\item Rimozione articolo
+\end{itemize}
+
+\subsubsection{GestioneOrdine}
+\begin{itemize}
+\item Creazione ordine
+\item Conferma ordine
+\item Annullamento ordine
+\item Richiesta rimborso
+\item Conferma rimborso
+\item Elenco ordini
+\end{itemize}
+
+\subsubsection{GestioneVendita}
+\begin{itemize}
+\item Creazione vendita
+\item Modifica vendita
+\item Annullamento vendita
+\item Conferma vendita
+\item Elenco vendite
+\end{itemize}
 
 \subsection{Casi d'uso}
+% TODO rivedere
 \subsubsection{Configurazione di un nuovo sistema}
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
 \hline
@@ -450,7 +488,5 @@ Spegne tutti i server attraverso il tasto dedicato. \\
 \hline
 \end {tabular}
 \\
-
-
 
 \end{document}
