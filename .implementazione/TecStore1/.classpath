@@ -6,17 +6,17 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ppatr/OneDrive/Desktop/Informatica/Ingegneria del Softwer/Progetto/Git/TecStore/.implementazione/TecStore1/src/commons-io-2.8.0.jar">
+	<classpathentry kind="lib" path="src/commons-io-2.8.0.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ppatr/OneDrive/Desktop/Informatica/Ingegneria del Softwer/Progetto/Git/TecStore/.implementazione/TecStore1/src/json-20200518.jar">
+	<classpathentry kind="lib" path="src/mysql-connector-java-8.0.20.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ppatr/OneDrive/Desktop/Informatica/Ingegneria del Softwer/Progetto/Git/TecStore/.implementazione/TecStore1/src/mysql-connector-java-8.0.20.jar">
+	<classpathentry kind="lib" path="src/json-20200518.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
