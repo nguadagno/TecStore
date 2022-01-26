@@ -25,6 +25,7 @@ public class DriverManagerConnectionPool {
 		String ip = "localhost";
 		String port = "3306";
 		String db = "tecstore";
+		//Da Cambiare
 		String username = "user";
 		String password = "Patrone96.";
 
