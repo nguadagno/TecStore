@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk-15.0.2">
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/ppatr/OneDrive/Desktop/Informatica/Ingegneria del Softwer/Progetto/Git/TecStore/.implementazione/TecStore1/src/commons-io-2.8.0.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/ppatr/OneDrive/Desktop/Informatica/Ingegneria del Softwer/Progetto/Git/TecStore/.implementazione/TecStore1/src/json-20200518.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/ppatr/OneDrive/Desktop/Informatica/Ingegneria del Softwer/Progetto/Git/TecStore/.implementazione/TecStore1/src/mysql-connector-java-8.0.20.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
