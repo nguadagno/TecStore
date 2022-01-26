@@ -1,26 +1,23 @@
 package it.unisa.model;
 
-import java.sql.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import Bean.UtenteBean;
 
 public class GestioneAccount {
-
-	private final static String TABLE_NAME="Utente";
-	
-	public synchronized void insertUser(UtenteBean utente) throws SQLException{
-		
+	public boolean registrazioneUtente(UtenteBean utente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
-			String insertSQL = "INSERT INTO "+TABLE_NAME+"(`CF`, `NOME`, `COGNOME`, `EMAIL`, `PASSWORD`, `VIA`, `NUMEROCIVICO`, `CITTA`, `CAP`, `TIPOLOGIA`)"+" VALUES (?,?,?,?,?,?,?,?,?,?);";
-			try{
+
+			String registrazioneUtente = "INSERT INTO Utente (`CF`, `NOME`, `COGNOME`, `EMAIL`, `PASSWORD`, `VIA`, `NUMEROCIVICO`, `CITTA`, `CAP`, `TIPOLOGIA`)" +
+											" VALUES (?,?,?,?,?,?,?,?,?,?);";
+			try {
 				connection = DriverManagerConnectionPool.getConnection();
-				preparedStatement=connection.prepareStatement(insertSQL);
-				
+				preparedStatement=connection.prepareStatement(registrazioneUtente);
+
 				preparedStatement.setString(1, utente.getCF());
 				preparedStatement.setString(2, utente.getNome());
 				preparedStatement.setString(3, utente.getCognome());
@@ -31,10 +28,11 @@ public class GestioneAccount {
 				preparedStatement.setString(8, utente.getCitta());
 				preparedStatement.setInt(9, utente.getCAP());
 				preparedStatement.setInt(10, utente.getTipologia());
-				
+
 				preparedStatement.executeUpdate();
-				
+
 				connection.commit();
+				return true;
 		} finally {
 			try {
 				if (preparedStatement != null)
@@ -44,21 +42,20 @@ public class GestioneAccount {
 			}
 		}
 	}
-	
-	public synchronized boolean eliminaUtente(String CF) throws SQLException{
-		
+
+	public boolean eliminaUtente(String CF) throws SQLException{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		int rs=0;
-		
-		String deleteSQL = "DELETE FROM "+TABLE_NAME+" WHERE CF_CLIENTE = ?;";
-	
+
+		String deleteSQL = "DELETE FROM WHERE CF_CLIENTE = ?;";
+
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setString(1, CF);
-			rs=preparedStatement.executeUpdate();
-			connection.commit();		
+			preparedStatement.executeUpdate();
+			connection.commit();
+			return true;
 		} finally {
 			try {
 				if (preparedStatement != null)
@@ -67,26 +64,25 @@ public class GestioneAccount {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
-		return (rs!=0);
 	}
-	
+
 	public synchronized boolean eliminaUtente(UtenteBean utente) throws SQLException{
 		return eliminaUtente(utente.getCF());
 	}
-	
 
-	public synchronized void updateUser(UtenteBean utente) throws SQLException{
+
+	public boolean aggiornamentoUtente (UtenteBean utente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
 		UtenteBean u = new UtenteBean();
-		
-		String searchUtenteQuery="SELECT * FROM UTENTE WHERE CF="+ utente.getCF()+";";
+
+		String searchUtenteQuery="SELECT * FROM UTENTE WHERE CF='?';";
 		try{
             connection = DriverManagerConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(searchUtenteQuery);
+            preparedStatement.setString(1, utente.getCF());
             ResultSet rs = preparedStatement.executeQuery();
-            
+
             if(rs.next()){
                u = new UtenteBean(
                         rs.getString("CF"),
@@ -99,15 +95,35 @@ public class GestioneAccount {
                         rs.getString("Citta"),
                         rs.getString("Provincia"),
                         rs.getInt("CAP"),
-                        rs.getInt("Tipologia")
+                        rs.getInt("Tipologia"),
+                        rs.getString("CartaDiCredito")
                         );
             }
-		}finally {}
+		} finally {
+
+		}
 		
-		String updateSQL = "UPDATE "+TABLE_NAME+" SET NOME = ?, SET COGNOME = ?, SET EMAIL = ?, PASSWORD = ?, VIA = ?, CAP = ?, NUMEROCIVICO = ?, ,  CITTA = ?, PROVINCIA=? WHERE CF_CLIENTE = ?;";
-	
+		
+		String updateSQL = "UPDATE Utente SET NOME = ?, SET COGNOME = ?, SET EMAIL = ?, PASSWORD = ?,"+
+							" VIA = ?, CAP = ?, NUMEROCIVICO = ?, ,  CITTA = ?, PROVINCIA=? WHERE CF_CLIENTE = ?;";
+
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
+			
+			if (!utente.getEmail().equals(u.getEmail()) && !utente.checkEmail(utente.getEmail()))
+				return false;
+			
+			if (!utente.getPassword().equals(u.getPassword())) {
+				if (utente.checkPassword(utente.getPassword())) {
+					String getPasswordQuery = "SELECT PASSWORD('?');";
+					preparedStatement = connection.prepareStatement(getPasswordQuery);
+					preparedStatement.setString(1, utente.getPassword());
+					ResultSet rs = preparedStatement.executeQuery();
+					rs.next();
+					utente.setPassword(rs.getString(0));
+				}
+			}
+			
 			preparedStatement = connection.prepareStatement(updateSQL);
 			preparedStatement.setString(1, utente.getNome());
 			preparedStatement.setString(2, utente.getCognome());
@@ -121,6 +137,7 @@ public class GestioneAccount {
 			preparedStatement.setString(10, utente.getCF());
 			preparedStatement.executeUpdate();
 			connection.commit();
+			return true;
 		} finally {
 			try {
 				if (preparedStatement != null)
@@ -131,4 +148,3 @@ public class GestioneAccount {
 		}
 }
 }
-		
