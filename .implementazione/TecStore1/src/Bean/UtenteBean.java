@@ -1,20 +1,24 @@
-package it.unisa.model;
+package Bean;
 
 import java.util.Objects;
 
 public class UtenteBean {
-	String CF;
-	String nome;
-	String cognome;
-	String email;
-	String password;
-	String via;
-	int numeroCivico;
-	String citta;
-	String provincia;
-	int CAP;
-	int tipologia;
-			
+	private String CF;
+	private String nome;
+	private String cognome;
+	private String email;
+	private String password;
+	private String via;
+	private int numeroCivico;
+	private String citta;
+	private String provincia;
+	private int CAP;
+	private int tipologia;
+	/*1:Cliente, 
+	 * 2: Centralinista,
+	 * 3: Magazziniere,
+	 * 4: AmministratoreAccount,
+	 * 5: AmministratorePersonale.*/
 	public UtenteBean() {}
 	
 	public UtenteBean(String CF, String nome, String cognome, String email, String password, String via, int numeroCivico, String citta, String provincia, int CAP, int tipologia) {
@@ -35,6 +39,15 @@ public class UtenteBean {
 	public boolean checkCf(String CF) {
 		//Reference: https://web.archive.org/web/20201102045911/http://blog.marketto.it/2016/01/regex-validazione-codice-fiscale-con-omocodia/ 
 		return CF.matches("^(?:[A-Z][AEIOU][AEIOUX]|[AEIOU]X{2}|[B-DF-HJ-NP-TV-Z]{2}[A-Z]){2}(?:[\\dLMNP-V]{2}(?:[A-EHLMPR-T](?:[04LQ][1-9MNP-V]|[15MR][\\dLMNP-V]|[26NS][0-8LMNP-U])|[DHPS][37PT][0L]|[ACELMRT][37PT][01LM]|[AC-EHLMPR-T][26NS][9V])|(?:[02468LNQSU][048LQU]|[13579MPRTV][26NS])B[26NS][9V])(?:[A-MZ][1-9MNP-V][\\dLMNP-V]{2}|[A-M][0L](?:[1-9MNP-V][\\dLMNP-V]|[0L][1-9MNP-V]))[A-Z]$");
+	}
+	
+	public boolean checkEmail(String email) {
+		//Reference: https://web.archive.org/web/20220106162522/https://www.w3resource.com/javascript/form/email-validation.php
+		return email.matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$");
+	}
+	
+	public boolean checkPassword(String password) {
+		return (password.length()>=10) && (password.length()<=64);
 	}
 	
 	@Override
@@ -64,10 +77,6 @@ public class UtenteBean {
 		return CF;
 	}
 	
-	public void setCF(String cF) {
-		CF = cF;
-	}
-	
 	public String getNome() {
 		return nome;
 	}
@@ -85,11 +94,11 @@ public class UtenteBean {
 	}
 	
 	public String getEmail() {
-		return email;
+	    return email;
 	}
 	
 	public void setEmail(String email) {
-		this.email = email;
+		if(checkEmail(email)) this.email = email;
 	}
 	
 	public String getPassword() {
@@ -97,7 +106,7 @@ public class UtenteBean {
 	}
 	
 	public void setPassword(String password) {
-		this.password = password;
+		if(checkPassword(password)) this.password = password;
 	}
 	
 	public String getVia() {
