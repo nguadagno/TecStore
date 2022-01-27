@@ -82,6 +82,7 @@ public class GestioneAccount {
             preparedStatement = connection.prepareStatement(searchUtenteQuery);
             preparedStatement.setString(1, utente.getCF());
             ResultSet rs = preparedStatement.executeQuery();
+            preparedStatement.close();
 
             if(rs.next()){
                u = new UtenteBean(
@@ -116,6 +117,7 @@ public class GestioneAccount {
 					preparedStatement = connection.prepareStatement(getPasswordQuery);
 					preparedStatement.setString(1, utente.getPassword());
 					rs = preparedStatement.executeQuery();
+					preparedStatement.close();
 					rs.next();
 					utente.setPassword(rs.getString(0));
 				}
@@ -185,6 +187,5 @@ public class GestioneAccount {
 			}
 		}
 	}
-
 
 }
