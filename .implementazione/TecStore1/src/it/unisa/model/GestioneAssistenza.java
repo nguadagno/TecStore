@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import Bean.ClienteBean;
+import Bean.MessaggioBean;
 import Bean.TicketBean;
 
-public class GestioneAssistenza {
+public class GestioneAssistenza {	
 	public ArrayList<TicketBean> elencoTicketCliente(ClienteBean c) throws SQLException {
 		return elencoTicketCliente(c.getCF());
 	}
@@ -24,7 +25,7 @@ public class GestioneAssistenza {
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
 			rs = preparedStatement.executeQuery();
 			
-			if(rs.next()){
+			while(rs.next()){
 				TicketBean ticket = new TicketBean(
 						rs.getString("IDTicket"),
 						rs.getString("IDCliente"),
@@ -58,7 +59,7 @@ public class GestioneAssistenza {
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
 			rs = preparedStatement.executeQuery();
 			
-			if(rs.next()){
+			while(rs.next()){
 				TicketBean ticket = new TicketBean(
 						rs.getString("IDTicket"),
 						rs.getString("IDCliente"),
@@ -84,7 +85,7 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		//create table test(id int primary key, data uuid default random_uuid());
-		String insertTicketQuery = "INSERT INTO ticket (IDCliente, Tipologia, Stato) VALUES (?,?,?);";
+		String insertTicketQuery = "INSERT INTO ticket (IDCliente, Tipologia, Stato) VALUES (`?`,`?`,`?`);";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -108,6 +109,33 @@ public class GestioneAssistenza {
 		}
 	}
 	
+	public boolean cambiaStato(String IDTicket, String stato) throws SQLException {
+		if (stato != "InElaborazione" && stato != "InAttesa")
+			return false;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String cambiaStatoQuery = "UPDATE ticket SET stato = `?` WHERE IDTicket = `?`;";
+		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement=connection.prepareStatement(cambiaStatoQuery);
+			preparedStatement.setString(1, stato);
+			preparedStatement.setString(2, IDTicket);
+			preparedStatement.executeQuery();
+			connection.commit();
+			return true;
+		} finally {
+			try{
+				if(connection!=null){
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+	
 	public TicketBean selezionaTicket(String IDTicket) throws SQLException {
 		TicketBean result = null;
 		Connection connection = null;
@@ -115,7 +143,8 @@ public class GestioneAssistenza {
 		ResultSet rs = null;
 		String searchTicketQuery = "SELECT * FROM ticket WHERE IDTicket = '" + IDTicket + "';";
 
-		try{
+		try {
+			this.cambiaStato(IDTicket, "InElaborazione");
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
 			rs = preparedStatement.executeQuery();
@@ -127,8 +156,41 @@ public class GestioneAssistenza {
 						rs.getString("Tipologia"),
 						rs.getString("Stato")
 						);
+				return result;
 			}
+			return null;
+		} finally {
+			try{
+				if(connection!=null){
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+	
+	public ArrayList<MessaggioBean> elencoMessaggiTicket (String IDTicket) throws SQLException {
+		ArrayList<MessaggioBean> result = new ArrayList<MessaggioBean>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		String searchTicketQuery = "SELECT * FROM messaggio WHERE IDTicket = '" + IDTicket + "';";
+
+		try{
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(searchTicketQuery);
+			rs = preparedStatement.executeQuery();
 			
+			while(rs.next()){
+				MessaggioBean m = new MessaggioBean(
+						rs.getString("IDTicket"),
+						rs.getString("CF"),
+						rs.getString("Contenuto"),
+						rs.getDate("Date")
+						);
+				result.add(m);
+			}
 			return result;
 		} finally {
 			try{
@@ -145,7 +207,7 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		//create table test(id int primary key, data uuid default random_uuid());
-		String insertTicketQuery = "INSERT INTO messaggio (CF, Contenuto, Data) VALUES (?,?,?);";
+		String insertTicketQuery = "INSERT INTO messaggio (CF, Contenuto, Data) VALUES (`?`,`?`,`?`);";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
