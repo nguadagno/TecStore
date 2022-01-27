@@ -7,9 +7,7 @@ import java.sql.SQLException;
 
 import Bean.UtenteBean;
 
-public class GestioneAccount {
-	// TODO dettagli utente da CF
-	
+public class GestioneAccount {	
 	public boolean registrazioneUtente(UtenteBean utente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
