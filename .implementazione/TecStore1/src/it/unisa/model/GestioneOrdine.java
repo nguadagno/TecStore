@@ -1,42 +1,43 @@
 package it.unisa.model;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import Bean.ArticoloBean;
 import Bean.OrdineBean;
 import Bean.UtenteBean;
 
 public class GestioneOrdine {
-	public boolean creazioneOrdine(OrdineBean ordine, UtenteBean utente) throws SQLException {
+	public boolean creazioneOrdine(UtenteBean utente) throws SQLException {
+		return creazioneOrdine(utente.getCF());
+	}
+
+	public boolean creazioneOrdine(String CF) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String selectClienteSQL = "SELECT * FROM cliente WHERE CF = `?`;";
+		String creazioneOrdineQuery = "INSERT INTO ordine (IDCLIENTE, IDARTICOLO, QUANTITA, DATA, STATO) VALUES (`?`,`?`,`?`,`?`,`?`);";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
-			preparedStatement = connection.prepareStatement(selectClienteSQL);
-			preparedStatement.setString(1, utente.getCF());
-			ResultSet rs = preparedStatement.executeQuery();
-
-			rs.last();
-			if (rs.getRow() != 1)
+			if (!GestioneAccount.exists(CF))
 				return false;
-			String insertSql = "INSERT INTO ordine (ID, IDCLIENTE, IDARTICOLO, QUANTITA, DATA, STATO) VALUES (`?`,`?`,`?`,`?`,`?`,`?`);";
+
+			ArrayList<ArticoloBean> carrello = GestioneCarrello.getCarrello(CF);
 
 			connection = DriverManagerConnectionPool.getConnection();
-			preparedStatement = connection.prepareStatement(insertSql);
-			preparedStatement.setString(1, ordine.getID());
-			preparedStatement.setString(2, ordine.getIDCliente());
-			preparedStatement.setString(3, ordine.getIDArticolo());
-			preparedStatement.setInt(4, ordine.getQuantita());
-			preparedStatement.setDate(5, (Date) ordine.getData());
-			preparedStatement.setString(6, "InAttesa");
+			for (ArticoloBean e : carrello) {
+				preparedStatement = connection.prepareStatement(creazioneOrdineQuery);
+				preparedStatement.setString(1, CF);
+				preparedStatement.setString(2, e.getID());
+				preparedStatement.setInt(3, e.getQuantita());
+				preparedStatement.setDate(4, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+				preparedStatement.setString(5, "InAttesa");
 
-			preparedStatement.executeUpdate();
+				preparedStatement.executeUpdate();
+			}
 
 			connection.commit();
 			return true;
@@ -85,6 +86,10 @@ public class GestioneOrdine {
 		}
 	}
 
+	public ArrayList<OrdineBean> elencoOrdiniCliente(UtenteBean utente) throws SQLException {
+		return elencoOrdiniCliente(utente.getCF());
+	}
+
 	public ArrayList<OrdineBean> elencoOrdiniCliente(String CF) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -119,8 +124,8 @@ public class GestioneOrdine {
 		}
 	}
 
-	public ArrayList<OrdineBean> elencoOrdiniCliente(UtenteBean utente) throws SQLException {
-		return elencoOrdiniCliente(utente.getCF());
+	public OrdineBean dettagliOrdineCliente(UtenteBean utente, String IDOrdine) throws SQLException {
+		return dettagliOrdineCliente(utente.getCF(), IDOrdine);
 	}
 
 	public OrdineBean dettagliOrdineCliente(String CF, String IDOrdine) throws SQLException {
@@ -153,10 +158,6 @@ public class GestioneOrdine {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
-	}
-
-	public OrdineBean dettagliOrdineCliente(UtenteBean utente, String IDOrdine) throws SQLException {
-		return dettagliOrdineCliente(utente.getCF(), IDOrdine);
 	}
 
 	public boolean cambiaStato(String ID, String stato) throws SQLException {
