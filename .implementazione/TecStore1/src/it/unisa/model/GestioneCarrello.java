@@ -15,7 +15,7 @@ public class GestioneCarrello {
 		return getCarrello(u.getCF());
 	}
 
-	public ArrayList<ArticoloBean> getCarrello(String CF) throws SQLException {
+	public static ArrayList<ArticoloBean> getCarrello(String CF) throws SQLException {
 		ArrayList<ArticoloBean> carrello = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -47,6 +47,18 @@ public class GestioneCarrello {
 			}
 		}
 	}
+	
+	public boolean aggiuntaArticolo(String CF, ArticoloBean articolo, int quantita) throws SQLException {
+		return aggiuntaArticolo(CF, articolo.getID(), quantita);
+	}
+	
+	public boolean aggiuntaArticolo(UtenteBean utente, String IDArticolo, int quantita) throws SQLException {
+		return aggiuntaArticolo(utente.getCF(), IDArticolo, quantita);
+	}
+	
+	public boolean aggiuntaArticolo(UtenteBean utente, ArticoloBean articolo, int quantita) throws SQLException {
+		return aggiuntaArticolo(utente.getCF(), articolo.getID(), quantita);
+	}
 
 	public boolean aggiuntaArticolo(String CF, String IDArticolo, int quantita) throws SQLException {
 		if (quantita < 1)
@@ -76,8 +88,20 @@ public class GestioneCarrello {
 			}
 		}
 	}
+	
+	public boolean rimozioneArticolo(String CF, ArticoloBean articolo) throws SQLException {
+		return rimozioneArticolo(CF, articolo.getID());
+	}
+	
+	public boolean rimozioneArticolo(UtenteBean utente, String IDArticolo) throws SQLException {
+		return rimozioneArticolo(utente.getCF(), IDArticolo);
+	}
+	
+	public boolean rimozioneArticolo(UtenteBean utente, ArticoloBean articolo) throws SQLException {
+		return rimozioneArticolo(utente.getCF(), articolo.getID());
+	}
 
-	public boolean rimozioneCarrello(String CF, String IDArticolo) throws SQLException {
+	public boolean rimozioneArticolo(String CF, String IDArticolo) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String rimozioneCarrelloQuery = "DELETE FROM carrello WHERE IDCliente = '?' AND IDArticolo = '?';";
@@ -101,6 +125,18 @@ public class GestioneCarrello {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+	}
+	
+	public boolean aggiornamentoQuantita(String CF, ArticoloBean articolo, int quantita) throws SQLException {
+		return aggiornamentoQuantita(CF, articolo.getID(), quantita);
+	}
+	
+	public boolean aggiornamentoQuantita(UtenteBean utente, ArticoloBean articolo, int quantita) throws SQLException {
+		return aggiornamentoQuantita(utente.getCF(), articolo.getID(), quantita);
+	}
+	
+	public boolean aggiornamentoQuantita(UtenteBean utente, String IDArticolo, int quantita) throws SQLException {
+		return aggiornamentoQuantita(utente.getCF(), IDArticolo, quantita);
 	}
 
 	public boolean aggiornamentoQuantita(String CF, String IDArticolo, int quantita) throws SQLException {
