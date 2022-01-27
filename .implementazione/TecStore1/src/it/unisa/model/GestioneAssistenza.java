@@ -102,7 +102,7 @@ public class GestioneAssistenza {
 	}
 
 	public boolean cambiaStato(String IDTicket, String stato) throws SQLException {
-		if (stato != "InElaborazione" && stato != "InAttesa")
+		if (stato != "InElaborazione" && stato != "InAttesa" && stato != "Chiuso")
 			return false;
 
 		Connection connection = null;
@@ -128,7 +128,7 @@ public class GestioneAssistenza {
 		}
 	}
 
-	public TicketBean selezionaTicket(String IDTicket) throws SQLException {
+	public TicketBean dettagliTicket(String IDTicket) throws SQLException {
 		TicketBean result = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -136,7 +136,6 @@ public class GestioneAssistenza {
 		String searchTicketQuery = "SELECT * FROM ticket WHERE IDTicket = '" + IDTicket + "';";
 
 		try {
-			this.cambiaStato(IDTicket, "InElaborazione");
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
 			rs = preparedStatement.executeQuery();
@@ -202,28 +201,6 @@ public class GestioneAssistenza {
 
 			preparedStatement.executeQuery();
 
-			connection.commit();
-			return true;
-		} finally {
-			try {
-				if (connection != null) {
-					connection.close();
-				}
-			} finally {
-				DriverManagerConnectionPool.releaseConnection(connection);
-			}
-		}
-	}
-
-	public boolean chiusuraTicket(String IDTicket) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		String closeTicketQuery = "UPDATE ticket SET stato='Chiuso' WHERE IDTicket='" + IDTicket + "';";
-
-		try {
-			connection = DriverManagerConnectionPool.getConnection();
-			preparedStatement = connection.prepareStatement(closeTicketQuery);
-			preparedStatement.executeUpdate();
 			connection.commit();
 			return true;
 		} finally {
