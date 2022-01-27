@@ -14,11 +14,12 @@ public class UtenteBean {
 	private String provincia;
 	private int CAP;
 	
-	/* 1: Cliente, 
-	 * 2: Centralinista,
-	 * 3: Magazziniere,
-	 * 4: AmministratoreAccount,
-	 * 5: AmministratorePersonale.*/
+	/* 1: Cliente
+	 * 2: Centralinista
+	 * 3: Magazziniere
+	 * 4: AmministratoreCatalogo
+	 * 5: AmministratorePersonale 
+	 */
 	private int tipologia;
 	
 	private String cartaDiCredito;
@@ -92,7 +93,7 @@ public class UtenteBean {
 				&& Objects.equals(password, other.password) && Objects.equals(provincia, other.provincia)
 				&& tipologia == other.tipologia && Objects.equals(via, other.via);
 	}
-			
+	
 	public String getCF() {
 		return CF;
 	}
