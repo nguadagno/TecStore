@@ -8,6 +8,42 @@ import java.sql.SQLException;
 import Bean.UtenteBean;
 
 public class GestioneAccount {
+	public boolean registrazioneUtente(String CF, String nome, String cognome, String email, String password,
+			String via, int numeroCivico, String citta, String provincia, int CAP, int tipologia, String cartaDiCredito)
+			throws SQLException {
+		return registrazioneUtente(new UtenteBean(CF, nome, cognome, email, password, via, numeroCivico, citta,
+				provincia, CAP, tipologia, cartaDiCredito));
+	}
+
+	public boolean exists(UtenteBean utente) throws SQLException {
+		return exists(utente.getCF());
+	}
+
+	public static boolean exists(String CF) throws SQLException {
+		PreparedStatement preparedStatement = null;
+		Connection connection = null;
+
+		try {
+			String selectClienteSQL = "SELECT * FROM cliente WHERE CF = `?`;";
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(selectClienteSQL);
+			preparedStatement.setString(1, CF);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			rs.last();
+			if (rs.getRow() != 1)
+				return false;
+			return false;
+		} finally {
+			try {
+				if (connection != null)
+					connection.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+
 	public boolean registrazioneUtente(UtenteBean utente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -73,8 +109,8 @@ public class GestioneAccount {
 	public boolean modificaUtente(String CF, String nome, String cognome, String email, String password, String via,
 			int numeroCivico, String citta, String provincia, int CAP, int tipologia, String cartaDiCredito)
 			throws SQLException {
-		return modificaUtente(CF, new UtenteBean(CF, nome, cognome, email, password, via, numeroCivico, citta, provincia,
-				CAP, tipologia, cartaDiCredito));
+		return modificaUtente(CF, new UtenteBean(CF, nome, cognome, email, password, via, numeroCivico, citta,
+				provincia, CAP, tipologia, cartaDiCredito));
 	}
 
 	public boolean modificaUtente(String CF, UtenteBean utente) throws SQLException {
