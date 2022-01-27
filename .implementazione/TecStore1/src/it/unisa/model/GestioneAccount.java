@@ -70,14 +70,21 @@ public class GestioneAccount {
 		return eliminaUtente(utente.getCF());
 	}
 
-	public boolean modificaUtente(UtenteBean utente) throws SQLException {
+	public boolean modificaUtente(String CF, String nome, String cognome, String email, String password, String via,
+			int numeroCivico, String citta, String provincia, int CAP, int tipologia, String cartaDiCredito)
+			throws SQLException {
+		return modificaUtente(CF, new UtenteBean(CF, nome, cognome, email, password, via, numeroCivico, citta, provincia,
+				CAP, tipologia, cartaDiCredito));
+	}
+
+	public boolean modificaUtente(String CF, UtenteBean utente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		UtenteBean u = dettagliUtente(utente.getCF());
+		UtenteBean u = dettagliUtente(CF);
 		ResultSet rs = null;
 
 		String updateUtenteQuery = "UPDATE Utente SET NOME = `?`, SET COGNOME = `?`, SET EMAIL = `?`, PASSWORD = `?`,"
-				+ " VIA = `?`, CAP = `?`, NUMEROCIVICO = `?`, ,  CITTA = `?`, PROVINCIA=`?` WHERE CF_CLIENTE = `?`;";
+				+ " VIA = `?`, CAP = `?`, NUMEROCIVICO = `?`, ,  CITTA = `?`, PROVINCIA=`?` WHERE CF = `?`;";
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 
