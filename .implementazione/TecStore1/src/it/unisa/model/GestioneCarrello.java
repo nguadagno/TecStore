@@ -48,7 +48,7 @@ public class GestioneCarrello {
 		}
 	}
 
-	public boolean aggiuntaCarrello(String CF, String IDArticolo, int quantita) throws SQLException {
+	public boolean aggiuntaArticolo(String CF, String IDArticolo, int quantita) throws SQLException {
 		if (quantita < 1)
 			return false;
 		Connection connection = null;
@@ -103,7 +103,7 @@ public class GestioneCarrello {
 		}
 	}
 
-	public boolean aggiornamentoQuantitaCarrello(String CF, String IDArticolo, int quantita) throws SQLException {
+	public boolean aggiornamentoQuantita(String CF, String IDArticolo, int quantita) throws SQLException {
 		if (quantita < 1)
 			return false;
 
