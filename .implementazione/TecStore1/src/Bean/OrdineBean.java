@@ -6,22 +6,26 @@ import java.util.Set;
 
 public class OrdineBean {
 	private String ID;
+	private String IDCliente;
 	private String IDArticolo;
 	private int quantita;
 	private Date data;
 	private String stato;
 	private String codiceTracciamento;
 	
-	public OrdineBean(String iD, String iDArticolo, int quantita, Date data, String stato, String codiceTracciamento) {
+	
+	public OrdineBean(String iD, String iDCliente, String iDArticolo, int quantita, Date data, String stato,
+			String codiceTracciamento) {
 		super();
 		ID = iD;
+		IDCliente = iDCliente;
 		IDArticolo = iDArticolo;
 		this.quantita = quantita;
 		this.data = data;
 		this.stato = stato;
 		this.codiceTracciamento = codiceTracciamento;
 	}
-	
+
 	public OrdineBean() {}
 
 	@Override
@@ -46,6 +50,10 @@ public class OrdineBean {
 
 	public String getID() {
 		return ID;
+	}
+
+	public String getIDCliente() {
+		return IDCliente;
 	}
 
 	public String getIDArticolo() {
