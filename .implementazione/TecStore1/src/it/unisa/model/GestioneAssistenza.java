@@ -7,6 +7,7 @@ import java.util.Calendar;
 import Bean.ClienteBean;
 import Bean.MessaggioBean;
 import Bean.TicketBean;
+import Bean.UtenteBean;
 
 public class GestioneAssistenza {
 	public ArrayList<TicketBean> elencoTicketCliente(ClienteBean c) throws SQLException {
@@ -101,6 +102,10 @@ public class GestioneAssistenza {
 		}
 	}
 
+	public boolean cambiaStato(TicketBean ticket, String stato) throws SQLException {
+		return cambiaStato(ticket.getIDTicket(), stato);
+	}
+
 	public boolean cambiaStato(String IDTicket, String stato) throws SQLException {
 		if (stato != "InElaborazione" && stato != "InAttesa" && stato != "Chiuso")
 			return false;
@@ -126,6 +131,10 @@ public class GestioneAssistenza {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+	}
+
+	public TicketBean dettagliTicket(TicketBean ticket) throws SQLException {
+		return dettagliTicket(ticket.getIDTicket());
 	}
 
 	public TicketBean dettagliTicket(String IDTicket) throws SQLException {
@@ -157,6 +166,10 @@ public class GestioneAssistenza {
 		}
 	}
 
+	public ArrayList<MessaggioBean> elencoMessaggiTicket(TicketBean ticket) throws SQLException {
+		return elencoMessaggiTicket(ticket.getIDTicket());
+	}
+
 	public ArrayList<MessaggioBean> elencoMessaggiTicket(String IDTicket) throws SQLException {
 		ArrayList<MessaggioBean> result = new ArrayList<MessaggioBean>();
 		Connection connection = null;
@@ -186,18 +199,31 @@ public class GestioneAssistenza {
 		}
 	}
 
-	public boolean rispostaTicket(String CF, String Contenuto) throws SQLException {
+	public boolean rispostaTicket(TicketBean ticket, UtenteBean utente, String contenuto) throws SQLException {
+		return rispostaTicket(ticket.getIDTicket(), utente.getCF(), contenuto);
+	}
+
+	public boolean rispostaTicket(TicketBean ticket, String CF, String contenuto) throws SQLException {
+		return rispostaTicket(ticket.getIDTicket(), CF, contenuto);
+	}
+
+	public boolean rispostaTicket(String IDTicket, UtenteBean utente, String contenuto) throws SQLException {
+		return rispostaTicket(IDTicket, utente.getCF(), contenuto);
+	}
+
+	public boolean rispostaTicket(String IDTicket, String CF, String Contenuto) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		// create table test(id int primary key, data uuid default random_uuid());
-		String insertTicketQuery = "INSERT INTO messaggio (CF, Contenuto, Data) VALUES (`?`,`?`,`?`);";
+		String insertTicketQuery = "INSERT INTO messaggio (CF, IDTicket, Contenuto, Data) VALUES (`?`, `?`, `?`, `?`);";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(insertTicketQuery);
 			preparedStatement.setString(1, CF);
-			preparedStatement.setString(2, Contenuto);
-			preparedStatement.setString(3, new java.sql.Date(Calendar.getInstance().getTime().getTime()).toString());
+			preparedStatement.setString(2, IDTicket);
+			preparedStatement.setString(3, Contenuto);
+			preparedStatement.setString(4, new java.sql.Date(Calendar.getInstance().getTime().getTime()).toString());
 
 			preparedStatement.executeQuery();
 
