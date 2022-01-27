@@ -4,12 +4,12 @@ import java.util.Date;
 import java.util.Objects;
 
 public class MessaggioBean {
-	
+
 	private String IDTicket;
 	private String CF;
 	private String contenuto;
 	private Date data;
-	
+
 	public MessaggioBean(String iDTicket, String cF, String contenuto, Date data) {
 		super();
 		IDTicket = iDTicket;
@@ -17,8 +17,9 @@ public class MessaggioBean {
 		this.contenuto = contenuto;
 		this.data = data;
 	}
-	
-	public MessaggioBean() {}
+
+	public MessaggioBean() {
+	}
 
 	@Override
 	public String toString() {

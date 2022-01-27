@@ -12,8 +12,7 @@ public class OrdineBean {
 	private Date data;
 	private String stato;
 	private String codiceTracciamento;
-	
-	
+
 	public OrdineBean(String iD, String iDCliente, String iDArticolo, int quantita, Date data, String stato,
 			String codiceTracciamento) {
 		super();
@@ -26,7 +25,8 @@ public class OrdineBean {
 		this.codiceTracciamento = codiceTracciamento;
 	}
 
-	public OrdineBean() {}
+	public OrdineBean() {
+	}
 
 	@Override
 	public String toString() {
@@ -78,8 +78,8 @@ public class OrdineBean {
 
 	public void setStato(String stato) {
 		final Set<String> states = Set.of("InAttesa", "Spedito", "Rimborsato", "Annullato");
-        if (states.contains(stato))
-            this.stato = stato;
+		if (states.contains(stato))
+			this.stato = stato;
 	}
 
 	public String getCodiceTracciamento() {
@@ -89,5 +89,5 @@ public class OrdineBean {
 	public void setCodiceTracciamento(String codiceTracciamento) {
 		this.codiceTracciamento = codiceTracciamento;
 	}
-	
+
 }

@@ -3,19 +3,20 @@ package Bean;
 import java.util.Objects;
 
 public class FotoBean {
-	
+
 	private String ID;
 	private String IDArticolo;
 	private String path;
-	
+
 	public FotoBean(String iD, String iDArticolo, String path) {
 		super();
 		ID = iD;
 		IDArticolo = iDArticolo;
 		this.path = path;
 	}
-	
-	public FotoBean() {}
+
+	public FotoBean() {
+	}
 
 	@Override
 	public String toString() {
@@ -50,5 +51,5 @@ public class FotoBean {
 	public void setPath(String path) {
 		this.path = path;
 	}
-	
+
 }

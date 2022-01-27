@@ -3,14 +3,15 @@ package Bean;
 import java.util.Objects;
 
 public class TicketBean {
-	
+
 	private String IDTicket;
 	private String IDCliente;
 	private String tipologia;
 	private String stato;
-	
-	public TicketBean() {}
-	
+
+	public TicketBean() {
+	}
+
 	public TicketBean(String iDTicket, String iDCliente, String tipologia, String stato) {
 		super();
 		IDTicket = iDTicket;
@@ -57,5 +58,5 @@ public class TicketBean {
 	public void setStato(String stato) {
 		this.stato = stato;
 	}
-	
+
 }

@@ -7,32 +7,32 @@ import java.sql.SQLException;
 
 import Bean.UtenteBean;
 
-public class GestioneAccount {	
+public class GestioneAccount {
 	public boolean registrazioneUtente(UtenteBean utente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-			String registrazioneUtente = "INSERT INTO Utente (`CF`, `NOME`, `COGNOME`, `EMAIL`, `PASSWORD`, `VIA`, `NUMEROCIVICO`, `CITTA`, `CAP`, `TIPOLOGIA`)" +
-											" VALUES (`?`,`?`,`?`,`?`,`?`,`?`,`?`,`?`,`?`,`?`);";
-			try {
-				connection = DriverManagerConnectionPool.getConnection();
-				preparedStatement=connection.prepareStatement(registrazioneUtente);
+		String registrazioneUtente = "INSERT INTO Utente (`CF`, `NOME`, `COGNOME`, `EMAIL`, `PASSWORD`, `VIA`, `NUMEROCIVICO`, `CITTA`, `CAP`, `TIPOLOGIA`)"
+				+ " VALUES (`?`,`?`,`?`,`?`,`?`,`?`,`?`,`?`,`?`,`?`);";
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(registrazioneUtente);
 
-				preparedStatement.setString(1, utente.getCF());
-				preparedStatement.setString(2, utente.getNome());
-				preparedStatement.setString(3, utente.getCognome());
-				preparedStatement.setString(4, utente.getEmail());
-				preparedStatement.setString(5, utente.getPassword());
-				preparedStatement.setString(6, utente.getVia());
-				preparedStatement.setInt(7, utente.getNumeroCivico());
-				preparedStatement.setString(8, utente.getCitta());
-				preparedStatement.setInt(9, utente.getCAP());
-				preparedStatement.setInt(10, utente.getTipologia());
+			preparedStatement.setString(1, utente.getCF());
+			preparedStatement.setString(2, utente.getNome());
+			preparedStatement.setString(3, utente.getCognome());
+			preparedStatement.setString(4, utente.getEmail());
+			preparedStatement.setString(5, utente.getPassword());
+			preparedStatement.setString(6, utente.getVia());
+			preparedStatement.setInt(7, utente.getNumeroCivico());
+			preparedStatement.setString(8, utente.getCitta());
+			preparedStatement.setInt(9, utente.getCAP());
+			preparedStatement.setInt(10, utente.getTipologia());
 
-				preparedStatement.executeUpdate();
+			preparedStatement.executeUpdate();
 
-				connection.commit();
-				return true;
+			connection.commit();
+			return true;
 		} finally {
 			try {
 				if (preparedStatement != null)
@@ -43,7 +43,7 @@ public class GestioneAccount {
 		}
 	}
 
-	public boolean eliminaUtente(String CF) throws SQLException{
+	public boolean eliminaUtente(String CF) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -66,51 +66,24 @@ public class GestioneAccount {
 		}
 	}
 
-	public synchronized boolean eliminaUtente(UtenteBean utente) throws SQLException{
+	public synchronized boolean eliminaUtente(UtenteBean utente) throws SQLException {
 		return eliminaUtente(utente.getCF());
 	}
 
-
-	public boolean aggiornamentoUtente (UtenteBean utente) throws SQLException {
+	public boolean modificaUtente(UtenteBean utente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		UtenteBean u = new UtenteBean();
+		UtenteBean u = dettagliUtente(utente.getCF());
+		ResultSet rs = null;
 
-		String searchUtenteQuery="SELECT * FROM UTENTE WHERE CF='`?`';";
-		try{
-            connection = DriverManagerConnectionPool.getConnection();
-            preparedStatement = connection.prepareStatement(searchUtenteQuery);
-            preparedStatement.setString(1, utente.getCF());
-            ResultSet rs = preparedStatement.executeQuery();
-            preparedStatement.close();
-
-            if(rs.next()){
-               u = new UtenteBean(
-                        rs.getString("CF"),
-                        rs.getString("Nome"),
-                        rs.getString("Cognome"),
-                        rs.getString("Email"),
-                        rs.getString("password"),
-                        rs.getString("Via"),
-                        rs.getInt("NumeroCivico"),
-                        rs.getString("Citta"),
-                        rs.getString("Provincia"),
-                        rs.getInt("CAP"),
-                        rs.getInt("Tipologia"),
-                        rs.getString("CartaDiCredito")
-                        );
-            }
-            else return false;
-
-		
-            String updateSQL = "UPDATE Utente SET NOME = `?`, SET COGNOME = `?`, SET EMAIL = `?`, PASSWORD = `?`,"+
-							" VIA = `?`, CAP = `?`, NUMEROCIVICO = `?`, ,  CITTA = `?`, PROVINCIA=`?` WHERE CF_CLIENTE = `?`;";
-
+		String updateUtenteQuery = "UPDATE Utente SET NOME = `?`, SET COGNOME = `?`, SET EMAIL = `?`, PASSWORD = `?`,"
+				+ " VIA = `?`, CAP = `?`, NUMEROCIVICO = `?`, ,  CITTA = `?`, PROVINCIA=`?` WHERE CF_CLIENTE = `?`;";
+		try {
 			connection = DriverManagerConnectionPool.getConnection();
-			
-			if (!utente.getEmail().equals(u.getEmail()) && !utente.checkEmail(utente.getEmail()))
+
+			if (utente == null || (!utente.getEmail().equals(u.getEmail()) && !utente.checkEmail(utente.getEmail())))
 				return false;
-			
+
 			if (!utente.getPassword().equals(u.getPassword())) {
 				if (utente.checkPassword(utente.getPassword())) {
 					String getPasswordQuery = "SELECT PASSWORD(`?`);";
@@ -122,8 +95,8 @@ public class GestioneAccount {
 					utente.setPassword(rs.getString(0));
 				}
 			}
-			
-			preparedStatement = connection.prepareStatement(updateSQL);
+
+			preparedStatement = connection.prepareStatement(updateUtenteQuery);
 			preparedStatement.setString(1, utente.getNome());
 			preparedStatement.setString(2, utente.getCognome());
 			preparedStatement.setString(3, utente.getEmail());
@@ -146,40 +119,30 @@ public class GestioneAccount {
 			}
 		}
 	}
-	
+
 	public UtenteBean dettagliUtente(String CF) throws SQLException {
 		UtenteBean result = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM utente WHERE CF='" + CF+ "';";
+		String searchTicketQuery = "SELECT * FROM utente WHERE CF='" + CF + "';";
 
-		try{
+		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
 			rs = preparedStatement.executeQuery();
-			
-			if(rs.next()){
-				result = new UtenteBean(
-						 rs.getString("CF"),
-                        rs.getString("Nome"),
-                        rs.getString("Cognome"),
-                        rs.getString("Email"),
-                        rs.getString("password"),
-                        rs.getString("Via"),
-                        rs.getInt("NumeroCivico"),
-                        rs.getString("Citta"),
-                        rs.getString("Provincia"),
-                        rs.getInt("CAP"),
-                        rs.getInt("Tipologia"),
-                        rs.getString("CartaDiCredito")
-						);
+
+			if (rs.next()) {
+				result = new UtenteBean(rs.getString("CF"), rs.getString("Nome"), rs.getString("Cognome"),
+						rs.getString("Email"), rs.getString("password"), rs.getString("Via"), rs.getInt("NumeroCivico"),
+						rs.getString("Citta"), rs.getString("Provincia"), rs.getInt("CAP"), rs.getInt("Tipologia"),
+						rs.getString("CartaDiCredito"));
 				return result;
 			}
 			return null;
 		} finally {
-			try{
-				if(connection!=null){
+			try {
+				if (connection != null) {
 					connection.close();
 				}
 			} finally {

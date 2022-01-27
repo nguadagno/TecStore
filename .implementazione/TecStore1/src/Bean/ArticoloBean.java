@@ -16,9 +16,10 @@ public class ArticoloBean {
 	private String IDCentralinista;
 	private Date data;
 	private boolean rimborsabile;
-	
-	public ArticoloBean () {}
-	
+
+	public ArticoloBean() {
+	}
+
 	public ArticoloBean(String iD, String nome, String descrizione, String iDVenditore, int quantita, float prezzo,
 			String stato, String iDCentralinista, Date data, boolean rimborsabile) {
 		super();
@@ -33,11 +34,11 @@ public class ArticoloBean {
 		this.data = data;
 		this.rimborsabile = rimborsabile;
 	}
-	
+
 	public boolean checkData(Date data) {
 		return data.equals(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 	}
-	
+
 	@Override
 	public String toString() {
 		return "ArticoloBean [ID=" + ID + ", nome=" + nome + ", descrizione=" + descrizione + ", IDVenditore="
@@ -84,7 +85,7 @@ public class ArticoloBean {
 	public String getIDVenditore() {
 		return IDVenditore;
 	}
-	
+
 	public int getQuantita() {
 		return quantita;
 	}
@@ -137,6 +138,5 @@ public class ArticoloBean {
 	public void setRimborsabile(boolean rimborsabile) {
 		this.rimborsabile = rimborsabile;
 	}
-	
-	
+
 }
