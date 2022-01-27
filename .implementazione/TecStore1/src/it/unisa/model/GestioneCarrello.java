@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Bean.ArticoloBean;
-import Bean.TicketBean;
 import Bean.UtenteBean;
 
 public class GestioneCarrello {
@@ -28,7 +27,7 @@ public class GestioneCarrello {
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
 			rs = preparedStatement.executeQuery();
 			
-			if(rs.next()){
+			while(rs.next()){
 				ArticoloBean articolo = new ArticoloBean(
 						rs.getString("ID"),
 						rs.getString("Nome"),
@@ -38,7 +37,7 @@ public class GestioneCarrello {
 						rs.getFloat("Prezzo"),
 						rs.getString("Stato"),
 						rs.getString("IDCentralinista"),
-						rs.getDate("Date"),
+						rs.getDate("Data"),
 						rs.getBoolean("Rimborsabile")
 						);
 				carrello.add(articolo);
@@ -61,7 +60,7 @@ public class GestioneCarrello {
 			return false;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String aggiuntaCarrelloQuery = "INSERT INTO carrello (IDCliente, IDArticolo, Quantita) VALUES (?,?,?);";
+		String aggiuntaCarrelloQuery = "INSERT INTO carrello (IDCliente, IDArticolo, Quantita) VALUES (`?`,`?`,`?`);";
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -117,7 +116,7 @@ public class GestioneCarrello {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String aggiuntaCarrelloQuery = "UPDATE carrello SET quantita = ? WHERE IDCliente = ? AND IDArticolo = ?";
+		String aggiuntaCarrelloQuery = "UPDATE carrello SET quantita = `?` WHERE IDCliente = `?` AND IDArticolo = `?`";
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
