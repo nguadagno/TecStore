@@ -8,12 +8,14 @@ import java.sql.SQLException;
 import Bean.UtenteBean;
 
 public class GestioneAccount {
+	// TODO dettagli utente da CF
+	
 	public boolean registrazioneUtente(UtenteBean utente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 			String registrazioneUtente = "INSERT INTO Utente (`CF`, `NOME`, `COGNOME`, `EMAIL`, `PASSWORD`, `VIA`, `NUMEROCIVICO`, `CITTA`, `CAP`, `TIPOLOGIA`)" +
-											" VALUES (?,?,?,?,?,?,?,?,?,?);";
+											" VALUES (`?`,`?`,`?`,`?`,`?`,`?`,`?`,`?`,`?`,`?`);";
 			try {
 				connection = DriverManagerConnectionPool.getConnection();
 				preparedStatement=connection.prepareStatement(registrazioneUtente);
@@ -47,7 +49,7 @@ public class GestioneAccount {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String deleteSQL = "DELETE FROM WHERE CF_CLIENTE = ?;";
+		String deleteSQL = "DELETE FROM WHERE CF_CLIENTE = `?`;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -76,7 +78,7 @@ public class GestioneAccount {
 		PreparedStatement preparedStatement = null;
 		UtenteBean u = new UtenteBean();
 
-		String searchUtenteQuery="SELECT * FROM UTENTE WHERE CF='?';";
+		String searchUtenteQuery="SELECT * FROM UTENTE WHERE CF='`?`';";
 		try{
             connection = DriverManagerConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(searchUtenteQuery);
@@ -99,15 +101,12 @@ public class GestioneAccount {
                         rs.getString("CartaDiCredito")
                         );
             }
-		} finally {
+            else return false;
 
-		}
 		
-		
-		String updateSQL = "UPDATE Utente SET NOME = ?, SET COGNOME = ?, SET EMAIL = ?, PASSWORD = ?,"+
-							" VIA = ?, CAP = ?, NUMEROCIVICO = ?, ,  CITTA = ?, PROVINCIA=? WHERE CF_CLIENTE = ?;";
+            String updateSQL = "UPDATE Utente SET NOME = `?`, SET COGNOME = `?`, SET EMAIL = `?`, PASSWORD = `?`,"+
+							" VIA = `?`, CAP = `?`, NUMEROCIVICO = `?`, ,  CITTA = `?`, PROVINCIA=`?` WHERE CF_CLIENTE = `?`;";
 
-		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			
 			if (!utente.getEmail().equals(u.getEmail()) && !utente.checkEmail(utente.getEmail()))
@@ -115,10 +114,10 @@ public class GestioneAccount {
 			
 			if (!utente.getPassword().equals(u.getPassword())) {
 				if (utente.checkPassword(utente.getPassword())) {
-					String getPasswordQuery = "SELECT PASSWORD('?');";
+					String getPasswordQuery = "SELECT PASSWORD(`?`);";
 					preparedStatement = connection.prepareStatement(getPasswordQuery);
 					preparedStatement.setString(1, utente.getPassword());
-					ResultSet rs = preparedStatement.executeQuery();
+					rs = preparedStatement.executeQuery();
 					rs.next();
 					utente.setPassword(rs.getString(0));
 				}
@@ -146,5 +145,48 @@ public class GestioneAccount {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
-}
+	}
+	
+	public UtenteBean dettagliUtente(String CF) throws SQLException {
+		UtenteBean result = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		String searchTicketQuery = "SELECT * FROM utente WHERE CF='" + CF+ "';";
+
+		try{
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(searchTicketQuery);
+			rs = preparedStatement.executeQuery();
+			
+			if(rs.next()){
+				result = new UtenteBean(
+						 rs.getString("CF"),
+                        rs.getString("Nome"),
+                        rs.getString("Cognome"),
+                        rs.getString("Email"),
+                        rs.getString("password"),
+                        rs.getString("Via"),
+                        rs.getInt("NumeroCivico"),
+                        rs.getString("Citta"),
+                        rs.getString("Provincia"),
+                        rs.getInt("CAP"),
+                        rs.getInt("Tipologia"),
+                        rs.getString("CartaDiCredito")
+						);
+				return result;
+			}
+			return null;
+		} finally {
+			try{
+				if(connection!=null){
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+
+
 }
