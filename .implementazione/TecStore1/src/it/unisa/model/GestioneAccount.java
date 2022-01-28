@@ -5,6 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Random;
+
+import Bean.MessaggioBean;
 import Bean.UtenteBean;
 
 public class GestioneAccount {
@@ -31,9 +36,7 @@ public class GestioneAccount {
 			ResultSet rs = preparedStatement.executeQuery();
 
 			rs.last();
-			if (rs.getRow() != 1)
-				return false;
-			return false;
+			return (rs.getRow() != 1);
 		} finally {
 			try {
 				if (connection != null)
@@ -102,7 +105,7 @@ public class GestioneAccount {
 		}
 	}
 
-	public synchronized boolean eliminaUtente(UtenteBean utente) throws SQLException {
+	public boolean eliminaUtente(UtenteBean utente) throws SQLException {
 		return eliminaUtente(utente.getCF());
 	}
 
@@ -194,4 +197,90 @@ public class GestioneAccount {
 		}
 	}
 
+	public ArrayList<UtenteBean> ricercaDipendenti(String testo) throws SQLException {
+		ArrayList<UtenteBean> result = new ArrayList<UtenteBean>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		String searchTicketQuery = "SELECT * FROM utente WHERE Tipologia != `1` AND (nome LIKE `%?%` OR cognome LIKE `%?$` OR CF LIKE `%?$`);";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(searchTicketQuery);
+			preparedStatement.setString(1, testo);
+			preparedStatement.setString(2, testo);
+			preparedStatement.setString(3, testo);
+			rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				UtenteBean u = new UtenteBean(rs.getString("CF"), rs.getString("Nome"), rs.getString("Cognome"),
+						rs.getString("Email"), rs.getString("password"), rs.getString("Via"), rs.getInt("NumeroCivico"),
+						rs.getString("Citta"), rs.getString("Provincia"), rs.getInt("CAP"), rs.getInt("Tipologia"),
+						rs.getString("CartaDiCredito"));
+				result.add(u);
+			}
+			return result;
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+
+	public boolean autenticazione(String email, String password) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		String searchTicketQuery = "SELECT * FROM utente WHERE email = `?` AND password = PASSWORD(`?`);";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(searchTicketQuery);
+			preparedStatement.setString(1, email);
+			preparedStatement.setString(2, password);
+			rs = preparedStatement.executeQuery();
+
+			rs.last();
+			return (rs.getRow() != 1);
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+
+	public String generatePassword(int length) {
+		if (length < 10) {
+			length = 10;
+		}
+
+		final char[] lowercase = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+		final char[] uppercase = "ABCDEFGJKLMNPRSTUVWXYZ".toCharArray();
+		final char[] numbers = "0123456789".toCharArray();
+		final char[] symbols = "^$?!@#%&".toCharArray();
+		final char[] allAllowed = "abcdefghijklmnopqrstuvwxyzABCDEFGJKLMNPRSTUVWXYZ0123456789^?!".toCharArray();
+
+		Random random = new SecureRandom();
+
+		StringBuilder password = new StringBuilder();
+
+		for (int i = 0; i < length - 4; i++) {
+			password.append(allAllowed[random.nextInt(allAllowed.length)]);
+		}
+
+		password.insert(random.nextInt(password.length()), lowercase[random.nextInt(lowercase.length)]);
+		password.insert(random.nextInt(password.length()), uppercase[random.nextInt(uppercase.length)]);
+		password.insert(random.nextInt(password.length()), numbers[random.nextInt(numbers.length)]);
+		password.insert(random.nextInt(password.length()), symbols[random.nextInt(symbols.length)]);
+
+		return password.toString();
+	}
 }

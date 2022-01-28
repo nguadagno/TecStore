@@ -113,9 +113,19 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String cambiaStatoQuery = "UPDATE ticket SET stato = `?` WHERE IDTicket = `?`;";
+		String getStatoQuery = "SELECT stato FROM ticket where ID = `?`;"; 
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(getStatoQuery);
+			preparedStatement.setString(1, IDTicket);
+			ResultSet rs = preparedStatement.executeQuery();
+			if (rs.next()) {
+				String statoOld = rs.getString("stato");
+				if (statoOld == "InElaborazione")
+					return false;
+			}
+			
 			preparedStatement = connection.prepareStatement(cambiaStatoQuery);
 			preparedStatement.setString(1, stato);
 			preparedStatement.setString(2, IDTicket);
@@ -211,7 +221,7 @@ public class GestioneAssistenza {
 		return rispostaTicket(IDTicket, utente.getCF(), contenuto);
 	}
 
-	public boolean rispostaTicket(String IDTicket, String CF, String Contenuto) throws SQLException {
+	public boolean rispostaTicket(String IDTicket, String CF, String contenuto) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		// create table test(id int primary key, data uuid default random_uuid());
@@ -222,7 +232,7 @@ public class GestioneAssistenza {
 			preparedStatement = connection.prepareStatement(insertTicketQuery);
 			preparedStatement.setString(1, CF);
 			preparedStatement.setString(2, IDTicket);
-			preparedStatement.setString(3, Contenuto);
+			preparedStatement.setString(3, contenuto);
 			preparedStatement.setString(4, new java.sql.Date(Calendar.getInstance().getTime().getTime()).toString());
 
 			preparedStatement.executeQuery();

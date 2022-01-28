@@ -167,9 +167,19 @@ public class GestioneOrdine {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String cambiaStatoQuery = "UPDATE ordine SET stato = `?` WHERE ID = `?`;";
+		String getStatoQuery = "SELECT stato FROM ordine where ID = `?`;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(getStatoQuery);
+			preparedStatement.setString(1, ID);
+			ResultSet rs = preparedStatement.executeQuery();
+			if (rs.next()) {
+				String statoOld = rs.getString("stato");
+				if (statoOld == "InElaborazione")
+					return false;
+			}
+
 			preparedStatement = connection.prepareStatement(cambiaStatoQuery);
 			preparedStatement.setString(1, stato);
 			preparedStatement.setString(2, ID);
@@ -186,4 +196,32 @@ public class GestioneOrdine {
 			}
 		}
 	}
+
+	public boolean setCodiceTracciamento(String IDOrdine, String codiceTracking) throws SQLException {
+		if (codiceTracking.isEmpty())
+			return false;
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String setTrackingQuery = "UPDATE ordine SET CodiceTracciamento = `?` WHERE ID = `?`;";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(setTrackingQuery);
+			preparedStatement.setString(1, IDOrdine);
+			preparedStatement.setString(2, codiceTracking);
+			preparedStatement.executeQuery();
+			connection.commit();
+			return true;
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+
 }
