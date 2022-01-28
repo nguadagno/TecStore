@@ -9,15 +9,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/RimozioneCarrelloServlet")
+@WebServlet("/RimozioneDalCarrelloServlet")
 
-public class RimozioneCarrelloServlet extends HttpServlet {
+public class RimozioneDalCarrelloServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	GestioneCarrello model = new GestioneCarrello();
 
-	public RimozioneCarrelloServlet() {
+	public RimozioneDalCarrelloServlet() {
 		super();
 	}
 
