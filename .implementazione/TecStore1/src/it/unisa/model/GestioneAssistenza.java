@@ -10,20 +10,22 @@ import Bean.TicketBean;
 import Bean.UtenteBean;
 
 public class GestioneAssistenza {
-	public ArrayList<TicketBean> elencoTicketCliente(ClienteBean c) throws SQLException {
-		return elencoTicketCliente(c.getCF());
+	public ArrayList<TicketBean> elencoTicketCliente(ClienteBean c, int limit) throws SQLException {
+		return elencoTicketCliente(c.getCF(), limit);
 	}
 
-	public ArrayList<TicketBean> elencoTicketCliente(String CF) throws SQLException {
+	public ArrayList<TicketBean> elencoTicketCliente(String CF, int limit) throws SQLException {
 		ArrayList<TicketBean> ticketList = new ArrayList<TicketBean>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM ticket WHERE IDCliente = " + CF + ";";
+		String searchTicketQuery = "SELECT * FROM ticket WHERE IDCliente = `?` LIMIT = `?`;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
+			preparedStatement.setString(1, CF);
+			preparedStatement.setInt(2, limit);
 			rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
@@ -113,7 +115,7 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String cambiaStatoQuery = "UPDATE ticket SET stato = `?` WHERE IDTicket = `?`;";
-		String getStatoQuery = "SELECT stato FROM ticket where ID = `?`;"; 
+		String getStatoQuery = "SELECT stato FROM ticket where ID = `?`;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -125,7 +127,7 @@ public class GestioneAssistenza {
 				if (statoOld == "InElaborazione")
 					return false;
 			}
-			
+
 			preparedStatement = connection.prepareStatement(cambiaStatoQuery);
 			preparedStatement.setString(1, stato);
 			preparedStatement.setString(2, IDTicket);
