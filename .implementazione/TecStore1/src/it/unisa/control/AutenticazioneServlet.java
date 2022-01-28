@@ -27,7 +27,7 @@ public class AutenticazioneServlet extends HttpServlet {
 			throws ServletException, IOException {
 		GestioneAccount model = new GestioneAccount();
 
-		request.getSession().setAttribute("operazione", "autenticazione");
+		request.getSession().setAttribute("operazione", "Autenticazione");
 		try {
 			if (model.autenticazione(request.getAttribute("email").toString(),
 					request.getAttribute("password").toString())) {

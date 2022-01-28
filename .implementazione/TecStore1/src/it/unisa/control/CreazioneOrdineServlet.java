@@ -29,20 +29,20 @@ public class CreazioneOrdineServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")) {
-			request.getSession().setAttribute("errore", "eccessononautorizzato");
+			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 
-		request.getSession().setAttribute("operazione", "crezioneOrdine");
+		request.getSession().setAttribute("operazione", "creazioneOrdine");
 
 		try {
 			if (model.creazioneOrdine(request.getSession().getAttribute("CF").toString()))
-				response.sendRedirect(request.getContextPath() + "/Successo.jsp");
+				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			else
-				response.sendRedirect(request.getContextPath() + "/Errore.jsp");
+				response.sendRedirect(request.getContextPath() + "/errore.jsp");
 
 		} catch (SQLException e) {
-			response.sendRedirect(request.getContextPath() + "/Errore.jsp");
+			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 	}
 }

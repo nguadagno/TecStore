@@ -32,7 +32,7 @@ public class GetCarrelloServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")) {
-			request.getSession().setAttribute("errore", "erroreaggiornamentoarticolo");
+			request.getSession().setAttribute("errore", "ErroreRichiestaCarrello");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 
@@ -44,10 +44,10 @@ public class GetCarrelloServlet extends HttpServlet {
 		try {
 			allOrdersByUser = model.getCarrello(user);
 			request.setAttribute("allOrdersByUser", allOrdersByUser);
-			response.sendRedirect(request.getContextPath() + "/Carrello.jsp");
+			response.sendRedirect(request.getContextPath() + "/carrello.jsp");
 
 		} catch (SQLException e) {
-			response.sendRedirect(request.getContextPath() + "/Errore.jsp");
+			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 	}
 }

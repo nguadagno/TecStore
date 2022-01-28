@@ -36,10 +36,8 @@ public class DettagliTicketServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "creazioneTicket");
 
 		try {
-			if (request.getSession().getAttribute("tipologiaUtente").toString().equals("2")) {
+			if (request.getSession().getAttribute("tipologiaUtente").toString().equals("2"))
 				model.cambiaStato(request.getSession().getAttribute("IDTicket").toString(), "InElaborazione");
-			}
-
 			request.getSession().setAttribute("messaggi",
 					model.elencoMessaggiTicket(request.getSession().getAttribute("IDTicket").toString()));
 			response.sendRedirect(request.getContextPath() + "/dettagliTicket.jsp");

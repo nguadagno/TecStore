@@ -37,7 +37,7 @@ public class ElencoTicketCentralinistaServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "elencoTicket");
 
 		try {
-			ArrayList<TicketBean> elenco = model.elencoTicketCentralinista(10);
+			ArrayList<TicketBean> elenco = model.elencoTicketCentralinista(Integer.parseInt(request.getSession().getAttribute("limit").toString()));
 			request.getSession().setAttribute("elenco", elenco);
 			response.sendRedirect(request.getContextPath() + "/gestioneassistenza.jsp");
 		} catch (SQLException e) {

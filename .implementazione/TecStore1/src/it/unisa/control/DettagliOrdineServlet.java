@@ -31,30 +31,24 @@ public class DettagliOrdineServlet extends HttpServlet {
 
 		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")
 				|| !request.getSession().getAttribute("tipologiaUtente").toString().equals("3")) {
-			request.getSession().setAttribute("errore", "eccessononautorizzato");
+			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 
-		request.getSession().setAttribute("operazione", "elaborazioneordine");
-		OrdineBean order = new OrdineBean();
-
+		request.getSession().setAttribute("operazione", "dettagliOrdine");
+		
 		try {
-
-			if (model.cambiaStato(request.getSession().getAttribute("IDOrdine").toString(),
-					request.getSession().getAttribute("Stato").toString())) {
-				order = model.dettagliOrdineCliente(request.getSession().getAttribute("CF").toString(),
-						request.getSession().getAttribute("IDOrdine").toString());
-
-				request.setAttribute("allOrdersByUser", order);
-				if (request.getSession().getAttribute("tipologiaUtente").toString().equals("3"))
-					response.sendRedirect(request.getContextPath() + "/DettagliOrdineMagazziniere.jsp");
-				else
-					response.sendRedirect(request.getContextPath() + "/DettagliOrdineCliente.jsp");
+			request.setAttribute("ordine",
+					model.dettagliOrdineCliente(request.getSession().getAttribute("CF").toString(),
+							request.getSession().getAttribute("IDOrdine").toString()));
+			if (request.getSession().getAttribute("tipologiaUtente").toString().equals("3")) {
+				model.cambiaStato(request.getSession().getAttribute("IDOrdine").toString(), "InElaborazione");
+				response.sendRedirect(request.getContextPath() + "/DettagliOrdineMagazziniere.jsp");
 			} else
-				response.sendRedirect(request.getContextPath() + "/Errore.jsp");
+				response.sendRedirect(request.getContextPath() + "/errore.jsp");
 
 		} catch (SQLException e) {
-			response.sendRedirect(request.getContextPath() + "/Errore.jsp");
+			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 	}
 }

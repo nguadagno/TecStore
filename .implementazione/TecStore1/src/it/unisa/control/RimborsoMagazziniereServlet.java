@@ -29,22 +29,22 @@ public class RimborsoMagazziniereServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("3")) {
-			request.getSession().setAttribute("errore", "eccessononautorizzato");
+			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 
-		request.getSession().setAttribute("operazione", "confermaordine");
+		request.getSession().setAttribute("operazione", "confermaRimborso");
 
 		try {
 
 			if (model.cambiaStato(request.getSession().getAttribute("IDOrdine").toString(),
 					request.getSession().getAttribute("Stato").toString()))
-				response.sendRedirect(request.getContextPath() + "/Successo.jsp");
+				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			else
-				response.sendRedirect(request.getContextPath() + "/Errore.jsp");
+				response.sendRedirect(request.getContextPath() + "/errore.jsp");
 
 		} catch (SQLException e) {
-			response.sendRedirect(request.getContextPath() + "/Errore.jsp");
+			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 	}
 }

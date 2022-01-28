@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/AggiornamentoCarrelloServlet")
 
-public class AggiornamentoCarrelloServlet extends HttpServlet {
+public class AggiornamentoQuantitaCarrelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	GestioneCarrello model = new GestioneCarrello();
@@ -24,21 +24,21 @@ public class AggiornamentoCarrelloServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")) {
-			request.getSession().setAttribute("errore", "eccessononautorizzato");
+			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 
-		request.getSession().setAttribute("operazione", "aggiornamentocarrello");
+		request.getSession().setAttribute("operazione", "AggiornamentoQuantitaCarrello");
 
 		try {
 			if (model.aggiornamentoQuantita(request.getSession().getAttribute("CF").toString(),
 					request.getParameter("IDArticolo"), (int) request.getAttribute("quantita")))
-				response.sendRedirect(request.getContextPath() + "/Successo.jsp");
+				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			else
-				response.sendRedirect(request.getContextPath() + "/Errore.jsp");
+				response.sendRedirect(request.getContextPath() + "/errore.jsp");
 
 		} catch (SQLException e) {
-			response.sendRedirect(request.getContextPath() + "/Errore.jsp");
+			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 	}
 }

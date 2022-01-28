@@ -31,11 +31,11 @@ public class VisualizzaElencoOrdineServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")) {
-			request.getSession().setAttribute("errore", "eccessononautorizzato");
+			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 
-		request.getSession().setAttribute("operazione", "visualizzaelencoordine");
+		request.getSession().setAttribute("operazione", "ElencoOrdiniCliente");
 		ArrayList<OrdineBean> allOrders = new ArrayList<OrdineBean>();
 
 		try {
@@ -44,7 +44,7 @@ public class VisualizzaElencoOrdineServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/InfoOrdine.jsp");
 
 		} catch (SQLException e) {
-			response.sendRedirect(request.getContextPath() + "/Errore.jsp");
+			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 	}
 }

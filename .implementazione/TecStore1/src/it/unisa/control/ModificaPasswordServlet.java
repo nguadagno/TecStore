@@ -41,6 +41,8 @@ public class ModificaPasswordServlet extends HttpServlet {
 			u.setPassword(u.getTipologia() == 1 ? request.getSession().getAttribute("CF").toString()
 					: model.generatePassword(15));
 			if (model.modificaUtente(u.getCF(), u)) {
+				request.getSession().setAttribute("email", u.getEmail());
+				request.getSession().setAttribute("password", u.getPassword());
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			} else {
 				response.sendRedirect(request.getContextPath() + "/errore.jsp");
