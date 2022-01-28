@@ -224,4 +224,37 @@ public class GestioneOrdine {
 		}
 	}
 
+	public ArrayList<OrdineBean> elencoRimborsi(int limite) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+
+		ArrayList<OrdineBean> ordersList = new ArrayList<OrdineBean>();
+
+		String elencoOrdiniClienteQuery = "SELECT * FROM ordine WHERE stato = 'InAttesaRimborso' LIMIT = `?`;";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(elencoOrdiniClienteQuery);
+			preparedStatement.setInt(1, limite);
+			rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				OrdineBean order = new OrdineBean(rs.getString("ID"), rs.getString("IDCliente"),
+						rs.getString("IDArticolo"), rs.getInt("quantita"), rs.getDate("data"), rs.getString("stato"),
+						rs.getString("codiceTracciamento"));
+				ordersList.add(order);
+			}
+
+			return ordersList;
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
 }
