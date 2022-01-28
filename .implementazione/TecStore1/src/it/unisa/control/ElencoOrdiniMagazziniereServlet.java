@@ -11,15 +11,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/VisualizzaElencoOrdine")
+@WebServlet("/VisualizzaElencoOrdiniMagazziniere")
 
-public class VisualizzaElencoOrdineServlet extends HttpServlet {
+public class ElencoOrdiniMagazziniereServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	GestioneOrdine model = new GestioneOrdine();
 
-	public VisualizzaElencoOrdineServlet() {
+	public ElencoOrdiniMagazziniereServlet() {
 		super();
 	}
 
@@ -35,14 +35,13 @@ public class VisualizzaElencoOrdineServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 
-		request.getSession().setAttribute("operazione", "ElencoOrdiniCliente");
-		ArrayList<OrdineBean> allOrders = new ArrayList<OrdineBean>();
+		request.getSession().setAttribute("operazione", "ElencoOrdiniMagazziniere");
 
 		try {
-			allOrders = model.elencoOrdiniMagazziniere();
-			request.setAttribute("allOrdersByUser", allOrders);
-			response.sendRedirect(request.getContextPath() + "/InfoOrdine.jsp");
-
+			ArrayList<OrdineBean> ordini = model
+					.elencoOrdiniMagazziniere();
+			request.setAttribute("ordini", ordini);
+			response.sendRedirect(request.getContextPath() + "/elencoOrdini.jsp");
 		} catch (SQLException e) {
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
