@@ -130,17 +130,18 @@ public class GestioneVendita {
 		}
 	}
 
-	public ArrayList<ArticoloBean> ricercaArticolo(String nome) throws SQLException {
+	public ArrayList<ArticoloBean> ricercaArticolo(String nome, int limit) throws SQLException {
 		ArrayList<ArticoloBean> result = new ArrayList<ArticoloBean>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchArticoloQuery = "SELECT * FROM articolo WHERE Nome LIKE `%?%`;";
+		String searchArticoloQuery = "SELECT * FROM articolo WHERE Nome LIKE `%?%` LIMIT `?`;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(searchArticoloQuery);
-			preparedStatement.setString(1, searchArticoloQuery);
+			preparedStatement.setString(1, nome);
+			preparedStatement.setInt(2, limit);
 			rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
@@ -163,17 +164,17 @@ public class GestioneVendita {
 		}
 	}
 
-	public ArrayList<ArticoloBean> elencoVenditeCentralinista() throws SQLException {
+	public ArrayList<ArticoloBean> elencoVenditeCentralinista(int limit) throws SQLException {
 		ArrayList<ArticoloBean> result = new ArrayList<ArticoloBean>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchArticoloQuery = "SELECT * FROM articolo WHERE Stato = `InAttesa`;";
+		String searchArticoloQuery = "SELECT * FROM articolo WHERE Stato = `InAttesa` LIMIT `?`;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(searchArticoloQuery);
-			preparedStatement.setString(1, searchArticoloQuery);
+			preparedStatement.setInt(1, limit);
 			rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
@@ -196,17 +197,19 @@ public class GestioneVendita {
 		}
 	}
 
-	public ArrayList<ArticoloBean> elencoVenditeCliente(String CF) throws SQLException {
+	public ArrayList<ArticoloBean> elencoVenditeCliente(String CF, String nome, int limit) throws SQLException {
 		ArrayList<ArticoloBean> result = new ArrayList<ArticoloBean>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchArticoloQuery = "SELECT * FROM articolo WHERE IDVenditore=`" + CF + "`;";
+		String searchArticoloQuery = "SELECT * FROM articolo WHERE IDVenditore=`?` AND nome LIKE `%?%` LIMIT `?`;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(searchArticoloQuery);
-			preparedStatement.setString(1, searchArticoloQuery);
+			preparedStatement.setString(1, CF);
+			preparedStatement.setString(2, nome);
+			preparedStatement.setInt(3, limit);
 			rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
