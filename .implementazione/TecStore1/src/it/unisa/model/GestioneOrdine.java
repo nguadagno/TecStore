@@ -86,23 +86,26 @@ public class GestioneOrdine {
 		}
 	}
 
-	public ArrayList<OrdineBean> elencoOrdiniCliente(UtenteBean utente) throws SQLException {
-		return elencoOrdiniCliente(utente.getCF());
+	public ArrayList<OrdineBean> ricercaOrdiniCliente(UtenteBean utente, String nome, int limit) throws SQLException {
+		return ricercaOrdiniCliente(utente.getCF(), nome, limit);
 	}
 
-	public ArrayList<OrdineBean> elencoOrdiniCliente(String CF) throws SQLException {
+	public ArrayList<OrdineBean> ricercaOrdiniCliente(String CF, String nome, int limit) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 
 		ArrayList<OrdineBean> ordersList = new ArrayList<OrdineBean>();
 
-		String elencoOrdiniClienteQuery = "SELECT * FROM ordine WHERE IDCliente = '?';";
+		String elencoOrdiniClienteQuery = "SELECT * FROM ordine WHERE IDCliente = '?' AND nome LIKE `%?%%` LIMIT `?`;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(elencoOrdiniClienteQuery);
 			preparedStatement.setString(1, CF);
+			preparedStatement.setString(2, nome);
+			preparedStatement.setInt(3, limit);
+
 			rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
@@ -140,6 +143,37 @@ public class GestioneOrdine {
 			preparedStatement = connection.prepareStatement(dettagliOrdineQuery);
 			preparedStatement.setString(1, CF);
 			preparedStatement.setString(2, IDOrdine);
+			rs = preparedStatement.executeQuery();
+
+			if (rs.next()) {
+				return new OrdineBean(rs.getString("ID"), rs.getString("IDCliente"), rs.getString("IDArticolo"),
+						rs.getInt("quantita"), rs.getDate("data"), rs.getString("stato"),
+						rs.getString("codiceTracciamento"));
+
+			}
+			return null;
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+	
+	public OrdineBean dettagliOrdineByID(String IDOrdine) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+
+		String dettagliOrdineQuery = "SELECT * FROM ordine WHERE ID = `?`;";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(dettagliOrdineQuery);
+			preparedStatement.setString(1, IDOrdine);
 			rs = preparedStatement.executeQuery();
 
 			if (rs.next()) {

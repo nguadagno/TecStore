@@ -3,6 +3,7 @@ package it.unisa.control;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import Bean.UtenteBean;
 import it.unisa.model.GestioneAccount;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -31,6 +32,9 @@ public class AutenticazioneServlet extends HttpServlet {
 		try {
 			if (model.autenticazione(request.getAttribute("email").toString(),
 					request.getAttribute("password").toString())) {
+				UtenteBean utente = model.dettagliUtenteByEmail(request.getAttribute("email").toString());
+				request.getSession().setAttribute("CF", utente.getCF());
+				request.getSession().setAttribute("tipologia", utente.getTipologia());
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			} else {
 				response.sendRedirect(request.getContextPath() + "/errore.jsp");

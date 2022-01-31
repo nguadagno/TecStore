@@ -169,11 +169,11 @@ public class GestioneAccount {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM utente WHERE CF='" + CF + "';";
+		String searchUtenteQuery = "SELECT * FROM utente WHERE CF='" + CF + "';";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
-			preparedStatement = connection.prepareStatement(searchTicketQuery);
+			preparedStatement = connection.prepareStatement(searchUtenteQuery);
 			rs = preparedStatement.executeQuery();
 
 			if (rs.next()) {
@@ -194,6 +194,37 @@ public class GestioneAccount {
 			}
 		}
 	}
+	
+	public UtenteBean dettagliUtenteByEmail(String email) throws SQLException {
+	UtenteBean result = null;
+	Connection connection = null;
+	PreparedStatement preparedStatement = null;
+	ResultSet rs = null;
+	String searchUtenteQuery = "SELECT * FROM utente WHERE email = `?`;";
+
+	try {
+		connection = DriverManagerConnectionPool.getConnection();
+		preparedStatement = connection.prepareStatement(searchUtenteQuery);
+		rs = preparedStatement.executeQuery();
+
+		if (rs.next()) {
+			result = new UtenteBean(rs.getString("CF"), rs.getString("Nome"), rs.getString("Cognome"),
+					rs.getString("Email"), rs.getString("password"), rs.getString("Via"), rs.getInt("NumeroCivico"),
+					rs.getString("Citta"), rs.getString("Provincia"), rs.getInt("CAP"), rs.getInt("Tipologia"),
+					rs.getString("CartaDiCredito"));
+			return result;
+		}
+		return null;
+	} finally {
+		try {
+			if (connection != null) {
+				connection.close();
+			}
+		} finally {
+			DriverManagerConnectionPool.releaseConnection(connection);
+		}
+	}
+}
 
 	public ArrayList<UtenteBean> ricercaDipendenti(String testo) throws SQLException {
 		ArrayList<UtenteBean> result = new ArrayList<UtenteBean>();

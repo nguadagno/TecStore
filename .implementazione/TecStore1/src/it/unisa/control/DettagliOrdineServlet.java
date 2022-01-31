@@ -2,6 +2,8 @@ package it.unisa.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+
+import Bean.OrdineBean;
 import it.unisa.model.GestioneOrdine;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -37,6 +39,8 @@ public class DettagliOrdineServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "dettagliOrdine");
 
 		try {
+			OrdineBean ordine = model.dettagliOrdineByID(request.getAttribute("IDOrdine").toString());
+			request.getSession().setAttribute("ordine", ordine);
 			request.setAttribute("ordine",
 					model.dettagliOrdineCliente(request.getSession().getAttribute("CF").toString(),
 							request.getSession().getAttribute("IDOrdine").toString()));
