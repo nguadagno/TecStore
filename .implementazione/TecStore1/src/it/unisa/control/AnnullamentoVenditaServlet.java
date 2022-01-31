@@ -2,24 +2,23 @@ package it.unisa.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import Bean.OrdineBean;
 import it.unisa.model.GestioneOrdine;
+import it.unisa.model.GestioneVendita;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/VisualizzaElencoOrdiniCliente")
+@WebServlet("/AnnullamentoVendita")
 
-public class ElencoOrdiniClienteServlet extends HttpServlet {
+public class AnnullamentoVenditaServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	GestioneOrdine model = new GestioneOrdine();
+	GestioneVendita model = new GestioneVendita();
 
-	public ElencoOrdiniClienteServlet() {
+	public AnnullamentoVenditaServlet() {
 		super();
 	}
 
@@ -30,18 +29,19 @@ public class ElencoOrdiniClienteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")
+				&& !request.getSession().getAttribute("tipologiaUtente").toString().equals("4")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 
-		request.getSession().setAttribute("operazione", "ElencoOrdiniCliente");
+		request.getSession().setAttribute("operazione", "annullamentoVendita");
 
 		try {
-			ArrayList<OrdineBean> ordini = model
-					.elencoOrdiniCliente(request.getSession().getAttribute("CF").toString());
-			request.setAttribute("ordini", ordini);
-			response.sendRedirect(request.getContextPath() + "/storicoOrdini.jsp");
+			if (model.rimozioneArticolo(request.getAttribute("IDArticolo").toString()))
+				response.sendRedirect(request.getContextPath() + "/successo.jsp");
+			else
+				response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		} catch (SQLException e) {
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}

@@ -3,26 +3,28 @@ package it.unisa.control;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import Bean.ArticoloBean;
-import it.unisa.model.GestioneVendita;
+import Bean.OrdineBean;
+import it.unisa.model.GestioneOrdine;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/ricercaarticolo")
-public class RicercaVenditaServlet extends HttpServlet {
+@WebServlet("/VisualizzaElencoOrdiniCliente")
+
+public class RicercaOrdiniClienteServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 
-	public RicercaVenditaServlet() {
+	GestioneOrdine model = new GestioneOrdine();
+
+	public RicercaOrdiniClienteServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -33,15 +35,14 @@ public class RicercaVenditaServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 
-		GestioneVendita model = new GestioneVendita();
+		request.getSession().setAttribute("operazione", "ElencoOrdiniCliente");
 
-		request.getSession().setAttribute("operazione", "ricercaArticolo");
 		try {
-			ArrayList<ArticoloBean> risultati = model.elencoVenditeCF(
+			ArrayList<OrdineBean> ordini = model.ricercaOrdiniCliente(
 					request.getSession().getAttribute("CF").toString(), request.getAttribute("nome").toString(),
 					Integer.parseInt(request.getAttribute("limit").toString()));
-			request.getSession().setAttribute("risultati", risultati);
-			response.sendRedirect(request.getContextPath() + "/risultatiRicerca.jsp");
+			request.setAttribute("ordini", ordini);
+			response.sendRedirect(request.getContextPath() + "/storicoOrdini.jsp");
 		} catch (SQLException e) {
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
