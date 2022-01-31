@@ -2,6 +2,8 @@ package it.unisa.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import Bean.OrdineBean;
 import it.unisa.model.GestioneOrdine;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,16 +11,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/AutorizzazioneVendita")
+@WebServlet("/VisualizzaElencoRimborsiMagazziniere")
 
-public class AutorizzazioneVenditaServlet extends HttpServlet {
+public class ElencoRimborsiMagazziniereServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	GestioneOrdine model = new GestioneOrdine();
 
-	public AutorizzazioneVenditaServlet() {
-		super();	
+	public ElencoRimborsiMagazziniereServlet() {
+		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -28,21 +30,17 @@ public class AutorizzazioneVenditaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("2")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("3")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 
-		request.getSession().setAttribute("operazione", "autorizzazioneVendita");
+		request.getSession().setAttribute("operazione", "ElencoRimborsiMagazziniere");
 
 		try {
-
-			if (model.cambiaStato(request.getSession().getAttribute("IDOrdine").toString(),
-					request.getSession().getAttribute("Stato").toString()))
-				response.sendRedirect(request.getContextPath() + "/successo.jsp");
-			else
-				response.sendRedirect(request.getContextPath() + "/errore.jsp");
-
+			ArrayList<OrdineBean> rimborsi = model.elencoRimborsi(Integer.parseInt(request.getAttribute("limit").toString()));
+			request.setAttribute("rimborsi", rimborsi);
+			response.sendRedirect(request.getContextPath() + "/elencoRimborsi.jsp");
 		} catch (SQLException e) {
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
