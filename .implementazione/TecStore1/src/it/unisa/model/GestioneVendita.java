@@ -289,7 +289,7 @@ public class GestioneVendita {
 	public boolean rimozioneArticolo(String IDArticolo) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String rimozioneArticoloQuery = "DELETE FROM articolo WHERE IDArticolo = '?';";
+		String rimozioneArticoloQuery = "UPDATE articolo SET stato=`annullata` WHERE IDArticolo = '?';";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
