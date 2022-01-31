@@ -2,7 +2,6 @@ package it.unisa.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import Bean.OrdineBean;
 import it.unisa.model.GestioneOrdine;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -30,13 +29,13 @@ public class DettagliOrdineServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")
-				|| !request.getSession().getAttribute("tipologiaUtente").toString().equals("3")) {
+				&& !request.getSession().getAttribute("tipologiaUtente").toString().equals("3")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 
 		request.getSession().setAttribute("operazione", "dettagliOrdine");
-		
+
 		try {
 			request.setAttribute("ordine",
 					model.dettagliOrdineCliente(request.getSession().getAttribute("CF").toString(),

@@ -27,9 +27,9 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		if (request.getSession().getAttribute("tipologiaUtente").toString().equals("1")
-				|| request.getSession().getAttribute("tipologiaUtente").toString().equals("2")
-				|| request.getSession().getAttribute("tipologiaUtente").toString().equals("3")
-				|| request.getSession().getAttribute("tipologiaUtente").toString().equals("4")) {
+				&& request.getSession().getAttribute("tipologiaUtente").toString().equals("2")
+				&& request.getSession().getAttribute("tipologiaUtente").toString().equals("3")
+				&& request.getSession().getAttribute("tipologiaUtente").toString().equals("4")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}

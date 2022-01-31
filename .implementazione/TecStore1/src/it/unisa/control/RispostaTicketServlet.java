@@ -28,7 +28,7 @@ public class RispostaTicketServlet extends HttpServlet {
 		GestioneAssistenza model = new GestioneAssistenza();
 
 		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")
-				|| !request.getSession().getAttribute("tipologiaUtente").toString().equals("2")) {
+				&& !request.getSession().getAttribute("tipologiaUtente").toString().equals("2")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
