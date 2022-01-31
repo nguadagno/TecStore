@@ -197,7 +197,7 @@ public class GestioneVendita {
 		}
 	}
 
-	public ArrayList<ArticoloBean> elencoVenditeCliente(String CF, String nome, int limit) throws SQLException {
+	public ArrayList<ArticoloBean> elencoVenditeCF(String CF, String nome, int limit) throws SQLException {
 		ArrayList<ArticoloBean> result = new ArrayList<ArticoloBean>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
