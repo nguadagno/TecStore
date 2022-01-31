@@ -9,15 +9,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/ElaborazioneOrdine")
+@WebServlet("/AutorizzazioneVendita")
 
-public class DettagliOrdineServlet extends HttpServlet {
+public class AutorizzazioneVenditaServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	GestioneOrdine model = new GestioneOrdine();
 
-	public DettagliOrdineServlet() {
+	public AutorizzazioneVenditaServlet() {
 		super();
 	}
 
@@ -28,23 +28,18 @@ public class DettagliOrdineServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")
-				&& !request.getSession().getAttribute("tipologiaUtente").toString().equals("3")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("2")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 
-		request.getSession().setAttribute("operazione", "dettagliOrdine");
+		request.getSession().setAttribute("operazione", "autorizzazioneVendita");
 
 		try {
-			request.setAttribute("ordine",
-					model.dettagliOrdineCliente(request.getSession().getAttribute("CF").toString(),
-							request.getSession().getAttribute("IDOrdine").toString()));
-			if (request.getSession().getAttribute("tipologiaUtente").toString().equals("3")) {
-				model.cambiaStato(request.getSession().getAttribute("IDOrdine").toString(), "InElaborazione");
-				response.sendRedirect(request.getContextPath() + "/dettagliOrdineMagazziniere.jsp");
-			} else if (request.getSession().getAttribute("tipologiaUtente").toString().equals("1"))
-				response.sendRedirect(request.getContextPath() + "/dettagliOrdine.jsp");
+
+			if (model.cambiaStato(request.getSession().getAttribute("IDOrdine").toString(),
+					request.getSession().getAttribute("Stato").toString()))
+				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			else
 				response.sendRedirect(request.getContextPath() + "/errore.jsp");
 
