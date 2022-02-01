@@ -51,7 +51,7 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM ticket WHERE stato = 'InAttesa' LIMIT = " + limit + ";";
+		String searchTicketQuery = "SELECT DISTINCT IDTicket,* FROM ticket NATURAL JOIN messaggio WHERE stato = 'InAttesa' LIMIT = " + limit + " ORDER BY messaggio.data;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();

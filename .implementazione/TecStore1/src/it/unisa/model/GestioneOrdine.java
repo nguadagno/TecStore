@@ -59,7 +59,7 @@ public class GestioneOrdine {
 
 		ArrayList<OrdineBean> ordersList = new ArrayList<OrdineBean>();
 
-		String elencoOrdiniMagazziniereQuery = "SELECT * FROM ordine WHERE stato = 'InAttesa';";
+		String elencoOrdiniMagazziniereQuery = "SELECT * FROM ordine WHERE stato = 'InAttesa' ORDER BY data;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
