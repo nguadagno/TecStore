@@ -6,13 +6,13 @@ public class FotoBean {
 
 	private String ID;
 	private String IDArticolo;
-	private String path;
+	private byte[] foto;
 
-	public FotoBean(String iD, String iDArticolo, String path) {
+	public FotoBean(String iD, String iDArticolo, byte[] foto) {
 		super();
 		ID = iD;
 		IDArticolo = iDArticolo;
-		this.path = path;
+		this.foto = foto;
 	}
 
 	public FotoBean() {
@@ -20,7 +20,7 @@ public class FotoBean {
 
 	@Override
 	public String toString() {
-		return "FotoBeans [ID=" + ID + ", IDArticolo=" + IDArticolo + ", path=" + path + "]";
+		return "FotoBeans [ID=" + ID + ", IDArticolo=" + IDArticolo + "]";
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class FotoBean {
 			return false;
 		FotoBean other = (FotoBean) obj;
 		return Objects.equals(ID, other.ID) && Objects.equals(IDArticolo, other.IDArticolo)
-				&& Objects.equals(path, other.path);
+				&& Objects.equals(foto, other.foto);
 	}
 
 	public String getID() {
@@ -44,12 +44,12 @@ public class FotoBean {
 		return IDArticolo;
 	}
 
-	public String getPath() {
-		return path;
+	public byte[] getFoto() {
+		return foto;
 	}
 
-	public void setPath(String path) {
-		this.path = path;
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 
 }

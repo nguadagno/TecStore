@@ -9,11 +9,11 @@ import java.util.Calendar;
 
 import Bean.ArticoloBean;
 import Bean.FotoBean;
+import Bean.OrdineBean;
 
 public class GestioneVendita {
 
 	public ArrayList<FotoBean> getFoto(String IDArticolo) throws SQLException {
-
 		ArrayList<FotoBean> foto = new ArrayList<FotoBean>();
 		Connection connection = null;
 
@@ -25,7 +25,7 @@ public class GestioneVendita {
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				FotoBean f = new FotoBean(rs.getString("ID"), rs.getString("IDArticolo"), rs.getString("Path"));
+				FotoBean f = new FotoBean(rs.getString("ID"), rs.getString("IDArticolo"), rs.getBytes("foto"));
 				foto.add(f);
 			}
 			return foto;
@@ -38,6 +38,91 @@ public class GestioneVendita {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+	}
+
+	public ArrayList<FotoBean> getFoto(ArrayList<ArticoloBean> articoli) throws SQLException {
+		ArrayList<FotoBean> foto = new ArrayList<FotoBean>();
+		Connection connection = null;
+
+		String getFotoQuery = "SELECT * FROM foto WHERE IDArticolo = `?` LIMIT 1;";
+
+		try {
+			for (ArticoloBean a : articoli) {
+				connection = DriverManagerConnectionPool.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(getFotoQuery);
+				preparedStatement.setString(1, a.getID());
+				ResultSet rs = preparedStatement.executeQuery();
+
+				if (rs.next()) {
+					FotoBean f = new FotoBean(rs.getString("ID"), rs.getString("IDArticolo"), rs.getBytes("foto"));
+					foto.add(f);
+				}
+			}
+			return foto;
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+
+	public ArrayList<FotoBean> getFotoOrdini(ArrayList<OrdineBean> ordini) throws SQLException {
+		ArrayList<FotoBean> foto = new ArrayList<FotoBean>();
+		Connection connection = null;
+
+		String getFotoQuery = "SELECT * FROM foto WHERE IDArticolo = `?` LIMIT 1;";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			for (OrdineBean a : ordini) {
+				PreparedStatement preparedStatement = connection.prepareStatement(getFotoQuery);
+				preparedStatement.setString(1, a.getIDArticolo());
+				ResultSet rs = preparedStatement.executeQuery();
+
+				if (rs.next()) {
+					FotoBean f = new FotoBean(rs.getString("ID"), rs.getString("IDArticolo"), rs.getBytes("foto"));
+					foto.add(f);
+				}
+			}
+			return foto;
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+
+	public boolean inserimentoFoto(String IDArticolo, ArrayList<FotoBean> foto) throws SQLException {
+		String insertFotoQuery = "INSERT INTO foto (IDArticolo, Foto) VALUES (`?`, `?`);";
+		Connection connection = null;
+		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			for (FotoBean f : foto) {
+				PreparedStatement preparedStatement = connection.prepareStatement(insertFotoQuery);
+				preparedStatement.setString(1, f.getIDArticolo());
+				preparedStatement.setBytes(2, f.getFoto());
+				preparedStatement.executeQuery();
+			}
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+
+		return false;
 	}
 
 	public boolean inserimentoNuovoArticolo(String nome, String descrizione, String IDVenditore, int quantita,
@@ -312,4 +397,5 @@ public class GestioneVendita {
 			}
 		}
 	}
+
 }
