@@ -2,9 +2,12 @@ package it.unisa.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import Bean.FotoBean;
 import Bean.OrdineBean;
 import it.unisa.model.GestioneOrdine;
+import it.unisa.model.GestioneVendita;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,7 +21,8 @@ public class DettagliOrdineServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	GestioneOrdine model = new GestioneOrdine();
-
+	GestioneVendita model1 = new GestioneVendita();
+	
 	public DettagliOrdineServlet() {
 		super();
 	}
@@ -44,6 +48,11 @@ public class DettagliOrdineServlet extends HttpServlet {
 			request.setAttribute("ordine",
 					model.dettagliOrdineCliente(request.getSession().getAttribute("CF").toString(),
 							request.getSession().getAttribute("IDOrdine").toString()));
+			
+			ArrayList<FotoBean> foto = model1.getFoto(((OrdineBean) request.getAttribute("ordine")).getIDArticolo());
+			
+			request.getSession().setAttribute("foto", foto);
+			
 			if (request.getSession().getAttribute("tipologiaUtente").toString().equals("3")) {
 				model.cambiaStato(request.getSession().getAttribute("IDOrdine").toString(), "InElaborazione");
 				response.sendRedirect(request.getContextPath() + "/dettagliOrdineMagazziniere.jsp");

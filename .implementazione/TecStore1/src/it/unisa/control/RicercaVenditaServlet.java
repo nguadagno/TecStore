@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Bean.ArticoloBean;
+import Bean.FotoBean;
 import it.unisa.model.GestioneVendita;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -40,7 +41,12 @@ public class RicercaVenditaServlet extends HttpServlet {
 			ArrayList<ArticoloBean> risultati = model.elencoVenditeCF(
 					request.getSession().getAttribute("CF").toString(), request.getAttribute("nome").toString(),
 					Integer.parseInt(request.getAttribute("limit").toString()));
+
+			ArrayList<FotoBean> foto = model.getFoto(risultati);
+
 			request.getSession().setAttribute("risultati", risultati);
+			request.getSession().setAttribute("foto", foto);
+
 			response.sendRedirect(request.getContextPath() + "/risultatiRicerca.jsp");
 		} catch (SQLException e) {
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");

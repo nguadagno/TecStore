@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import Bean.ArticoloBean;
+import Bean.FotoBean;
 import Bean.UtenteBean;
 import it.unisa.model.GestioneCarrello;
+import it.unisa.model.GestioneVendita;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,6 +21,7 @@ public class GetCarrelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	GestioneCarrello model = new GestioneCarrello();
+	GestioneVendita model1 = new GestioneVendita();
 
 	public GetCarrelloServlet() {
 		super();
@@ -36,14 +39,16 @@ public class GetCarrelloServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 
-		ArrayList<ArticoloBean> allOrdersByUser = new ArrayList<ArticoloBean>();
 		UtenteBean user = (UtenteBean) request.getSession().getAttribute("user");
 
 		request.getSession().setAttribute("operazione", "getCarrello");
 
 		try {
-			allOrdersByUser = model.getCarrello(user);
-			request.setAttribute("allOrdersByUser", allOrdersByUser);
+			ArrayList<ArticoloBean> carrello = model.getCarrello(user);
+			ArrayList<FotoBean> foto = model1.getFoto(carrello);
+
+			request.setAttribute("carrello", carrello);
+			request.setAttribute("foto", foto);
 			response.sendRedirect(request.getContextPath() + "/carrello.jsp");
 
 		} catch (SQLException e) {
