@@ -162,7 +162,7 @@ public class GestioneOrdine {
 			}
 		}
 	}
-	
+
 	public OrdineBean dettagliOrdineByID(String IDOrdine) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;

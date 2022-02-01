@@ -43,6 +43,7 @@ public class DettagliArticoloServlet extends HttpServlet {
 		try {
 			ArticoloBean articolo = model.dettagliArticolo(request.getSession().getAttribute("IDArticolo").toString());
 			ArrayList<FotoBean> foto = model.getFoto(request.getSession().getAttribute("IDArticolo").toString());
+
 			request.setAttribute("dettagliArticolo", articolo);
 			request.setAttribute("fotoArticolo", foto);
 

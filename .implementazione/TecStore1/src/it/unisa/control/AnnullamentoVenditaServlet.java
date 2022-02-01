@@ -2,7 +2,6 @@ package it.unisa.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import it.unisa.model.GestioneOrdine;
 import it.unisa.model.GestioneVendita;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

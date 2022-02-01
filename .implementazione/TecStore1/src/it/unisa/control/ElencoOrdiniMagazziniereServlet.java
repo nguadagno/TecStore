@@ -38,8 +38,7 @@ public class ElencoOrdiniMagazziniereServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "ElencoOrdiniMagazziniere");
 
 		try {
-			ArrayList<OrdineBean> ordini = model
-					.elencoOrdiniMagazziniere();
+			ArrayList<OrdineBean> ordini = model.elencoOrdiniMagazziniere();
 			request.setAttribute("ordini", ordini);
 			response.sendRedirect(request.getContextPath() + "/elencoOrdini.jsp");
 		} catch (SQLException e) {

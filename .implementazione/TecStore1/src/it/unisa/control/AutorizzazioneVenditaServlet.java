@@ -18,7 +18,7 @@ public class AutorizzazioneVenditaServlet extends HttpServlet {
 	GestioneOrdine model = new GestioneOrdine();
 
 	public AutorizzazioneVenditaServlet() {
-		super();	
+		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
