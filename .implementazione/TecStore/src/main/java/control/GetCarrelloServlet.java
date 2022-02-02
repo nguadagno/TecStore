@@ -9,12 +9,12 @@ import Bean.UtenteBean;
 import model.GestioneCarrello;
 import model.GestioneVendita;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/GetCarrelloServlet")
+@WebServlet("/GetCarrelloServlet")
 
 public class GetCarrelloServlet extends HttpServlet {
 

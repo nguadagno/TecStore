@@ -5,12 +5,12 @@ import java.sql.SQLException;
 
 import model.GestioneAccount;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/dettagliUtente")
+@WebServlet("/dettagliUtente")
 public class DettagliUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -29,7 +29,7 @@ public class DettagliUtenteServlet extends HttpServlet {
 
 		request.getSession().setAttribute("operazione", "dettagli");
 		try {
-			request.getSession().setAttribute("utente", model.dettagliUtente(request.getAttribute("CF").toString()));
+			request.getSession().setAttribute("utente", model.dettagliUtente(request.getParameter("CF").toString()));
 			response.sendRedirect(request.getContextPath() + "/dettagliUtente.jsp");
 		} catch (SQLException e) {
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");

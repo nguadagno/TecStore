@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import Bean.FotoBean;
 import model.GestioneVendita;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/InserimentoArticolo")
+@WebServlet("/InserimentoArticolo")
 
 public class InserimentoNuovoArticoloServlet extends HttpServlet {
 
@@ -39,16 +39,16 @@ public class InserimentoNuovoArticoloServlet extends HttpServlet {
 
 		request.getSession().setAttribute("operazione", "InserimentoArticolo");
 
-		String nome = request.getAttribute("nome").toString();
-		String descrizione = request.getAttribute("descrizione").toString();
-		String IDVenditore = request.getAttribute("IDVenditore").toString();
-		int quantita = Integer.parseInt(request.getAttribute("quantita").toString());
-		float prezzo = Float.parseFloat(request.getAttribute("prezzo").toString());
-		boolean rimborsabile = Boolean.parseBoolean(request.getAttribute("rimborsabile").toString());
-		ArrayList<FotoBean> foto = (ArrayList<FotoBean>) request.getAttribute("foto");
+		String nome = request.getParameter("nome").toString();
+		String descrizione = request.getParameter("descrizione").toString();
+		String IDVenditore = request.getParameter("IDVenditore").toString();
+		int quantita = Integer.parseInt(request.getParameter("quantita").toString());
+		float prezzo = Float.parseFloat(request.getParameter("prezzo").toString());
+		boolean rimborsabile = Boolean.parseBoolean(request.getParameter("rimborsabile").toString());
+		ArrayList<FotoBean> foto ;//= (ArrayList<FotoBean>) request.getParameter("foto");
 
 		if (nome.isEmpty() || descrizione.isEmpty() || IDVenditore.isEmpty() || quantita < 1 || prezzo < 0.01
-				|| request.getAttribute("rimborsabile").toString().isEmpty() || foto.size() < 1)
+				|| request.getParameter("rimborsabile").toString().isEmpty() || foto.size() < 1)
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 
 		try {

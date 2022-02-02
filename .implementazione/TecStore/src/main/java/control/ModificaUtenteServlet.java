@@ -6,12 +6,12 @@ import java.sql.SQLException;
 import Bean.UtenteBean;
 import model.GestioneAccount;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/modificautente")
+@WebServlet("/modificautente")
 public class ModificaUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -38,7 +38,7 @@ public class ModificaUtenteServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "modificaUtente");
 		
 		try {
-			UtenteBean u = (UtenteBean) request.getAttribute("utente");
+			UtenteBean u ;//= (UtenteBean) request.getParameter("utente");
 			if (model.modificaUtente(u.getCF(), u)) {
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			} else {

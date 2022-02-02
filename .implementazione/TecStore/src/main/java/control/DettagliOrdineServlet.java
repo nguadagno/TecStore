@@ -9,12 +9,12 @@ import Bean.OrdineBean;
 import model.GestioneOrdine;
 import model.GestioneVendita;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/ElaborazioneOrdine")
+@WebServlet("/ElaborazioneOrdine")
 
 public class DettagliOrdineServlet extends HttpServlet {
 
@@ -43,13 +43,13 @@ public class DettagliOrdineServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "dettagliOrdine");
 
 		try {
-			OrdineBean ordine = model.dettagliOrdineByID(request.getAttribute("IDOrdine").toString());
+			OrdineBean ordine = model.dettagliOrdineByID(request.getParameter("IDOrdine").toString());
 			request.getSession().setAttribute("ordine", ordine);
 			request.setAttribute("ordine",
 					model.dettagliOrdineCliente(request.getSession().getAttribute("CF").toString(),
 							request.getSession().getAttribute("IDOrdine").toString()));
 			
-			ArrayList<FotoBean> foto = model1.getFoto(((OrdineBean) request.getAttribute("ordine")).getIDArticolo());
+			ArrayList<FotoBean> foto = model1.getFoto(request.getParameter("IDArticolo"));
 			
 			request.getSession().setAttribute("foto", foto);
 			

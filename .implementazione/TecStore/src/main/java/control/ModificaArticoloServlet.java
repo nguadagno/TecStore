@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import model.GestioneVendita;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/ModificaArticoloServlet")
+@WebServlet("/ModificaArticoloServlet")
 
 public class ModificaArticoloServlet extends HttpServlet {
 
@@ -36,15 +36,15 @@ public class ModificaArticoloServlet extends HttpServlet {
 
 		request.getSession().setAttribute("operazione", "modificaArticolo");
 
-		String nome = request.getAttribute("nome").toString();
-		String descrizione = request.getAttribute("descrizione").toString();
-		String IDVenditore = request.getAttribute("IDVenditore").toString();
-		int quantita = Integer.parseInt(request.getAttribute("quantita").toString());
-		float prezzo = Float.parseFloat(request.getAttribute("prezzo").toString());
-		boolean rimborsabile = Boolean.parseBoolean(request.getAttribute("rimborsabile").toString());
+		String nome = request.getParameter("nome").toString();
+		String descrizione = request.getParameter("descrizione").toString();
+		String IDVenditore = request.getParameter("IDVenditore").toString();
+		int quantita = Integer.parseInt(request.getParameter("quantita").toString());
+		float prezzo = Float.parseFloat(request.getParameter("prezzo").toString());
+		boolean rimborsabile = Boolean.parseBoolean(request.getParameter("rimborsabile").toString());
 
 		if (nome.isEmpty() || descrizione.isEmpty() || IDVenditore.isEmpty() || quantita < 1 || prezzo < 0.01
-				|| request.getAttribute("rimborsabile").toString().isEmpty())
+				|| request.getParameter("rimborsabile").toString().isEmpty())
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 
 		try {

@@ -6,12 +6,12 @@ import java.sql.SQLException;
 import Bean.ArticoloBean;
 import model.GestioneVendita;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/SelezionaVendita")
+@WebServlet("/SelezionaVendita")
 
 public class SelezionaVenditaServlet extends HttpServlet {
 

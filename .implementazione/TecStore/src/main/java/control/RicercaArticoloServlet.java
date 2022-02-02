@@ -8,12 +8,12 @@ import Bean.ArticoloBean;
 import Bean.FotoBean;
 import model.GestioneVendita;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/ricercaarticolo")
+@WebServlet("/ricercaarticolo")
 public class RicercaArticoloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -38,8 +38,8 @@ public class RicercaArticoloServlet extends HttpServlet {
 
 		request.getSession().setAttribute("operazione", "ricercaArticolo");
 		try {
-			ArrayList<ArticoloBean> risultati = model.ricercaArticolo(request.getAttribute("testo").toString(),
-					Integer.parseInt(request.getAttribute("limit").toString()));
+			ArrayList<ArticoloBean> risultati = model.ricercaArticolo(request.getParameter("testo").toString(),
+					Integer.parseInt(request.getParameter("limit").toString()));
 			ArrayList<FotoBean> foto = model.getFoto(risultati);
 
 			request.getSession().setAttribute("risultati", risultati);

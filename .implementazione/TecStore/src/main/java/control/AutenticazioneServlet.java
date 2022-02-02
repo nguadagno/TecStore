@@ -2,16 +2,17 @@ package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Enumeration;
 
 import Bean.UtenteBean;
 import model.GestioneAccount;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/autenticazione")
+@WebServlet("/autenticazione")
 public class AutenticazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -21,18 +22,16 @@ public class AutenticazioneServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		GestioneAccount model = new GestioneAccount();
+			throws ServletException, IOException {GestioneAccount model = new GestioneAccount();
 
 		request.getSession().setAttribute("operazione", "Autenticazione");
 		try {
-			if (model.autenticazione(request.getAttribute("email").toString(),
-					request.getAttribute("password").toString())) {
-				UtenteBean utente = model.dettagliUtenteByEmail(request.getAttribute("email").toString());
+			if (model.autenticazione(request.getParameter("email").toString(),
+					request.getParameter("password").toString())) {
+				UtenteBean utente = model.dettagliUtenteByEmail(request.getParameter("email").toString());
 				request.getSession().setAttribute("CF", utente.getCF());
 				request.getSession().setAttribute("tipologia", utente.getTipologia());
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");

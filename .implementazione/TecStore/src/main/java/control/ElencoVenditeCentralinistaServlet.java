@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import Bean.ArticoloBean;
 import model.GestioneVendita;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/ElencoVenditeCentralinista")
+@WebServlet("/ElencoVenditeCentralinista")
 
 public class ElencoVenditeCentralinistaServlet extends HttpServlet {
 
@@ -40,7 +40,7 @@ public class ElencoVenditeCentralinistaServlet extends HttpServlet {
 
 		try {
 			ArrayList<ArticoloBean> elenco = model
-					.elencoVenditeCentralinista(Integer.parseInt(request.getAttribute("Limit").toString()));
+					.elencoVenditeCentralinista(Integer.parseInt(request.getParameter("Limit").toString()));
 			request.setAttribute("elenco", elenco);
 			response.sendRedirect(request.getContextPath() + "/elencoVenditeCentralinista.jsp");
 

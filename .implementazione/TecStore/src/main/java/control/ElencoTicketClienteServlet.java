@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import Bean.TicketBean;
 import model.GestioneAssistenza;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/elencoTicketCliente")
+@WebServlet("/elencoTicketCliente")
 public class ElencoTicketClienteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -37,8 +37,8 @@ public class ElencoTicketClienteServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "elencoTicket");
 
 		try {
-			ArrayList<TicketBean> elenco = model.elencoTicketCliente(request.getAttribute("CF").toString(),
-					Integer.parseInt(request.getAttribute("CF").toString()));
+			ArrayList<TicketBean> elenco = model.elencoTicketCliente(request.getParameter("CF").toString(),
+					Integer.parseInt(request.getParameter("CF").toString()));
 			request.getSession().setAttribute("elenco", elenco);
 			response.sendRedirect(request.getContextPath() + "/centroassistenza.jsp");
 		} catch (SQLException e) {

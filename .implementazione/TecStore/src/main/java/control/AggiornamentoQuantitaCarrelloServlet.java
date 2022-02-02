@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import model.GestioneCarrello;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/AggiornamentoCarrelloServlet")
+@WebServlet("/AggiornamentoCarrelloServlet")
 
 public class AggiornamentoQuantitaCarrelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,7 +32,7 @@ public class AggiornamentoQuantitaCarrelloServlet extends HttpServlet {
 
 		try {
 			if (model.aggiornamentoQuantita(request.getSession().getAttribute("CF").toString(),
-					request.getParameter("IDArticolo"), (int) request.getAttribute("quantita")))
+					request.getParameter("IDArticolo"), Integer.parseInt(request.getParameter("quantita"))))
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			else
 				response.sendRedirect(request.getContextPath() + "/errore.jsp");

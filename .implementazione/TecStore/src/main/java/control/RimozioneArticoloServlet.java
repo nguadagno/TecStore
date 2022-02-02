@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import model.GestioneVendita;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/RimozioneArticolo")
+@WebServlet("/RimozioneArticolo")
 
 public class RimozioneArticoloServlet extends HttpServlet {
 

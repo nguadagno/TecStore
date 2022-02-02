@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import model.GestioneVendita;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/AnnullamentoVendita")
+@WebServlet("/AnnullamentoVendita")
 
 public class AnnullamentoVenditaServlet extends HttpServlet {
 
@@ -37,7 +37,7 @@ public class AnnullamentoVenditaServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "annullamentoVendita");
 
 		try {
-			if (model.rimozioneArticolo(request.getAttribute("IDArticolo").toString()))
+			if (model.rimozioneArticolo(request.getParameter("IDArticolo").toString()))
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			else
 				response.sendRedirect(request.getContextPath() + "/errore.jsp");

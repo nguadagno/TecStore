@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/registrazione")
+@WebServlet("/registrazione")
 public class RegistrazioneUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -37,17 +37,17 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 		GestioneAccount model = new GestioneAccount();
 
 		String password = request.getSession().getAttribute("tipologiaUtente").equals("1")
-				? request.getAttribute("password").toString()
+				? request.getParameter("password").toString()
 				: model.generatePassword(15);
 
-		UtenteBean utente = new UtenteBean(request.getAttribute("CF").toString(),
-				request.getAttribute("Nome").toString(), request.getAttribute("Cognome").toString(),
-				request.getAttribute("Email").toString(), password, request.getAttribute("Via").toString(),
-				Integer.parseInt(request.getAttribute("NumeroCivico").toString()),
-				request.getAttribute("Citta").toString(), request.getAttribute("Provincia").toString(),
-				Integer.parseInt(request.getAttribute("CAP").toString()),
-				Integer.parseInt(request.getAttribute("Tipologia").toString()),
-				request.getAttribute("CartaDiCredito").toString());
+		UtenteBean utente = new UtenteBean(request.getParameter("CF").toString(),
+				request.getParameter("Nome").toString(), request.getParameter("Cognome").toString(),
+				request.getParameter("Email").toString(), password, request.getParameter("Via").toString(),
+				Integer.parseInt(request.getParameter("NumeroCivico").toString()),
+				request.getParameter("Citta").toString(), request.getParameter("Provincia").toString(),
+				Integer.parseInt(request.getParameter("CAP").toString()),
+				Integer.parseInt(request.getParameter("Tipologia").toString()),
+				request.getParameter("CartaDiCredito").toString());
 
 		request.getSession().setAttribute("operazione", "registrazioneUtente");
 		try {

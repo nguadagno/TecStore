@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import Bean.OrdineBean;
 import model.GestioneOrdine;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/VisualizzaElencoRimborsiMagazziniere")
+@WebServlet("/VisualizzaElencoRimborsiMagazziniere")
 
 public class ElencoRimborsiMagazziniereServlet extends HttpServlet {
 
@@ -39,7 +39,7 @@ public class ElencoRimborsiMagazziniereServlet extends HttpServlet {
 
 		try {
 			ArrayList<OrdineBean> rimborsi = model
-					.elencoRimborsi(Integer.parseInt(request.getAttribute("limit").toString()));
+					.elencoRimborsi(Integer.parseInt(request.getParameter("limit").toString()));
 			request.setAttribute("rimborsi", rimborsi);
 			response.sendRedirect(request.getContextPath() + "/elencoRimborsi.jsp");
 		} catch (SQLException e) {

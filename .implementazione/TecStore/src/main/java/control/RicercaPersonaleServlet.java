@@ -1,3 +1,4 @@
+
 package control;
 
 import java.io.IOException;
@@ -7,12 +8,12 @@ import java.util.ArrayList;
 import Bean.UtenteBean;
 import model.GestioneAccount;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/ricercapersonale")
+@WebServlet("/ricercapersonale")
 public class RicercaPersonaleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -37,7 +38,7 @@ public class RicercaPersonaleServlet extends HttpServlet {
 
 		request.getSession().setAttribute("operazione", "ricercaPersonale");
 		try {
-			ArrayList<UtenteBean> risultati = model.ricercaDipendenti(request.getAttribute("testo").toString());
+			ArrayList<UtenteBean> risultati = model.ricercaDipendenti(request.getParameter("testo").toString());
 			request.getSession().setAttribute("risultati", risultati);
 			response.sendRedirect(request.getContextPath() + "/GestionePersonale.jsp");
 		} catch (SQLException e) {

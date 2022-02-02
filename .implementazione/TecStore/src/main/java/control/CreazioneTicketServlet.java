@@ -5,12 +5,12 @@ import java.sql.SQLException;
 
 import model.GestioneAssistenza;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/creazioneTicket")
+@WebServlet("/creazioneTicket")
 public class CreazioneTicketServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

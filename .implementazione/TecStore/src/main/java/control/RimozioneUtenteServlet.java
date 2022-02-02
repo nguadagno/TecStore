@@ -5,12 +5,12 @@ import java.sql.SQLException;
 
 import model.GestioneAccount;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/rimozioneutente")
+@WebServlet("/rimozioneutente")
 public class RimozioneUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -36,7 +36,7 @@ public class RimozioneUtenteServlet extends HttpServlet {
 
 		request.getSession().setAttribute("operazione", "rimozioneUtente");
 		try {
-			if (model.eliminaUtente(request.getAttribute("CF").toString())) {
+			if (model.eliminaUtente(request.getParameter("CF").toString())) {
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			} else {
 				response.sendRedirect(request.getContextPath() + "/errore.jsp");

@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import model.GestioneCarrello;
 import jakarta.servlet.ServletException;
-
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@WebServlet("/RimozioneDalCarrelloServlet")
+@WebServlet("/RimozioneDalCarrelloServlet")
 
 public class RimozioneDalCarrelloServlet extends HttpServlet {
 
