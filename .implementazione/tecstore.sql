@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `tecstore`.`articolo` (
   `Prezzo` FLOAT(5,2) NOT NULL,
   `Stato` VARCHAR(45) NOT NULL,
   `IDCentralinista` CHAR(16) NULL,
-  `Data` DATETIME ,
+  `Data` DATETIME DEFAULT CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
   `Rimborsabile` TINYINT NOT NULL,
   PRIMARY KEY (`ID`),
   CONSTRAINT `FK_1`
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `tecstore`.`ordine` (
   `IDCliente` CHAR(16) NOT NULL,
   `IDArticolo` VARCHAR(45) NULL,
   `Quantita` INT(3) NOT NULL,
-  `Data` DATETIME,
+  `Data` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `Stato` VARCHAR(45) NOT NULL,
   `CodiceTracciamento` VARCHAR(45) NULL,
   PRIMARY KEY (`ID`),
@@ -157,8 +157,7 @@ CREATE TABLE IF NOT EXISTS `tecstore`.`messaggio` (
   `IDTicket` VARCHAR(45) NOT NULL,
   `CF` CHAR(16) NOT NULL,
   `Contenuto` VARCHAR(512) NOT NULL,
-  `Date` DATETIME,
-  PRIMARY KEY (`CF`, `IDTicket`),
+  `Data` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT `FK_15`
     FOREIGN KEY (`IDTicket`)
     REFERENCES `tecstore`.`ticket` (`IDTicket`)
@@ -234,3 +233,10 @@ CREATE TRIGGER before_insert_ticket
   BEFORE INSERT ON `ticket`
   FOR EACH ROW
   SET new.IDTicket = uuid();
+  
+CREATE TRIGGER  after_insert_messaggio
+ AFTER INSERT ON `messaggio` 
+ FOR EACH ROW 
+UPDATE `ticket` 
+SET stato = 'InAttesa' 
+WHERE IDTicket = new.IDTicket;
