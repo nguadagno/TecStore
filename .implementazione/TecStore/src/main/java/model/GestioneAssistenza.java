@@ -19,7 +19,7 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM ticket WHERE IDCliente = `?` LIMIT = `?`;";
+		String searchTicketQuery = "SELECT * FROM ticket WHERE IDCliente = ? LIMIT = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -30,7 +30,7 @@ public class GestioneAssistenza {
 
 			while (rs.next()) {
 				TicketBean ticket = new TicketBean(rs.getString("IDTicket"), rs.getString("IDCliente"),
-						rs.getString("Tipologia"), rs.getString("Stato"));
+						rs.getString("Tipologia"), rs.getString("Stato"), rs.getDate("data"));
 				ticketList.add(ticket);
 			}
 
@@ -51,17 +51,17 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT DISTINCT IDTicket,* FROM ticket NATURAL JOIN messaggio WHERE stato = 'InAttesa' LIMIT = "
-				+ limit + " ORDER BY messaggio.data;";
+		String searchTicketQuery = "SELECT DISTINCT IDTicket,messaggio.Data AS Data ,CF,Tipologia,Stato FROM ticket NATURAL JOIN messaggio WHERE stato = 'InAttesa' ORDER BY messaggio.Data LIMIT ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("centralinista", "centralinista");
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
+			preparedStatement.setInt(1, limit);
 			rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				TicketBean ticket = new TicketBean(rs.getString("IDTicket"), rs.getString("IDCliente"),
-						rs.getString("Tipologia"), rs.getString("Stato"));
+				TicketBean ticket = new TicketBean(rs.getString("IDTicket"), rs.getString("CF"),
+						rs.getString("Tipologia"), rs.getString("Stato"), rs.getDate("Data"));
 				ticketList.add(ticket);
 			}
 
@@ -81,7 +81,7 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String insertTicketQuery = "INSERT INTO ticket (IDCliente, Tipologia, Stato) VALUES (`?`,`?`,`?`);";
+		String insertTicketQuery = "INSERT INTO ticket (IDCliente, Tipologia, Stato) VALUES (?,?,?);";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -115,8 +115,8 @@ public class GestioneAssistenza {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String cambiaStatoQuery = "UPDATE ticket SET stato = `?` WHERE IDTicket = `?`;";
-		String getStatoQuery = "SELECT stato FROM ticket where ID = `?`;";
+		String cambiaStatoQuery = "UPDATE ticket SET stato = ? WHERE IDTicket = ?;";
+		String getStatoQuery = "SELECT stato FROM ticket where ID = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("centralinista", "centralinista");
@@ -164,7 +164,7 @@ public class GestioneAssistenza {
 
 			if (rs.next()) {
 				result = new TicketBean(rs.getString("IDTicket"), rs.getString("IDCliente"), rs.getString("Tipologia"),
-						rs.getString("Stato"));
+						rs.getString("Stato"), rs.getDate("data"));
 				return result;
 			}
 			return null;
@@ -228,7 +228,7 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String insertTicketQuery = "INSERT INTO messaggio (CF, IDTicket, Contenuto, Data) VALUES (`?`, `?`, `?`, `?`);";
+		String insertTicketQuery = "INSERT INTO messaggio (CF, IDTicket, Contenuto, Data) VALUES (?, ?, ?, ?);";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");

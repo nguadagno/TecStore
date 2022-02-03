@@ -20,7 +20,7 @@ public class GestioneCarrello {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM carrello, articolo WHERE IDArticolo = ID AND IDCliente =`?`;";
+		String searchTicketQuery = "SELECT * FROM carrello, articolo WHERE IDArticolo = ID AND IDCliente =?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -65,7 +65,7 @@ public class GestioneCarrello {
 			return false;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String aggiuntaCarrelloQuery = "INSERT INTO carrello (IDCliente, IDArticolo, Quantita) VALUES (`?`,`?`,`?`);";
+		String aggiuntaCarrelloQuery = "INSERT INTO carrello (IDCliente, IDArticolo, Quantita) VALUES (?,?,?);";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -104,7 +104,7 @@ public class GestioneCarrello {
 	public boolean rimozioneArticolo(String CF, String IDArticolo) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String rimozioneCarrelloQuery = "DELETE FROM carrello WHERE IDCliente = '?' AND IDArticolo = '?';";
+		String rimozioneCarrelloQuery = "DELETE FROM carrello WHERE IDCliente = ? AND IDArticolo = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -145,7 +145,7 @@ public class GestioneCarrello {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String aggiuntaCarrelloQuery = "UPDATE carrello SET quantita = `?` WHERE IDCliente = `?` AND IDArticolo = `?`";
+		String aggiuntaCarrelloQuery = "UPDATE carrello SET quantita = ? WHERE IDCliente = ? AND IDArticolo = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");

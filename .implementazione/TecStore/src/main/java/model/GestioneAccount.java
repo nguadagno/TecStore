@@ -27,7 +27,7 @@ public class GestioneAccount {
 		Connection connection = null;
 
 		try {
-			String selectClienteSQL = "SELECT * FROM cliente WHERE CF = `?`;";
+			String selectClienteSQL = "SELECT * FROM cliente WHERE CF = ?;";
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(selectClienteSQL);
 			preparedStatement.setString(1, CF);
@@ -50,7 +50,7 @@ public class GestioneAccount {
 		PreparedStatement preparedStatement = null;
 
 		String registrazioneUtente = "INSERT INTO Utente (`CF`, `NOME`, `COGNOME`, `EMAIL`, `PASSWORD`, `VIA`, `NUMEROCIVICO`, `CITTA`, `CAP`, `TIPOLOGIA`)"
-				+ " VALUES (`?`,`?`,`?`,`?`,`?`,`?`,`?`,`?`,`?`,`?`);";
+				+ " VALUES (?,?,?,?,?,?,?,?,?,?);";
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(registrazioneUtente);
@@ -84,7 +84,7 @@ public class GestioneAccount {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String deleteSQL = "DELETE FROM WHERE CF = `?`;";
+		String deleteSQL = "DELETE FROM WHERE CF = ?;";
 
 		try {
 			if (getTipologia(CF) == 1)
@@ -126,8 +126,8 @@ public class GestioneAccount {
 		UtenteBean u = dettagliUtente(CF, utente.getCF());
 		ResultSet rs = null;
 
-		String updateUtenteQuery = "UPDATE Utente SET NOME = `?`, SET COGNOME = `?`, SET EMAIL = `?`, PASSWORD = `?`,"
-				+ " VIA = `?`, CAP = `?`, NUMEROCIVICO = `?`, ,  CITTA = `?`, PROVINCIA=`?` WHERE CF = `?`;";
+		String updateUtenteQuery = "UPDATE Utente SET NOME = ?, SET COGNOME = ?, SET EMAIL = ?, PASSWORD = ?,"
+				+ " VIA = ?, CAP = ?, NUMEROCIVICO = ?, ,  CITTA = ?, PROVINCIA=? WHERE CF = ?;";
 		try {
 			if (getTipologia(CF) == 1)
 				connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -141,7 +141,7 @@ public class GestioneAccount {
 
 			if (!utente.getPassword().equals(u.getPassword())) {
 				if (utente.checkPassword(utente.getPassword())) {
-					String getPasswordQuery = "SELECT PASSWORD(`?`);";
+					String getPasswordQuery = "SELECT PASSWORD(?);";
 					preparedStatement = connection.prepareStatement(getPasswordQuery);
 					preparedStatement.setString(1, utente.getPassword());
 					rs = preparedStatement.executeQuery();
@@ -217,7 +217,7 @@ public class GestioneAccount {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchUtenteQuery = "SELECT * FROM utente WHERE email = `?`;";
+		String searchUtenteQuery = "SELECT * FROM utente WHERE email = ?;";
 
 		try {
 			if (getTipologia(CF) == 1)
@@ -252,7 +252,7 @@ public class GestioneAccount {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM utente WHERE Tipologia != `1` AND (nome LIKE `%?%` OR cognome LIKE `%?$` OR CF LIKE `%?$`);";
+		String searchTicketQuery = "SELECT * FROM utente WHERE Tipologia != ? AND (nome LIKE `%?%` OR cognome LIKE `%?$` OR CF LIKE `%?$`);";
 
 		try {
 			if (getTipologia(CF) == 5)
@@ -288,7 +288,7 @@ public class GestioneAccount {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM utente WHERE email = `?` AND password = PASSWORD(`?`);";
+		String searchTicketQuery = "SELECT * FROM utente WHERE email = ? AND password = PASSWORD(?);";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -314,7 +314,7 @@ public class GestioneAccount {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT tipologia FROM utente CF= `?`;";
+		String searchTicketQuery = "SELECT tipologia FROM utente CF= ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -338,7 +338,7 @@ public class GestioneAccount {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT tipologia FROM utente email = `?`;";
+		String searchTicketQuery = "SELECT tipologia FROM utente email = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");

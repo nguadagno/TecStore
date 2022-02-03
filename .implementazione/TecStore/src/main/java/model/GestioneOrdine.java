@@ -19,7 +19,7 @@ public class GestioneOrdine {
 	public boolean creazioneOrdine(String CF) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String creazioneOrdineQuery = "INSERT INTO ordine (IDCLIENTE, IDARTICOLO, QUANTITA, DATA, STATO) VALUES (`?`,`?`,`?`,`?`,`?`);";
+		String creazioneOrdineQuery = "INSERT INTO ordine (IDCLIENTE, IDARTICOLO, QUANTITA, DATA, STATO) VALUES (?,?,?,?,?);";
 
 		try {
 			if (!GestioneAccount.exists(CF))
@@ -97,7 +97,7 @@ public class GestioneOrdine {
 
 		ArrayList<OrdineBean> ordersList = new ArrayList<OrdineBean>();
 
-		String elencoOrdiniClienteQuery = "SELECT * FROM ordine WHERE IDCliente = '?' AND nome LIKE `%?%%` LIMIT `?`;";
+		String elencoOrdiniClienteQuery = "SELECT * FROM ordine WHERE IDCliente = ? AND nome LIKE `%?%%` LIMIT ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -136,7 +136,7 @@ public class GestioneOrdine {
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 
-		String dettagliOrdineQuery = "SELECT * FROM ordine WHERE IDCliente = `?` AND ID = `?`;";
+		String dettagliOrdineQuery = "SELECT * FROM ordine WHERE IDCliente = ? AND ID = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -168,7 +168,7 @@ public class GestioneOrdine {
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 
-		String dettagliOrdineQuery = "SELECT * FROM ordine WHERE ID = `?`;";
+		String dettagliOrdineQuery = "SELECT * FROM ordine WHERE ID = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -200,8 +200,8 @@ public class GestioneOrdine {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String cambiaStatoQuery = "UPDATE ordine SET stato = `?` WHERE ID = `?`;";
-		String getStatoQuery = "SELECT stato FROM ordine where ID = `?`;";
+		String cambiaStatoQuery = "UPDATE ordine SET stato = ? WHERE ID = ?;";
+		String getStatoQuery = "SELECT stato FROM ordine where ID = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("magazziniere", "magazziniere");
@@ -237,7 +237,7 @@ public class GestioneOrdine {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String setTrackingQuery = "UPDATE ordine SET CodiceTracciamento = `?` WHERE ID = `?`;";
+		String setTrackingQuery = "UPDATE ordine SET CodiceTracciamento = ? WHERE ID = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("magazziniere", "magazziniere");
@@ -265,7 +265,7 @@ public class GestioneOrdine {
 
 		ArrayList<OrdineBean> ordersList = new ArrayList<OrdineBean>();
 
-		String elencoOrdiniClienteQuery = "SELECT * FROM ordine WHERE stato = 'InAttesaRimborso' LIMIT = `?`;";
+		String elencoOrdiniClienteQuery = "SELECT * FROM ordine WHERE stato = 'InAttesaRimborso' LIMIT = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("magazziniere", "magazziniere");

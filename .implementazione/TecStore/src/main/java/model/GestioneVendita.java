@@ -17,7 +17,7 @@ public class GestioneVendita {
 		ArrayList<FotoBean> foto = new ArrayList<FotoBean>();
 		Connection connection = null;
 
-		String getFotoQuery = "SELECT * FROM foto WHERE IDArticolo = `?`;";
+		String getFotoQuery = "SELECT * FROM foto WHERE IDArticolo = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -45,7 +45,7 @@ public class GestioneVendita {
 		ArrayList<FotoBean> foto = new ArrayList<FotoBean>();
 		Connection connection = null;
 
-		String getFotoQuery = "SELECT * FROM foto WHERE IDArticolo = `?` LIMIT 1;";
+		String getFotoQuery = "SELECT * FROM foto WHERE IDArticolo = ? LIMIT 1;";
 
 		try {
 			for (ArticoloBean a : articoli) {
@@ -75,7 +75,7 @@ public class GestioneVendita {
 		ArrayList<FotoBean> foto = new ArrayList<FotoBean>();
 		Connection connection = null;
 
-		String getFotoQuery = "SELECT * FROM foto WHERE IDArticolo = `?` LIMIT 1;";
+		String getFotoQuery = "SELECT * FROM foto WHERE IDArticolo = ? LIMIT 1;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -102,7 +102,7 @@ public class GestioneVendita {
 	}
 
 	public boolean inserimentoFoto(String IDArticolo, ArrayList<FotoBean> foto) throws SQLException {
-		String insertFotoQuery = "INSERT INTO foto (IDArticolo, Foto) VALUES (`?`, `?`);";
+		String insertFotoQuery = "INSERT INTO foto (IDArticolo, Foto) VALUES (?, ?);";
 		Connection connection = null;
 
 		try {
@@ -133,7 +133,7 @@ public class GestioneVendita {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String aggiuntaArticoloQuery = "INSERT INTO articolo (Nome, Descrizione, IDVenditore, Quantita, Prezzo, Stato, Data, Rimborsabile) VALUES (`?`,`?`,`?`,`?`,`?`,`?`,`?`,`?`);";
+		String aggiuntaArticoloQuery = "INSERT INTO articolo (Nome, Descrizione, IDVenditore, Quantita, Prezzo, Stato, Data, Rimborsabile) VALUES (?,?,?,?,?,?,?,?);";
 		String getTipologiaVenditore = "SELECT Tipologia FROM utente WHERE ID = `" + IDVenditore + "`;";
 
 		try {
@@ -185,7 +185,7 @@ public class GestioneVendita {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String aggiuntaArticoloQuery = "UPDATE articolo SET Nome = `?`, Descrizione = `?`, IDVenditore = `?`, Quantita = `?`, Prezzo = `?`, Stato = `?`, Data = `?`, Rimborsabile = `?`);";
+		String aggiuntaArticoloQuery = "UPDATE articolo SET Nome = ?, Descrizione = ?, IDVenditore = ?, Quantita = ?, Prezzo = ?, Stato = ?, Data = ?, Rimborsabile = ?);";
 
 		try {
 			GestioneAccount gestioneaccount = new GestioneAccount();
@@ -227,7 +227,7 @@ public class GestioneVendita {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchArticoloQuery = "SELECT * FROM articolo WHERE Nome LIKE `%?%` LIMIT `?`;";
+		String searchArticoloQuery = "SELECT * FROM articolo WHERE Nome LIKE `%?%` LIMIT ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -261,7 +261,7 @@ public class GestioneVendita {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchArticoloQuery = "SELECT * FROM articolo WHERE Stato = `InAttesa` LIMIT `?`;";
+		String searchArticoloQuery = "SELECT * FROM articolo WHERE Stato = `InAttesa` LIMIT ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("centralinista", "centralinista");
@@ -294,7 +294,7 @@ public class GestioneVendita {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchArticoloQuery = "SELECT * FROM articolo WHERE IDVenditore=`?` AND nome LIKE `%?%` LIMIT `?`;";
+		String searchArticoloQuery = "SELECT * FROM articolo WHERE IDVenditore=? AND nome LIKE `%?%` LIMIT ?;";
 
 		try {
 			GestioneAccount gestioneaccount = new GestioneAccount();
@@ -367,7 +367,7 @@ public class GestioneVendita {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String cambiaStatoQuery = "UPDATE articolo SET stato = `?` WHERE IDArticolo = `?`;";
+		String cambiaStatoQuery = "UPDATE articolo SET stato = ? WHERE IDArticolo = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("centralinista", "centralinista");
@@ -391,7 +391,7 @@ public class GestioneVendita {
 	public boolean rimozioneArticolo(String CF, String IDArticolo) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String rimozioneArticoloQuery = "UPDATE articolo SET stato=`annullata` WHERE IDArticolo = '?';";
+		String rimozioneArticoloQuery = "UPDATE articolo SET stato=`annullata` WHERE IDArticolo = ?;";
 
 		try {
 			GestioneAccount gestioneaccount = new GestioneAccount();
