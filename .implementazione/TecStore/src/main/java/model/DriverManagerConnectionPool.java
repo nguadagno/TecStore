@@ -1,8 +1,7 @@
 package model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,17 +12,17 @@ public class DriverManagerConnectionPool {
 	static {
 		freeDbConnections = new LinkedList<Connection>();
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			System.out.println("DB driver not found:" + e.getMessage());
 		}
 	}
 
 	private static synchronized Connection createDBConnection(String username, String password) throws SQLException {
 		Connection newConnection = null;
-		String ip = "localhost";
+		String ip = "192.168.1.80";
 		String port = "3306";
 		String db = "tecstore";
+		
 
 		newConnection = DriverManager.getConnection(
 				"jdbc:mysql://" + ip + ":" + port + "/" + db + "?serverTimezone=UTC", username, password);
