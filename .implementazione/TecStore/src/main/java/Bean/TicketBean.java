@@ -8,16 +8,18 @@ public class TicketBean {
 	private String IDCliente;
 	private String tipologia;
 	private String stato;
+	private String dataUltimoMessaggio;
 
 	public TicketBean() {
 	}
 
-	public TicketBean(String iDTicket, String iDCliente, String tipologia, String stato) {
+	public TicketBean(String iDTicket, String iDCliente, String tipologia, String stato, String dataUltimoMessaggio) {
 		super();
 		IDTicket = iDTicket;
 		IDCliente = iDCliente;
 		this.tipologia = tipologia;
 		this.stato = stato;
+		this.dataUltimoMessaggio = dataUltimoMessaggio;
 	}
 
 	@Override
@@ -57,6 +59,10 @@ public class TicketBean {
 
 	public void setStato(String stato) {
 		this.stato = stato;
+	}
+
+	public String getDataUltimoMessaggio() {
+		return dataUltimoMessaggio;
 	}
 
 }
