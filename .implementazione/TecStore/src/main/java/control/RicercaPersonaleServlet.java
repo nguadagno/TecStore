@@ -29,7 +29,7 @@ public class RicercaPersonaleServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("5")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("5")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -38,7 +38,7 @@ public class RicercaPersonaleServlet extends HttpServlet {
 
 		request.getSession().setAttribute("operazione", "ricercaPersonale");
 		try {
-			ArrayList<UtenteBean> risultati = model.ricercaDipendenti(request.getParameter("testo").toString());
+			ArrayList<UtenteBean> risultati = model.ricercaDipendenti(request.getParameter("testo"));
 			request.getSession().setAttribute("risultati", risultati);
 			response.sendRedirect(request.getContextPath() + "/GestionePersonale.jsp");
 		} catch (SQLException e) {

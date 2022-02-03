@@ -27,8 +27,8 @@ public class DettagliTicketServlet extends HttpServlet {
 			throws ServletException, IOException {
 		GestioneAssistenza model = new GestioneAssistenza();
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")
-				&& !request.getSession().getAttribute("tipologiaUtente").toString().equals("2")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")
+				&& !request.getSession().getAttribute("tipologiaUtente").equals("2")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -36,10 +36,9 @@ public class DettagliTicketServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "creazioneTicket");
 
 		try {
-			if (request.getSession().getAttribute("tipologiaUtente").toString().equals("2"))
-				model.cambiaStato(request.getSession().getAttribute("IDTicket").toString(), "InElaborazione");
-			request.getSession().setAttribute("messaggi",
-					model.elencoMessaggiTicket(request.getSession().getAttribute("IDTicket").toString()));
+			if (request.getSession().getAttribute("tipologiaUtente").equals("2"))
+				model.cambiaStato(request.getParameter("IDTicket"), "InElaborazione");
+			request.getSession().setAttribute("messaggi", model.elencoMessaggiTicket(request.getParameter("IDTicket")));
 			response.sendRedirect(request.getContextPath() + "/dettagliTicket.jsp");
 		} catch (SQLException e) {
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");

@@ -26,8 +26,8 @@ public class ModificaPasswordServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("5")
-				&& !request.getSession().getAttribute("tipologiaUtente").toString().equals("1")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("5")
+				&& !request.getSession().getAttribute("tipologiaUtente").equals("1")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}

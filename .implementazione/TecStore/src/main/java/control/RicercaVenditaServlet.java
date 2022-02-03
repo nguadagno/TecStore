@@ -29,7 +29,7 @@ public class RicercaVenditaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -39,8 +39,8 @@ public class RicercaVenditaServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "ricercaArticolo");
 		try {
 			ArrayList<ArticoloBean> risultati = model.elencoVenditeCF(
-					request.getSession().getAttribute("CF").toString(), request.getParameter("nome").toString(),
-					Integer.parseInt(request.getParameter("limit").toString()));
+					request.getSession().getAttribute("CF").toString(), request.getParameter("nome"),
+					Integer.parseInt(request.getParameter("limit")));
 
 			ArrayList<FotoBean> foto = model.getFoto(risultati);
 

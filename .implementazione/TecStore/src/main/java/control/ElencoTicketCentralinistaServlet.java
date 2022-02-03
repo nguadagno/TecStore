@@ -29,7 +29,7 @@ public class ElencoTicketCentralinistaServlet extends HttpServlet {
 			throws ServletException, IOException {
 		GestioneAssistenza model = new GestioneAssistenza();
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -37,7 +37,8 @@ public class ElencoTicketCentralinistaServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "elencoTicket");
 
 		try {
-			ArrayList<TicketBean> elenco = model.elencoTicketCentralinista(Integer.parseInt(request.getSession().getAttribute("limit").toString()));
+			ArrayList<TicketBean> elenco = model
+					.elencoTicketCentralinista(Integer.parseInt(request.getParameter("limit")));
 			request.getSession().setAttribute("elenco", elenco);
 			response.sendRedirect(request.getContextPath() + "/gestioneassistenza.jsp");
 		} catch (SQLException e) {

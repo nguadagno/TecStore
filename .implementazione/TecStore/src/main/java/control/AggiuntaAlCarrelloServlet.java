@@ -23,7 +23,7 @@ public class AggiuntaAlCarrelloServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -31,7 +31,8 @@ public class AggiuntaAlCarrelloServlet extends HttpServlet {
 		request.getSession().setAttribute("successo", "AggiuntaAlCarrello");
 
 		try {
-			if (model.aggiuntaArticolo(request.getSession().getAttribute("CF").toString(),
+			if (model.aggiuntaArticolo(request.getSession().getAttribute("CF")
+					.toString(),
 					request.getParameter("IDArticolo"), Integer.parseInt(request.getParameter("quantita"))))
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			else

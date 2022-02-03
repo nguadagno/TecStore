@@ -31,9 +31,9 @@ public class DettagliArticoloServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")
-				&& !request.getSession().getAttribute("tipologiaUtente").toString().equals("2")
-				&& !request.getSession().getAttribute("tipologiaUtente").toString().equals("4")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")
+				&& !request.getSession().getAttribute("tipologiaUtente").equals("2")
+				&& !request.getSession().getAttribute("tipologiaUtente").equals("4")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -41,13 +41,13 @@ public class DettagliArticoloServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "dettagliArticolo");
 
 		try {
-			ArticoloBean articolo = model.dettagliArticolo(request.getSession().getAttribute("IDArticolo").toString());
-			ArrayList<FotoBean> foto = model.getFoto(request.getSession().getAttribute("IDArticolo").toString());
+			ArticoloBean articolo = model.dettagliArticolo(request.getParameter("IDArticolo"));
+			ArrayList<FotoBean> foto = model.getFoto(request.getParameter("IDArticolo"));
 
 			request.setAttribute("dettagliArticolo", articolo);
 			request.setAttribute("fotoArticolo", foto);
 
-			if (request.getSession().getAttribute("tipologiaUtente").toString().equals("2"))
+			if (request.getSession().getAttribute("tipologiaUtente").equals("2"))
 				response.sendRedirect(request.getContextPath() + "/autorizzazioneVendita.jsp");
 			else
 				response.sendRedirect(request.getContextPath() + "/dettagliArticolo.jsp");

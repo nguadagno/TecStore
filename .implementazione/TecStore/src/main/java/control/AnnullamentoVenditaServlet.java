@@ -28,8 +28,8 @@ public class AnnullamentoVenditaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")
-				&& !request.getSession().getAttribute("tipologiaUtente").toString().equals("4")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")
+				&& !request.getSession().getAttribute("tipologiaUtente").equals("4")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -37,7 +37,7 @@ public class AnnullamentoVenditaServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "annullamentoVendita");
 
 		try {
-			if (model.rimozioneArticolo(request.getParameter("IDArticolo").toString()))
+			if (model.rimozioneArticolo(request.getParameter("IDArticolo")))
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			else
 				response.sendRedirect(request.getContextPath() + "/errore.jsp");

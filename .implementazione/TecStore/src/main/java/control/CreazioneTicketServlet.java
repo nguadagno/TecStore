@@ -27,7 +27,7 @@ public class CreazioneTicketServlet extends HttpServlet {
 			throws ServletException, IOException {
 		GestioneAssistenza model = new GestioneAssistenza();
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -36,7 +36,7 @@ public class CreazioneTicketServlet extends HttpServlet {
 
 		try {
 			if (model.creazioneTicket(request.getSession().getAttribute("CF").toString(),
-					request.getSession().getAttribute("messaggio").toString()))
+					request.getParameter("messaggio")))
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			else
 				response.sendRedirect(request.getContextPath() + "/errore.jsp");

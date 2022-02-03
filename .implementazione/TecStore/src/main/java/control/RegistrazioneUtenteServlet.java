@@ -26,10 +26,10 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (request.getSession().getAttribute("tipologiaUtente").toString().equals("1")
-				&& request.getSession().getAttribute("tipologiaUtente").toString().equals("2")
-				&& request.getSession().getAttribute("tipologiaUtente").toString().equals("3")
-				&& request.getSession().getAttribute("tipologiaUtente").toString().equals("4")) {
+		if (request.getSession().getAttribute("tipologiaUtente").equals("1")
+				&& request.getSession().getAttribute("tipologiaUtente").equals("2")
+				&& request.getSession().getAttribute("tipologiaUtente").equals("3")
+				&& request.getSession().getAttribute("tipologiaUtente").equals("4")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -37,17 +37,14 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 		GestioneAccount model = new GestioneAccount();
 
 		String password = request.getSession().getAttribute("tipologiaUtente").equals("1")
-				? request.getParameter("password").toString()
+				? request.getParameter("password")
 				: model.generatePassword(15);
 
-		UtenteBean utente = new UtenteBean(request.getParameter("CF").toString(),
-				request.getParameter("Nome").toString(), request.getParameter("Cognome").toString(),
-				request.getParameter("Email").toString(), password, request.getParameter("Via").toString(),
-				Integer.parseInt(request.getParameter("NumeroCivico").toString()),
-				request.getParameter("Citta").toString(), request.getParameter("Provincia").toString(),
-				Integer.parseInt(request.getParameter("CAP").toString()),
-				Integer.parseInt(request.getParameter("Tipologia").toString()),
-				request.getParameter("CartaDiCredito").toString());
+		UtenteBean utente = new UtenteBean(request.getParameter("CF"), request.getParameter("Nome"),
+				request.getParameter("Cognome"), request.getParameter("Email"), password, request.getParameter("Via"),
+				Integer.parseInt(request.getParameter("NumeroCivico")), request.getParameter("Citta"),
+				request.getParameter("Provincia"), Integer.parseInt(request.getParameter("CAP")),
+				Integer.parseInt(request.getParameter("Tipologia")), request.getParameter("CartaDiCredito"));
 
 		request.getSession().setAttribute("operazione", "registrazioneUtente");
 		try {

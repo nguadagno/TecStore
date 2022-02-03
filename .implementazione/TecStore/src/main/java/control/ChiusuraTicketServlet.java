@@ -27,7 +27,7 @@ public class ChiusuraTicketServlet extends HttpServlet {
 			throws ServletException, IOException {
 		GestioneAssistenza model = new GestioneAssistenza();
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -35,7 +35,7 @@ public class ChiusuraTicketServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "chiusuraTicket");
 
 		try {
-			if (model.cambiaStato(request.getSession().getAttribute("IDTicket").toString(), "chiuso"))
+			if (model.cambiaStato(request.getParameter("IDTicket"), "chiuso"))
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			else
 				response.sendRedirect(request.getContextPath() + "/errore.jsp");

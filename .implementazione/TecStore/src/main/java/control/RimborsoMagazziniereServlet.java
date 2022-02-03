@@ -28,7 +28,7 @@ public class RimborsoMagazziniereServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("3")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("3")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -37,8 +37,7 @@ public class RimborsoMagazziniereServlet extends HttpServlet {
 
 		try {
 
-			if (model.cambiaStato(request.getSession().getAttribute("IDOrdine").toString(),
-					request.getSession().getAttribute("Stato").toString()))
+			if (model.cambiaStato(request.getParameter("IDOrdine"), request.getParameter("Stato")))
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			else
 				response.sendRedirect(request.getContextPath() + "/errore.jsp");

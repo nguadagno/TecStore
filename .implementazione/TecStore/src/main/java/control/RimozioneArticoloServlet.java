@@ -28,8 +28,8 @@ public class RimozioneArticoloServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")
-				&& !request.getSession().getAttribute("tipologiaUtente").toString().equals("4")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")
+				&& !request.getSession().getAttribute("tipologiaUtente").equals("4")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -37,9 +37,8 @@ public class RimozioneArticoloServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "rimozioneArticolo");
 
 		try {
-			if (request.getSession().getAttribute("IDVenditore").toString()
-					.equals(request.getSession().getAttribute("CF").toString())) {
-				model.rimozioneArticolo(request.getSession().getAttribute("IDArticolo").toString());
+			if (request.getSession().getAttribute("IDVenditore").equals(request.getSession().getAttribute("CF"))) {
+				model.rimozioneArticolo(request.getParameter("IDArticolo"));
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			} else
 				response.sendRedirect(request.getContextPath() + "/errore.jsp");

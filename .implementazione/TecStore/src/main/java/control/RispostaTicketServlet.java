@@ -27,8 +27,8 @@ public class RispostaTicketServlet extends HttpServlet {
 			throws ServletException, IOException {
 		GestioneAssistenza model = new GestioneAssistenza();
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")
-				&& !request.getSession().getAttribute("tipologiaUtente").toString().equals("2")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")
+				&& !request.getSession().getAttribute("tipologiaUtente").equals("2")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -36,9 +36,8 @@ public class RispostaTicketServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "rispostaTicket");
 
 		try {
-			if (model.rispostaTicket(request.getSession().getAttribute("IDTicket").toString(),
-					request.getSession().getAttribute("CF").toString(),
-					request.getSession().getAttribute("messaggio").toString()))
+			if (model.rispostaTicket(request.getParameter("IDTicket"),
+					request.getSession().getAttribute("CF").toString(), request.getParameter("messaggio")))
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			else
 				response.sendRedirect(request.getContextPath() + "/errore.jsp");

@@ -31,7 +31,7 @@ public class ElencoVenditeCentralinistaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("2")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("2")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -40,7 +40,7 @@ public class ElencoVenditeCentralinistaServlet extends HttpServlet {
 
 		try {
 			ArrayList<ArticoloBean> elenco = model
-					.elencoVenditeCentralinista(Integer.parseInt(request.getParameter("Limit").toString()));
+					.elencoVenditeCentralinista(Integer.parseInt(request.getParameter("Limit")));
 			request.setAttribute("elenco", elenco);
 			response.sendRedirect(request.getContextPath() + "/elencoVenditeCentralinista.jsp");
 

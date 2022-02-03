@@ -2,7 +2,6 @@ package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Enumeration;
 
 import Bean.UtenteBean;
 import model.GestioneAccount;
@@ -25,13 +24,13 @@ public class AutenticazioneServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {GestioneAccount model = new GestioneAccount();
+			throws ServletException, IOException {
+		GestioneAccount model = new GestioneAccount();
 
 		request.getSession().setAttribute("operazione", "Autenticazione");
 		try {
-			if (model.autenticazione(request.getParameter("email").toString(),
-					request.getParameter("password").toString())) {
-				UtenteBean utente = model.dettagliUtenteByEmail(request.getParameter("email").toString());
+			if (model.autenticazione(request.getParameter("email"), request.getParameter("password"))) {
+				UtenteBean utente = model.dettagliUtenteByEmail(request.getParameter("email"));
 				request.getSession().setAttribute("CF", utente.getCF());
 				request.getSession().setAttribute("tipologia", utente.getTipologia());
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");

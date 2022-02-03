@@ -22,7 +22,7 @@ public class DettagliOrdineServlet extends HttpServlet {
 
 	GestioneOrdine model = new GestioneOrdine();
 	GestioneVendita model1 = new GestioneVendita();
-	
+
 	public DettagliOrdineServlet() {
 		super();
 	}
@@ -34,8 +34,8 @@ public class DettagliOrdineServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")
-				&& !request.getSession().getAttribute("tipologiaUtente").toString().equals("3")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")
+				&& !request.getSession().getAttribute("tipologiaUtente").equals("3")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -43,20 +43,19 @@ public class DettagliOrdineServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "dettagliOrdine");
 
 		try {
-			OrdineBean ordine = model.dettagliOrdineByID(request.getParameter("IDOrdine").toString());
+			OrdineBean ordine = model.dettagliOrdineByID(request.getParameter("IDOrdine"));
 			request.getSession().setAttribute("ordine", ordine);
-			request.setAttribute("ordine",
-					model.dettagliOrdineCliente(request.getSession().getAttribute("CF").toString(),
-							request.getSession().getAttribute("IDOrdine").toString()));
-			
+			request.setAttribute("ordine", model.dettagliOrdineCliente(
+					request.getSession().getAttribute("CF").toString(), request.getParameter("IDOrdine")));
+
 			ArrayList<FotoBean> foto = model1.getFoto(request.getParameter("IDArticolo"));
-			
+
 			request.getSession().setAttribute("foto", foto);
-			
-			if (request.getSession().getAttribute("tipologiaUtente").toString().equals("3")) {
-				model.cambiaStato(request.getSession().getAttribute("IDOrdine").toString(), "InElaborazione");
+
+			if (request.getSession().getAttribute("tipologiaUtente").equals("3")) {
+				model.cambiaStato(request.getParameter("IDOrdine"), "InElaborazione");
 				response.sendRedirect(request.getContextPath() + "/dettagliOrdineMagazziniere.jsp");
-			} else if (request.getSession().getAttribute("tipologiaUtente").toString().equals("1"))
+			} else if (request.getSession().getAttribute("tipologiaUtente").equals("1"))
 				response.sendRedirect(request.getContextPath() + "/dettagliOrdine.jsp");
 			else
 				response.sendRedirect(request.getContextPath() + "/errore.jsp");

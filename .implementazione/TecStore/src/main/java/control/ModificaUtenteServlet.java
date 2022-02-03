@@ -27,8 +27,8 @@ public class ModificaUtenteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("5")
-				&& !request.getSession().getAttribute("tipologiaUtente").toString().equals("1")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("5")
+				&& !request.getSession().getAttribute("tipologiaUtente").equals("1")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -36,10 +36,14 @@ public class ModificaUtenteServlet extends HttpServlet {
 		GestioneAccount model = new GestioneAccount();
 
 		request.getSession().setAttribute("operazione", "modificaUtente");
-		
+
 		try {
-			UtenteBean u ;//= (UtenteBean) request.getParameter("utente");
-			if (model.modificaUtente(u.getCF(), u)) {
+			if (model.modificaUtente(request.getParameter("CF"), new UtenteBean(request.getParameter("CF"),
+					request.getParameter("nome"), request.getParameter("cognome"), request.getParameter("email"),
+					request.getParameter("password"), request.getParameter("via"),
+					Integer.parseInt(request.getParameter("numeroCivico")), request.getParameter("citta"),
+					request.getParameter("provincia"), Integer.parseInt(request.getParameter("CAP")),
+					Integer.parseInt(request.getParameter("tipologia")), request.getParameter("cartaDiCredito")))) {
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			} else {
 				response.sendRedirect(request.getContextPath() + "/errore.jsp");

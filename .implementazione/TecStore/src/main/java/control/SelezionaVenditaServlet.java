@@ -30,9 +30,9 @@ public class SelezionaVenditaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")
-				&& !request.getSession().getAttribute("tipologiaUtente").toString().equals("2")
-				&& !request.getSession().getAttribute("tipologiaUtente").toString().equals("4")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")
+				&& !request.getSession().getAttribute("tipologiaUtente").equals("2")
+				&& !request.getSession().getAttribute("tipologiaUtente").equals("4")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -43,10 +43,10 @@ public class SelezionaVenditaServlet extends HttpServlet {
 			vendita = model.dettagliArticolo(request.getSession().getAttribute("CF").toString());
 
 			request.setAttribute("dettagliArticolo", vendita);
-			if (request.getSession().getAttribute("tipologiaUtente").toString().equals("1"))
+			if (request.getSession().getAttribute("tipologiaUtente").equals("1"))
 				response.sendRedirect(request.getContextPath() + "/dettagliVenditaCliente.jsp");
 
-			else if (request.getSession().getAttribute("tipologiaUtente").toString().equals("3"))
+			else if (request.getSession().getAttribute("tipologiaUtente").equals("3"))
 				response.sendRedirect(request.getContextPath() + "/dettagliVenditaMagazziniere.jsp");
 			else
 				response.sendRedirect(request.getContextPath() + "/dettagliVenditaCentralinista.jsp");

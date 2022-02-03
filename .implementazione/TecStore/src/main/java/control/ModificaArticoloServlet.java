@@ -28,23 +28,23 @@ public class ModificaArticoloServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")
-				|| !request.getSession().getAttribute("tipologiaUtente").toString().equals("4")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")
+				|| !request.getSession().getAttribute("tipologiaUtente").equals("4")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
 
 		request.getSession().setAttribute("operazione", "modificaArticolo");
 
-		String nome = request.getParameter("nome").toString();
-		String descrizione = request.getParameter("descrizione").toString();
-		String IDVenditore = request.getParameter("IDVenditore").toString();
-		int quantita = Integer.parseInt(request.getParameter("quantita").toString());
-		float prezzo = Float.parseFloat(request.getParameter("prezzo").toString());
-		boolean rimborsabile = Boolean.parseBoolean(request.getParameter("rimborsabile").toString());
+		String nome = request.getParameter("nome");
+		String descrizione = request.getParameter("descrizione");
+		String IDVenditore = request.getParameter("IDVenditore");
+		int quantita = Integer.parseInt(request.getParameter("quantita"));
+		float prezzo = Float.parseFloat(request.getParameter("prezzo"));
+		boolean rimborsabile = Boolean.parseBoolean(request.getParameter("rimborsabile"));
 
 		if (nome.isEmpty() || descrizione.isEmpty() || IDVenditore.isEmpty() || quantita < 1 || prezzo < 0.01
-				|| request.getParameter("rimborsabile").toString().isEmpty())
+				|| request.getParameter("rimborsabile").isEmpty())
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 
 		try {

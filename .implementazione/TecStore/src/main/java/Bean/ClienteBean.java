@@ -22,7 +22,7 @@ public class ClienteBean extends UtenteBean {
 
 	@Override
 	public String toString() {
-		return super.toString() + " ClienteBean [cartaDiCredito=" + cartaDiCredito + "]";
+		return super + " ClienteBean [cartaDiCredito=" + cartaDiCredito + "]";
 	}
 
 	@Override

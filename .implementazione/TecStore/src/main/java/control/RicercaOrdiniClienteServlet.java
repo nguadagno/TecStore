@@ -34,7 +34,7 @@ public class RicercaOrdiniClienteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (!request.getSession().getAttribute("tipologiaUtente").toString().equals("1")) {
+		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")) {
 			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}
@@ -42,15 +42,14 @@ public class RicercaOrdiniClienteServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "ElencoOrdiniCliente");
 
 		try {
-			ArrayList<OrdineBean> ordini = model.ricercaOrdiniCliente(
-					request.getSession().getAttribute("CF").toString(), request.getParameter("nome").toString(),
-					Integer.parseInt(request.getParameter("limit").toString()));
-			
+			ArrayList<OrdineBean> ordini = model.ricercaOrdiniCliente(request.getSession().getAttribute("CF").toString(),
+					request.getParameter("nome"), Integer.parseInt(request.getParameter("limit")));
+
 			ArrayList<FotoBean> foto = model1.getFotoOrdini(ordini);
-			
+
 			request.setAttribute("ordini", ordini);
 			request.setAttribute("foto", foto);
-			
+
 			response.sendRedirect(request.getContextPath() + "/storicoOrdini.jsp");
 		} catch (SQLException e) {
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
