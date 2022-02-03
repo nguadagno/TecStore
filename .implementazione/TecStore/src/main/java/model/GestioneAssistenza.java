@@ -22,7 +22,7 @@ public class GestioneAssistenza {
 		String searchTicketQuery = "SELECT * FROM ticket WHERE IDCliente = `?` LIMIT = `?`;";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
 			preparedStatement.setString(1, CF);
 			preparedStatement.setInt(2, limit);
@@ -55,7 +55,7 @@ public class GestioneAssistenza {
 				+ limit + " ORDER BY messaggio.data;";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("centralinista", "centralinista");
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
 			rs = preparedStatement.executeQuery();
 
@@ -80,11 +80,11 @@ public class GestioneAssistenza {
 	public boolean creazioneTicket(String CF, String tipologia) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
+
 		String insertTicketQuery = "INSERT INTO ticket (IDCliente, Tipologia, Stato) VALUES (`?`,`?`,`?`);";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(insertTicketQuery);
 			preparedStatement.setString(1, CF);
 			preparedStatement.setString(2, tipologia);
@@ -119,7 +119,7 @@ public class GestioneAssistenza {
 		String getStatoQuery = "SELECT stato FROM ticket where ID = `?`;";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("centralinista", "centralinista");
 			preparedStatement = connection.prepareStatement(getStatoQuery);
 			preparedStatement.setString(1, IDTicket);
 			ResultSet rs = preparedStatement.executeQuery();
@@ -158,7 +158,7 @@ public class GestioneAssistenza {
 		String searchTicketQuery = "SELECT * FROM ticket WHERE IDTicket = '" + IDTicket + "';";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
 			rs = preparedStatement.executeQuery();
 
@@ -191,7 +191,7 @@ public class GestioneAssistenza {
 		String searchTicketQuery = "SELECT * FROM messaggio WHERE IDTicket = '" + IDTicket + "';";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
 			rs = preparedStatement.executeQuery();
 
@@ -227,11 +227,11 @@ public class GestioneAssistenza {
 	public boolean rispostaTicket(String IDTicket, String CF, String contenuto) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
+
 		String insertTicketQuery = "INSERT INTO messaggio (CF, IDTicket, Contenuto, Data) VALUES (`?`, `?`, `?`, `?`);";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(insertTicketQuery);
 			preparedStatement.setString(1, CF);
 			preparedStatement.setString(2, IDTicket);

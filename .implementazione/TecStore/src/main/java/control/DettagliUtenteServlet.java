@@ -29,7 +29,8 @@ public class DettagliUtenteServlet extends HttpServlet {
 
 		request.getSession().setAttribute("operazione", "dettagli");
 		try {
-			request.getSession().setAttribute("utente", model.dettagliUtente(request.getParameter("CF")));
+			request.getSession().setAttribute("utente", model
+					.dettagliUtente(request.getSession().getAttribute("CF").toString(), request.getParameter("CF")));
 			response.sendRedirect(request.getContextPath() + "/dettagliUtente.jsp");
 		} catch (SQLException e) {
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");

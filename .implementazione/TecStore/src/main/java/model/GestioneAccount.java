@@ -28,7 +28,7 @@ public class GestioneAccount {
 
 		try {
 			String selectClienteSQL = "SELECT * FROM cliente WHERE CF = `?`;";
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(selectClienteSQL);
 			preparedStatement.setString(1, CF);
 			ResultSet rs = preparedStatement.executeQuery();
@@ -52,7 +52,7 @@ public class GestioneAccount {
 		String registrazioneUtente = "INSERT INTO Utente (`CF`, `NOME`, `COGNOME`, `EMAIL`, `PASSWORD`, `VIA`, `NUMEROCIVICO`, `CITTA`, `CAP`, `TIPOLOGIA`)"
 				+ " VALUES (`?`,`?`,`?`,`?`,`?`,`?`,`?`,`?`,`?`,`?`);";
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(registrazioneUtente);
 
 			preparedStatement.setString(1, utente.getCF());
@@ -80,16 +80,22 @@ public class GestioneAccount {
 		}
 	}
 
-	public boolean eliminaUtente(String CF) throws SQLException {
+	public boolean eliminaUtente(String CF, String CFtarget) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String deleteSQL = "DELETE FROM WHERE CF_CLIENTE = `?`;";
+		String deleteSQL = "DELETE FROM WHERE CF = `?`;";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			if (getTipologia(CF) == 1)
+				connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			else if (getTipologia(CF) == 5)
+				connection = DriverManagerConnectionPool.getConnection("ammpersonale", "ammpersonale");
+			else
+				return false;
+
 			preparedStatement = connection.prepareStatement(deleteSQL);
-			preparedStatement.setString(1, CF);
+			preparedStatement.setString(1, CFtarget);
 			preparedStatement.executeUpdate();
 			connection.commit();
 			return true;
@@ -103,27 +109,32 @@ public class GestioneAccount {
 		}
 	}
 
-	public boolean eliminaUtente(UtenteBean utente) throws SQLException {
-		return eliminaUtente(utente.getCF());
+	public boolean eliminaUtente(String CF, UtenteBean utente) throws SQLException {
+		return eliminaUtente(CF, utente.getCF());
 	}
 
-	public boolean modificaUtente(String CF, String nome, String cognome, String email, String password, String via,
-			int numeroCivico, String citta, String provincia, int CAP, int tipologia, String cartaDiCredito)
-			throws SQLException {
-		return modificaUtente(CF, new UtenteBean(CF, nome, cognome, email, password, via, numeroCivico, citta,
+	public boolean modificaUtente(String CF, String CFtarget, String nome, String cognome, String email,
+			String password, String via, int numeroCivico, String citta, String provincia, int CAP, int tipologia,
+			String cartaDiCredito) throws SQLException {
+		return modificaUtente(CF, new UtenteBean(CFtarget, nome, cognome, email, password, via, numeroCivico, citta,
 				provincia, CAP, tipologia, cartaDiCredito));
 	}
 
 	public boolean modificaUtente(String CF, UtenteBean utente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		UtenteBean u = dettagliUtente(CF);
+		UtenteBean u = dettagliUtente(CF, utente.getCF());
 		ResultSet rs = null;
 
 		String updateUtenteQuery = "UPDATE Utente SET NOME = `?`, SET COGNOME = `?`, SET EMAIL = `?`, PASSWORD = `?`,"
 				+ " VIA = `?`, CAP = `?`, NUMEROCIVICO = `?`, ,  CITTA = `?`, PROVINCIA=`?` WHERE CF = `?`;";
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			if (getTipologia(CF) == 1)
+				connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			else if (getTipologia(CF) == 5)
+				connection = DriverManagerConnectionPool.getConnection("ammpersonale", "ammpersonale");
+			else
+				return false;
 
 			if (utente == null || (!utente.getEmail().equals(u.getEmail()) && !utente.checkEmail(utente.getEmail())))
 				return false;
@@ -164,7 +175,7 @@ public class GestioneAccount {
 		}
 	}
 
-	public UtenteBean dettagliUtente(String CF) throws SQLException {
+	public UtenteBean dettagliUtente(String CF, String CFtarget) throws SQLException {
 		UtenteBean result = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -172,7 +183,13 @@ public class GestioneAccount {
 		String searchUtenteQuery = "SELECT * FROM utente WHERE CF='" + CF + "';";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			if (getTipologia(CF) == 1)
+				connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			else if (getTipologia(CF) == 5)
+				connection = DriverManagerConnectionPool.getConnection("ammpersonale", "ammpersonale");
+			else
+				return new UtenteBean();
+
 			preparedStatement = connection.prepareStatement(searchUtenteQuery);
 			rs = preparedStatement.executeQuery();
 
@@ -195,7 +212,7 @@ public class GestioneAccount {
 		}
 	}
 
-	public UtenteBean dettagliUtenteByEmail(String email) throws SQLException {
+	public UtenteBean dettagliUtenteByEmail(String CF, String email) throws SQLException {
 		UtenteBean result = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -203,7 +220,11 @@ public class GestioneAccount {
 		String searchUtenteQuery = "SELECT * FROM utente WHERE email = `?`;";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			if (getTipologia(CF) == 1)
+				connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			else if (getTipologia(CF) == 5)
+				connection = DriverManagerConnectionPool.getConnection("ammpersonale", "ammpersonale");
+
 			preparedStatement = connection.prepareStatement(searchUtenteQuery);
 			rs = preparedStatement.executeQuery();
 
@@ -226,7 +247,7 @@ public class GestioneAccount {
 		}
 	}
 
-	public ArrayList<UtenteBean> ricercaDipendenti(String testo) throws SQLException {
+	public ArrayList<UtenteBean> ricercaDipendenti(String CF, String testo) throws SQLException {
 		ArrayList<UtenteBean> result = new ArrayList<UtenteBean>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -234,7 +255,10 @@ public class GestioneAccount {
 		String searchTicketQuery = "SELECT * FROM utente WHERE Tipologia != `1` AND (nome LIKE `%?%` OR cognome LIKE `%?$` OR CF LIKE `%?$`);";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			if (getTipologia(CF) == 5)
+				connection = DriverManagerConnectionPool.getConnection("ammpersonale", "ammpersonale");
+			else
+				return result;
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
 			preparedStatement.setString(1, testo);
 			preparedStatement.setString(2, testo);
@@ -267,7 +291,7 @@ public class GestioneAccount {
 		String searchTicketQuery = "SELECT * FROM utente WHERE email = `?` AND password = PASSWORD(`?`);";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
 			preparedStatement.setString(1, email);
 			preparedStatement.setString(2, password);
@@ -275,6 +299,54 @@ public class GestioneAccount {
 
 			rs.last();
 			return (rs.getRow() != 1);
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+
+	public int getTipologia(String CF) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		String searchTicketQuery = "SELECT tipologia FROM utente CF= `?`;";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			preparedStatement = connection.prepareStatement(searchTicketQuery);
+			preparedStatement.setString(1, CF);
+			rs = preparedStatement.executeQuery();
+
+			return rs.next() ? rs.getInt("tipologia") : -1;
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+
+	public int getTipologiaByEmail(String CF) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		String searchTicketQuery = "SELECT tipologia FROM utente email = `?`;";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			preparedStatement = connection.prepareStatement(searchTicketQuery);
+			preparedStatement.setString(1, CF);
+			rs = preparedStatement.executeQuery();
+
+			return rs.next() ? rs.getInt("tipologia") : -1;
 		} finally {
 			try {
 				if (connection != null) {

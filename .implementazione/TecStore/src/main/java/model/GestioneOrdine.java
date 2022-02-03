@@ -27,7 +27,7 @@ public class GestioneOrdine {
 
 			ArrayList<ArticoloBean> carrello = GestioneCarrello.getCarrello(CF);
 
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			for (ArticoloBean e : carrello) {
 				preparedStatement = connection.prepareStatement(creazioneOrdineQuery);
 				preparedStatement.setString(1, CF);
@@ -62,7 +62,7 @@ public class GestioneOrdine {
 		String elencoOrdiniMagazziniereQuery = "SELECT * FROM ordine WHERE stato = 'InAttesa' ORDER BY data;";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("magazziniere", "magazziniere");
 			preparedStatement = connection.prepareStatement(elencoOrdiniMagazziniereQuery);
 			rs = preparedStatement.executeQuery();
 			rs = preparedStatement.executeQuery();
@@ -100,7 +100,7 @@ public class GestioneOrdine {
 		String elencoOrdiniClienteQuery = "SELECT * FROM ordine WHERE IDCliente = '?' AND nome LIKE `%?%%` LIMIT `?`;";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(elencoOrdiniClienteQuery);
 			preparedStatement.setString(1, CF);
 			preparedStatement.setString(2, nome);
@@ -139,7 +139,7 @@ public class GestioneOrdine {
 		String dettagliOrdineQuery = "SELECT * FROM ordine WHERE IDCliente = `?` AND ID = `?`;";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(dettagliOrdineQuery);
 			preparedStatement.setString(1, CF);
 			preparedStatement.setString(2, IDOrdine);
@@ -171,7 +171,7 @@ public class GestioneOrdine {
 		String dettagliOrdineQuery = "SELECT * FROM ordine WHERE ID = `?`;";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(dettagliOrdineQuery);
 			preparedStatement.setString(1, IDOrdine);
 			rs = preparedStatement.executeQuery();
@@ -204,7 +204,7 @@ public class GestioneOrdine {
 		String getStatoQuery = "SELECT stato FROM ordine where ID = `?`;";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("magazziniere", "magazziniere");
 			preparedStatement = connection.prepareStatement(getStatoQuery);
 			preparedStatement.setString(1, ID);
 			ResultSet rs = preparedStatement.executeQuery();
@@ -240,7 +240,7 @@ public class GestioneOrdine {
 		String setTrackingQuery = "UPDATE ordine SET CodiceTracciamento = `?` WHERE ID = `?`;";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("magazziniere", "magazziniere");
 			preparedStatement = connection.prepareStatement(setTrackingQuery);
 			preparedStatement.setString(1, IDOrdine);
 			preparedStatement.setString(2, codiceTracking);
@@ -268,7 +268,7 @@ public class GestioneOrdine {
 		String elencoOrdiniClienteQuery = "SELECT * FROM ordine WHERE stato = 'InAttesaRimborso' LIMIT = `?`;";
 
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection("magazziniere", "magazziniere");
 			preparedStatement = connection.prepareStatement(elencoOrdiniClienteQuery);
 			preparedStatement.setInt(1, limite);
 			rs = preparedStatement.executeQuery();

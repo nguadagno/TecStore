@@ -38,7 +38,8 @@ public class RicercaPersonaleServlet extends HttpServlet {
 
 		request.getSession().setAttribute("operazione", "ricercaPersonale");
 		try {
-			ArrayList<UtenteBean> risultati = model.ricercaDipendenti(request.getParameter("testo"));
+			ArrayList<UtenteBean> risultati = model.ricercaDipendenti(
+					request.getSession().getAttribute("CF").toString(), request.getParameter("testo"));
 			request.getSession().setAttribute("risultati", risultati);
 			response.sendRedirect(request.getContextPath() + "/GestionePersonale.jsp");
 		} catch (SQLException e) {

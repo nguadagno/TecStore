@@ -38,7 +38,8 @@ public class RimozioneArticoloServlet extends HttpServlet {
 
 		try {
 			if (request.getSession().getAttribute("IDVenditore").equals(request.getSession().getAttribute("CF"))) {
-				model.rimozioneArticolo(request.getParameter("IDArticolo"));
+				model.rimozioneArticolo(request.getSession().getAttribute("CF").toString(),
+						request.getParameter("IDArticolo"));
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			} else
 				response.sendRedirect(request.getContextPath() + "/errore.jsp");

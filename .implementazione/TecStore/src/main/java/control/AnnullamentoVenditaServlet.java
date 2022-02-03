@@ -37,7 +37,8 @@ public class AnnullamentoVenditaServlet extends HttpServlet {
 		request.getSession().setAttribute("operazione", "annullamentoVendita");
 
 		try {
-			if (model.rimozioneArticolo(request.getParameter("IDArticolo")))
+			if (model.rimozioneArticolo(request.getSession().getAttribute("CF").toString(),
+					request.getParameter("IDArticolo")))
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			else
 				response.sendRedirect(request.getContextPath() + "/errore.jsp");
