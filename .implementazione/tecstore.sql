@@ -10,169 +10,10 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema tecstore
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `tecstore`;
 
--- -----------------------------------------------------
--- Schema tecstore
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `tecstore` DEFAULT CHARACTER SET utf8 ;
 USE `tecstore` ;
-
--- -----------------------------------------------------
--- Table `tecstore`.`articolo`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `tecstore`.`articolo` ;
-
-CREATE TABLE IF NOT EXISTS `tecstore`.`articolo` (
-  `ID` VARCHAR(45) GENERATED ALWAYS AS (random_uuid()) VIRTUAL,
-  `Nome` VARCHAR(45) NOT NULL,
-  `Descrizione` VARCHAR(512) NOT NULL,
-  `IDVenditore` CHAR(16) NOT NULL,
-  `Quantita` INT(3) NOT NULL,
-  `Prezzo` FLOAT(5,2) NOT NULL,
-  `Stato` VARCHAR(45) NOT NULL,
-  `IDCentralinista` CHAR(16) NULL,
-  `Data` DATE GENERATED ALWAYS AS (GETDATE()) VIRTUAL,
-  `Rimborsabile` TINYINT NOT NULL,
-  PRIMARY KEY (`ID`),
-  CONSTRAINT `FK_1`
-    FOREIGN KEY (`IDVenditore`)
-    REFERENCES `tecstore`.`utente` (`CF`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `FK_2`
-    FOREIGN KEY (`IDCentralinista`)
-    REFERENCES `tecstore`.`utente` (`CF`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-CREATE INDEX `FK_1_idx` ON `tecstore`.`articolo` (`IDVenditore` ASC) VISIBLE;
-
-CREATE INDEX `FK_2_idx` ON `tecstore`.`articolo` (`IDCentralinista` ASC) VISIBLE;
-
-
--- -----------------------------------------------------
--- Table `tecstore`.`carrello`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `tecstore`.`carrello` ;
-
-CREATE TABLE IF NOT EXISTS `tecstore`.`carrello` (
-  `IDCliente` CHAR(16) NOT NULL,
-  `IDArticolo` VARCHAR(45) NOT NULL,
-  `Quantita` INT NOT NULL DEFAULT 1,
-  PRIMARY KEY (`IDCliente`, `IDArticolo`),
-  CONSTRAINT `FK_1`
-    FOREIGN KEY (`IDArticolo`)
-    REFERENCES `tecstore`.`articolo` (`ID`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `FK_2`
-    FOREIGN KEY (`IDCliente`)
-    REFERENCES `tecstore`.`utente` (`CF`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-CREATE INDEX `FK_1_idx` ON `tecstore`.`carrello` (`IDArticolo` ASC) VISIBLE;
-
-
--- -----------------------------------------------------
--- Table `tecstore`.`foto`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `tecstore`.`foto` ;
-
-CREATE TABLE IF NOT EXISTS `tecstore`.`foto` (
-  `ID` VARCHAR(45) NOT NULL,
-  `IDArticolo` VARCHAR(45) NULL,
-  `Foto` VARBINARY(500000) NULL,
-  PRIMARY KEY (`ID`),
-  CONSTRAINT `FK_1`
-    FOREIGN KEY (`IDArticolo`)
-    REFERENCES `tecstore`.`articolo` (`ID`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-CREATE INDEX `FK_1_idx` ON `tecstore`.`foto` (`IDArticolo` ASC) VISIBLE;
-
-
--- -----------------------------------------------------
--- Table `tecstore`.`messaggio`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `tecstore`.`messaggio` ;
-
-CREATE TABLE IF NOT EXISTS `tecstore`.`messaggio` (
-  `IDTicket` VARCHAR(45) NOT NULL,
-  `CF` CHAR(16) NOT NULL,
-  `Contenuto` VARCHAR(512) NOT NULL,
-  `Date` DATE GENERATED ALWAYS AS (GETDATE()) VIRTUAL,
-  PRIMARY KEY (`CF`, `IDTicket`),
-  CONSTRAINT `FK_1`
-    FOREIGN KEY (`IDTicket`)
-    REFERENCES `tecstore`.`ticket` (`IDTicket`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `FK_2`
-    FOREIGN KEY (`CF`)
-    REFERENCES `tecstore`.`utente` (`CF`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-CREATE INDEX `FK_1_idx` ON `tecstore`.`messaggio` (`IDTicket` ASC) VISIBLE;
-
-
--- -----------------------------------------------------
--- Table `tecstore`.`ordine`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `tecstore`.`ordine` ;
-
-CREATE TABLE IF NOT EXISTS `tecstore`.`ordine` (
-  `ID` INT GENERATED ALWAYS AS (random_uuid()) VIRTUAL,
-  `IDCliente` CHAR(16) NOT NULL,
-  `IDArticolo` VARCHAR(45) NULL,
-  `Quantita` INT(3) NOT NULL,
-  `Data` DATE GENERATED ALWAYS AS (GETDATE()) VIRTUAL,
-  `Stato` VARCHAR(45) NOT NULL,
-  `CodiceTracciamento` VARCHAR(45) NULL,
-  PRIMARY KEY (`ID`),
-  CONSTRAINT `FK_1`
-    FOREIGN KEY (`IDCliente`)
-    REFERENCES `tecstore`.`utente` (`CF`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
-  CONSTRAINT `FK_2`
-    FOREIGN KEY (`IDArticolo`)
-    REFERENCES `tecstore`.`articolo` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-CREATE INDEX `FK_1_idx` ON `tecstore`.`ordine` (`IDCliente` ASC) VISIBLE;
-
-CREATE INDEX `FK_2_idx` ON `tecstore`.`ordine` (`IDArticolo` ASC) VISIBLE;
-
-
--- -----------------------------------------------------
--- Table `tecstore`.`ticket`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `tecstore`.`ticket` ;
-
-CREATE TABLE IF NOT EXISTS `tecstore`.`ticket` (
-  `IDTicket` VARCHAR(45) GENERATED ALWAYS AS (random_uuid()) VIRTUAL,
-  `IDCliente` CHAR(16) NOT NULL,
-  `Tipologia` VARCHAR(45) NULL,
-  `Stato` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`IDTicket`),
-  CONSTRAINT `FK_1`
-    FOREIGN KEY (`IDCliente`)
-    REFERENCES `tecstore`.`utente` (`CF`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-CREATE INDEX `FK_1_idx` ON `tecstore`.`ticket` (`IDCliente` ASC) VISIBLE;
-
 
 -- -----------------------------------------------------
 -- Table `tecstore`.`utente`
@@ -195,9 +36,140 @@ CREATE TABLE IF NOT EXISTS `tecstore`.`utente` (
   PRIMARY KEY (`CF`))
 ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `CF_UNIQUE` ON `tecstore`.`utente` (`CF` ASC) VISIBLE;
+-- -----------------------------------------------------
+-- Table `tecstore`.`articolo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `tecstore`.`articolo` ;
 
-CREATE UNIQUE INDEX `Email_UNIQUE` ON `tecstore`.`utente` (`Email` ASC) VISIBLE;
+CREATE TABLE IF NOT EXISTS `tecstore`.`articolo` (
+  `ID` VARCHAR(45) NOT NULL,
+  `Nome` VARCHAR(45) NOT NULL,
+  `Descrizione` VARCHAR(512) NOT NULL,
+  `IDVenditore` CHAR(16) NOT NULL,
+  `Quantita` INT(3) NOT NULL,
+  `Prezzo` FLOAT(5,2) NOT NULL,
+  `Stato` VARCHAR(45) NOT NULL,
+  `IDCentralinista` CHAR(16) NULL,
+  `Data` DATETIME ,
+  `Rimborsabile` TINYINT NOT NULL,
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `FK_1`
+    FOREIGN KEY (`IDVenditore`)
+    REFERENCES `tecstore`.`utente` (`CF`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `FK_2`
+    FOREIGN KEY (`IDCentralinista`)
+    REFERENCES `tecstore`.`utente` (`CF`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `tecstore`.`carrello`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `tecstore`.`carrello` ;
+
+CREATE TABLE IF NOT EXISTS `tecstore`.`carrello` (
+  `IDCliente` CHAR(16) NOT NULL,
+  `IDArticolo` VARCHAR(45) NOT NULL,
+  `Quantita` INT NOT NULL DEFAULT 1,
+  PRIMARY KEY (`IDCliente`, `IDArticolo`),
+  CONSTRAINT `FK_11`
+    FOREIGN KEY (`IDArticolo`)
+    REFERENCES `tecstore`.`articolo` (`ID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `FK_21`
+    FOREIGN KEY (`IDCliente`)
+    REFERENCES `tecstore`.`utente` (`CF`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `tecstore`.`foto`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `tecstore`.`foto` ;
+
+CREATE TABLE IF NOT EXISTS `tecstore`.`foto` (
+  `ID` VARCHAR(45) NOT NULL,
+  `IDArticolo` VARCHAR(45) NULL,
+  `Foto` BLOB(500000) NULL,
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `FK_14`
+    FOREIGN KEY (`IDArticolo`)
+    REFERENCES `tecstore`.`articolo` (`ID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `tecstore`.`ordine`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `tecstore`.`ordine` ;
+
+CREATE TABLE IF NOT EXISTS `tecstore`.`ordine` (
+  `ID` VARCHAR(45) NOT NULL,
+  `IDCliente` CHAR(16) NOT NULL,
+  `IDArticolo` VARCHAR(45) NULL,
+  `Quantita` INT(3) NOT NULL,
+  `Data` DATETIME,
+  `Stato` VARCHAR(45) NOT NULL,
+  `CodiceTracciamento` VARCHAR(45) NULL,
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `FK_10`
+    FOREIGN KEY (`IDCliente`)
+    REFERENCES `tecstore`.`utente` (`CF`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `FK_20`
+    FOREIGN KEY (`IDArticolo`)
+    REFERENCES `tecstore`.`articolo` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `tecstore`.`ticket`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `tecstore`.`ticket` ;
+
+CREATE TABLE IF NOT EXISTS `tecstore`.`ticket` (
+  `IDTicket` VARCHAR(45) NOT NULL,
+  `IDCliente` CHAR(16) NOT NULL,
+  `Tipologia` VARCHAR(45) NULL,
+  `Stato` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`IDTicket`),
+  CONSTRAINT `FK_17`
+    FOREIGN KEY (`IDCliente`)
+    REFERENCES `tecstore`.`utente` (`CF`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `tecstore`.`messaggio`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `tecstore`.`messaggio` ;
+
+CREATE TABLE IF NOT EXISTS `tecstore`.`messaggio` (
+  `IDTicket` VARCHAR(45) NOT NULL,
+  `CF` CHAR(16) NOT NULL,
+  `Contenuto` VARCHAR(512) NOT NULL,
+  `Date` DATETIME,
+  PRIMARY KEY (`CF`, `IDTicket`),
+  CONSTRAINT `FK_15`
+    FOREIGN KEY (`IDTicket`)
+    REFERENCES `tecstore`.`ticket` (`IDTicket`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `FK_25`
+    FOREIGN KEY (`CF`)
+    REFERENCES `tecstore`.`utente` (`CF`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
 
 SET SQL_MODE = '';
 DROP USER IF EXISTS magazziniere;
@@ -242,3 +214,23 @@ GRANT UPDATE, SELECT, INSERT ON TABLE `tecstore`.`foto` TO 'ammcatalogo';
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+CREATE TRIGGER before_insert_articolo
+  BEFORE INSERT ON `articolo`
+  FOR EACH ROW
+  SET new.ID = uuid();
+
+CREATE TRIGGER before_insert_foto
+  BEFORE INSERT ON `foto`
+  FOR EACH ROW
+  SET new.ID = uuid();
+  
+CREATE TRIGGER before_insert_ordine
+  BEFORE INSERT ON `ordine`
+  FOR EACH ROW
+  SET new.ID = uuid();
+  
+CREATE TRIGGER before_insert_ticket
+  BEFORE INSERT ON `ticket`
+  FOR EACH ROW
+  SET new.IDTicket = uuid();
