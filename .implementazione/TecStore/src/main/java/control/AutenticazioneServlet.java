@@ -34,7 +34,7 @@ public class AutenticazioneServlet extends HttpServlet {
 						request.getParameter("email"));
 				request.getSession().setAttribute("CF", utente.getCF());
 				request.getSession().setAttribute("tipologia", utente.getTipologia());
-				response.sendRedirect(request.getContextPath() + "/successo.jsp");
+				response.sendRedirect(request.getContextPath() + "/paginainiziale.jsp");
 			} else {
 				response.sendRedirect(request.getContextPath() + "/errore.jsp");
 			}

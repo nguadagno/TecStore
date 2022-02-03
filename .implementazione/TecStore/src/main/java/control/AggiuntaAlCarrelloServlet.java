@@ -31,8 +31,7 @@ public class AggiuntaAlCarrelloServlet extends HttpServlet {
 		request.getSession().setAttribute("successo", "AggiuntaAlCarrello");
 
 		try {
-			if (model.aggiuntaArticolo(request.getSession().getAttribute("CF")
-					.toString(),
+			if (model.aggiuntaArticolo(request.getSession().getAttribute("CF").toString(),
 					request.getParameter("IDArticolo"), Integer.parseInt(request.getParameter("quantita"))))
 				response.sendRedirect(request.getContextPath() + "/successo.jsp");
 			else
