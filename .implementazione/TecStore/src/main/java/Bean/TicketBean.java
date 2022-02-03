@@ -1,5 +1,6 @@
 package Bean;
 
+import java.sql.Date;
 import java.util.Objects;
 
 public class TicketBean {
@@ -8,12 +9,12 @@ public class TicketBean {
 	private String IDCliente;
 	private String tipologia;
 	private String stato;
-	private String dataUltimoMessaggio;
+	private Date dataUltimoMessaggio;
 
 	public TicketBean() {
 	}
 
-	public TicketBean(String iDTicket, String iDCliente, String tipologia, String stato, String dataUltimoMessaggio) {
+	public TicketBean(String iDTicket, String iDCliente, String tipologia, String stato, Date dataUltimoMessaggio) {
 		super();
 		IDTicket = iDTicket;
 		IDCliente = iDCliente;
@@ -25,7 +26,7 @@ public class TicketBean {
 	@Override
 	public String toString() {
 		return "TicketBean [IDTicket=" + IDTicket + ", IDCliente=" + IDCliente + ", tipologia=" + tipologia + ", stato="
-				+ stato + "]";
+				+ stato + ", dataUltimoMessaggio=" + dataUltimoMessaggio + "]";
 	}
 
 	@Override
@@ -61,7 +62,7 @@ public class TicketBean {
 		this.stato = stato;
 	}
 
-	public String getDataUltimoMessaggio() {
+	public Date getDataUltimoMessaggio() {
 		return dataUltimoMessaggio;
 	}
 
