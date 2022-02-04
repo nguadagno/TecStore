@@ -62,10 +62,8 @@ public class ModificaPasswordServlet extends HttpServlet {
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
