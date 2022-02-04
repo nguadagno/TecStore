@@ -74,7 +74,7 @@ public class GestioneCarrello {
 			preparedStatement.setString(2, IDArticolo);
 			preparedStatement.setInt(3, quantita);
 
-			preparedStatement.executeQuery();
+			preparedStatement.execute();
 
 			connection.commit();
 			return true;
@@ -112,7 +112,7 @@ public class GestioneCarrello {
 			preparedStatement.setString(1, CF);
 			preparedStatement.setString(2, IDArticolo);
 
-			preparedStatement.executeQuery();
+			preparedStatement.execute();
 
 			connection.commit();
 			return true;
@@ -154,7 +154,7 @@ public class GestioneCarrello {
 			preparedStatement.setString(2, CF);
 			preparedStatement.setString(3, IDArticolo);
 
-			preparedStatement.executeQuery();
+			preparedStatement.execute();
 
 			connection.commit();
 			return true;

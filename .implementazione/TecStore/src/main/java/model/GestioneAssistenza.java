@@ -90,7 +90,7 @@ public class GestioneAssistenza {
 			preparedStatement.setString(2, tipologia);
 			preparedStatement.setString(3, "InAttesa");
 
-			preparedStatement.executeQuery();
+			preparedStatement.execute();
 
 			connection.commit();
 			return true;
@@ -132,7 +132,7 @@ public class GestioneAssistenza {
 			preparedStatement = connection.prepareStatement(cambiaStatoQuery);
 			preparedStatement.setString(1, stato);
 			preparedStatement.setString(2, IDTicket);
-			preparedStatement.executeQuery();
+			preparedStatement.execute();
 			connection.commit();
 			return true;
 		} finally {
@@ -238,7 +238,7 @@ public class GestioneAssistenza {
 			preparedStatement.setString(3, contenuto);
 			preparedStatement.setDate(4, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 
-			preparedStatement.executeQuery();
+			preparedStatement.execute();
 
 			connection.commit();
 			return true;

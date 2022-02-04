@@ -65,7 +65,6 @@ public class GestioneOrdine {
 			connection = DriverManagerConnectionPool.getConnection("magazziniere", "magazziniere");
 			preparedStatement = connection.prepareStatement(elencoOrdiniMagazziniereQuery);
 			rs = preparedStatement.executeQuery();
-			rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
 				OrdineBean order = new OrdineBean(rs.getString("ID"), rs.getString("IDCliente"),
@@ -217,7 +216,7 @@ public class GestioneOrdine {
 			preparedStatement = connection.prepareStatement(cambiaStatoQuery);
 			preparedStatement.setString(1, stato);
 			preparedStatement.setString(2, ID);
-			preparedStatement.executeQuery();
+			preparedStatement.execute();
 			connection.commit();
 			return true;
 		} finally {
@@ -244,7 +243,7 @@ public class GestioneOrdine {
 			preparedStatement = connection.prepareStatement(setTrackingQuery);
 			preparedStatement.setString(1, IDOrdine);
 			preparedStatement.setString(2, codiceTracking);
-			preparedStatement.executeQuery();
+			preparedStatement.execute();
 			connection.commit();
 			return true;
 		} finally {

@@ -109,7 +109,7 @@ public class GestioneVendita {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			PreparedStatement preparedStatement = connection.prepareStatement(rimozioneFotoQuery);
 			preparedStatement.setString(1, IDArticolo);
-			preparedStatement.executeQuery();
+			preparedStatement.execute();
 			return true;
 		} finally {
 			try {
@@ -146,7 +146,7 @@ public class GestioneVendita {
 				PreparedStatement preparedStatement = connection.prepareStatement(insertFotoQuery);
 				preparedStatement.setString(1, IDArticolo);
 				preparedStatement.setBytes(2, f.getFoto());
-				preparedStatement.executeQuery();
+				preparedStatement.execute();
 			}
 			return true;
 		} finally {
@@ -190,7 +190,7 @@ public class GestioneVendita {
 			preparedStatement.setString(6, tipologia == 1 ? "InAttesa" : "InVendita");
 			preparedStatement.setDate(7, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 			preparedStatement.setBoolean(8, rimborsabile);
-			preparedStatement.executeQuery();
+			preparedStatement.execute();
 
 			preparedStatement = connection.prepareStatement(getIDArticoloQuery);
 			preparedStatement.setString(1, nome);
@@ -414,7 +414,7 @@ public class GestioneVendita {
 			preparedStatement = connection.prepareStatement(cambiaStatoQuery);
 			preparedStatement.setString(1, stato);
 			preparedStatement.setString(2, IDArticolo);
-			preparedStatement.executeQuery();
+			preparedStatement.execute();
 			connection.commit();
 			return true;
 		} finally {
@@ -443,7 +443,7 @@ public class GestioneVendita {
 				return false;
 			preparedStatement = connection.prepareStatement(rimozioneArticoloQuery);
 			preparedStatement.setString(1, IDArticolo);
-			preparedStatement.executeQuery();
+			preparedStatement.execute();
 
 			connection.commit();
 			return true;
