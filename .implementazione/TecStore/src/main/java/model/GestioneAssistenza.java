@@ -77,11 +77,12 @@ public class GestioneAssistenza {
 		}
 	}
 
-	public boolean creazioneTicket(String CF, String tipologia) throws SQLException {
+	public boolean creazioneTicket(String CF, String tipologia, String messaggio) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String insertTicketQuery = "INSERT INTO ticket (IDCliente, Tipologia, Stato) VALUES (?,?,?);";
+		String getIDTicketQuery = "SELECT IDTicket FROM ticket WHERE IDCliente = ? AND Tipologia = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -93,7 +94,17 @@ public class GestioneAssistenza {
 			preparedStatement.execute();
 
 			connection.commit();
-			return true;
+
+			preparedStatement = connection.prepareStatement(getIDTicketQuery);
+			preparedStatement.setString(1, CF);
+			preparedStatement.setString(2, tipologia);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			if (rs.next())
+				return rispostaTicket(rs.getString("IDTicket"), CF, messaggio);
+			else
+				return false;
 		} finally {
 			try {
 				if (connection != null) {
