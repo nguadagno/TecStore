@@ -101,71 +101,15 @@ public class GestioneVendita {
 		}
 	}
 
-	public boolean inserimentoFoto(String IDArticolo, ArrayList<FotoBean> foto) throws SQLException {
-		String insertFotoQuery = "INSERT INTO foto (IDArticolo, Foto) VALUES (?, ?);";
+	public boolean rimozioneFoto(String IDArticolo) throws SQLException {
+		String rimozioneFotoQuery = "DELETE FROM foto WHERE IDArticolo = ?;";
 		Connection connection = null;
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
-			for (FotoBean f : foto) {
-				PreparedStatement preparedStatement = connection.prepareStatement(insertFotoQuery);
-				preparedStatement.setString(1, f.getIDArticolo());
-				preparedStatement.setBytes(2, f.getFoto());
-				preparedStatement.executeQuery();
-			}
-		} finally {
-			try {
-				if (connection != null) {
-					connection.close();
-				}
-			} finally {
-				DriverManagerConnectionPool.releaseConnection(connection);
-			}
-		}
-
-		return false;
-	}
-
-	public boolean inserimentoNuovoArticolo(String nome, String descrizione, String IDVenditore, int quantita,
-			float prezzo, boolean rimborsabile) throws SQLException {
-		if (quantita < 1 || prezzo < 0.01 || nome.isEmpty() || descrizione.isEmpty() || IDVenditore.isEmpty())
-			return false;
-
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		String aggiuntaArticoloQuery = "INSERT INTO articolo (Nome, Descrizione, IDVenditore, Quantita, Prezzo, Stato, Data, Rimborsabile) VALUES (?,?,?,?,?,?,?,?);";
-		String getTipologiaVenditore = "SELECT Tipologia FROM utente WHERE ID = `" + IDVenditore + "`;";
-
-		try {
-			GestioneAccount gestioneaccount = new GestioneAccount();
-			if (gestioneaccount.getTipologia(IDVenditore) == 1)
-				connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
-			else if (gestioneaccount.getTipologia(IDVenditore) == 4)
-				connection = DriverManagerConnectionPool.getConnection("ammcatalogo", "ammcatalogo");
-			else
-				return false;
-
-			preparedStatement = connection.prepareStatement(getTipologiaVenditore);
-			ResultSet rs = preparedStatement.executeQuery();
-			int tipologia = -1;
-			if (rs.next()) {
-				tipologia = rs.getInt("Tipologia");
-			}
-			if (tipologia != 1 && tipologia != 4)
-				return false;
-
-			preparedStatement = connection.prepareStatement(aggiuntaArticoloQuery);
-			preparedStatement.setString(1, nome);
-			preparedStatement.setString(2, descrizione);
-			preparedStatement.setString(3, IDVenditore);
-			preparedStatement.setInt(4, quantita);
-			preparedStatement.setFloat(5, prezzo);
-			preparedStatement.setString(6, tipologia == 1 ? "InAttesa" : "InVendita");
-			preparedStatement.setDate(7, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
-			preparedStatement.setBoolean(8, rimborsabile);
+			PreparedStatement preparedStatement = connection.prepareStatement(rimozioneFotoQuery);
+			preparedStatement.setString(1, IDArticolo);
 			preparedStatement.executeQuery();
-
-			connection.commit();
 			return true;
 		} finally {
 			try {
@@ -178,14 +122,109 @@ public class GestioneVendita {
 		}
 	}
 
-	public boolean modificaArticolo(String nome, String descrizione, String IDVenditore, int quantita, float prezzo,
-			boolean rimborsabile) throws SQLException {
+	public boolean sovrascritturaFoto(String IDArticolo, ArrayList<FotoBean> foto) throws SQLException {
+		Connection connection = null;
+		try {
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			connection.setAutoCommit(false);
+			return rimozioneFoto(IDArticolo) && inserimentoFoto(IDArticolo, foto);
+		} catch (SQLException e) {
+			connection.rollback();
+		} finally {
+			connection.commit();
+		}
+		return false;
+	}
+
+	public boolean inserimentoFoto(String IDArticolo, ArrayList<FotoBean> foto) throws SQLException {
+		String insertFotoQuery = "INSERT INTO foto (IDArticolo, Foto) VALUES (?, ?);";
+		Connection connection = null;
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			for (FotoBean f : foto) {
+				PreparedStatement preparedStatement = connection.prepareStatement(insertFotoQuery);
+				preparedStatement.setString(1, IDArticolo);
+				preparedStatement.setBytes(2, f.getFoto());
+				preparedStatement.executeQuery();
+			}
+			return true;
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+
+	public String inserimentoNuovoArticolo(String nome, String descrizione, String IDVenditore, int quantita,
+			float prezzo, Boolean rimborsabile) throws SQLException {
+		if (nome == null || descrizione == null || IDVenditore == null || rimborsabile == null || quantita < 1
+				|| prezzo < 0.01 || nome.isEmpty() || descrizione.isEmpty() || IDVenditore.isEmpty())
+			return "";
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String aggiuntaArticoloQuery = "INSERT INTO articolo (Nome, Descrizione, IDVenditore, Quantita, Prezzo, Stato, Data, Rimborsabile) VALUES (?,?,?,?,?,?,?,?);";
+		String getIDArticoloQuery = "SELECT ID FROM articolo WHERE nome = ? AND IDVenditore = ? AND quantita = ? AND prezzo = ? AND data = ?";
+
+		try {
+			GestioneAccount gestioneaccount = new GestioneAccount();
+			int tipologia = gestioneaccount.getTipologia(IDVenditore);
+			if (tipologia == 1)
+				connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			else if (tipologia == 4)
+				connection = DriverManagerConnectionPool.getConnection("ammcatalogo", "ammcatalogo");
+			else
+				return "";
+
+			preparedStatement = connection.prepareStatement(aggiuntaArticoloQuery);
+			preparedStatement.setString(1, nome);
+			preparedStatement.setString(2, descrizione);
+			preparedStatement.setString(3, IDVenditore);
+			preparedStatement.setInt(4, quantita);
+			preparedStatement.setFloat(5, prezzo);
+			preparedStatement.setString(6, tipologia == 1 ? "InAttesa" : "InVendita");
+			preparedStatement.setDate(7, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+			preparedStatement.setBoolean(8, rimborsabile);
+			preparedStatement.executeQuery();
+
+			preparedStatement = connection.prepareStatement(getIDArticoloQuery);
+			preparedStatement.setString(1, nome);
+			preparedStatement.setString(2, IDVenditore);
+			preparedStatement.setInt(3, quantita);
+			preparedStatement.setFloat(4, prezzo);
+			preparedStatement.setDate(5, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+			ResultSet rs = preparedStatement.executeQuery();
+
+			String IDArticolo = "";
+			if (rs.next())
+				IDArticolo = rs.getString("ID");
+
+			connection.commit();
+			return IDArticolo;
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+
+	public boolean modificaArticolo(String IDArticolo, String nome, String descrizione, String IDVenditore,
+			int quantita, float prezzo, boolean rimborsabile) throws SQLException {
 		if (quantita < 1 || prezzo < 0.01 || nome.isEmpty() || descrizione.isEmpty() || IDVenditore.isEmpty())
 			return false;
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String aggiuntaArticoloQuery = "UPDATE articolo SET Nome = ?, Descrizione = ?, IDVenditore = ?, Quantita = ?, Prezzo = ?, Stato = ?, Data = ?, Rimborsabile = ?);";
+		String aggiuntaArticoloQuery = "UPDATE articolo SET Nome = ?, Descrizione = ?, IDVenditore = ?, Quantita = ?, Prezzo = ?, Stato = ?, Data = ?, Rimborsabile = ? WHERE IDArticolo = ?;";
 
 		try {
 			GestioneAccount gestioneaccount = new GestioneAccount();
@@ -207,6 +246,7 @@ public class GestioneVendita {
 			preparedStatement.setString(6, tipologia == 1 ? "InAttesa" : "InVendita");
 			preparedStatement.setDate(7, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 			preparedStatement.setBoolean(8, rimborsabile);
+			preparedStatement.setString(9, IDArticolo);
 			preparedStatement.executeQuery();
 
 			connection.commit();

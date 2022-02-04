@@ -212,7 +212,7 @@ public class GestioneAccount {
 		}
 	}
 
-	public UtenteBean dettagliUtenteByEmail(String CF, String email) throws SQLException {
+	public UtenteBean dettagliUtenteByEmail(String email) throws SQLException {
 		UtenteBean result = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -220,10 +220,7 @@ public class GestioneAccount {
 		String searchUtenteQuery = "SELECT * FROM utente WHERE email = ?;";
 
 		try {
-			if (getTipologia(CF) == 1)
-				connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
-			else if (getTipologia(CF) == 5)
-				connection = DriverManagerConnectionPool.getConnection("ammpersonale", "ammpersonale");
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 
 			preparedStatement = connection.prepareStatement(searchUtenteQuery);
 			rs = preparedStatement.executeQuery();
