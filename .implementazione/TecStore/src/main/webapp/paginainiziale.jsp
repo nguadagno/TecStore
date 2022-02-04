@@ -27,7 +27,12 @@ if (tipologia < 2 || tipologia > 5) {
 <body>
 	<div align="center">
 		<%
-		if (tipologia == 2) { // centralinista
+		if (tipologia == 1) { // cliente
+		%>
+		<meta http-equiv="refresh" content="0; URL='index.jsp'" />
+		return;
+		<%
+		} else if (tipologia == 2) { // centralinista
 		%>
 		<form action="elencoTicketCentralinista" method="post">
 			<input type="submit" value="Gestione Ticket">
@@ -38,13 +43,15 @@ if (tipologia < 2 || tipologia > 5) {
 
 		<%
 		return;
-		} else if (tipologia == 3) { // magazziniere
+		} else if (tipologia == 3)
+
+		{ // magazziniere
 		%>
 
 		<form action="ElencoRimborsiMagazziniere" method="post">
 			<input type="submit" value="Gestione Rimborsi">
 		</form>
-		
+
 		<form action="ElencoOrdiniMagazziniere" method="post">
 			<input type="submit" value="Gestione Ordini">
 		</form>
@@ -56,7 +63,7 @@ if (tipologia < 2 || tipologia > 5) {
 			<input type="text" name="testo" placeholder="Ricerca vendite...">
 			<input type="submit">
 		</form>
-		
+
 		<form action="nuovavendita.jsp" method="post">
 			<input type="submit" value="Nuova Vendita">
 		</form>
@@ -68,7 +75,7 @@ if (tipologia < 2 || tipologia > 5) {
 			<input type="text" name="testo" placeholder="Ricerca dipendenti...">
 			<input type="submit">
 		</form>
-		
+
 		<form action="nuovodipendente.jsp" method="post">
 			<input type="submit" value="Nuovo Dipendente">
 		</form>
