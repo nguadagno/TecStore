@@ -4,20 +4,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 import Bean.UtenteBean;
 
 public class GestioneAccount {
-	public boolean registrazioneUtente(String CF, String nome, String cognome, String email, String password,
-			String via, int numeroCivico, String citta, String provincia, int CAP, int tipologia, String cartaDiCredito)
-			throws SQLException {
-		return registrazioneUtente(new UtenteBean(CF, nome, cognome, email, password, via, numeroCivico, citta,
-				provincia, CAP, tipologia, cartaDiCredito));
-	}
-
 	public boolean exists(UtenteBean utente) throws SQLException {
 		return exists(utente.getCF());
 	}
@@ -45,12 +44,28 @@ public class GestioneAccount {
 		}
 	}
 
-	public boolean registrazioneUtente(UtenteBean utente) throws SQLException {
+	public boolean registrazioneUtente(String CF, String nome, String cognome, String email, String password,
+			String via, int numeroCivico, String citta, String provincia, int CAP, int tipologia)
+			throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
+		return registrazioneUtente(new UtenteBean(CF, nome, cognome, email, password, via, numeroCivico, citta,
+				provincia, CAP, tipologia, ""));
+	}
+
+	public boolean registrazioneUtente(UtenteBean utente)
+			throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String registrazioneUtente = "INSERT INTO Utente (`CF`, `NOME`, `COGNOME`, `EMAIL`, `PASSWORD`, `VIA`, `NUMEROCIVICO`, `CITTA`, `CAP`, `TIPOLOGIA`)"
-				+ " VALUES (?,?,?,?,?,?,?,?,?,?);";
+		if (utente == null || utente.getCF() == null || utente.getNome() == null || utente.getCognome() == null
+				|| utente.getEmail() == null || utente.getPassword() == null || utente.getVia() == null
+				|| utente.getProvincia() == null || utente.getCitta() == null || utente.getCF().isEmpty()
+				|| utente.getNome().isEmpty() || utente.getCognome().isEmpty() || utente.getEmail().isEmpty()
+				|| utente.getPassword().isEmpty() || utente.getVia().isEmpty() || utente.getNumeroCivico() < 0
+				|| utente.getProvincia().isEmpty() || utente.getCitta().isEmpty() || utente.getCAP() < 0
+				|| utente.getTipologia() < 0)
+			return false;
+
+		String registrazioneUtente = "INSERT INTO utente (`CF`, `NOME`, `COGNOME`, `EMAIL`, `PASSWORD`, `VIA`, `NUMEROCIVICO`, `PROVINCIA`, `CITTA`, `CAP`, `TIPOLOGIA`, `SALT`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(registrazioneUtente);
@@ -59,17 +74,23 @@ public class GestioneAccount {
 			preparedStatement.setString(2, utente.getNome());
 			preparedStatement.setString(3, utente.getCognome());
 			preparedStatement.setString(4, utente.getEmail());
-			preparedStatement.setString(5, utente.getPassword());
+			preparedStatement.setString(5, "");
 			preparedStatement.setString(6, utente.getVia());
 			preparedStatement.setInt(7, utente.getNumeroCivico());
-			preparedStatement.setString(8, utente.getCitta());
-			preparedStatement.setInt(9, utente.getCAP());
-			preparedStatement.setInt(10, utente.getTipologia());
+			preparedStatement.setString(8, utente.getProvincia());
+			preparedStatement.setString(9, utente.getCitta());
+			preparedStatement.setInt(10, utente.getCAP());
+			preparedStatement.setInt(11, utente.getTipologia());
+			preparedStatement.setString(12, "");
 
 			preparedStatement.executeUpdate();
 
+			encryptPassword(utente.getEmail(), utente.getPassword());
+
 			connection.commit();
 			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (preparedStatement != null)
@@ -78,6 +99,7 @@ public class GestioneAccount {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return false;
 	}
 
 	public boolean eliminaUtente(String CF, String CFtarget) throws SQLException {
@@ -115,16 +137,16 @@ public class GestioneAccount {
 
 	public boolean modificaUtente(String CF, String CFtarget, String nome, String cognome, String email,
 			String password, String via, int numeroCivico, String citta, String provincia, int CAP, int tipologia,
-			String cartaDiCredito) throws SQLException {
+			String cartaDiCredito) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
 		return modificaUtente(CF, new UtenteBean(CFtarget, nome, cognome, email, password, via, numeroCivico, citta,
 				provincia, CAP, tipologia, cartaDiCredito));
 	}
 
-	public boolean modificaUtente(String CF, UtenteBean utente) throws SQLException {
+	public boolean modificaUtente(String CF, UtenteBean utente)
+			throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		UtenteBean u = dettagliUtente(CF, utente.getCF());
-		ResultSet rs = null;
 
 		String updateUtenteQuery = "UPDATE Utente SET NOME = ?, SET COGNOME = ?, SET EMAIL = ?, PASSWORD = ?,"
 				+ " VIA = ?, CAP = ?, NUMEROCIVICO = ?, ,  CITTA = ?, PROVINCIA=? WHERE CF = ?;";
@@ -141,13 +163,7 @@ public class GestioneAccount {
 
 			if (!utente.getPassword().equals(u.getPassword())) {
 				if (utente.checkPassword(utente.getPassword())) {
-					String getPasswordQuery = "SELECT PASSWORD(?);";
-					preparedStatement = connection.prepareStatement(getPasswordQuery);
-					preparedStatement.setString(1, utente.getPassword());
-					rs = preparedStatement.executeQuery();
-					preparedStatement.close();
-					rs.next();
-					utente.setPassword(rs.getString(0));
+					utente.setPassword(encryptPassword(utente.getEmail(), utente.getPassword()));
 				}
 			}
 
@@ -223,6 +239,7 @@ public class GestioneAccount {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 
 			preparedStatement = connection.prepareStatement(searchUtenteQuery);
+			preparedStatement.setString(1, email);
 			rs = preparedStatement.executeQuery();
 
 			if (rs.next()) {
@@ -233,6 +250,8 @@ public class GestioneAccount {
 				return result;
 			}
 			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -242,6 +261,7 @@ public class GestioneAccount {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return null;
 	}
 
 	public ArrayList<UtenteBean> ricercaDipendenti(String CF, String testo) throws SQLException {
@@ -282,29 +302,15 @@ public class GestioneAccount {
 	}
 
 	public boolean autenticazione(String email, String password) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM utente WHERE email = ? AND password = PASSWORD(?);";
-
 		try {
-			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
-			preparedStatement = connection.prepareStatement(searchTicketQuery);
-			preparedStatement.setString(1, email);
-			preparedStatement.setString(2, password);
-			rs = preparedStatement.executeQuery();
-
-			rs.last();
-			return (rs.getRow() != 1);
-		} finally {
-			try {
-				if (connection != null) {
-					connection.close();
-				}
-			} finally {
-				DriverManagerConnectionPool.releaseConnection(connection);
-			}
+			if (email == null || password == null || email.isEmpty() || password.isEmpty())
+				return false;
+			return verifyPassword(email, password);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return false;
+
 	}
 
 	public int getTipologia(String CF) throws SQLException {
@@ -380,5 +386,67 @@ public class GestioneAccount {
 		password.insert(random.nextInt(password.length()), symbols[random.nextInt(symbols.length)]);
 
 		return password.toString();
+	}
+
+	public String encryptPassword(String email, String password)
+			throws NoSuchAlgorithmException, InvalidKeySpecException {
+		try {
+			if (email == null || password == null || email.isEmpty() || password.isEmpty())
+				return "";
+
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String saveSaltQuery = "UPDATE utente SET salt = ? WHERE email = ?";
+
+			SecureRandom random = new SecureRandom();
+			byte[] salt = new byte[16];
+			random.nextBytes(salt);
+
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			preparedStatement = connection.prepareStatement(saveSaltQuery);
+			preparedStatement.setBytes(1, salt);
+			preparedStatement.setString(2, email);
+			preparedStatement.execute();
+
+			KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+			SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+
+			return factory.generateSecret(spec).getEncoded().toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	public boolean verifyPassword(String email, String passwordHash) {
+		try {
+			if (email == null || passwordHash == null || email.isEmpty() || passwordHash.isEmpty())
+				return false;
+
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String getSaltQuery = "SELECT Salt FROM utente WHERE email = ?;";
+			byte[] salt = new byte[16];
+
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			preparedStatement = connection.prepareStatement(getSaltQuery);
+			preparedStatement.setString(1, email);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			if (rs.next())
+				salt = rs.getBytes("Salt");
+			else
+				return false;
+
+			System.out.println(salt);
+
+			KeySpec spec = new PBEKeySpec(passwordHash.toCharArray(), salt, 65536, 128);
+			SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+
+			return (factory.generateSecret(spec).getEncoded().toString().equals(passwordHash));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }
