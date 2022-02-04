@@ -44,18 +44,18 @@
 				<td><%=ticket.getIDTicket()%></td>
 				<td><%=ticket.getTipologia()%></td>
 				<td><%=ticket.getDataUltimoMessaggio()%></td>
-				<td><form action="dettagliTicket" method="post">
-						<input type="hidden" value=<%=ticket.getIDTicket()%>><input
-							type="submit" value="Dettagli">
-					</form></td>
 
 			</tr>
 
-			<%
-			}
-			%>
-
 		</table>
+		<form action="dettagliTicket" method="post">
+			<input type="hidden" value=<%=ticket.getIDTicket()%>><input
+				type="submit" value="Dettagli">
+		</form>
+
+		<%
+		}
+		%>
 
 	</div>
 </body>
