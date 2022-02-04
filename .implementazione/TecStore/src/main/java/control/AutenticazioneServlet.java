@@ -40,7 +40,7 @@ public class AutenticazioneServlet extends HttpServlet {
 				session.setAttribute("Nome", utente.getNome());
 				session.setAttribute("Cognome", utente.getCognome());
 				session.setAttribute("tipologia", utente.getTipologia());
-				redirect = "/index.jsp";
+				redirect = "/paginainiziale.jsp";
 			} else {
 				redirect = "/errore.jsp";
 			}
@@ -48,6 +48,7 @@ public class AutenticazioneServlet extends HttpServlet {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
+			e.printStackTrace();
 		}
 
 		dd = request.getRequestDispatcher(redirect);

@@ -7,12 +7,10 @@ import java.sql.SQLException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
+import org.mindrot.jbcrypt.BCrypt;
 
 import Bean.UtenteBean;
 
@@ -65,7 +63,7 @@ public class GestioneAccount {
 				|| utente.getTipologia() < 0)
 			return false;
 
-		String registrazioneUtente = "INSERT INTO utente (`CF`, `NOME`, `COGNOME`, `EMAIL`, `PASSWORD`, `VIA`, `NUMEROCIVICO`, `PROVINCIA`, `CITTA`, `CAP`, `TIPOLOGIA`, `SALT`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
+		String registrazioneUtente = "INSERT INTO utente (`CF`, `NOME`, `COGNOME`, `EMAIL`, `PASSWORD`, `VIA`, `NUMEROCIVICO`, `PROVINCIA`, `CITTA`, `CAP`, `TIPOLOGIA`) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(registrazioneUtente);
@@ -74,22 +72,20 @@ public class GestioneAccount {
 			preparedStatement.setString(2, utente.getNome());
 			preparedStatement.setString(3, utente.getCognome());
 			preparedStatement.setString(4, utente.getEmail());
-			preparedStatement.setString(5, "");
+			preparedStatement.setString(5, encryptPassword(utente.getPassword()));
 			preparedStatement.setString(6, utente.getVia());
 			preparedStatement.setInt(7, utente.getNumeroCivico());
 			preparedStatement.setString(8, utente.getProvincia());
 			preparedStatement.setString(9, utente.getCitta());
 			preparedStatement.setInt(10, utente.getCAP());
 			preparedStatement.setInt(11, utente.getTipologia());
-			preparedStatement.setString(12, "");
 
 			preparedStatement.executeUpdate();
-
-			encryptPassword(utente.getEmail(), utente.getPassword());
 
 			connection.commit();
 			return true;
 		} catch (Exception e) {
+			connection.rollback();
 			e.printStackTrace();
 		} finally {
 			try {
@@ -163,7 +159,7 @@ public class GestioneAccount {
 
 			if (!utente.getPassword().equals(u.getPassword())) {
 				if (utente.checkPassword(utente.getPassword())) {
-					utente.setPassword(encryptPassword(utente.getEmail(), utente.getPassword()));
+					utente.setPassword(encryptPassword(utente.getPassword()));
 				}
 			}
 
@@ -388,65 +384,44 @@ public class GestioneAccount {
 		return password.toString();
 	}
 
-	public String encryptPassword(String email, String password)
-			throws NoSuchAlgorithmException, InvalidKeySpecException {
-		try {
-			if (email == null || password == null || email.isEmpty() || password.isEmpty())
-				return "";
-
-			Connection connection = null;
-			PreparedStatement preparedStatement = null;
-			String saveSaltQuery = "UPDATE utente SET salt = ? WHERE email = ?";
-
-			SecureRandom random = new SecureRandom();
-			byte[] salt = new byte[16];
-			random.nextBytes(salt);
-
-			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
-			preparedStatement = connection.prepareStatement(saveSaltQuery);
-			preparedStatement.setBytes(1, salt);
-			preparedStatement.setString(2, email);
-			preparedStatement.execute();
-
-			KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
-			SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-
-			return factory.generateSecret(spec).getEncoded().toString();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "";
+	public String encryptPassword(String password) {
+		if (password == null || password.isEmpty())
+			return "";
+		return BCrypt.hashpw(password, BCrypt.gensalt());
 	}
 
-	public boolean verifyPassword(String email, String passwordHash) {
+	public boolean verifyPassword(String email, String password) throws SQLException {
+		Connection connection = null;
 		try {
-			if (email == null || passwordHash == null || email.isEmpty() || passwordHash.isEmpty())
+			if (email == null || password == null || email.isEmpty() || password.isEmpty())
 				return false;
 
-			Connection connection = null;
-			PreparedStatement preparedStatement = null;
-			String getSaltQuery = "SELECT Salt FROM utente WHERE email = ?;";
-			byte[] salt = new byte[16];
-
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
-			preparedStatement = connection.prepareStatement(getSaltQuery);
+			String getPasswordQuery = "SELECT Password FROM utente WHERE email = ?;";
+			String hash;
+
+			PreparedStatement preparedStatement = connection.prepareStatement(getPasswordQuery);
 			preparedStatement.setString(1, email);
 			ResultSet rs = preparedStatement.executeQuery();
 
 			if (rs.next())
-				salt = rs.getBytes("Salt");
+				hash = rs.getString("Password");
 			else
 				return false;
 
-			System.out.println(salt);
-
-			KeySpec spec = new PBEKeySpec(passwordHash.toCharArray(), salt, 65536, 128);
-			SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-
-			return (factory.generateSecret(spec).getEncoded().toString().equals(passwordHash));
+			return (BCrypt.checkpw(password, hash));
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
 		}
+
 		return false;
 	}
 }
