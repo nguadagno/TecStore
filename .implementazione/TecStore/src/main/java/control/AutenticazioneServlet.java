@@ -37,6 +37,8 @@ public class AutenticazioneServlet extends HttpServlet {
 			if (model.autenticazione(request.getParameter("email"), request.getParameter("password"))) {
 				UtenteBean utente = model.dettagliUtenteByEmail(request.getParameter("email"));
 				session.setAttribute("CF", utente.getCF());
+				session.setAttribute("Nome", utente.getNome());
+				session.setAttribute("Cognome", utente.getCognome());
 				session.setAttribute("tipologia", utente.getTipologia());
 				redirect = "/index.jsp";
 			} else {
