@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import Bean.ArticoloBean;
 import Bean.FotoBean;
 import model.GestioneVendita;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/ricercaVendita")
 public class RicercaVenditaServlet extends HttpServlet {
@@ -23,33 +25,42 @@ public class RicercaVenditaServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		GestioneVendita model = new GestioneVendita();
+		HttpSession session = request.getSession(true);
+		String redirect = "";
+		RequestDispatcher dd;
 
-		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")) {
-			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+		if (!session.getAttribute("tipologiaUtente").equals("1")) {
+			session.setAttribute("errore", "AccessoNonAutorizzato");
+			response.setStatus(403);
+			redirect = "/errore.jsp";
+			dd = request.getRequestDispatcher(redirect);
+			dd.forward(request, response);
 		}
 
-		GestioneVendita model = new GestioneVendita();
-
-		request.getSession().setAttribute("operazione", "ricercaArticolo");
+		session.setAttribute("operazione", "ricercaArticolo");
 		try {
-			ArrayList<ArticoloBean> risultati = model.elencoVenditeCF(
-					request.getSession().getAttribute("CF").toString(), request.getParameter("nome"),
-					Integer.parseInt(request.getParameter("limit")));
+			ArrayList<ArticoloBean> risultati = model.elencoVenditeCF(session.getAttribute("CF").toString(),
+					request.getParameter("nome"), Integer.parseInt(request.getParameter("limit")));
 
 			ArrayList<FotoBean> foto = model.getFoto(risultati);
 
-			request.getSession().setAttribute("risultati", risultati);
-			request.getSession().setAttribute("foto", foto);
+			session.setAttribute("risultati", risultati);
+			session.setAttribute("foto", foto);
 
-			response.sendRedirect(request.getContextPath() + "/risultatiRicerca.jsp");
+			redirect = "/risultatiRicerca.jsp";
+
 		} catch (SQLException e) {
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+			response.setStatus(500);
+			session.setAttribute("errore", "erroreSQL");
+			redirect = "/errore.jsp";
 		}
+
+		dd = request.getRequestDispatcher(redirect);
+		dd.forward(request, response);
 	}
 }

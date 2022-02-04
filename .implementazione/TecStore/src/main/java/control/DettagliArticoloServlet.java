@@ -6,19 +6,19 @@ import java.util.ArrayList;
 import Bean.ArticoloBean;
 import Bean.FotoBean;
 import model.GestioneVendita;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/DettagliArticolo")
 
 public class DettagliArticoloServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
-	GestioneVendita model = new GestioneVendita();
 
 	public DettagliArticoloServlet() {
 		super();
@@ -30,30 +30,41 @@ public class DettagliArticoloServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		GestioneVendita model = new GestioneVendita();
+		HttpSession session = request.getSession(true);
+		String redirect = "";
+		RequestDispatcher dd;
 
-		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")
-				&& !request.getSession().getAttribute("tipologiaUtente").equals("2")
-				&& !request.getSession().getAttribute("tipologiaUtente").equals("4")) {
-			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+		if (!session.getAttribute("tipologiaUtente").equals("1") && !session.getAttribute("tipologiaUtente").equals("2")
+				&& !session.getAttribute("tipologiaUtente").equals("4")) {
+			session.setAttribute("errore", "AccessoNonAutorizzato");
+			response.setStatus(403);
+			redirect = "/errore.jsp";
+			dd = request.getRequestDispatcher(redirect);
+			dd.forward(request, response);
 		}
 
-		request.getSession().setAttribute("operazione", "dettagliArticolo");
+		session.setAttribute("operazione", "dettagliArticolo");
 
 		try {
 			ArticoloBean articolo = model.dettagliArticolo(request.getParameter("IDArticolo"));
 			ArrayList<FotoBean> foto = model.getFoto(request.getParameter("IDArticolo"));
 
-			request.setAttribute("dettagliArticolo", articolo);
-			request.setAttribute("fotoArticolo", foto);
+			session.setAttribute("dettagliArticolo", articolo);
+			session.setAttribute("fotoArticolo", foto);
 
-			if (request.getSession().getAttribute("tipologiaUtente").equals("2"))
-				response.sendRedirect(request.getContextPath() + "/autorizzazioneVendita.jsp");
+			if (session.getAttribute("tipologiaUtente").equals("2"))
+				redirect = "/autorizzazioneVendita.jsp";
 			else
-				response.sendRedirect(request.getContextPath() + "/dettagliArticolo.jsp");
+				redirect = "/dettagliArticolo.jsp";
 
 		} catch (SQLException e) {
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+			response.setStatus(500);
+			session.setAttribute("errore", "erroreSQL");
+			redirect = "/errore.jsp";
 		}
+
+		dd = request.getRequestDispatcher(redirect);
+		dd.forward(request, response);
 	}
 }

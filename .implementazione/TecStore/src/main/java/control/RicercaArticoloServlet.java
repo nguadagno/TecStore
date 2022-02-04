@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import Bean.ArticoloBean;
 import Bean.FotoBean;
 import model.GestioneVendita;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/ricercaarticolo")
 public class RicercaArticoloServlet extends HttpServlet {
@@ -23,31 +25,41 @@ public class RicercaArticoloServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		GestioneVendita model = new GestioneVendita();
+		HttpSession session = request.getSession(true);
+		String redirect = "";
+		RequestDispatcher dd;
 
-		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")) {
-			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+		if (!session.getAttribute("tipologiaUtente").equals("1")) {
+			session.setAttribute("errore", "AccessoNonAutorizzato");
+			response.setStatus(403);
+			redirect = "/errore.jsp";
+			dd = request.getRequestDispatcher(redirect);
+			dd.forward(request, response);
 		}
 
-		GestioneVendita model = new GestioneVendita();
+		session.setAttribute("operazione", "ricercaArticolo");
 
-		request.getSession().setAttribute("operazione", "ricercaArticolo");
 		try {
 			ArrayList<ArticoloBean> risultati = model.ricercaArticolo(request.getParameter("testo"),
 					Integer.parseInt(request.getParameter("limit")));
 			ArrayList<FotoBean> foto = model.getFoto(risultati);
 
-			request.getSession().setAttribute("risultati", risultati);
-			request.getSession().setAttribute("foto", foto);
-			
-			response.sendRedirect(request.getContextPath() + "/risultatiRicerca.jsp");
+			session.setAttribute("risultati", risultati);
+			session.setAttribute("foto", foto);
+
+			redirect = "/risultatiRicerca.jsp";
 		} catch (SQLException e) {
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+			response.setStatus(500);
+			session.setAttribute("errore", "erroreSQL");
+			redirect = "/errore.jsp";
 		}
+
+		dd = request.getRequestDispatcher(redirect);
+		dd.forward(request, response);
 	}
 }

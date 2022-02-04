@@ -30,30 +30,34 @@ public class ElencoTicketCentralinistaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		GestioneAssistenza model = new GestioneAssistenza();
+		HttpSession session = request.getSession(true);
 		String redirect = "";
+		RequestDispatcher dd;
 
-		if (request.getSession().getAttribute("tipologia") == null
-				|| !request.getSession().getAttribute("tipologiaUtente").equals("2")) {
-			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
+		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologiaUtente").equals("2")) {
+			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
-			redirect = "/accessononautorizzato.jsp";
+			redirect = "/errore.jsp";
+			dd = request.getRequestDispatcher(redirect);
+			dd.forward(request, response);
 		}
 
-		request.getSession().setAttribute("operazione", "elencoTicket");
+		session.setAttribute("operazione", "elencoTicket");
 
 		try {
 			int limit = 10;
 			if (request.getParameter("limit") != null && !request.getParameter("limit").isEmpty())
 				limit = Integer.parseInt(request.getParameter("limit"));
 			ArrayList<TicketBean> elencoTicket = model.elencoTicketCentralinista(limit);
-			request.getSession(true).setAttribute("elencoTicket", elencoTicket);
+			session.setAttribute("elencoTicket", elencoTicket);
 			redirect = "/gestioneassistenza.jsp";
 		} catch (SQLException e) {
 			response.setStatus(500);
+			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
 		}
 
-		RequestDispatcher dd = request.getRequestDispatcher(redirect);
+		dd = request.getRequestDispatcher(redirect);
 		dd.forward(request, response);
 	}
 }

@@ -27,7 +27,7 @@
 				<th></th>
 			</tr>
 			<%
-			ArrayList<TicketBean> elencoTicket = (ArrayList<TicketBean>) request.getSession().getAttribute("elencoTicket");
+			ArrayList<TicketBean> elencoTicket = (ArrayList<TicketBean>) session.getAttribute("elencoTicket");
 
 			if (elencoTicket == null) {
 			%>

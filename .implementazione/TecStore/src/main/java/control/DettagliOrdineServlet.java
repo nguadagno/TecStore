@@ -8,20 +8,19 @@ import Bean.FotoBean;
 import Bean.OrdineBean;
 import model.GestioneOrdine;
 import model.GestioneVendita;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/ElaborazioneOrdine")
 
 public class DettagliOrdineServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
-	GestioneOrdine model = new GestioneOrdine();
-	GestioneVendita model1 = new GestioneVendita();
 
 	public DettagliOrdineServlet() {
 		super();
@@ -33,35 +32,48 @@ public class DettagliOrdineServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		GestioneOrdine model = new GestioneOrdine();
+		GestioneVendita model1 = new GestioneVendita();
+		HttpSession session = request.getSession(true);
+		String redirect = "";
+		RequestDispatcher dd;
 
-		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")
-				&& !request.getSession().getAttribute("tipologiaUtente").equals("3")) {
-			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+		if (!session.getAttribute("tipologiaUtente").equals("1")
+				&& !session.getAttribute("tipologiaUtente").equals("3")) {
+			session.setAttribute("errore", "AccessoNonAutorizzato");
+			response.setStatus(403);
+			redirect = "/errore.jsp";
+			dd = request.getRequestDispatcher(redirect);
+			dd.forward(request, response);
 		}
 
-		request.getSession().setAttribute("operazione", "dettagliOrdine");
+		session.setAttribute("operazione", "dettagliOrdine");
 
 		try {
 			OrdineBean ordine = model.dettagliOrdineByID(request.getParameter("IDOrdine"));
-			request.getSession().setAttribute("ordine", ordine);
-			request.setAttribute("ordine", model.dettagliOrdineCliente(
-					request.getSession().getAttribute("CF").toString(), request.getParameter("IDOrdine")));
+			session.setAttribute("ordine", ordine);
+			session.setAttribute("ordine", model.dettagliOrdineCliente(session.getAttribute("CF").toString(),
+					request.getParameter("IDOrdine")));
 
 			ArrayList<FotoBean> foto = model1.getFoto(request.getParameter("IDArticolo"));
 
-			request.getSession().setAttribute("foto", foto);
+			session.setAttribute("foto", foto);
 
-			if (request.getSession().getAttribute("tipologiaUtente").equals("3")) {
+			if (session.getAttribute("tipologiaUtente").equals("3")) {
 				model.cambiaStato(request.getParameter("IDOrdine"), "InElaborazione");
-				response.sendRedirect(request.getContextPath() + "/dettagliOrdineMagazziniere.jsp");
-			} else if (request.getSession().getAttribute("tipologiaUtente").equals("1"))
-				response.sendRedirect(request.getContextPath() + "/dettagliOrdine.jsp");
+				redirect = "/dettagliOrdineMagazziniere.jsp";
+			} else if (session.getAttribute("tipologiaUtente").equals("1"))
+				redirect = "/dettagliOrdine.jsp";
 			else
-				response.sendRedirect(request.getContextPath() + "/errore.jsp");
+				redirect = "/errore.jsp";
 
 		} catch (SQLException e) {
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+			response.setStatus(500);
+			session.setAttribute("errore", "erroreSQL");
+			redirect = "/errore.jsp";
 		}
+
+		dd = request.getRequestDispatcher(redirect);
+		dd.forward(request, response);
 	}
 }

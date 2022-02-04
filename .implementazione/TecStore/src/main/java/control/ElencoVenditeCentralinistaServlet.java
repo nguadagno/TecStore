@@ -6,19 +6,19 @@ import java.util.ArrayList;
 
 import Bean.ArticoloBean;
 import model.GestioneVendita;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/ElencoVenditeCentralinista")
 
 public class ElencoVenditeCentralinistaServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
-	GestioneVendita model = new GestioneVendita();
 
 	public ElencoVenditeCentralinistaServlet() {
 		super();
@@ -30,22 +30,32 @@ public class ElencoVenditeCentralinistaServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		GestioneVendita model = new GestioneVendita();
+		HttpSession session = request.getSession(true);
+		String redirect = "";
+		RequestDispatcher dd;
 
-		if (!request.getSession().getAttribute("tipologiaUtente").equals("2")) {
-			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+		if (!session.getAttribute("tipologiaUtente").equals("2")) {
+			session.setAttribute("errore", "AccessoNonAutorizzato");
+			response.setStatus(403);
+			redirect = "/errore.jsp";
+			dd = request.getRequestDispatcher(redirect);
+			dd.forward(request, response);
 		}
 
-		request.getSession().setAttribute("operazione", "elencoVenditeCentralinista");
+		session.setAttribute("operazione", "elencoVenditeCentralinista");
 
 		try {
 			ArrayList<ArticoloBean> elenco = model
 					.elencoVenditeCentralinista(Integer.parseInt(request.getParameter("Limit")));
-			request.setAttribute("elenco", elenco);
-			response.sendRedirect(request.getContextPath() + "/elencoVenditeCentralinista.jsp");
+			session.setAttribute("elenco", elenco);
+			redirect = "/elencoVenditeCentralinista.jsp";
 
 		} catch (SQLException e) {
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+			redirect = "/errore.jsp";
 		}
+
+		dd = request.getRequestDispatcher(redirect);
+		dd.forward(request, response);
 	}
 }

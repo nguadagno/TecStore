@@ -5,19 +5,19 @@ import java.sql.SQLException;
 
 import Bean.ArticoloBean;
 import model.GestioneVendita;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/SelezionaVendita")
 
 public class SelezionaVenditaServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
-	GestioneVendita model = new GestioneVendita();
 
 	public SelezionaVenditaServlet() {
 		super();
@@ -29,30 +29,38 @@ public class SelezionaVenditaServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		GestioneVendita model = new GestioneVendita();
+		HttpSession session = request.getSession(true);
+		String redirect = "";
+		RequestDispatcher dd;
 
-		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")
-				&& !request.getSession().getAttribute("tipologiaUtente").equals("2")
-				&& !request.getSession().getAttribute("tipologiaUtente").equals("4")) {
-			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+		if (!session.getAttribute("tipologiaUtente").equals("1")
+				&& !session.getAttribute("tipologiaUtente").equals("2")) {
+			session.setAttribute("errore", "AccessoNonAutorizzato");
+			response.setStatus(403);
+			redirect = "/errore.jsp";
+			dd = request.getRequestDispatcher(redirect);
+			dd.forward(request, response);
 		}
 
-		request.getSession().setAttribute("operazione", "selezionaVendita");
+		session.setAttribute("operazione", "selezionaVendita");
 		ArticoloBean vendita = new ArticoloBean();
 		try {
-			vendita = model.dettagliArticolo(request.getSession().getAttribute("CF").toString());
+			vendita = model.dettagliArticolo(session.getAttribute("CF").toString());
 
-			request.setAttribute("dettagliArticolo", vendita);
-			if (request.getSession().getAttribute("tipologiaUtente").equals("1"))
-				response.sendRedirect(request.getContextPath() + "/dettagliVenditaCliente.jsp");
-
-			else if (request.getSession().getAttribute("tipologiaUtente").equals("3"))
-				response.sendRedirect(request.getContextPath() + "/dettagliVenditaMagazziniere.jsp");
+			session.setAttribute("dettagliArticolo", vendita);
+			if (session.getAttribute("tipologiaUtente").equals("1"))
+				redirect = "/dettaglivenditacliente.jsp";
 			else
-				response.sendRedirect(request.getContextPath() + "/dettagliVenditaCentralinista.jsp");
+				redirect = "/dettagliVenditaCentralinista.jsp";
 
 		} catch (SQLException e) {
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+			response.setStatus(500);
+			session.setAttribute("errore", "erroreSQL");
+			redirect = "/errore.jsp";
 		}
+
+		dd = request.getRequestDispatcher(redirect);
+		dd.forward(request, response);
 	}
 }

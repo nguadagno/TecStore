@@ -8,20 +8,19 @@ import Bean.FotoBean;
 import Bean.UtenteBean;
 import model.GestioneCarrello;
 import model.GestioneVendita;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/GetCarrelloServlet")
 
 public class GetCarrelloServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
-	GestioneCarrello model = new GestioneCarrello();
-	GestioneVendita model1 = new GestioneVendita();
 
 	public GetCarrelloServlet() {
 		super();
@@ -33,26 +32,38 @@ public class GetCarrelloServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		GestioneCarrello model = new GestioneCarrello();
+		GestioneVendita model1 = new GestioneVendita();
+		HttpSession session = request.getSession(true);
+		String redirect = "";
+		RequestDispatcher dd;
 
-		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")) {
-			request.getSession().setAttribute("errore", "ErroreRichiestaCarrello");
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+		if (!session.getAttribute("tipologiaUtente").equals("1")) {
+			session.setAttribute("errore", "ErroreRichiestaCarrello");
+			response.setStatus(403);
+			redirect = "/errore.jsp";
+			dd = request.getRequestDispatcher(redirect);
+			dd.forward(request, response);
 		}
 
-		UtenteBean user = (UtenteBean) request.getSession().getAttribute("user");
+		UtenteBean user = (UtenteBean) session.getAttribute("user");
 
-		request.getSession().setAttribute("operazione", "getCarrello");
+		session.setAttribute("operazione", "getCarrello");
 
 		try {
 			ArrayList<ArticoloBean> carrello = model.getCarrello(user);
 			ArrayList<FotoBean> foto = model1.getFoto(carrello);
 
-			request.setAttribute("carrello", carrello);
-			request.setAttribute("foto", foto);
-			response.sendRedirect(request.getContextPath() + "/carrello.jsp");
-
+			session.setAttribute("carrello", carrello);
+			session.setAttribute("foto", foto);
+			redirect = "carrello.jsp";
 		} catch (SQLException e) {
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+			response.setStatus(500);
+			session.setAttribute("errore", "erroreSQL");
+			redirect = "/errore.jsp";
 		}
+
+		dd = request.getRequestDispatcher(redirect);
+		dd.forward(request, response);
 	}
 }

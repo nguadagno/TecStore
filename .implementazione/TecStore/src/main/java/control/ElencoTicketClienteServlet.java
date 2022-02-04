@@ -6,11 +6,13 @@ import java.util.ArrayList;
 
 import Bean.TicketBean;
 import model.GestioneAssistenza;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/elencoTicketCliente")
 public class ElencoTicketClienteServlet extends HttpServlet {
@@ -22,27 +24,39 @@ public class ElencoTicketClienteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		GestioneAssistenza model = new GestioneAssistenza();
+		HttpSession session = request.getSession(true);
+		String redirect = "";
+		RequestDispatcher dd;
 
-		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")) {
-			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+		if (!session.getAttribute("tipologiaUtente").equals("1")) {
+			session.setAttribute("errore", "AccessoNonAutorizzato");
+			response.setStatus(403);
+			redirect = "/errore.jsp";
+			dd = request.getRequestDispatcher(redirect);
+			dd.forward(request, response);
 		}
 
-		request.getSession().setAttribute("operazione", "elencoTicket");
+		session.setAttribute("operazione", "elencoTicket");
 
 		try {
 			ArrayList<TicketBean> elenco = model.elencoTicketCliente(request.getParameter("CF"),
 					Integer.parseInt(request.getParameter("CF")));
-			request.getSession().setAttribute("elenco", elenco);
-			response.sendRedirect(request.getContextPath() + "/centroassistenza.jsp");
+			session.setAttribute("elenco", elenco);
+			redirect = "/centroassistenza.jsp";
 		} catch (SQLException e) {
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+			response.setStatus(500);
+			session.setAttribute("errore", "erroreSQL");
+			redirect = "/errore.jsp";
+
 		}
+
+		dd = request.getRequestDispatcher(redirect);
+		dd.forward(request, response);
 	}
 }

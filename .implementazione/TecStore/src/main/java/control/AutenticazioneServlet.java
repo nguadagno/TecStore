@@ -5,11 +5,13 @@ import java.sql.SQLException;
 
 import Bean.UtenteBean;
 import model.GestioneAccount;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/autenticazione")
 public class AutenticazioneServlet extends HttpServlet {
@@ -26,20 +28,27 @@ public class AutenticazioneServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		GestioneAccount model = new GestioneAccount();
+		HttpSession session = request.getSession(true);
+		String redirect = "";
+		RequestDispatcher dd;
 
-		request.getSession().setAttribute("operazione", "Autenticazione");
+		session.setAttribute("operazione", "Autenticazione");
 		try {
 			if (model.autenticazione(request.getParameter("email"), request.getParameter("password"))) {
-				UtenteBean utente = model.dettagliUtenteByEmail(request.getSession().getAttribute("CF").toString(),
-						request.getParameter("email"));
-				request.getSession().setAttribute("CF", utente.getCF());
-				request.getSession().setAttribute("tipologia", utente.getTipologia());
-				response.sendRedirect(request.getContextPath() + "/paginainiziale.jsp");
+				UtenteBean utente = model.dettagliUtenteByEmail(request.getParameter("email"));
+				session.setAttribute("CF", utente.getCF());
+				session.setAttribute("tipologia", utente.getTipologia());
+				redirect = "/index.jsp";
 			} else {
-				response.sendRedirect(request.getContextPath() + "/errore.jsp");
+				redirect = "/errore.jsp";
 			}
 		} catch (SQLException e) {
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+			response.setStatus(500);
+			session.setAttribute("errore", "erroreSQL");
+			redirect = "/errore.jsp";
 		}
+
+		dd = request.getRequestDispatcher(redirect);
+		dd.forward(request, response);
 	}
 }

@@ -3,18 +3,18 @@ package control;
 import java.io.IOException;
 import java.sql.SQLException;
 import model.GestioneCarrello;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/AggiornamentoCarrelloServlet")
 
 public class AggiornamentoQuantitaCarrelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	GestioneCarrello model = new GestioneCarrello();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -22,23 +22,34 @@ public class AggiornamentoQuantitaCarrelloServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		if (!request.getSession().getAttribute("tipologiaUtente").equals("1")) {
-			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+		GestioneCarrello model = new GestioneCarrello();
+		HttpSession session = request.getSession(true);
+		String redirect = "";
+		RequestDispatcher dd;
+		if (!session.getAttribute("tipologiaUtente").equals("1")) {
+			session.setAttribute("errore", "AccessoNonAutorizzato");
+			response.setStatus(403);
+			redirect = "/errore.jsp";
+			dd = request.getRequestDispatcher(redirect);
+			dd.forward(request, response);
 		}
 
-		request.getSession().setAttribute("operazione", "AggiornamentoQuantitaCarrello");
+		session.setAttribute("operazione", "AggiornamentoQuantitaCarrello");
 
 		try {
-			if (model.aggiornamentoQuantita(request.getSession().getAttribute("CF").toString(),
-					request.getParameter("IDArticolo"), Integer.parseInt(request.getParameter("quantita"))))
-				response.sendRedirect(request.getContextPath() + "/successo.jsp");
+			if (model.aggiornamentoQuantita(session.getAttribute("CF").toString(), request.getParameter("IDArticolo"),
+					Integer.parseInt(request.getParameter("quantita"))))
+				redirect = "/successo.jsp";
 			else
-				response.sendRedirect(request.getContextPath() + "/errore.jsp");
+				redirect = "/successo.jsp";
 
 		} catch (SQLException e) {
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+			response.setStatus(500);
+			session.setAttribute("errore", "erroreSQL");
+			redirect = "/errore.jsp";
 		}
+
+		dd = request.getRequestDispatcher(redirect);
+		dd.forward(request, response);
 	}
 }

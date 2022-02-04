@@ -5,11 +5,13 @@ import java.sql.SQLException;
 
 import Bean.UtenteBean;
 import model.GestioneAccount;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/modificaPassword")
 public class ModificaPasswordServlet extends HttpServlet {
@@ -21,35 +23,45 @@ public class ModificaPasswordServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (!request.getSession().getAttribute("tipologiaUtente").equals("5")
-				&& !request.getSession().getAttribute("tipologiaUtente").equals("1")) {
-			request.getSession().setAttribute("errore", "AccessoNonAutorizzato");
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+		GestioneAccount model = new GestioneAccount();
+		HttpSession session = request.getSession(true);
+		String redirect = "";
+		RequestDispatcher dd;
+
+		if (!session.getAttribute("tipologiaUtente").equals("5")
+				&& !session.getAttribute("tipologiaUtente").equals("1")) {
+			session.setAttribute("errore", "AccessoNonAutorizzato");
+			response.setStatus(403);
+			redirect = "/errore.jsp";
+			dd = request.getRequestDispatcher(redirect);
+			dd.forward(request, response);
 		}
 
-		GestioneAccount model = new GestioneAccount();
-
-		request.getSession().setAttribute("operazione", "modificaPassword");
+		session.setAttribute("operazione", "modificaPassword");
 
 		try {
-			UtenteBean u = model.dettagliUtente(request.getSession().getAttribute("CF").toString(),
-					request.getParameter("CF"));
+			UtenteBean u = model.dettagliUtente(session.getAttribute("CF").toString(), request.getParameter("CF"));
 			u.setPassword(
 					u.getTipologia() == 1 ? request.getParameter("password").toString() : model.generatePassword(15));
 			if (model.modificaUtente(u.getCF(), u)) {
-				request.getSession().setAttribute("email", u.getEmail());
-				request.getSession().setAttribute("password", u.getPassword());
-				response.sendRedirect(request.getContextPath() + "/successo.jsp");
+				session.setAttribute("email", u.getEmail());
+				session.setAttribute("password", u.getPassword());
+				redirect = "/successo.jsp";
 			} else {
-				response.sendRedirect(request.getContextPath() + "/errore.jsp");
+				redirect = "/errore.jsp";
 			}
 		} catch (SQLException e) {
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+			response.setStatus(500);
+			session.setAttribute("errore", "erroreSQL");
+			redirect = "/errore.jsp";
 		}
+
+		dd = request.getRequestDispatcher(redirect);
+		dd.forward(request, response);
 	}
 }
