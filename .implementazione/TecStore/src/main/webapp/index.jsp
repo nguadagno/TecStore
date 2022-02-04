@@ -5,11 +5,9 @@
 <head>
 <meta charset="ISO-8859-1">
 
-<title>Pagine Iniziale</title>
-
+<title>Pagina Iniziale</title>
 
 </head>
-
 
 <body>
 	<div align="center">
@@ -37,7 +35,8 @@
 
 	<div align="right">
 		<p>
-			<a href="Registrazione.jsp"><button>Registrati</button></a> <a
+			<a href="datiprova?q=1"><button>Inserimento dati di prova</button></a> <a
+				href="Registrazione.jsp"><button>Registrati</button></a> <a
 				href="Autenticazione.jsp"><button>Autenticati</button></a>
 		</p>
 	</div>
