@@ -10,8 +10,7 @@
 </head>
 <body>
 	<div align="center">
-		<!-- <form action="gestioneassistenza.jsp" type="post"> -->
-		<form action="gestioneassistenza.jsp?tipologia=<%=2%>&" method="post">
+		<form action="gestioneassistenza.jsp" type="post"> 
 			<select name="limit">
 				<option value="10">10</option>
 				<option value="20">20</option>
