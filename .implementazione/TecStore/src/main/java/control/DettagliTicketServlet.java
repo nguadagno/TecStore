@@ -33,7 +33,6 @@ public class DettagliTicketServlet extends HttpServlet {
 
 		if (session.getAttribute("tipologia") == null || (!session.getAttribute("tipologia").toString().equals("1")
 				&& !session.getAttribute("tipologia").toString().equals("2"))) {
-			System.out.println("qui");
 			request.getSession(true).setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -45,7 +44,7 @@ public class DettagliTicketServlet extends HttpServlet {
 		session.setAttribute("operazione", "creazioneTicket");
 
 		try {
-			if (session.getAttribute("IDTicket") == null || session.getAttribute("IDTicket").toString().isEmpty()) {
+			if (request.getParameter("IDTicket") == null || request.getParameter("IDTicket").isEmpty()) {
 				response.setStatus(500);
 				request.getSession(true).setAttribute("errore", "IDTicket mancante");
 				redirect = "/errore.jsp";
@@ -56,7 +55,6 @@ public class DettagliTicketServlet extends HttpServlet {
 				model.cambiaStato(request.getParameter("IDTicket"), "InElaborazione");
 			request.getSession(true).setAttribute("messaggi",
 					model.elencoMessaggiTicket(request.getParameter("IDTicket")));
-			System.out.println(model.elencoMessaggiTicket(request.getParameter("IDTicket").toString()));
 			redirect = "/dettagliTicket.jsp";
 		} catch (SQLException e) {
 			response.setStatus(500);

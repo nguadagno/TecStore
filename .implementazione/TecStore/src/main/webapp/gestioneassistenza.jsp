@@ -5,12 +5,31 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<%
+int tipologia = -1;
+if (request.getSession().getAttribute("tipologia") == null
+		|| request.getSession().getAttribute("tipologia").toString().isEmpty()) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+
+tipologia = Integer.parseInt(request.getSession().getAttribute("tipologia").toString());
+
+if (tipologia != 2) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+%>
 
 <title>Gestione Ticket</title>
 </head>
 <body>
 	<div align="center">
-		<form action="gestioneassistenza.jsp" type="post"> 
+		<form action="elencoTicketCentralinista" type="post">
 			<select name="limit">
 				<option value="10">10</option>
 				<option value="20">20</option>
@@ -20,7 +39,6 @@
 
 		<table>
 			<tr>
-				<th>Codice Ticket</th>
 				<th>Tipologia</th>
 				<th>Data ultimo messaggio</th>
 				<th></th>
@@ -40,22 +58,17 @@
 			for (TicketBean ticket : elencoTicket) {
 			%>
 			<tr>
-				<td><%=ticket.getIDTicket()%></td>
 				<td><%=ticket.getTipologia()%></td>
 				<td><%=ticket.getDataUltimoMessaggio()%></td>
-
+				<td><form action="dettagliTicket" method="post">
+						<input type="hidden" name="IDTicket" value=<%=ticket.getIDTicket()%>><input
+							type="submit" value="Dettagli">
+					</form></td>
 			</tr>
-
+			<%
+			}
+			%>
 		</table>
-		<form action="dettagliTicket" method="post">
-			<input type="hidden" value=<%=ticket.getIDTicket()%>><input
-				type="submit" value="Dettagli">
-		</form>
-
-		<%
-		}
-		%>
-
 	</div>
 </body>
 </html>

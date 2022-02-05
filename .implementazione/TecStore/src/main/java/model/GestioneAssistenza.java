@@ -202,16 +202,19 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM messaggio WHERE IDTicket = '" + IDTicket + "';";
+		String searchTicketQuery = "SELECT IDTicket, CF, Tipologia, Data, Contenuto FROM ticket NATURAL JOIN messaggio WHERE stato = 'InAttesa' AND IDTicket = ? ORDER BY DATA ASC;";
 
 		try {
+			GestioneAccount gestioneaccount = new GestioneAccount();
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
+			preparedStatement.setString(1, IDTicket);
 			rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
 				MessaggioBean m = new MessaggioBean(rs.getString("IDTicket"), rs.getString("CF"),
-						rs.getString("Contenuto"), rs.getDate("Date"));
+						rs.getString("Contenuto"), rs.getDate("Data"),
+						gestioneaccount.dettagliUtente(rs.getString("CF"), rs.getString("CF")));
 				result.add(m);
 			}
 			return result;
