@@ -32,13 +32,14 @@ public class RispostaTicketServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologiaUtente").equals("1")
-				&& !session.getAttribute("tipologiaUtente").equals("2")) {
+		if (!session.getAttribute("tipologia").equals("1")
+				&& !session.getAttribute("tipologia").equals("2")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
+			return;
 		}
 
 		session.setAttribute("operazione", "rispostaTicket");
@@ -57,5 +58,6 @@ public class RispostaTicketServlet extends HttpServlet {
 
 		dd = request.getRequestDispatcher(redirect);
 		dd.forward(request, response);
+		return;
 	}
 }

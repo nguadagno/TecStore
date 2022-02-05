@@ -31,19 +31,20 @@ public class DettagliTicketServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologiaUtente").equals("1")
-				&& !session.getAttribute("tipologiaUtente").equals("2")) {
+		if (session.getAttribute("tipologia") == null ||  !session.getAttribute("tipologia").equals("1")
+				&& !session.getAttribute("tipologia").equals("2")) {
 			request.getSession(true).setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
+			return;
 		}
 
 		session.setAttribute("operazione", "creazioneTicket");
 
 		try {
-			if (session.getAttribute("tipologiaUtente").equals("2"))
+			if (session.getAttribute("tipologia").equals("2"))
 				model.cambiaStato(request.getParameter("IDTicket"), "InElaborazione");
 			request.getSession(true).setAttribute("messaggi",
 					model.elencoMessaggiTicket(request.getParameter("IDTicket")));
@@ -56,5 +57,6 @@ public class DettagliTicketServlet extends HttpServlet {
 
 		dd = request.getRequestDispatcher(redirect);
 		dd.forward(request, response);
+		return;
 	}
 }

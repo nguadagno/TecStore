@@ -51,6 +51,7 @@ public class datiprovaservlet extends HttpServlet {
 
 		dd = request.getRequestDispatcher(redirect);
 		dd.forward(request, response);
+		return;
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

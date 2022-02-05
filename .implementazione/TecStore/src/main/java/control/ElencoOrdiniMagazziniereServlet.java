@@ -34,12 +34,13 @@ public class ElencoOrdiniMagazziniereServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologiaUtente").equals("3")) {
+		if (!session.getAttribute("tipologia").equals("3")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
+			return;
 		}
 
 		session.setAttribute("operazione", "ElencoOrdiniMagazziniere");
@@ -56,5 +57,6 @@ public class ElencoOrdiniMagazziniereServlet extends HttpServlet {
 
 		dd = request.getRequestDispatcher(redirect);
 		dd.forward(request, response);
+		return;
 	}
 }

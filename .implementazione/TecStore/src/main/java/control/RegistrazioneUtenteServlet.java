@@ -34,17 +34,18 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (session.getAttribute("tipologiaUtente").equals("1") && session.getAttribute("tipologiaUtente").equals("2")
-				&& session.getAttribute("tipologiaUtente").equals("3")
-				&& session.getAttribute("tipologiaUtente").equals("4")) {
+		if (session.getAttribute("tipologia").equals("1") && session.getAttribute("tipologia").equals("2")
+				&& session.getAttribute("tipologia").equals("3")
+				&& session.getAttribute("tipologia").equals("4")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
+			return;
 		}
 
-		String password = session.getAttribute("tipologiaUtente").equals("1") ? request.getParameter("password")
+		String password = session.getAttribute("tipologia").equals("1") ? request.getParameter("password")
 				: model.generatePassword(15);
 
 		UtenteBean utente = new UtenteBean(request.getParameter("CF"), request.getParameter("Nome"),
@@ -76,5 +77,6 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 
 		dd = request.getRequestDispatcher(redirect);
 		dd.forward(request, response);
+		return;
 	}
 }

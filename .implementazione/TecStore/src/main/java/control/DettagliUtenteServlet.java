@@ -38,6 +38,7 @@ public class DettagliUtenteServlet extends HttpServlet {
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
+			return;
 		}
 
 		session.setAttribute("operazione", "dettagli");
@@ -53,5 +54,6 @@ public class DettagliUtenteServlet extends HttpServlet {
 
 		dd = request.getRequestDispatcher(redirect);
 		dd.forward(request, response);
+		return;
 	}
 }

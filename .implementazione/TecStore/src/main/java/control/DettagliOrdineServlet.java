@@ -38,13 +38,14 @@ public class DettagliOrdineServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologiaUtente").equals("1")
-				&& !session.getAttribute("tipologiaUtente").equals("3")) {
+		if (!session.getAttribute("tipologia").equals("1")
+				&& !session.getAttribute("tipologia").equals("3")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
+			return;
 		}
 
 		session.setAttribute("operazione", "dettagliOrdine");
@@ -59,10 +60,10 @@ public class DettagliOrdineServlet extends HttpServlet {
 
 			session.setAttribute("foto", foto);
 
-			if (session.getAttribute("tipologiaUtente").equals("3")) {
+			if (session.getAttribute("tipologia").equals("3")) {
 				model.cambiaStato(request.getParameter("IDOrdine"), "InElaborazione");
 				redirect = "/dettagliOrdineMagazziniere.jsp";
-			} else if (session.getAttribute("tipologiaUtente").equals("1"))
+			} else if (session.getAttribute("tipologia").equals("1"))
 				redirect = "/dettagliOrdine.jsp";
 			else
 				redirect = "/errore.jsp";
@@ -75,5 +76,6 @@ public class DettagliOrdineServlet extends HttpServlet {
 
 		dd = request.getRequestDispatcher(redirect);
 		dd.forward(request, response);
+		return;
 	}
 }

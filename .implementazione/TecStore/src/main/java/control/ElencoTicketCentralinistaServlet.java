@@ -33,12 +33,13 @@ public class ElencoTicketCentralinistaServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologiaUtente").equals("2")) {
+		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().equals("2")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
+			return;
 		}
 
 		session.setAttribute("operazione", "elencoTicket");
@@ -54,9 +55,11 @@ public class ElencoTicketCentralinistaServlet extends HttpServlet {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
+			e.printStackTrace();
 		}
 
 		dd = request.getRequestDispatcher(redirect);
 		dd.forward(request, response);
+		return;
 	}
 }

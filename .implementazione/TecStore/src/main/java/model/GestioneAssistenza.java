@@ -51,7 +51,7 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT DISTINCT IDTicket,messaggio.Data AS Data ,CF,Tipologia,Stato FROM ticket NATURAL JOIN messaggio WHERE stato = 'InAttesa' ORDER BY messaggio.Data LIMIT ?;";
+		String searchTicketQuery = "SELECT DISTINCT IDTicket,messaggio.Data AS Data,CF,Tipologia,Stato FROM ticket NATURAL JOIN messaggio WHERE stato = 'InAttesa' ORDER BY messaggio.Data LIMIT ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("centralinista", "centralinista");
@@ -66,6 +66,8 @@ public class GestioneAssistenza {
 			}
 
 			return ticketList;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -75,6 +77,7 @@ public class GestioneAssistenza {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return null;
 	}
 
 	public boolean creazioneTicket(String CF, String tipologia, String messaggio) throws SQLException {
