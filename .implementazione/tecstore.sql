@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `tecstore`.`ordine` (
   `IDArticolo` VARCHAR(45) NULL,
   `Quantita` INT(3) NOT NULL,
   `Data` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `Stato` VARCHAR(45) NOT NULL,
+  `Stato` VARCHAR(45) NOT NULL DEFAULT "InAttesa",
   `CodiceTracciamento` VARCHAR(45) NULL,
   PRIMARY KEY (`ID`),
   CONSTRAINT `FK_10`
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `tecstore`.`ticket` (
   `IDTicket` VARCHAR(45) NOT NULL,
   `IDCliente` CHAR(16) NOT NULL,
   `Tipologia` VARCHAR(45) NULL,
-  `Stato` VARCHAR(45) NOT NULL,
+  `Stato` VARCHAR(45) NOT NULL DEFAULT "InAttesa",
   PRIMARY KEY (`IDTicket`),
   CONSTRAINT `FK_17`
     FOREIGN KEY (`IDCliente`)
