@@ -38,12 +38,13 @@ public class GetCarrelloServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologiaUtente").equals("1")) {
+		if (!session.getAttribute("tipologia").equals("1")) {
 			session.setAttribute("errore", "ErroreRichiestaCarrello");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
+			return;
 		}
 
 		UtenteBean user = (UtenteBean) session.getAttribute("user");
@@ -65,5 +66,6 @@ public class GetCarrelloServlet extends HttpServlet {
 
 		dd = request.getRequestDispatcher(redirect);
 		dd.forward(request, response);
+		return;
 	}
 }

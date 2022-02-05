@@ -8,51 +8,54 @@
 <title>Messaggi</title>
 </head>
 <body>
-	<form>
+	<div align=center>
 		<%
 		ArrayList<MessaggioBean> elenco = (ArrayList<MessaggioBean>) session.getAttribute("messaggi");
 		%>
-	</form>
-	<table>
-		<tr>
-			<th>Contenuto</th>
-			<th>Data</th>
-			<th></th>
-		</tr>
-		<%
-		if (elenco == null) {
-		%>
-		<h3>Non ci sono Messaggi...</h3>
-		<h2>Puoi creare un ticket cliccando su "Nuovo Ticket" nella
-			pagina Servizio Clienti</h2>
-		<%
-		return;
-		}
-		%>
+		<table>
+			<tr>
+				<th>Scritto da</th>
+				<th>Contenuto</th>
+				<th>Data</th>
+				<th></th>
+			</tr>
+			<%
+			if (elenco == null) {
+			%>
+			<h3>Non ci sono Messaggi...</h3>
+			<h2>Puoi creare un ticket cliccando su "Nuovo Ticket" nella
+				pagina Servizio Clienti</h2>
+			<%
+			return;
+			}
 
-		<%
-		for (MessaggioBean messaggio : elenco) {
-		%>
-		<tr>
-			<td><%=messaggio.getContenuto()%></td>
-			<td><%=messaggio.getData()%></td>
+			for (MessaggioBean messaggio : elenco) {
+			%>
+			<tr>
+				<td><%=messaggio.getAutore().getNome()%> <%=messaggio.getAutore().getCognome()%>
+					<BR> <%
+ if (messaggio.getAutore().getTipologia() == 1) {
+ %> (Cliente) <%
+ } else {
+ %> (Centralinista)<%
+ }
+ %></td>
+				<td><%=messaggio.getContenuto()%></td>
+				<td><%=messaggio.getData()%></td>
 
-		</tr>
-	</table>
-	<%
-	}
-	%>
-	<br>
-	<br>
-	<br>
-	<hr>
-	<br>
-	<div>
-		<a href="rispostaTIcket.jsp">
-			<button>Rispondi</button>
-		</a>
+			</tr>
+			<%
+			}
+			%>
+		</table>
+		<br> <br> <br>
+		<div align=left>
+			<a href="rispostaTicket.jsp">
+				<button>Rispondi</button>
+			</a>
+
+		</div>
 
 	</div>
-
 </body>
 </html>

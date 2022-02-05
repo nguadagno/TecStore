@@ -195,13 +195,7 @@ public class GestioneAccount {
 		String searchUtenteQuery = "SELECT * FROM utente WHERE CF='" + CF + "';";
 
 		try {
-			if (getTipologia(CF) == 1)
-				connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
-			else if (getTipologia(CF) == 5)
-				connection = DriverManagerConnectionPool.getConnection("ammpersonale", "ammpersonale");
-			else
-				return new UtenteBean();
-
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(searchUtenteQuery);
 			rs = preparedStatement.executeQuery();
 
@@ -313,7 +307,7 @@ public class GestioneAccount {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT tipologia FROM utente CF= ?;";
+		String searchTicketQuery = "SELECT tipologia FROM utente WHERE CF= ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");

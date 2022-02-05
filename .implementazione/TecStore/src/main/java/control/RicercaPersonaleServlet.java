@@ -34,12 +34,13 @@ public class RicercaPersonaleServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologiaUtente").equals("5")) {
+		if (!session.getAttribute("tipologia").equals("5")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
+			return;
 		}
 		session.setAttribute("operazione", "ricercaPersonale");
 		try {
@@ -55,5 +56,6 @@ public class RicercaPersonaleServlet extends HttpServlet {
 
 		dd = request.getRequestDispatcher(redirect);
 		dd.forward(request, response);
+		return;
 	}
 }

@@ -31,19 +31,27 @@ public class DettagliTicketServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologiaUtente").equals("1")
-				&& !session.getAttribute("tipologiaUtente").equals("2")) {
+		if (session.getAttribute("tipologia") == null || (!session.getAttribute("tipologia").toString().equals("1")
+				&& !session.getAttribute("tipologia").toString().equals("2"))) {
 			request.getSession(true).setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
+			return;
 		}
 
 		session.setAttribute("operazione", "creazioneTicket");
 
 		try {
-			if (session.getAttribute("tipologiaUtente").equals("2"))
+			if (request.getParameter("IDTicket") == null || request.getParameter("IDTicket").isEmpty()) {
+				response.setStatus(500);
+				request.getSession(true).setAttribute("errore", "IDTicket mancante");
+				redirect = "/errore.jsp";
+				return;
+			}
+
+			if (session.getAttribute("tipologia").equals("2"))
 				model.cambiaStato(request.getParameter("IDTicket"), "InElaborazione");
 			request.getSession(true).setAttribute("messaggi",
 					model.elencoMessaggiTicket(request.getParameter("IDTicket")));
@@ -52,9 +60,11 @@ public class DettagliTicketServlet extends HttpServlet {
 			response.setStatus(500);
 			request.getSession(true).setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
+			e.printStackTrace();
 		}
 
 		dd = request.getRequestDispatcher(redirect);
 		dd.forward(request, response);
+		return;
 	}
 }

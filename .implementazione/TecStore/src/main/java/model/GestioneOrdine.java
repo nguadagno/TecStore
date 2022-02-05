@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import Bean.ArticoloBean;
 import Bean.OrdineBean;
@@ -19,7 +18,7 @@ public class GestioneOrdine {
 	public boolean creazioneOrdine(String CF) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String creazioneOrdineQuery = "INSERT INTO ordine (IDCLIENTE, IDARTICOLO, QUANTITA, DATA, STATO) VALUES (?,?,?,?,?);";
+		String creazioneOrdineQuery = "INSERT INTO ordine (IDCLIENTE, IDARTICOLO, QUANTITA) VALUES (?,?,?);";
 
 		try {
 			if (!GestioneAccount.exists(CF))
@@ -33,8 +32,6 @@ public class GestioneOrdine {
 				preparedStatement.setString(1, CF);
 				preparedStatement.setString(2, e.getID());
 				preparedStatement.setInt(3, e.getQuantita());
-				preparedStatement.setDate(4, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
-				preparedStatement.setString(5, "InAttesa");
 
 				preparedStatement.executeUpdate();
 			}

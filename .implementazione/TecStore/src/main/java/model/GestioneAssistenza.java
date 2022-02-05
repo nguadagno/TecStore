@@ -2,7 +2,6 @@ package model;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import Bean.ClienteBean;
 import Bean.MessaggioBean;
@@ -51,7 +50,7 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT DISTINCT IDTicket,messaggio.Data AS Data ,CF,Tipologia,Stato FROM ticket NATURAL JOIN messaggio WHERE stato = 'InAttesa' ORDER BY messaggio.Data LIMIT ?;";
+		String searchTicketQuery = "SELECT IDTicket, CF, Tipologia, Stato, MAX(Data) AS Data FROM ticket NATURAL JOIN messaggio WHERE stato = 'InAttesa' GROUP BY IDTicket LIMIT ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("centralinista", "centralinista");
@@ -66,6 +65,8 @@ public class GestioneAssistenza {
 			}
 
 			return ticketList;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -75,6 +76,7 @@ public class GestioneAssistenza {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return null;
 	}
 
 	public boolean creazioneTicket(String CF, String tipologia, String messaggio) throws SQLException {
@@ -166,11 +168,12 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM ticket WHERE IDTicket = '" + IDTicket + "';";
+		String searchTicketQuery = "SELECT IDTicket, CF, Tipologia, Stato, MAX(Data) AS Data FROM ticket NATURAL JOIN messaggio WHERE stato = 'InAttesa' AND IDTicket = ? GROUP BY IDTicket;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
+			preparedStatement.setString(1, IDTicket);
 			rs = preparedStatement.executeQuery();
 
 			if (rs.next()) {
@@ -199,16 +202,19 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM messaggio WHERE IDTicket = '" + IDTicket + "';";
+		String searchTicketQuery = "SELECT IDTicket, CF, Tipologia, Data, Contenuto FROM ticket NATURAL JOIN messaggio WHERE stato = 'InAttesa' AND IDTicket = ? ORDER BY DATA ASC;";
 
 		try {
+			GestioneAccount gestioneaccount = new GestioneAccount();
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
+			preparedStatement.setString(1, IDTicket);
 			rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
 				MessaggioBean m = new MessaggioBean(rs.getString("IDTicket"), rs.getString("CF"),
-						rs.getString("Contenuto"), rs.getDate("Date"));
+						rs.getString("Contenuto"), rs.getDate("Data"),
+						gestioneaccount.dettagliUtente(rs.getString("CF"), rs.getString("CF")));
 				result.add(m);
 			}
 			return result;
@@ -239,7 +245,7 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String insertTicketQuery = "INSERT INTO messaggio (CF, IDTicket, Contenuto, Data) VALUES (?, ?, ?, ?);";
+		String insertTicketQuery = "INSERT INTO messaggio (CF, IDTicket, Contenuto) VALUES (?, ?, ?);";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -247,7 +253,6 @@ public class GestioneAssistenza {
 			preparedStatement.setString(1, CF);
 			preparedStatement.setString(2, IDTicket);
 			preparedStatement.setString(3, contenuto);
-			preparedStatement.setDate(4, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 
 			preparedStatement.execute();
 

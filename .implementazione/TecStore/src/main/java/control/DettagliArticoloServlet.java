@@ -35,13 +35,14 @@ public class DettagliArticoloServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologiaUtente").equals("1") && !session.getAttribute("tipologiaUtente").equals("2")
-				&& !session.getAttribute("tipologiaUtente").equals("4")) {
+		if (!session.getAttribute("tipologia").equals("1") && !session.getAttribute("tipologia").equals("2")
+				&& !session.getAttribute("tipologia").equals("4")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
+			return;
 		}
 
 		session.setAttribute("operazione", "dettagliArticolo");
@@ -53,7 +54,7 @@ public class DettagliArticoloServlet extends HttpServlet {
 			session.setAttribute("dettagliArticolo", articolo);
 			session.setAttribute("fotoArticolo", foto);
 
-			if (session.getAttribute("tipologiaUtente").equals("2"))
+			if (session.getAttribute("tipologia").equals("2"))
 				redirect = "/autorizzazioneVendita.jsp";
 			else
 				redirect = "/dettagliArticolo.jsp";
@@ -66,5 +67,6 @@ public class DettagliArticoloServlet extends HttpServlet {
 
 		dd = request.getRequestDispatcher(redirect);
 		dd.forward(request, response);
+		return;
 	}
 }

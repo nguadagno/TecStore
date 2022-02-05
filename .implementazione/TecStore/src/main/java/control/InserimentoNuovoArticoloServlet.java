@@ -32,13 +32,15 @@ public class InserimentoNuovoArticoloServlet extends HttpServlet {
 			throws ServletException, IOException {
 		GestioneVendita model = new GestioneVendita();
 		HttpSession session = request.getSession(true);
-		String redirect = ""; RequestDispatcher dd;
+		String redirect = "";
+		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologiaUtente").equals("1")
-				|| !session.getAttribute("tipologiaUtente").equals("4")) {
+		if (!session.getAttribute("tipologia").equals("1") || !session.getAttribute("tipologia").equals("4")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
-			redirect = "/errore.jsp";  dd = request.getRequestDispatcher(redirect); dd.forward(request,response);
+			redirect = "/errore.jsp";
+			dd = request.getRequestDispatcher(redirect);
+			dd.forward(request, response);
 		}
 
 		session.setAttribute("operazione", "InserimentoArticolo");
@@ -56,8 +58,11 @@ public class InserimentoNuovoArticoloServlet extends HttpServlet {
 		ArrayList<FotoBean> foto = (ArrayList<FotoBean>) request.getAttribute("foto");
 
 		if (nome == null || descrizione == null || IDVenditore == null || rimborsabile == null || nome.isEmpty()
-				|| descrizione.isEmpty() || IDVenditore.isEmpty() || quantita < 1 || prezzo < 0.01)
-			redirect = "/errore.jsp";  dd = request.getRequestDispatcher(redirect); dd.forward(request,response);
+				|| descrizione.isEmpty() || IDVenditore.isEmpty() || quantita < 1 || prezzo < 0.01) {
+			redirect = "/errore.jsp";
+			dd = request.getRequestDispatcher(redirect);
+			dd.forward(request, response);
+		}
 
 		try {
 			String IDArticolo;
@@ -65,15 +70,19 @@ public class InserimentoNuovoArticoloServlet extends HttpServlet {
 					rimborsabile)).isEmpty() && model.inserimentoFoto(IDArticolo, foto))
 				redirect = "/successo.jsp";
 			else
-				redirect = "/errore.jsp";  dd = request.getRequestDispatcher(redirect); dd.forward(request,response);
+				redirect = "/errore.jsp";
+			dd = request.getRequestDispatcher(redirect);
+			dd.forward(request, response);
 
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
-			redirect = "/errore.jsp";  dd = request.getRequestDispatcher(redirect); dd.forward(request,response);
+			redirect = "/errore.jsp";
+			dd = request.getRequestDispatcher(redirect);
+			dd.forward(request, response);
 		}
 
-		
 		dd.forward(request, response);
+		return;
 	}
 }

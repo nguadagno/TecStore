@@ -32,13 +32,14 @@ public class RimozioneArticoloServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologiaUtente").equals("1")
-				&& !session.getAttribute("tipologiaUtente").equals("4")) {
+		if (!session.getAttribute("tipologia").equals("1")
+				&& !session.getAttribute("tipologia").equals("4")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
+			return;
 		}
 
 		session.setAttribute("operazione", "rimozioneArticolo");
@@ -58,5 +59,6 @@ public class RimozioneArticoloServlet extends HttpServlet {
 
 		dd = request.getRequestDispatcher(redirect);
 		dd.forward(request, response);
+		return;
 	}
 }

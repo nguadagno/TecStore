@@ -1,7 +1,6 @@
 package Bean;
 
 import java.sql.Date;
-import java.util.Calendar;
 import java.util.Objects;
 import java.util.Set;
 
@@ -33,10 +32,6 @@ public class ArticoloBean {
 		IDCentralinista = iDCentralinista;
 		this.data = data;
 		this.rimborsabile = rimborsabile;
-	}
-
-	public boolean checkData(Date data) {
-		return data.equals(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 	}
 
 	@Override
@@ -127,8 +122,7 @@ public class ArticoloBean {
 	}
 
 	public void setData(Date data) {
-		if (checkData(data))
-			this.data = data;
+		this.data = data;
 	}
 
 	public boolean isRimborsabile() {
