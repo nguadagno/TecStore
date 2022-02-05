@@ -7,19 +7,27 @@
 <meta charset="ISO-8859-1">
 <%
 int tipologia = -1;
-if (request.getParameter("tipologia") == null || request.getParameter("tipologia").isEmpty()) {
+if (request.getSession().getAttribute("tipologia") == null
+		|| request.getSession().getAttribute("tipologia").toString().isEmpty()) {
 %>
 <meta http-equiv="refresh" content="0; URL='index.jsp'" />
 <%
 return;
 }
 
-tipologia = Integer.parseInt(request.getParameter("tipologia"));
+tipologia = Integer.parseInt(request.getSession().getAttribute("tipologia").toString());
 
 if (tipologia < 2 || tipologia > 5) {
 %>
 <meta http-equiv="refresh" content="0; URL='index.jsp'" />
 <%
+return;
+}
+if (tipologia == 1) { // cliente
+%>
+<meta http-equiv="refresh" content="0; URL='index.jsp'" />
+<%
+return;
 }
 %>
 <title>Pagina Iniziale</title>
@@ -27,12 +35,7 @@ if (tipologia < 2 || tipologia > 5) {
 <body>
 	<div align="center">
 		<%
-		if (tipologia == 1) { // cliente
-		%>
-		<meta http-equiv="refresh" content="0; URL='index.jsp'" />
-		return;
-		<%
-		} else if (tipologia == 2) { // centralinista
+		if (tipologia == 2) { // centralinista
 		%>
 		<form action="elencoTicketCentralinista" method="post">
 			<input type="submit" value="Gestione Ticket">
@@ -43,9 +46,7 @@ if (tipologia < 2 || tipologia > 5) {
 
 		<%
 		return;
-		} else if (tipologia == 3)
-
-		{ // magazziniere
+		} else if (tipologia == 3) { // magazziniere
 		%>
 
 		<form action="ElencoRimborsiMagazziniere" method="post">

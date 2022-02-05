@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" import="Bean.UtenteBean"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,13 +32,31 @@
 	<br>
 	<hr>
 	<br>
+	<a href="datiprova?q=1"><button>Inserimento dati di prova</button></a>
 
+	<%
+	if (request.getSession().getAttribute("CF") == null) {
+	%>
 	<div align="right">
 		<p>
-			<a href="datiprova?q=1"><button>Inserimento dati di prova</button></a> <a
-				href="Registrazione.jsp"><button>Registrati</button></a> <a
+			<a href="Registrazione.jsp"><button>Registrati</button></a> <a
 				href="Autenticazione.jsp"><button>Autenticati</button></a>
 		</p>
 	</div>
+	<%
+	} else {
+	%>
+	<div align="right">
+		<p>
+			Benvenuto, <i> <%=((UtenteBean) request.getSession().getAttribute("utente")).getNome()%>
+				<%=((UtenteBean) request.getSession().getAttribute("utente")).getCognome()%>
+				<BR>
+			</i> <a href="areavenditori.jsp"><button>Area Venditori</button></a> <a
+				href="dettagliprofilo.jsp"><button>Dettagli profilo</button></a>
+		</p>
+	</div>
+	<%
+	}
+	%>
 </body>
 </html>
