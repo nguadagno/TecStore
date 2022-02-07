@@ -6,6 +6,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import model.GestioneAccount;
 import model.GestioneAssistenza;
+import model.GestioneVendita;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,6 +23,7 @@ public class datiprovaservlet extends HttpServlet {
 			throws ServletException, IOException {
 		GestioneAccount g = new GestioneAccount();
 		GestioneAssistenza g1 = new GestioneAssistenza();
+		GestioneVendita g2 = new GestioneVendita ();
 		String redirect = "index.jsp";
 		RequestDispatcher dd;
 
@@ -39,6 +41,10 @@ public class datiprovaservlet extends HttpServlet {
 			g1.rispostaTicket(IDTicket, "CF1", "r1");
 			g1.rispostaTicket(IDTicket, "CF2", "r2");
 			g1.rispostaTicket(IDTicket, "CF1", "r3");
+			
+			g2.inserimentoNuovoArticolo("art1", "descr1", "CF1", 10, (float) 15.50, true);
+			g2.inserimentoNuovoArticolo("art2", "descr2", "CF1", 15, (float) 30.50, true);
+			g2.inserimentoNuovoArticolo("art3", "descr3", "CF1", 20, (float) 99.50, false);
 
 			redirect = "index.jsp";
 		} catch (SQLException e) {
