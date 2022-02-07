@@ -29,7 +29,7 @@ return;
 </head>
 <body>
 	<div align="center">
-		<form action="elencoTicketCentralinista" type="post">
+		<form action="ElencoTicketCentralinista" method="post">
 			<select name="limit">
 				<option value="10">10</option>
 				<option value="20">20</option>

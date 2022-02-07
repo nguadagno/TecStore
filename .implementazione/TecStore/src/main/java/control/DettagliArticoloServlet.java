@@ -54,10 +54,9 @@ public class DettagliArticoloServlet extends HttpServlet {
 			session.setAttribute("dettagliArticolo", articolo);
 			session.setAttribute("fotoArticolo", foto);
 
-			if (session.getAttribute("tipologia").toString().equals("2"))
-				redirect = "/autorizzazioneVendita.jsp";
-			else
-				redirect = "/dettagliArticolo.jsp";
+			redirect = "/dettagliArticolo.jsp";
+
+			model.cambiaStato(articolo.getID(), "InElaborazione");
 
 		} catch (Exception e) {
 			e.printStackTrace();

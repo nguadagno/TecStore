@@ -9,7 +9,7 @@
 <body>
 <body>
 
-	<form action="elencoVenditeCentralinista" type="post">
+	<form action="ElencoVenditeCentralinista" method="post">
 		<select name="limit">
 			<option value="10">10</option>
 			<option value="20">20</option>
@@ -27,7 +27,7 @@
 	<h3>Nessun Articolo in attesa di revisione!</h3>
 	<%
 	return;
-	} else {
+	}
 	%>
 	<table>
 		<tr>
@@ -46,7 +46,6 @@
 				</form></td>
 		</tr>
 		<%
-		}
 		}
 		%>
 	</table>

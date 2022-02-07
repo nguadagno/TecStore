@@ -402,12 +402,12 @@ public class GestioneVendita {
 	}
 
 	public boolean cambiaStato(String IDArticolo, String stato) throws SQLException {
-		if (stato != "InVendita" && stato != "Rifiutato")
+		if (stato.equals("InVendita") && stato.equals("Rifiutato"))
 			return false;
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String cambiaStatoQuery = "UPDATE articolo SET stato = ? WHERE IDArticolo = ?;";
+		String cambiaStatoQuery = "UPDATE articolo SET stato = ? WHERE ID = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("centralinista", "centralinista");
@@ -417,6 +417,8 @@ public class GestioneVendita {
 			preparedStatement.execute();
 			connection.commit();
 			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -426,6 +428,7 @@ public class GestioneVendita {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return false;
 	}
 
 	public boolean rimozioneArticolo(String CF, String IDArticolo) throws SQLException {

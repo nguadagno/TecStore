@@ -2,7 +2,7 @@ package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import model.GestioneOrdine;
+import model.GestioneVendita;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -27,7 +27,7 @@ public class AutorizzazioneVenditaServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		GestioneOrdine model = new GestioneOrdine();
+		GestioneVendita model = new GestioneVendita();
 		HttpSession session = request.getSession(true);
 		String redirect = "";
 		RequestDispatcher dd;
@@ -44,13 +44,13 @@ public class AutorizzazioneVenditaServlet extends HttpServlet {
 		session.setAttribute("operazione", "autorizzazioneVendita");
 
 		try {
-
-			if (model.cambiaStato(request.getParameter("IDOrdine"), request.getParameter("Stato")))
+			if (model.cambiaStato(request.getParameter("IDArticolo"), request.getParameter("stato")))
 				redirect = "/successo.jsp";
 			else
 				redirect = "/errore.jsp";
 
 		} catch (SQLException e) {
+			e.printStackTrace();
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
