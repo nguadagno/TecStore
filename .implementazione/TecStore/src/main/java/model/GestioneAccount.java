@@ -79,7 +79,7 @@ public class GestioneAccount {
 			preparedStatement.setString(9, utente.getCitta());
 			preparedStatement.setInt(10, utente.getCAP());
 			preparedStatement.setInt(11, utente.getTipologia());
-
+			
 			preparedStatement.executeUpdate();
 
 			connection.commit();
@@ -259,7 +259,7 @@ public class GestioneAccount {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM utente WHERE Tipologia != ? AND (nome LIKE `%?%` OR cognome LIKE `%?$` OR CF LIKE `%?$`);";
+		String searchTicketQuery = "SELECT * FROM utente WHERE Tipologia != ? AND (nome LIKE %?% OR cognome LIKE %?$' OR CF LIKE %?$');";
 
 		try {
 			if (getTipologia(CF) == 5)

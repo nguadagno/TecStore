@@ -32,7 +32,7 @@ public class AutorizzazioneVenditaServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologia").equals("2")) {
+		if (!session.getAttribute("tipologia").toString().equals("2")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";

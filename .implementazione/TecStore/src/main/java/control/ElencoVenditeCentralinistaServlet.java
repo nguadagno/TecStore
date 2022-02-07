@@ -1,7 +1,6 @@
 package control;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Bean.ArticoloBean;
@@ -35,7 +34,8 @@ public class ElencoVenditeCentralinistaServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologia").equals("2")) {
+		if (!session.getAttribute("tipologia").toString().toString().equals("2")) {
+			System.out.println("qui!");
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -47,13 +47,16 @@ public class ElencoVenditeCentralinistaServlet extends HttpServlet {
 		session.setAttribute("operazione", "elencoVenditeCentralinista");
 
 		try {
-			ArrayList<ArticoloBean> elenco = model
-					.elencoVenditeCentralinista(Integer.parseInt(request.getParameter("Limit")));
+			int limit = 10;
+			if (request.getParameter("limit") != null)
+				limit = Integer.parseInt(request.getParameter("limit"));
+			ArrayList<ArticoloBean> elenco = model.elencoVenditeCentralinista(limit);
 			session.setAttribute("elenco", elenco);
 			redirect = "/elencoVenditeCentralinista.jsp";
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			redirect = "/errore.jsp";
+			e.printStackTrace();
 		}
 
 		dd = request.getRequestDispatcher(redirect);

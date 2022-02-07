@@ -84,7 +84,7 @@ public class GestioneAssistenza {
 		PreparedStatement preparedStatement = null;
 
 		String insertTicketQuery = "INSERT INTO ticket (IDCliente, Tipologia, Stato) VALUES (?,?,?);";
-		String getIDTicketQuery = "SELECT IDTicket FROM ticket WHERE IDCliente = ? AND Tipologia = ?;";
+		String getIDTicketQuery = "SELECT IDTicket FROM ticket WHERE IDCliente = ? AND Tipologia = ? LIMIT 1;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -102,6 +102,8 @@ public class GestioneAssistenza {
 			preparedStatement.setString(2, tipologia);
 
 			ResultSet rs = preparedStatement.executeQuery();
+			
+			connection.commit();
 
 			if (rs.next())
 				return rispostaTicket(rs.getString("IDTicket"), CF, messaggio);

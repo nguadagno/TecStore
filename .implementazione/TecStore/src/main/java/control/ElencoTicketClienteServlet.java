@@ -34,7 +34,7 @@ public class ElencoTicketClienteServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologia").equals("1")) {
+		if (!session.getAttribute("tipologia").toString().equals("1")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";

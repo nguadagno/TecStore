@@ -40,7 +40,7 @@ return;
 		<form action="elencoTicketCentralinista" method="post">
 			<input type="submit" value="Gestione Ticket">
 		</form>
-		<form action="elencoVenditeCentralinista" method="post">
+		<form action="ElencoVenditeCentralinista" method="post">
 			<input type="submit" value="Gestione Vendite">
 		</form>
 

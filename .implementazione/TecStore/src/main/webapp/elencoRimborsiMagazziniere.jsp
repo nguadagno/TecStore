@@ -13,7 +13,7 @@
 	<form action="VisualizzaElencoRimborsiMagazziniere" method="post">
  
 		<%
-		ArrayList<ArtasdicoloBean> rimborsi = (ArrayList<ArticoloBean>) session.getAttribute("elenco");
+		ArrayList<ArticoloBean> rimborsi = (ArrayList<ArticoloBean>) session.getAttribute("elenco");
 		%>
 	</form>
 	<%
