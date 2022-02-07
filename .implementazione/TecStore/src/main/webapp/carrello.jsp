@@ -61,10 +61,10 @@
 		<h4>
 			Totale:<%=totale%></h4>
 	</div>
-	<!-- Redirect a form inserimento carta di credito se non è ancora presente nel db :\-->
-	<a href="confermaOrdine.jsp">
-		<button>Continua</button>
-	</a>
+	<form action="confermaOrdine" method="post">
+			<input type="submit" value="Acquista!"><input type="hidden"
+				value="<%=session.getAttribute("CF")%>" name="CF">
+		</form>
 
 </body>
 </html>
