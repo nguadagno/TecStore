@@ -5,6 +5,25 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<%
+int tipologia = -1;
+if (request.getSession().getAttribute("tipologia") == null
+		|| request.getSession().getAttribute("tipologia").toString().isEmpty()) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+
+tipologia = Integer.parseInt(request.getSession().getAttribute("tipologia").toString());
+
+if (tipologia != 1) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+%>
 <title>Carrello</title>
 </head>
 <body>
@@ -62,9 +81,9 @@
 			Totale:<%=totale%></h4>
 	</div>
 	<form action="confermaOrdine" method="post">
-			<input type="submit" value="Acquista!"><input type="hidden"
-				value="<%=session.getAttribute("CF")%>" name="CF">
-		</form>
+		<input type="submit" value="Acquista!"><input type="hidden"
+			value="<%=session.getAttribute("CF")%>" name="CF">
+	</form>
 
 </body>
 </html>

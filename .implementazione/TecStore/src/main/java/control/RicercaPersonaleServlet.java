@@ -34,7 +34,7 @@ public class RicercaPersonaleServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologia").toString().equals("5")) {
+		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().equals("5")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";

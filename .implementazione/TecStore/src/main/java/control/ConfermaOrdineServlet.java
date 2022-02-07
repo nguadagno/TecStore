@@ -32,7 +32,7 @@ public class ConfermaOrdineServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologia").toString().equals("3")) {
+		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().equals("3")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.sendRedirect(request.getContextPath() + "/errore.jsp");
 		}

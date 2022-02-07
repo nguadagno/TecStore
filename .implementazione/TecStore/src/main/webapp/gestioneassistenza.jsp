@@ -61,8 +61,9 @@ return;
 				<td><%=ticket.getTipologia()%></td>
 				<td><%=ticket.getDataUltimoMessaggio()%></td>
 				<td><form action="dettagliTicket" method="post">
-						<input type="hidden" name="IDTicket" value=<%=ticket.getIDTicket()%>><input
-							type="submit" value="Dettagli">
+						<input type="hidden" name="IDTicket"
+							value=<%=ticket.getIDTicket()%>><input type="submit"
+							value="Dettagli">
 					</form></td>
 			</tr>
 			<%

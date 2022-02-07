@@ -1,17 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="java.util.*, Bean.* " session="true"%>&euro;&euro;
+	pageEncoding="ISO-8859-1" import="java.util.*, Bean.* " session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<%
+int tipologia = -1;
+if (request.getSession().getAttribute("tipologia") == null
+		|| request.getSession().getAttribute("tipologia").toString().isEmpty()) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+
+tipologia = Integer.parseInt(request.getSession().getAttribute("tipologia").toString());
+
+if (tipologia != 3) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+%>
 <title>Elenco Rimborsi</title>
 </head>
 <body>
 <body>
-
-
 	<form action="VisualizzaElencoRimborsiMagazziniere" method="post">
- 
+
 		<%
 		ArrayList<ArticoloBean> rimborsi = (ArrayList<ArticoloBean>) session.getAttribute("elenco");
 		%>

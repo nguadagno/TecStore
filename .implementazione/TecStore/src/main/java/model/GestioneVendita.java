@@ -374,7 +374,7 @@ public class GestioneVendita {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String dettagliArticoloQuery = "SELECT * FROM articolo WHERE IDArticolo = ?;";
+		String dettagliArticoloQuery = "SELECT * FROM articolo WHERE ID = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");

@@ -1,7 +1,6 @@
 package control;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import Bean.ArticoloBean;
 import Bean.FotoBean;
@@ -35,8 +34,9 @@ public class DettagliArticoloServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologia").toString().equals("1") && !session.getAttribute("tipologia").toString().equals("2")
-				&& !session.getAttribute("tipologia").toString().equals("4")) {
+		if (session.getAttribute("tipologia") == null || (!session.getAttribute("tipologia").toString().equals("1")
+				&& !session.getAttribute("tipologia").toString().equals("2")
+				&& !session.getAttribute("tipologia").toString().equals("4"))) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -59,7 +59,8 @@ public class DettagliArticoloServlet extends HttpServlet {
 			else
 				redirect = "/dettagliArticolo.jsp";
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
+			e.printStackTrace();
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";

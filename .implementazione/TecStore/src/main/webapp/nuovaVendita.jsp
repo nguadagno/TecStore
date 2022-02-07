@@ -4,6 +4,25 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<%
+int tipologia = -1;
+if (request.getSession().getAttribute("tipologia") == null
+		|| request.getSession().getAttribute("tipologia").toString().isEmpty()) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+
+tipologia = Integer.parseInt(request.getSession().getAttribute("tipologia").toString());
+
+if (tipologia != 1 && tipologia != 4) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+%>
 <title>Nuova Vendita</title>
 </head>
 <body>

@@ -4,17 +4,41 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<%
+int tipologia = -1;
+if (request.getSession().getAttribute("tipologia") == null
+		|| request.getSession().getAttribute("tipologia").toString().isEmpty()) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+
+tipologia = Integer.parseInt(request.getSession().getAttribute("tipologia").toString());
+
+if (tipologia != 1 && tipologia != 2) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+%>
 <title>Risposta TIcket</title>
 </head>
 <body>
 	<br>
 	<br>
 	<br>
+	<%
+	if (tipologia == 1) {
+	%>
 	<div align="center">
 		<h2>Ciao! Inserisci il tuo messaggio, ti rispoderemo il prima
 			possibile</h2>
-
 	</div>
+	<%
+	}
+	%>
 
 	<form action="rispostaTIcket" method="post">
 		<div align="center">

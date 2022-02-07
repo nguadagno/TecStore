@@ -34,7 +34,7 @@ public class ElencoVenditeCentralinistaServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologia").toString().toString().equals("2")) {
+		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().toString().equals("2")) {
 			System.out.println("qui!");
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);

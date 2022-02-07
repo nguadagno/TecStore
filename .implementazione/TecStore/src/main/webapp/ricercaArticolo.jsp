@@ -4,6 +4,25 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<%
+int tipologia = -1;
+if (request.getSession().getAttribute("tipologia") == null
+		|| request.getSession().getAttribute("tipologia").toString().isEmpty()) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+
+tipologia = Integer.parseInt(request.getSession().getAttribute("tipologia").toString());
+
+if (tipologia !=1 && tipologia != 4) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+%>
 <title>Negozio</title>
 </head>
 <body>
@@ -39,7 +58,7 @@
 
 		<th>
 			<div class="bigger">
-			<!-- 
+				<!-- 
 				<div>
 					<img src="<%=//show foto%>" alt="Immagine non disponibile">
 				</div>
@@ -47,7 +66,9 @@
 				<div class="little">
 					<h2><%=a.getNome()%></h2>
 					<span class="hiddenContent" style="display: none">
-						<h6>Descrizione:<%=a.getDescrizione() %> </h6><br>
+						<h6>
+							Descrizione:<%=a.getDescrizione()%>
+						</h6> <br>
 						<h6>Prezzo:</h6> <%=a.getPrezzo()%> &euro;<br> <br> <br>
 					</span>
 				</div>

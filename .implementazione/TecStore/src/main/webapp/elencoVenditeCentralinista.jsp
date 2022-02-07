@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="java.util.*, Bean.* " session="true"%>&euro;&euro;
+	pageEncoding="ISO-8859-1" import="java.util.*, Bean.* " session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,30 +9,47 @@
 <body>
 <body>
 
-
-	<form action="ElencoVenditeCentralinista" method="post">
-
-		<%
-		ArrayList<ArticoloBean> risultati = (ArrayList<ArticoloBean>) session.getAttribute("elenco");
-		%>
-
-		<%
-		if (risultati == null) {
-		%>
-		<h3>Nessun Articolo in attesa</h3>
-		<%
-		return;
-		} else {
-		for (ArticoloBean a : risultati) {
-		%>
-		<!-- da rivedere le servlet
- 			-->
-		<%
-		}
-		}
-		%>
-
+	<form action="elencoVenditeCentralinista" type="post">
+		<select name="limit">
+			<option value="10">10</option>
+			<option value="20">20</option>
+			<option value="50">50</option>
+		</select> <input type="submit">
 	</form>
+
+	<%
+	ArrayList<ArticoloBean> risultati = (ArrayList<ArticoloBean>) session.getAttribute("elenco");
+	%>
+
+	<%
+	if (risultati == null) {
+	%>
+	<h3>Nessun Articolo in attesa di revisione!</h3>
+	<%
+	return;
+	} else {
+	%>
+	<table>
+		<tr>
+			<th>Tipologia</th>
+			<th>Data ultimo messaggio</th>
+			<th></th>
+		</tr>
+		<%
+		for (ArticoloBean articolo : risultati) {
+		%>
+		<tr>
+			<td><%=articolo.getNome()%></td>
+			<td><form action="DettagliArticolo" method="post">
+					<input type="hidden" name="IDArticolo" value=<%=articolo.getID()%>><input
+						type="submit" value="Dettagli">
+				</form></td>
+		</tr>
+		<%
+		}
+		}
+		%>
+	</table>
 </body>
 </body>
 </html>

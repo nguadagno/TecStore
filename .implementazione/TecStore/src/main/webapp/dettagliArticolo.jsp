@@ -5,6 +5,25 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<%
+int tipologia = -1;
+if (request.getSession().getAttribute("tipologia") == null
+		|| request.getSession().getAttribute("tipologia").toString().isEmpty()) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+
+tipologia = Integer.parseInt(request.getSession().getAttribute("tipologia").toString());
+
+if (tipologia != 1 && tipologia != 4) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+%>
 <title>Negozio</title>
 </head>
 <body>
@@ -56,9 +75,9 @@
 			<div align="Right">
 
 				<form action="AggiuntaAlCarrello" method="post">
-					<input type="submit" value="Aggiungi al Carrello">
-					<input type="hidden" name="IDArticolo"
-						value="<%=risultato.getID()%>"> <select name="quantita">
+					<input type="submit" value="Aggiungi al Carrello"> <input
+						type="hidden" name="IDArticolo" value="<%=risultato.getID()%>">
+					<select name="quantita">
 						<option value="10">1</option>
 						<option value="20">2</option>
 						<option value="3">3</option>
