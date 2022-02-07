@@ -50,7 +50,7 @@ public class ElencoTicketCentralinistaServlet extends HttpServlet {
 				limit = Integer.parseInt(request.getParameter("limit"));
 			ArrayList<TicketBean> elencoTicket = model.elencoTicketCentralinista(limit);
 			session.setAttribute("elencoTicket", elencoTicket);
-			redirect = "/gestioneassistenza.jsp";
+			redirect = "/gestioneAssistenza.jsp";
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");

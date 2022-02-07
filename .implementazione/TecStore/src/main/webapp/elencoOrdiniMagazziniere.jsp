@@ -27,7 +27,7 @@ return;
 </head>
 <body>
 <body>
-	<form action="ricercaArticolo" method="post">
+	<form action="RicercaArticolo" method="post">
 		<%
 		ArrayList<ArticoloBean> ordini = (ArrayList<ArticoloBean>) session.getAttribute("elenco");
 		%>

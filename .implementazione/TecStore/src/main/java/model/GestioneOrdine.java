@@ -24,7 +24,7 @@ public class GestioneOrdine {
 			if (!GestioneAccount.exists(CF))
 				return false;
 
-			ArrayList<ArticoloBean> carrello = GestioneCarrello.getCarrello(CF);
+			ArrayList<ArticoloBean> carrello = GestioneCarrello.GetCarrello(CF);
 
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			for (ArticoloBean e : carrello) {

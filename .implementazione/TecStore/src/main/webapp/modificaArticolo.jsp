@@ -32,7 +32,7 @@ return;
 			<br> <br>
 		</div>
 		<div>
-			<form action="modificaArtiolo" method="post">
+			<form action="ModificaArtiolo" method="post">
 				<div>
 					<label><b>Nome</b></label> <br> <input type="text" name="nome"
 						required> <br> <br> <label><b>Descrizione</b></label>

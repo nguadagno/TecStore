@@ -19,7 +19,7 @@
 		<h1>Registrazione</h1>
 
 		<h3>Compila i campi per continuare</h3>
-		<form action="registrazioneUtente" method="post">
+		<form action="RegistrazioneUtente" method="post">
 			<br> <br> <input type="hidden" name="tipologia" value="1">
 
 			<h3>

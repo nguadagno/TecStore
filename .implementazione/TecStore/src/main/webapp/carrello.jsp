@@ -28,7 +28,7 @@ return;
 </head>
 <body>
 
-	<form action="getCarrello" method="post">
+	<form action="GetCarrello" method="post">
 		<%
 		ArrayList<ArticoloBean> carrello = (ArrayList<ArticoloBean> ) session.getAttribute("carrello");
 		FotoBean foto = (FotoBean) session.getAttribute("foto");

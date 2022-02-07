@@ -27,7 +27,7 @@ return;
 </head>
 <body>
 <body>
-	<form action="VisualizzaElencoRimborsiMagazziniere" method="post">
+	<form action="ElencoRimborsiMagazziniere" method="post">
 
 		<%
 		ArrayList<ArticoloBean> rimborsi = (ArrayList<ArticoloBean>) session.getAttribute("elenco");
@@ -43,7 +43,7 @@ return;
 	for (ArticoloBean a : rimborsi) {
 	%>
 	<div>
-		<form action="dettagliOrdine" method="post">
+		<form action="DettagliOrdine" method="post">
 			<label>Id Ordine:<%=a.getID()%></label> <input type="text"
 				name="IDOrdine" value="<%=a.getID()%>"> <input type="submit"
 				value="Dettagli">

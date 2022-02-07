@@ -30,7 +30,7 @@ return;
 	<br>
 	<br>
 
-	<form action="creazioneTIcket" method="post">
+	<form action="CreazioneTIcket" method="post">
 		<div align="center">
 			<input type="text" name="messaggio"
 				style="width: 300px; height: 300px;" required>

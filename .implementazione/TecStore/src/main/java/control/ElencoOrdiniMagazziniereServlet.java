@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/VisualizzaElencoOrdiniMagazziniere")
+@WebServlet("/ElencoOrdiniMagazziniere")
 
 public class ElencoOrdiniMagazziniereServlet extends HttpServlet {
 

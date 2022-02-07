@@ -13,13 +13,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/SelezionaVendita")
+@WebServlet("/DettagliVendita")
 
-public class SelezionaVenditaServlet extends HttpServlet {
+public class DettagliVenditaServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	public SelezionaVenditaServlet() {
+	public DettagliVenditaServlet() {
 		super();
 	}
 
