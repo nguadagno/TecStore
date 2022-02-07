@@ -30,7 +30,7 @@ public class UtenteBean {
 
 	public UtenteBean(String CF, String nome, String cognome, String email, String password, String via,
 			int numeroCivico, String citta, String provincia, int CAP, int tipologia, String cartaDiCredito) {
-		if (this.checkCF(CF) && this.checkEmail(email) && this.checkPassword(password)) {
+		// if (this.checkCF(CF) && this.checkEmail(email) && this.checkPassword(password)) {
 			this.CF = CF;
 			this.nome = nome;
 			this.cognome = cognome;
@@ -43,20 +43,12 @@ public class UtenteBean {
 			this.CAP = CAP;
 			this.tipologia = tipologia;
 			this.cartaDiCredito = cartaDiCredito;
-		} else {
-			this.CF = null;
-			this.nome = null;
-			this.cognome = null;
-			this.email = null;
-			this.password = null;
-			this.via = null;
-			this.numeroCivico = -1;
-			this.citta = null;
-			this.provincia = null;
-			this.CAP = -1;
-			this.tipologia = -1;
-			this.cartaDiCredito = null;
-		}
+			/*
+			 * } else { this.CF = null; this.nome = null; this.cognome = null; this.email =
+			 * null; this.password = null; this.via = null; this.numeroCivico = -1;
+			 * this.citta = null; this.provincia = null; this.CAP = -1; this.tipologia = -1;
+			 * this.cartaDiCredito = null; }
+			 */
 
 	}
 
