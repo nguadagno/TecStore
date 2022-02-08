@@ -125,13 +125,13 @@ public class GestioneAssistenza {
 	}
 
 	public boolean cambiaStato(String IDTicket, String stato) throws SQLException {
-		if (stato != "InElaborazione" && stato != "InAttesa" && stato != "Chiuso")
+		if (stato != "InElaborazione" && stato != "InAttesa" && stato != "Chiuso" && stato != "InAttesaCliente")
 			return false;
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String cambiaStatoQuery = "UPDATE ticket SET stato = ? WHERE IDTicket = ?;";
-		String getStatoQuery = "SELECT stato FROM ticket where ID = ?;";
+		String getStatoQuery = "SELECT stato FROM ticket where IDTicket = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("centralinista", "centralinista");
@@ -204,7 +204,7 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT IDTicket, CF, Tipologia, Data, Contenuto FROM ticket NATURAL JOIN messaggio WHERE stato = 'InAttesa' AND IDTicket = ? ORDER BY DATA ASC;";
+		String searchTicketQuery = "SELECT IDTicket, CF, Tipologia, Data, Contenuto FROM ticket NATURAL JOIN messaggio WHERE IDTicket = ? ORDER BY DATA ASC;";
 
 		try {
 			GestioneAccount gestioneaccount = new GestioneAccount();

@@ -7,7 +7,8 @@
 <%
 int tipologia = -1;
 if (request.getSession().getAttribute("tipologia") == null
-		|| request.getSession().getAttribute("tipologia").toString().isEmpty()) {
+		|| request.getSession().getAttribute("tipologia").toString().isEmpty()
+		|| request.getSession().getAttribute("IDTicket") == null) {
 %>
 <meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
 <%
@@ -33,7 +34,7 @@ return;
 	if (tipologia == 1) {
 	%>
 	<div align="center">
-		<h2>Ciao! Inserisci il tuo messaggio, ti rispoderemo il prima
+		<h2>Inserisci il tuo messaggio, ti risponderemo il prima
 			possibile</h2>
 	</div>
 	<%
@@ -42,15 +43,16 @@ return;
 
 	<form action="RispostaTicket" method="post">
 		<div align="center">
-			<input type="text" name="messaggio"
-				style="width: 300px; height: 300px;" required>
+			<input type="hidden" name="IDTicket"
+				value="<%=session.getAttribute("IDTicket").toString()%>"> <input
+				type="text" name="messaggio" style="width: 300px; height: 300px;"
+				required>
 		</div>
 		<br> <br> <br>
 		<hr>
 		<br>
 		<div>
-			<input type="submit" value="Conferma"> <a
-				href="dettagliArticolo.jsp">
+			<input type="submit" value="Conferma"> <a href="index.jsp">
 				<button>Annulla</button>
 			</a>
 		</div>

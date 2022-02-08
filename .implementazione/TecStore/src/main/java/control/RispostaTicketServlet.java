@@ -45,15 +45,21 @@ public class RispostaTicketServlet extends HttpServlet {
 		session.setAttribute("operazione", "rispostaTicket");
 
 		try {
+			redirect = "/errore.jsp";
 			if (model.rispostaTicket(request.getParameter("IDTicket"), session.getAttribute("CF").toString(),
-					request.getParameter("messaggio")))
-				redirect = "/successo.jsp";
-			else
-				redirect = "/errore.jsp";
+					request.getParameter("messaggio"))) {
+				if (session.getAttribute("tipologia").toString().equals("2")
+						&& model.cambiaStato(request.getParameter("IDTicket"), "InAttesaCliente"))
+					redirect = "/successo.jsp";
+				if (session.getAttribute("tipologia").toString().equals("1")
+						&& model.cambiaStato(request.getParameter("IDTicket"), "InAttesa"))
+					redirect = "/successo.jsp";
+			}
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
+			e.printStackTrace();
 		}
 
 		dd = request.getRequestDispatcher(redirect);

@@ -67,13 +67,9 @@ return;
 			}
 			%>
 		</table>
-		<br> <br> <br>
-		<div align=left>
-			<a href="rispostaTicket.jsp">
-				<button>Rispondi</button>
-			</a>
-
-		</div>
+		<br> <br> <br> <a href="rispostaTicket.jsp">
+			<button>Rispondi</button>
+		</a>
 
 	</div>
 </body>
