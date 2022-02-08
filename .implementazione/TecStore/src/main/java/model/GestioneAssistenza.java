@@ -19,7 +19,7 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM ticket WHERE IDCliente = ? LIMIT = ?;";
+		String searchTicketQuery = "SELECT * FROM ticket WHERE IDCliente = ? LIMIT ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");

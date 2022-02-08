@@ -106,7 +106,7 @@ public class GestioneOrdine {
 
 		ArrayList<OrdineBean> ordersList = new ArrayList<OrdineBean>();
 
-		String elencoOrdiniClienteQuery = "SELECT * FROM ordine WHERE IDCliente = ? AND nome LIKE ? LIMIT ?;";
+		String elencoOrdiniClienteQuery = "SELECT ordine.id as ID, idcliente, idarticolo, ordine.quantita, ordine.data, ordine.stato, codicetracciamento, nome FROM ordine, articolo WHERE idcliente = ? AND articolo.nome LIKE ? AND articolo.id = ordine.idarticolo LIMIT ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -205,7 +205,7 @@ public class GestioneOrdine {
 	}
 
 	public boolean cambiaStato(String ID, String stato) throws SQLException {
-		final Set<String> states = Set.of("Spedito", "InElaborazione", "Rimborsato", "InAttesaDiRimborso", "Annullato");
+		final Set<String> states = Set.of("Spedito", "InElaborazione", "Rimborsato", "InAttesaRimborso", "Annullato");
 		if (!states.contains(stato))
 			return false;
 
@@ -270,7 +270,7 @@ public class GestioneOrdine {
 
 		ArrayList<OrdineBean> ordersList = new ArrayList<OrdineBean>();
 
-		String elencoOrdiniClienteQuery = "SELECT * FROM ordine WHERE stato = 'InAttesaRimborso' LIMIT = ?;";
+		String elencoOrdiniClienteQuery = "SELECT * FROM ordine WHERE stato = 'InAttesaRimborso' LIMIT ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("magazziniere", "magazziniere");
@@ -286,6 +286,8 @@ public class GestioneOrdine {
 			}
 
 			return ordersList;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -295,5 +297,6 @@ public class GestioneOrdine {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return null;
 	}
 }

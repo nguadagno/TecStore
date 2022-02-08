@@ -46,13 +46,17 @@ public class ElencoRimborsiMagazziniereServlet extends HttpServlet {
 		session.setAttribute("operazione", "ElencoRimborsiMagazziniere");
 
 		try {
-			ArrayList<OrdineBean> rimborsi = model.elencoRimborsi(Integer.parseInt(request.getParameter("limit")));
+			int limit = 10;
+			if (request.getParameter("limit") != null)
+				limit = Integer.parseInt(request.getParameter("limit"));
+			ArrayList<OrdineBean> rimborsi = model.elencoRimborsi(limit);
 			session.setAttribute("elenco", rimborsi);
-			redirect = "/elencoRimborsi.jsp";
+			redirect = "/elencoRimborsiMagazziniere.jsp";
 		} catch (SQLException e) {
 			response.setStatus(500);
 			request.getSession(true).setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
+			e.printStackTrace();
 		}
 
 		dd = request.getRequestDispatcher(redirect);

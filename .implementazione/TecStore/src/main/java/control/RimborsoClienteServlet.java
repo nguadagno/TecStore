@@ -46,7 +46,7 @@ public class RimborsoClienteServlet extends HttpServlet {
 
 		try {
 
-			if (model.cambiaStato(request.getParameter("IDOrdine"), request.getParameter("Stato")))
+			if (model.cambiaStato(request.getParameter("IDOrdine"), "InAttesaRimborso"))
 				redirect = "/successo.jsp";
 			else
 				redirect = "/errore.jsp";
