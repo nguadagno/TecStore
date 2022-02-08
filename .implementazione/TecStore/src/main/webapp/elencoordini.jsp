@@ -9,33 +9,40 @@
 <body>
 <body>
 
-
-	<form action="ricercaArticolo" method="post">
-
-		<%
-		ArrayList<ArticoloBean> ordini = (ArrayList<ArticoloBean>) session.getAttribute("elenco");
-		%>
-	</form>
 	<%
+	ArrayList<OrdineBean> ordini = (ArrayList<OrdineBean>) session.getAttribute("elenco");
 	if (ordini == null) {
 	%>
 	<h3>Nessun Ordine in attesa</h3>
 	<%
 	return;
 	} else {
-	for (ArticoloBean a : ordini) {
-	%>
-	<div>
-		<form action="dettagliOrdine" method="post">
-			<label>Id Ordine:<%=a.getID()%></label> <input type="text"
-				name="IDOrdine" value="<%=a.getID()%>"> <input type="submit"
-				value="Dettagli">
-		</form>
-	</div>
-	<%
-	}
-	}
-	%>
+	%><table>
+		<tr>
+			<th>ID</th>
+			<th>Quantita</th>
+			<th>Data</th>
+			<th></th>
+		</tr>
+		<%
+		for (OrdineBean a : ordini) {
+		%>
+		<tr>
+			<td><%=a.getID()%></td>
+			<td><%=a.getQuantita()%></td>
+			<td><%=a.getData()%></td>
+			<td>
+				<form action="dettagliOrdine" method="post">
+					<input type="hidden" name="IDOrdine" value="<%=a.getID()%>">
+					<input type="submit" value="Dettagli">
+				</form>
+			</td>
+			<%
+			}
+			}
+			%>
+		</tr>
+	</table>
 
 </body>
 </body>
