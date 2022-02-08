@@ -20,8 +20,11 @@
 
 		<h3>Compila i campi per continuare</h3>
 		<form action="registrazioneUtente" method="post">
-			<br> <br> <input type="hidden" name="tipologia" value="1">
-
+			<br> <br>
+			<%
+			int tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
+			%>
+			
 			<h3>
 				<i>Dati Autenticazione</i>
 			</h3>
@@ -57,6 +60,7 @@
 			<label for="cap">CAP</label><br> <input type="number" name="CAP"
 				maxlength="5" id="cap" required>
 			<p>
+			<% %>
 			<h3>
 				<i>Carta di Credito</i>
 			</h3>
@@ -65,13 +69,13 @@
 
 			<label for="email">Numero Carta</label><br> <input type="text"
 				name="CartaDiCredito"> <br> <br>
-		</form>
 	</div>
 	<div align="center">
 		<br> <input class="final" id="conferma" type="submit"
 			name="submit" value="Conferma"> <input id="resetta"
 			class="final" type="reset" name="reset" value="Reset">
 	</div>
+	</form>
 </body>
 <br>
 </html>
