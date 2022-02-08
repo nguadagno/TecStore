@@ -205,7 +205,7 @@ public class GestioneOrdine {
 	}
 
 	public boolean cambiaStato(String ID, String stato) throws SQLException {
-		final Set<String> states = Set.of("Spedito", "InElaborazione", "Rimborsato", "InAttesaRimborso", "Annullato");
+		final Set<String> states = Set.of("Spedito", "InElaborazione", "Rimborsato", "RimborsoRifiutato", "InAttesaRimborso", "Annullato");
 		if (!states.contains(stato))
 			return false;
 

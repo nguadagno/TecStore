@@ -57,6 +57,7 @@ return;
 				<td><%=a.getData().toString()%></td>
 				<td>
 					<form action="DettagliOrdine" method="post">
+						<input type="hidden" name="operazione" value="spedizione">
 						<input type="hidden" name="IDOrdine" value="<%=a.getID()%>">
 						<input type="submit" value="Dettagli">
 					</form>

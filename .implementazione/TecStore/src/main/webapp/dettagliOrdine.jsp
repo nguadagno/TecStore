@@ -27,6 +27,7 @@ return;
 <body>
 	<%
 	OrdineBean ordine = (OrdineBean) session.getAttribute("ordine");
+	ArticoloBean articolo = (ArticoloBean) session.getAttribute("articolo");
 	UtenteBean cliente = (UtenteBean) session.getAttribute("cliente");
 
 	if (ordine == null || cliente == null) {
@@ -35,8 +36,10 @@ return;
 	<%
 	return;
 	}
-	%>
 
+	if (request.getParameter("operazione") != null) {
+	if (request.getParameter("operazione").equals("spedizione")) {
+	%>
 	<div align=center>
 		<h2>
 			<b>Dettagli Ordine</b>
@@ -44,9 +47,53 @@ return;
 		<br>
 		<div>
 			<h4>
-				<b>ID Ordine</b>
+				<b>Nome articolo:</b>
 			</h4>
-			<label><%=ordine.getID()%></label>
+			<label><%=articolo.getNome()%></label>
+		</div>
+		<div>
+			<h4>
+				<b>Dati cliente</b>
+			</h4>
+			<label><b>Cognome:</b><%=cliente.getCognome()%>, <b>Nome:</b>
+				<%=cliente.getNome()%></label>
+		</div>
+		<div>
+			<h4>
+				<b>Indirizzo</b>
+			</h4>
+			<label><b>Via:</b><%=cliente.getVia()%>, <b>N:</b> <%=cliente.getNumeroCivico()%>.</label><br>
+			<label><b>Citta:</b> <%=cliente.getCitta()%>, <%=cliente.getProvincia()%>,<b>
+					CAP:</b> <%=cliente.getCAP()%> </label><br> <br> <br>
+			<hr>
+			<br>
+			<div>
+				<form action="ConfermaOrdine" method="post">
+					<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
+					<input type=hidden name=stato value="Rimborsato"><input
+						type="submit" value="Conferma rimborso">
+				</form>
+				<form action="ConfermaOrdine" method="post">
+					<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
+					<input type=hidden name=stato value="RimborsoRifiutato"><input
+						type="submit" value="Rifiuta rimborso">
+				</form>
+			</div>
+		</div>
+	</div>
+	<%
+	} else if (request.getParameter("operazione").equals("rimborso")) {
+	%>
+	<div align=center>
+		<h2>
+			<b>Dettagli Rimborso</b>
+		</h2>
+		<br>
+		<div>
+			<h4>
+				<b>Nome articolo:</b>
+			</h4>
+			<label><%=articolo.getNome()%></label>
 		</div>
 		<div>
 			<h4>
@@ -65,20 +112,23 @@ return;
 			<hr>
 			<br>
 			<div>
-				<form action="ConfermaOrdine" method="post">
+				<form action="RimborsoMagazziniere" method="post">
 					<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
-					<input type=hidden name=stato value="Spedito"> <label><b>Codice
-							Tracking:</b></label> <input type="text" name="Tracking" placeholder="Codice Tracking"><br> <br>
-					<input type="submit" value="Conferma spedizione">
+					<input type=hidden name=stato value="Rimborsato"><input
+						type="submit" value="Conferma rimborso">
 				</form>
-				<form action="ConfermaOrdine" method="post">
+				<form action="RimborsoMagazziniere" method="post">
 					<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
-					<input type=hidden name=stato value="Annulla"> <input
-						type="submit" value="Annulla ordine">
+					<input type=hidden name=stato value="RimborsoRifiutato"> <input
+						type="submit" value="Rifiuta rimborso">
 				</form>
 			</div>
 		</div>
 
 	</div>
+	<%
+	}
+	}
+	%>
 </body>
 </html>

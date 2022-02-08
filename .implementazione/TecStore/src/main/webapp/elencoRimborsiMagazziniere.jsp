@@ -27,33 +27,48 @@ return;
 </head>
 <body>
 <body>
-	<form action="ElencoRimborsiMagazziniere" method="post">
-
-		<%
-		ArrayList<ArticoloBean> rimborsi = (ArrayList<ArticoloBean>) session.getAttribute("elenco");
-		%>
-	</form>
-	<%
-	if (rimborsi == null) {
-	%>
-	<h3>Nessun Rimborso in attesa</h3>
-	<%
-	return;
-	} else {
-	for (ArticoloBean a : rimborsi) {
-	%>
-	<div>
-		<form action="DettagliOrdine" method="post">
-			<label>Id Ordine:<%=a.getID()%></label> <input type="text"
-				name="IDOrdine" value="<%=a.getID()%>"> <input type="submit"
-				value="Dettagli">
+	<div align=center>
+		<form action="ElencoRimborsiMagazziniere" method="post">
+			<select name="limit">
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option value="50">50</option>
+			</select> <input type="submit">
 		</form>
-	</div>
-	<%
-	}
-	}
-	%>
+		<%
+		ArrayList<OrdineBean> elenco = (ArrayList<OrdineBean>) session.getAttribute("elenco");
 
+		if (elenco == null || elenco.size() == 0) {
+		%>
+		<h3>Nessun rimborso in attesa di conferma</h3>
+		<%
+		return;
+		} else {
+		%>
+		<table>
+			<tr>
+				<th>Data creazione ordine</th>
+				<th>Dettagli</th>
+			</tr>
+			<%
+			for (OrdineBean a : elenco) {
+			%>
+			<tr>
+				<td><%=a.getData().toString()%></td>
+				<td>
+					<form action="DettagliOrdine" method="post">
+						<input type="hidden" name="operazione" value="rimborso">
+						<input type="hidden" name="IDOrdine" value="<%=a.getID()%>">
+						<input type="submit" value="Dettagli">
+					</form>
+				</td>
+				<%
+				}
+				}
+				%>
+			
+		</table>
+	</div>
 </body>
 </body>
 </html>
