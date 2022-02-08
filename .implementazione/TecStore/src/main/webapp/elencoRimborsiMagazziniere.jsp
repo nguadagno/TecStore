@@ -11,9 +11,9 @@
 
 
 	<form action="VisualizzaElencoRimborsiMagazziniere" method="post">
- 
+
 		<%
-		ArrayList<ArtasdicoloBean> rimborsi = (ArrayList<ArticoloBean>) session.getAttribute("elenco");
+		ArrayList<ArticoloBean> rimborsi = (ArrayList<ArticoloBean>) session.getAttribute("elenco");
 		%>
 	</form>
 	<%
@@ -25,18 +25,33 @@
 	} else {
 	for (ArticoloBean a : rimborsi) {
 	%>
-	<div>
-		<form action="dettagliOrdine" method="post">
-			<label>Id Ordine:<%=a.getID()%></label> <input type="text"
-				name="IDOrdine" value="<%=a.getID()%>"> <input type="submit"
-				value="Dettagli">
-		</form>
-	</div>
-	<%
-	}
-	}
-	%>
 
+	<table>
+		<tr>
+			<th>Id:</th>
+			<th>Quantita:</th>
+			<th>Descizione:</th>
+			<th></th>
+		</tr>
+
+		<tr>
+			<td><%=a.getID()%></td>
+			<td><%=a.getQuantita()%></td>
+			<td><%=a.getDescrizione()%></td>
+			<td>
+
+				<form action="ElaborazioneOrdine" method="post">
+					<input type="submit" value="Dettagli"> <input type="hidden"
+						name="IDOrdine" value="<%=a.getID()%>">
+				</form>
+			</td>
+			<%
+			}
+			}
+			%>
+		</tr>
+
+	</table>
 </body>
 </body>
 </html>

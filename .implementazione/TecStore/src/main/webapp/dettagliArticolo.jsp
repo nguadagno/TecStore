@@ -21,44 +21,64 @@
 	<hr>
 
 
-	<tr>
-		<%
-		ArticoloBean risultato = (ArticoloBean) session.getAttribute("articolo");
-		FotoBean foto = (FotoBean) session.getAttribute("foto");
-		if (risultato == null || foto == null) {
-		%>
-		<h3>Articolo non Trovato!</h3>
-		<%
-		return;
-		} else {
-	
-		%>
-		<br>
-		<div>
-			<!-- 
-				<div>
-					<img src="<%=//show foto%>" alt="Immagine non disponibile">
-				</div>
- 			-->
-			<div align="center">
-				<h3>
-					Nome:
-					<%=risultato.getNome()%>
-					<h3>
-						Prezzo:<%=risultato.getPrezzo()%>
-					</h3>
-			</div>
-			<div align="center">
-				<h3>
-					Quantità:
-					<%=risultato.getQuantita()%>
-			</div>
-			<div align="Right">
 
-				<form action="AggiuntaAlCarrello" method="post">
-					<input type="submit" value="Aggiungi al Carrello">
+	<%
+	ArticoloBean risultato = (ArticoloBean) session.getAttribute("dettagliArticolo");
+
+	//int tipologia= Integer.parseInt(session.getAttribute("tipologia").toString());
+	int tipologia = Integer.parseInt(request.getParameter("tipologia"));
+	if (risultato == null) {
+	%>
+	<h3>Articolo non Trovato!</h3>
+	<%
+	return;
+	}
+	%>
+	<table>
+		<tr>
+			<th>Nome:</th>
+			<th>Prezzo:</th>
+			<th>Quantita:</th>
+			<th>Descizione:</th>
+			<th></th>
+		</tr>
+
+		<tr>
+			<td><%=risultato.getNome()%></td>
+			<td><%=risultato.getPrezzo()%></td>
+			<td><%=risultato.getQuantita()%></td>
+			<td><%=risultato.getDescrizione()%></td>
+
+			<%
+			if (tipologia == 1) {
+				if ((session.getAttribute("CF").toString().equals(request.getParameter("IDVenditore")))) {
+			%>
+			<td>
+				<form action="modificaArticolo.jsp" method="post">
 					<input type="hidden" name="IDArticolo"
-						value="<%=risultato.getID()%>"> <select name="quantita">
+						value="<%=risultato.getID()%>"> <input type="hidden"
+						name="nome" value="<%=risultato.getNome()%>"> <input
+						type="hidden" name="descrizione"
+						value="<%=risultato.getDescrizione()%>"> <input
+						type="hidden" name="IDVenditore"
+						value="<%=risultato.getIDVenditore()%>"> <input
+						type="hidden" name="quantita" value="<%=risultato.getQuantita()%>">
+					<input type="hidden" name="prezzo"
+						value="<%=risultato.getPrezzo()%>"> <input type="hidden"
+						name="rimborsabile" value="<%=risultato.isRimborsabile()%>">
+					<input type="submit" value="Modifica">
+				</form>
+			</td>
+
+
+			<%
+			} else {
+			%>
+			<td>
+				<form action="AggiuntaAlCarrello" method="post">
+					<input type="submit" value="Aggiungi al Carrello"> <input
+						type="hidden" name="IDArticolo" value="<%=risultato.getID()%>">
+					<select name="quantita">
 						<option value="10">1</option>
 						<option value="20">2</option>
 						<option value="3">3</option>
@@ -71,20 +91,25 @@
 						<option value="10">10</option>
 					</select>
 				</form>
-			</div>
-		</div>
-		<div>
-			<h3>Descrizione</h3>
-		</div>
-		<div>
-			<h4>
-				<%=risultato.getDescrizione()%>
-			</h4>
-		</div>
+			</td>
+			<%
+			}
+			}
+			if (tipologia == 2) {
+			%>
+			<td>
+				<form action="AutorizzazioneVendita" method="post">
+					<label><b>Conferma Vendita</b></label> <input type="radio"
+						name="Stato" value="InVendita"><br> <label><b>Rifiuta
+							Vendita</b></label> <input type="radio" name="Stato" value="Rifiutato">
+					<br> <br> <input type="submit" value="Conferma">
+				</form>
+			</td>
+			<%
+			}
+			%>
+		</tr>
+	</table>
 
-		<%
-		}
-		%>
-	
 </body>
 </html>
