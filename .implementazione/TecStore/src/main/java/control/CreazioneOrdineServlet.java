@@ -2,6 +2,9 @@ package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+
+import Bean.UtenteBean;
+import model.GestioneAccount;
 import model.GestioneOrdine;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -44,11 +47,18 @@ public class CreazioneOrdineServlet extends HttpServlet {
 		session.setAttribute("operazione", "creazioneOrdine");
 
 		try {
-			if (model.creazioneOrdine(session.getAttribute("CF").toString()))
-				redirect = "/successo.jsp";
-			else
-				redirect = "/successo.jsp";
+			GestioneAccount a = new GestioneAccount();
 
+			UtenteBean u = a.dettagliUtente(session.getAttribute("CF").toString(),
+					session.getAttribute("CF").toString());
+			if (u.getCartaDiCredito() == null) {
+				redirect = "/inserimentoCartaDiCredito.jsp";
+			} else {
+				if (model.creazioneOrdine(session.getAttribute("CF").toString()))
+					redirect = "/successo.jsp";
+				else
+					redirect = "/errore.jsp";
+			}
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
