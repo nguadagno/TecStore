@@ -19,6 +19,15 @@
 		</div>
 	</form>
 
+	<%
+	if (elenco == null) {
+	%>
+	<h3>Non ci sono Ticket aperti...</h3>
+	<h2>Puoi creare un ticket cliccando su "Nuovo Ticket"</h2>
+	<%
+	return;
+	}
+	%>
 	<table>
 		<tr>
 			<th>Codice Ticket</th>
@@ -26,16 +35,6 @@
 			<th>Data ultimo messaggio</th>
 			<th></th>
 		</tr>
-		<%
-		if (elenco == null) {
-		%>
-		<h3>Non ci sono Ticket aperti...</h3>
-		<h2>Puoi creare un ticket cliccando su "Nuovo Ticket"</h2>
-		<%
-		return;
-		}
-		%>
-
 		<%
 		for (TicketBean ticket : elenco) {
 		%>
@@ -50,8 +49,6 @@
 
 			</form>
 		</div>
-
-
 		<%
 		}
 		%>
