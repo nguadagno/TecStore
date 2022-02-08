@@ -263,12 +263,12 @@ public class GestioneVendita {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchArticoloQuery = "SELECT * FROM articolo WHERE Nome LIKE %?% LIMIT ?;";
+		String searchArticoloQuery = "SELECT * FROM articolo WHERE Nome LIKE ? LIMIT ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(searchArticoloQuery);
-			preparedStatement.setString(1, nome);
+			preparedStatement.setString(1, "%" + nome + "%");
 			preparedStatement.setInt(2, limit);
 			rs = preparedStatement.executeQuery();
 
@@ -333,7 +333,7 @@ public class GestioneVendita {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchArticoloQuery = "SELECT * FROM articolo WHERE IDVenditore=? AND nome LIKE %?% LIMIT ?;";
+		String searchArticoloQuery = "SELECT * FROM articolo WHERE IDVenditore=? AND nome LIKE ? LIMIT ?;";
 
 		try {
 			GestioneAccount gestioneaccount = new GestioneAccount();
@@ -346,7 +346,7 @@ public class GestioneVendita {
 
 			preparedStatement = connection.prepareStatement(searchArticoloQuery);
 			preparedStatement.setString(1, CF);
-			preparedStatement.setString(2, nome);
+			preparedStatement.setString(2, "%" + nome + "%");
 			preparedStatement.setInt(3, limit);
 			rs = preparedStatement.executeQuery();
 

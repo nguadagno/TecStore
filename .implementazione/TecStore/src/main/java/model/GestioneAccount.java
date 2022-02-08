@@ -259,7 +259,7 @@ public class GestioneAccount {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM utente WHERE Tipologia != ? AND (nome LIKE %?% OR cognome LIKE %?$' OR CF LIKE %?$');";
+		String searchTicketQuery = "SELECT * FROM utente WHERE (nome LIKE ? OR cognome LIKE ? OR CF LIKE ?);";
 
 		try {
 			if (getTipologia(CF) == 5)
@@ -267,9 +267,9 @@ public class GestioneAccount {
 			else
 				return result;
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
-			preparedStatement.setString(1, testo);
-			preparedStatement.setString(2, testo);
-			preparedStatement.setString(3, testo);
+			preparedStatement.setString(1, "%" + testo + "%");
+			preparedStatement.setString(2, "%" + testo + "%");
+			preparedStatement.setString(3, "%" + testo + "%");
 			rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {

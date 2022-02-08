@@ -93,13 +93,13 @@ public class GestioneOrdine {
 
 		ArrayList<OrdineBean> ordersList = new ArrayList<OrdineBean>();
 
-		String elencoOrdiniClienteQuery = "SELECT * FROM ordine WHERE IDCliente = ? AND nome LIKE %?% LIMIT ?;";
+		String elencoOrdiniClienteQuery = "SELECT * FROM ordine WHERE IDCliente = ? AND nome LIKE ? LIMIT ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(elencoOrdiniClienteQuery);
 			preparedStatement.setString(1, CF);
-			preparedStatement.setString(2, nome);
+			preparedStatement.setString(2, "%" + nome + "%");
 			preparedStatement.setInt(3, limit);
 
 			rs = preparedStatement.executeQuery();
