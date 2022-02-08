@@ -26,7 +26,7 @@ return;
 <title>Dettagli Ordine</title>
 </head>
 <body>
-	<form action="creazioneOrdine" method="post">
+	<form action="CreazioneOrdine" method="post">
 		<%
 		OrdineBean ordine = (OrdineBean) session.getAttribute("ordine");
 		ClienteBean cliente = (ClienteBean) session.getAttribute("cliente");
@@ -61,7 +61,7 @@ return;
 			<hr>
 			<br>
 			<div>
-				<form action="confermaOrdine" method="post">
+				<form action="ConfermaOrdine" method="post">
 					<label><b>Codice Tracking:</b></label><input type="text"
 						name="Tracking"><br> <br> <input type="submit"
 						value="Conferma "> <a href="elencoordini.jsp"><button>Annulla</button></a>

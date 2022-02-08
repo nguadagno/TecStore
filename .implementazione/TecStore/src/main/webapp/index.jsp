@@ -12,7 +12,7 @@
 <body>
 	<div align="center">
 
-		<form action="ricercaArticolo" method="post">
+		<form action="RicercaArticolo" method="post">
 			<p>
 				<br> <input type="text" name="testo" maxlength="45"
 					placeholder="Cerca..." required> <select name="limit">
@@ -39,20 +39,27 @@
 	%>
 	<div align="right">
 		<p>
-			<a href="Registrazione.jsp"><button>Registrati</button></a> <a
-				href="Autenticazione.jsp"><button>Autenticati</button></a>
+			<a href="registrazione.jsp"><button>Registrati</button></a> <a
+				href="autenticazione.jsp"><button>Autenticati</button></a>
 		</p>
 	</div>
 	<%
 	} else {
+	if (Integer.parseInt(session.getAttribute("tipologia").toString()) > 1
+			&& Integer.parseInt(session.getAttribute("tipologia").toString()) < 6) {
+	%>
+	<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+	<%
+	return;
+	}
 	%>
 	<div align="right">
 		<p>
 			Benvenuto, <i> <%=((UtenteBean) request.getSession().getAttribute("utente")).getNome()%>
 				<%=((UtenteBean) request.getSession().getAttribute("utente")).getCognome()%>
 				<BR>
-			</i> <a href="areavenditori.jsp"><button>Area Venditori</button></a> <a
-				href="dettagliprofilo.jsp"><button>Dettagli profilo</button></a>
+			</i> <a href="areaVenditori.jsp"><button>Area Venditori</button></a> <a
+				href="dettagliProfilo.jsp"><button>Dettagli profilo</button></a>
 		</p>
 	</div>
 	<%

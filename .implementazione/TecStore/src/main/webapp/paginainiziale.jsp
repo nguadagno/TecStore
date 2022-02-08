@@ -37,7 +37,7 @@ return;
 		<%
 		if (tipologia == 2) { // centralinista
 		%>
-		<form action="elencoTicketCentralinista" method="post">
+		<form action="ElencoTicketCentralinista" method="post">
 			<input type="submit" value="Gestione Ticket">
 		</form>
 		<form action="ElencoVenditeCentralinista" method="post">
@@ -65,7 +65,7 @@ return;
 			<input type="submit">
 		</form>
 
-		<form action="nuovavendita.jsp" method="post">
+		<form action="nuovaVendita.jsp" method="post">
 			<input type="submit" value="Nuova Vendita">
 		</form>
 

@@ -33,7 +33,7 @@ return;
 	if (tipologia == 1) {
 	%>
 	<div align="center">
-		<form action="ricercaArticolo" method="post">
+		<form action="RicercaArticolo" method="post">
 			<input type="text" name="testo" maxlength="35" id="testo"
 				placeholder="Titolo..." required> <input type="submit"
 				value="Cerca">
