@@ -126,7 +126,6 @@ public class GestioneAssistenza {
 	}
 
 	public boolean cambiaStato(String IDTicket, String stato) throws SQLException {
-
 		final Set<String> states = Set.of("InElaborazione", "InAttesa", "Chiuso", "InAttesaCliente");
 		if (!states.contains(stato))
 			return false;

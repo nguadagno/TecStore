@@ -42,7 +42,6 @@ public class DettagliOrdineServlet extends HttpServlet {
 
 		if (session.getAttribute("tipologia") == null || (!session.getAttribute("tipologia").toString().equals("1")
 				&& !session.getAttribute("tipologia").toString().equals("3"))) {
-			System.out.println("qui");
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
