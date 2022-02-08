@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Set;
 
 import Bean.ArticoloBean;
 import Bean.FotoBean;
@@ -402,7 +403,8 @@ public class GestioneVendita {
 	}
 
 	public boolean cambiaStato(String IDArticolo, String stato) throws SQLException {
-		if (stato.equals("InVendita") && stato.equals("Rifiutato"))
+		final Set<String> states = Set.of("InVendita", "InElaborazione", "Rifiutato");
+		if (!states.contains(stato))
 			return false;
 
 		Connection connection = null;

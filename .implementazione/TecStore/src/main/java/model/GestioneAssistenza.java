@@ -2,6 +2,7 @@ package model;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Set;
 
 import Bean.ClienteBean;
 import Bean.MessaggioBean;
@@ -102,7 +103,7 @@ public class GestioneAssistenza {
 			preparedStatement.setString(2, tipologia);
 
 			ResultSet rs = preparedStatement.executeQuery();
-			
+
 			connection.commit();
 
 			if (rs.next())
@@ -125,7 +126,9 @@ public class GestioneAssistenza {
 	}
 
 	public boolean cambiaStato(String IDTicket, String stato) throws SQLException {
-		if (stato != "InElaborazione" && stato != "InAttesa" && stato != "Chiuso" && stato != "InAttesaCliente")
+
+		final Set<String> states = Set.of("InElaborazione", "InAttesa", "Chiuso", "InAttesaCliente");
+		if (!states.contains(stato))
 			return false;
 
 		Connection connection = null;
