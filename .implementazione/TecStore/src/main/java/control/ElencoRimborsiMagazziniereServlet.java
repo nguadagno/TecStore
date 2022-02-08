@@ -47,7 +47,7 @@ public class ElencoRimborsiMagazziniereServlet extends HttpServlet {
 
 		try {
 			ArrayList<OrdineBean> rimborsi = model.elencoRimborsi(Integer.parseInt(request.getParameter("limit")));
-			session.setAttribute("rimborsi", rimborsi);
+			session.setAttribute("elenco", rimborsi);
 			redirect = "/elencoRimborsi.jsp";
 		} catch (SQLException e) {
 			response.setStatus(500);

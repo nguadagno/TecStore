@@ -37,6 +37,8 @@ public class GestioneCarrello {
 			}
 
 			return carrello;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -46,6 +48,7 @@ public class GestioneCarrello {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return null;
 	}
 
 	public boolean aggiuntaArticolo(String CF, ArticoloBean articolo, int quantita) throws SQLException {

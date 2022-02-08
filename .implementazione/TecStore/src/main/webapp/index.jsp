@@ -32,10 +32,10 @@
 	<br>
 	<hr>
 	<br>
-	<a href="datiprova?q=1"><button>Inserimento dati di prova</button></a>
+	<a href="DatiProva?q=1"><button>Inserimento dati di prova</button></a>
 
 	<%
-	if (request.getSession().getAttribute("CF") == null) {
+	if (session.getAttribute("CF") == null) {
 	%>
 	<div align="right">
 		<p>
@@ -55,8 +55,8 @@
 	%>
 	<div align="right">
 		<p>
-			Benvenuto, <i> <%=((UtenteBean) request.getSession().getAttribute("utente")).getNome()%>
-				<%=((UtenteBean) request.getSession().getAttribute("utente")).getCognome()%>
+			Benvenuto, <i> <%=((UtenteBean) session.getAttribute("utente")).getNome()%>
+				<%=((UtenteBean) session.getAttribute("utente")).getCognome()%>
 				<BR>
 			</i> <a href="areaVenditori.jsp"><button>Area Venditori</button></a> <a
 				href="dettagliProfilo.jsp"><button>Dettagli profilo</button></a>

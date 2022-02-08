@@ -47,8 +47,8 @@ public class ElencoOrdiniMagazziniereServlet extends HttpServlet {
 
 		try {
 			ArrayList<OrdineBean> ordini = model.elencoOrdiniMagazziniere();
-			session.setAttribute("ordini", ordini);
-			redirect = "/elencoordini.jsp";
+			session.setAttribute("elenco", ordini);
+			redirect = "/elencoOrdiniMagazziniere.jsp";
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
