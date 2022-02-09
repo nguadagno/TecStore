@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="java.util.*, Bean.* " session="true"%>&euro;&euro;
+	pageEncoding="ISO-8859-1" import="java.util.*, Bean.* " session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +9,7 @@
 <body>
 	<div align="center">
 		<h3>Ricerca Vendita</h3>
-		<form action="ricercaVendita" method="post">
+		<form action="RicercaVendita" method="post">
 			<input type="text" name="nome" maxlength="35" required> <input
 				type="submit" value="Cerca">
 		</form>
