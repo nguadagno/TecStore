@@ -349,6 +349,45 @@ public class GestioneVendita {
 			preparedStatement.setString(1, CF);
 			preparedStatement.setString(2, "%" + nome + "%");
 			preparedStatement.setInt(3, limit);
+			System.out.println(preparedStatement);
+			rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				ArticoloBean articolo = new ArticoloBean(rs.getString("ID"), rs.getString("Nome"),
+						rs.getString("Descrizione"), rs.getString("IDVenditore"), rs.getInt("Quantita"),
+						rs.getFloat("Prezzo"), rs.getString("Stato"), rs.getString("IDCentralinista"),
+						rs.getDate("Data"), rs.getBoolean("Rimborsabile"));
+				result.add(articolo);
+			}
+
+			return result;
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+
+	public ArrayList<ArticoloBean> elencoVenditeTipologia(String tipologia, String nome, int limit)
+			throws SQLException {
+		ArrayList<ArticoloBean> result = new ArrayList<ArticoloBean>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		String searchArticoloQuery = "SELECT articolo.ID ,articolo.nome, articolo.descrizione, articolo.IDVenditore, articolo.quantita ,articolo.prezzo, articolo.stato ,articolo.IDCentralinista, articolo.data, articolo.rimborsabile FROM articolo, utente WHERE IDVenditore=utente.CF AND tipologia = ? AND articolo.nome LIKE ? LIMIT ?;";
+		try {
+
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+
+			preparedStatement = connection.prepareStatement(searchArticoloQuery);
+			preparedStatement.setString(1, tipologia);
+			preparedStatement.setString(2, "%" + nome + "%");
+			preparedStatement.setInt(3, limit);
+			System.out.println(preparedStatement);
 			rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
