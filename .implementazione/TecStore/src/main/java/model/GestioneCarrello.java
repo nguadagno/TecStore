@@ -20,7 +20,7 @@ public class GestioneCarrello {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM carrello, articolo WHERE IDArticolo = ID AND IDCliente =?;";
+		String searchTicketQuery = "SELECT articolo.ID,articolo.nome,articolo.descrizione,articolo.IDVenditore,carrello.quantita,articolo.prezzo,articolo.stato, articolo.idcentralinista,articolo.data, articolo.rimborsabile FROM carrello, articolo WHERE IDArticolo = ID AND IDCliente =?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
