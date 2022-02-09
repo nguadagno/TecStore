@@ -8,9 +8,15 @@
 </head>
 <body>
 	<%
-	UtenteBean a = (UtenteBean) session.getAttribute("utente");
-	//UtenteBean a = new UtenteBean("RSSMRA80A01H703F","Mario","Rossi","mariorossi@gmail.com","australopitecoccc","monza",3,"Salerno","SA",84127,5,"ciao");
-	if (a == null) {
+	//UtenteBean utente = (UtenteBean) session.getAttribute("utente");
+	int tipologia = -1;
+	if (session.getAttribute("tipologia") != null) {
+		tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
+	}
+
+	UtenteBean utente = new UtenteBean("RSSMRA80A01H703F", "Mario", "Rossi", "mariorossi@gmail.com", "australopitecoccc",
+			"monza", 3, "Salerno", "SA", 84127, 5, "ciao");
+	if (utente == null) {
 		return;
 	} else {
 	%><table>
@@ -18,44 +24,53 @@
 			<th>Nome</th>
 			<th>Cognome</th>
 			<th>Codice Fiscale</th>
+			<%
+			if (tipologia == 5) {
+			%>
 			<th>Tipologia</th>
+			<%
+			}
+			%>
 			<th>Citta</th>
 			<th>Email</th>
 			<th></th>
 		</tr>
-		<td><%=a.getNome()%></td>
-		<td><%=a.getCognome()%></td>
-		<td><%=a.getCF()%></td>
+		<td><%=utente.getNome()%></td>
+		<td><%=utente.getCognome()%></td>
+		<td><%=utente.getCF()%></td>
+		<%
+		if (tipologia == 5) {
+		%>
 		<td>
 			<%
-			if (a.getTipologia() == 1) {
+			if (utente.getTipologia() == 1) {
 			%>Cliente<%
 			}
 			%> <%
- if (a.getTipologia() == 2) {
+ if (utente.getTipologia() == 2) {
  %>Centralinista<%
  }
  %> <%
- if (a.getTipologia() == 3) {
+ if (utente.getTipologia() == 3) {
  %>Magazziniere<%
  }
  %> <%
- if (a.getTipologia() == 4) {
+ if (utente.getTipologia() == 4) {
  %>Amministratore Catalogo<%
  }
  %> <%
- if (a.getTipologia() == 5) {
+ if (utente.getTipologia() == 5) {
  %>Amministratore Personale<%
  }
  %>
 		</td>
-		<td><%=a.getCitta()%></td>
-		<td><%=a.getEmail()%></td>
+		<%
+		}
+		%>
+		<td><%=utente.getCitta()%></td>
+		<td><%=utente.getEmail()%></td>
 		<td><form action="modificaUtente.jsp" method="post">
 				<input type="submit" value="Modifica">
-				<%
-				session.setAttribute("utente", a);
-				%>
 			</form></td>
 	</table>
 	<%
