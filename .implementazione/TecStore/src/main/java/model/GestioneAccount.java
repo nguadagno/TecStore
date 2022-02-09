@@ -260,7 +260,7 @@ public class GestioneAccount {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM utente WHERE (nome LIKE ? OR cognome LIKE ? OR CF LIKE ?);";
+		String searchTicketQuery = "SELECT * FROM utente WHERE (nome LIKE ? OR cognome LIKE ? OR CF LIKE ?) AND tipologia != 1;";
 
 		try {
 			if (getTipologia(CF) == 5)
