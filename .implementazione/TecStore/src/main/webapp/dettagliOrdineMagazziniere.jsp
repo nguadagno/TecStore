@@ -10,6 +10,9 @@
 	<%
 	OrdineBean ordine = (OrdineBean) session.getAttribute("ordine");
 	ClienteBean cliente = (ClienteBean) session.getAttribute("cliente");
+	if (ordine == null || cliente == null) {
+		return;
+	}
 	%>
 
 
