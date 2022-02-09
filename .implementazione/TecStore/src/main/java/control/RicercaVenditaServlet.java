@@ -35,7 +35,7 @@ public class RicercaVenditaServlet extends HttpServlet {
 		RequestDispatcher dd;
 
 		if (session.getAttribute("tipologia") == null || (!session.getAttribute("tipologia").toString().equals("1")
-				&& !session.getAttribute("tipologia").toString().equals("5"))) {
+				&& !session.getAttribute("tipologia").toString().equals("4"))) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -46,8 +46,17 @@ public class RicercaVenditaServlet extends HttpServlet {
 
 		session.setAttribute("operazione", "ricercaArticolo");
 		try {
-			ArrayList<ArticoloBean> risultati = model.elencoVenditeCF(session.getAttribute("CF").toString(),
-					request.getParameter("nome"), Integer.parseInt(request.getParameter("limit")));
+
+			int limit = 10;
+			if (request.getAttribute("limit") != null)
+				limit = Integer.parseInt(request.getParameter("limit"));
+			ArrayList<ArticoloBean> risultati;
+			if (session.getAttribute("tipologia").toString().equals("1"))
+				risultati = model.elencoVenditeCF(session.getAttribute("CF").toString(), request.getParameter("nome"),
+						limit);
+			else
+				risultati = model.elencoVenditeTipologia(session.getAttribute("tipologia").toString(),
+						request.getParameter("nome"), limit);
 
 			ArrayList<FotoBean> foto = model.getFoto(risultati);
 
@@ -60,6 +69,7 @@ public class RicercaVenditaServlet extends HttpServlet {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
+			e.printStackTrace();
 		}
 
 		dd = request.getRequestDispatcher(redirect);
