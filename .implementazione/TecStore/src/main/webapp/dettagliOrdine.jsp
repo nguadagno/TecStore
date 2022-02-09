@@ -111,6 +111,7 @@ return;
 					CAP:</b> <%=cliente.getCAP()%> </label><br> <br> <br>
 			<hr>
 			<br>
+		</div>
 			<div>
 				<form action="RimborsoMagazziniere" method="post">
 					<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
@@ -128,6 +129,37 @@ return;
 	</div>
 	<%
 	}
+	}
+	else {
+	%>
+		<div>
+			<h4>
+				<b> Prezzo: </b>
+				<%=articolo.getPrezzo()%>&euro;
+
+			</h4>
+		</div>
+		<div>
+			<h4>
+				<b>Indirizzo di spedizione:</b>
+			</h4>
+			<label><b>Via:</b><%=cliente.getVia()%>, <b>N:</b> <%=cliente.getNumeroCivico()%>.</label><br>
+			<label><b>Citta:</b> <%=cliente.getCitta()%>, <%=cliente.getProvincia()%>,<b>
+					CAP:</b> <%=cliente.getCAP()%> </label><br> <br> <br>
+			<hr>
+			<br>
+		</div>
+			<div>
+				<form action="RimborsoCliente" method="post">
+					<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
+					<input type="submit" value="Richiedi rimborso">
+				</form>
+				<form action="AnnullamentoOrdine" method="post">
+					<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
+					 <input type="submit" value="Richiedi annullamento ordine">
+				</form>
+			</div>
+	<%
 	}
 	%>
 </body>

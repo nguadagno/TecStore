@@ -42,7 +42,7 @@ return;
 						name="quantita" required> <br> <br> <label><b>Prezzo</b></label>
 					<br> <input type="number" name="prezzo" required> <br>
 					<br> <label><b>Foto</b></label> <br> <input type="file"
-						name="foto" accept="image/png, image/jpeg">> <br> <br>
+						name="foto" accept="image/png, image/jpeg" multiple="multiple"> <br> <br>
 					<label><b>Rimborsabile</b></label> <br> <label><b>Si</b></label>
 					<input type="radio" name="rimborsabile" value="1"> <br>
 					<label><b>No</b></label> <input type="radio" name="rimborsabile"

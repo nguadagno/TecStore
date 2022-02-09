@@ -38,6 +38,15 @@ return;
 		</div>
 	</form>
 
+	<%
+	if (elenco == null) {
+	%>
+	<h3>Non ci sono Ticket aperti...</h3>
+	<h2>Puoi creare un ticket cliccando su "Nuovo Ticket"</h2>
+	<%
+	return;
+	}
+	%>
 	<table>
 		<tr>
 			<th>Codice Ticket</th>
@@ -45,16 +54,6 @@ return;
 			<th>Data ultimo messaggio</th>
 			<th></th>
 		</tr>
-		<%
-		if (elenco == null) {
-		%>
-		<h3>Non ci sono Ticket aperti...</h3>
-		<h2>Puoi creare un ticket cliccando su "Nuovo Ticket"</h2>
-		<%
-		return;
-		}
-		%>
-
 		<%
 		for (TicketBean ticket : elenco) {
 		%>
@@ -64,12 +63,11 @@ return;
 		</tr>
 		<div>
 			<form action="DettagliTicket" method="post">
-				<input type="hidden" value=<%=ticket.getIDTicket()%>><input
+				<input type="hidden" value=<%=ticket.getIDTicket()%><input
 					type="submit" value="Dettagli">
 
 			</form>
 		</div>
-
 		<%
 		}
 		%>

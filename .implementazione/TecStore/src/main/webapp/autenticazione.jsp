@@ -28,7 +28,7 @@
 				<input type="password" name="password">
 			</p>
 			<p>
-				<input type="submit">
+				<input type="submit" value="Accedi">
 			</p>
 		</form>
 		<a href="/passwordDimenticata.jsp">Password dimenticata?</a> <br>

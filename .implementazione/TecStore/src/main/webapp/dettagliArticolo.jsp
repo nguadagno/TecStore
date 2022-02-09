@@ -28,7 +28,6 @@ return;
 <title>Dettagli articolo</title>
 </head>
 <body>
-
 	<%
 	if (tipologia == 1) {
 	%>
@@ -45,83 +44,96 @@ return;
 	ArticoloBean risultato = (ArticoloBean) session.getAttribute("dettagliArticolo");
 	ArrayList<FotoBean> foto = (ArrayList<FotoBean>) session.getAttribute("fotoArticolo");
 
-	if (risultato == null || foto == null) {
+	<%
+	ArticoloBean risultato = (ArticoloBean) session.getAttribute("dettagliArticolo");
+
+	int tipologia = -1;
+	if (request.getParameter("tipologia") != null)
+		tipologia = Integer.parseInt(request.getParameter("tipologia").toString());
+
+	if (risultato == null) {
 	%>
 	<h3>Articolo non Trovato!</h3>
-	Fare click
-	<a href="ElencoVenditeCentralinista">qui</a> per tornare all'elenco
-	delle vendite.
 	<%
+	// TODO pulsante per tornare indietro
 	return;
 	}
 	%>
-	<div align="center">
-		<!--  TODO: foto -->
-		<div>
-			<h3>
-				Nome:
-				<%=risultato.getNome()%>
-			</h3>
-		</div>
-		<div>
-			<h3>
-				Prezzo:<%=risultato.getPrezzo()%>
-				&euro;
-			</h3>
-		</div>
-		<div align="center">
-			<h3>
-				Quantità disponibile:
-				<%=risultato.getQuantita()%>
-		</div>
-		<div>
-			<h3>Descrizione:</h3>
-		</div>
-		<div>
-			<h4>
-				<%=risultato.getDescrizione()%>
-			</h4>
-		</div>
+	<table>
+		<tr>
+			<th>Nome:</th>
+			<th>Prezzo:</th>
+			<th>Quantita:</th>
+			<th>Descizione:</th>
+			<th></th>
+		</tr>
 
-		<%
-		if (tipologia == 1) {
-		%>
-		<div align="Right">
-			<form action="AggiuntaAlCarrello" method="post">
-				<input type="submit" value="Aggiungi al Carrello"> <input
-					type="hidden" name="IDArticolo" value="<%=risultato.getID()%>">
-				<select name="quantita">
-					<option value="10">1</option>
-					<option value="20">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
-				</select>
-			</form>
-		</div>
-		<%
-		} else {
-		%>
-		<div align=center>
-			<form action="AutorizzazioneVendita" method=post>
-				<input type=hidden name="IDArticolo" value="<%=risultato.getID()%>">
-				<input type=radio id="InVendita" name="stato" value="InVendita">
-				<label for="Autorizzata">Autorizza</label> <BR> <input
-					type=radio id="Rifiutata" name="stato" value="Rifiutato" checked>
-				<label for="Rifiutato">Rifiuta</label> <BR>
+		<tr>
+			<td><%=risultato.getNome()%></td>
+			<td><%=risultato.getPrezzo()%></td>
+			<td><%=risultato.getQuantita()%></td>
+			<td><%=risultato.getDescrizione()%></td>
 
-				<button type=submit>Conferma</button>
-			</form>
-		</div>
-		<%
-		}
-		%>
-	</div>
+			<%
+			if (tipologia == 1) {
+				if ((session.getAttribute("CF").toString().equals(request.getParameter("IDVenditore")))) {
+			%>
+			<td>
+				<form action="modificaArticolo.jsp" method="post">
+					<input type="hidden" name="IDArticolo"
+						value="<%=risultato.getID()%>"> <input type="hidden"
+						name="nome" value="<%=risultato.getNome()%>"> <input
+						type="hidden" name="descrizione"
+						value="<%=risultato.getDescrizione()%>"> <input
+						type="hidden" name="IDVenditore"
+						value="<%=risultato.getIDVenditore()%>"> <input
+						type="hidden" name="quantita" value="<%=risultato.getQuantita()%>">
+					<input type="hidden" name="prezzo"
+						value="<%=risultato.getPrezzo()%>"> <input type="hidden"
+						name="rimborsabile" value="<%=risultato.isRimborsabile()%>">
+					<input type="submit" value="Modifica">
+				</form>
+			</td>
 
+
+			<%
+			} else {
+			%>
+			<td>
+				<form action="AggiuntaAlCarrello" method="post">
+					<input type="submit" value="Aggiungi al Carrello"> <input
+						type="hidden" name="IDArticolo" value="<%=risultato.getID()%>">
+					<select name="quantita">
+						<option value="10">1</option>
+						<option value="20">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select>
+				</form>
+			</td>
+			<%
+			}
+			}
+			if (tipologia == 2) {
+			%>
+			<td>
+				<form action="AutorizzazioneVendita" method="post">
+					<label><b>Conferma Vendita</b></label> <input type="radio"
+						name="Stato" value="InVendita"><br> <label><b>Rifiuta
+							Vendita</b></label> <input type="radio" name="Stato" value="Rifiutato">
+					<br> <br> <input type="submit" value="Conferma">
+				</form>
+			</td>
+			<%
+			}
+			%>
+		</tr>
+	</table>
 </body>
 </html>
