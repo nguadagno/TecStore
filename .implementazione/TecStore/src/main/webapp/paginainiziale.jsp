@@ -61,7 +61,7 @@ return;
 		} else if (tipologia == 4) { // amministratore catalogo
 		%>
 		<form action="RicercaVendita" method="post">
-			<input type="text" name="testo" placeholder="Ricerca vendite...">
+			<input type="text" name="nome" placeholder="Ricerca vendite...">
 			<input type="submit">
 		</form>
 
