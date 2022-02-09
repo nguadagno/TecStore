@@ -7,15 +7,12 @@
 <meta charset="ISO-8859-1">
 <%
 int tipologia = -1;
-if (session.getAttribute("tipologia") == null
-		|| session.getAttribute("tipologia").toString().isEmpty()) {
+if (session.getAttribute("tipologia") == null || session.getAttribute("tipologia").toString().isEmpty()) {
 %>
 <meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
 <%
 return;
 }
-
-tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
 
 if ((tipologia != 1 && tipologia != 2 && tipologia != 4) || session.getAttribute("dettagliArticolo") == null
 		|| session.getAttribute("fotoArticolo") == null) {
@@ -28,6 +25,7 @@ return;
 <title>Dettagli articolo</title>
 </head>
 <body>
+
 	<%
 	if (tipologia == 1) {
 	%>
@@ -43,13 +41,6 @@ return;
 
 	ArticoloBean risultato = (ArticoloBean) session.getAttribute("dettagliArticolo");
 	ArrayList<FotoBean> foto = (ArrayList<FotoBean>) session.getAttribute("fotoArticolo");
-
-	<%
-	ArticoloBean risultato = (ArticoloBean) session.getAttribute("dettagliArticolo");
-
-	int tipologia = -1;
-	if (request.getParameter("tipologia") != null)
-		tipologia = Integer.parseInt(request.getParameter("tipologia").toString());
 
 	if (risultato == null) {
 	%>
@@ -119,8 +110,7 @@ return;
 			</td>
 			<%
 			}
-			}
-			if (tipologia == 2) {
+			} else if (tipologia == 2) {
 			%>
 			<td>
 				<form action="AutorizzazioneVendita" method="post">

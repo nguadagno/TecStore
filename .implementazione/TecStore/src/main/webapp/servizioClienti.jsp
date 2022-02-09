@@ -63,7 +63,7 @@ return;
 		</tr>
 		<div>
 			<form action="DettagliTicket" method="post">
-				<input type="hidden" value=<%=ticket.getIDTicket()%><input
+				<input type="hidden" value=<%=ticket.getIDTicket()%>><input
 					type="submit" value="Dettagli">
 
 			</form>

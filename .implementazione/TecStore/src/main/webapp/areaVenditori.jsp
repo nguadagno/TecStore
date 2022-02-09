@@ -47,11 +47,6 @@ return;
 	</form>
 	</div>
 	<div>
-		<%
-		ArrayList<ArticoloBean> elencoVendite = (ArrayList<ArticoloBean>) session.getAttribute("risultati");
-		ArrayList<FotoBean> foto = (ArrayList<FotoBean>) session.getAttribute("foto");
-		%>
-
 	<%
 	if (elencoVendite == null || foto == null) {
 		return;

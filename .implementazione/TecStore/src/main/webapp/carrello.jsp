@@ -62,7 +62,7 @@ return;
 			</td>
 			<td>
 				<form action="aggiornamentoQuantitaCarrello" name="aggiornamento" method="post">
-					<input type="number" min=1 max=10 onchange="javascript:document.aggiornamento.submit();" value="<%a.getQuantita()%>">
+					<input type="number" min=1 max=10 onchange="javascript:document.aggiornamento.submit();" value="<%=a.getQuantita()%>">
 				</form>
 			</td>
 			<%
