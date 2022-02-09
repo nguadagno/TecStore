@@ -52,6 +52,12 @@ public class datiprovaservlet extends HttpServlet {
 			g2.inserimentoNuovoArticolo("art3", "descr3", "CF1", 20, (float) 99.50, false);
 			g2.inserimentoNuovoArticolo("art4", "descr4", "CF1", 40, (float) 99.50, false);
 
+
+			g2.inserimentoNuovoArticolo("art0", "descr1", "CF4", 10, (float) 15.50, true);
+			g2.inserimentoNuovoArticolo("art2we", "descr2", "CF4", 15, (float) 30.50, true);
+			g2.inserimentoNuovoArticolo("art3q", "descr3", "CF4", 20, (float) 99.50, false);
+			g2.inserimentoNuovoArticolo("art4e", "descr4", "CF4", 40, (float) 99.50, false);
+
 			ArticoloBean a1 = g2.ricercaArticolo("art1", 10).get(0);
 			ArticoloBean a2 = g2.ricercaArticolo("art2", 10).get(0);
 			ArticoloBean a3 = g2.ricercaArticolo("art3", 10).get(0);
