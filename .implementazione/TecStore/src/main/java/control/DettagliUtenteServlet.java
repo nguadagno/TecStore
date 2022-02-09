@@ -40,7 +40,7 @@ public class DettagliUtenteServlet extends HttpServlet {
 			dd.forward(request, response);
 			return;
 		}
-
+		// 
 		session.setAttribute("operazione", "dettagli");
 		try {
 			session.setAttribute("utente",
