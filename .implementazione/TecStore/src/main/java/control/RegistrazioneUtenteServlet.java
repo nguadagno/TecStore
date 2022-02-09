@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/registrazione")
+@WebServlet("/Registrazione")
 public class RegistrazioneUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -34,9 +34,9 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (session.getAttribute("tipologia").equals("1") && session.getAttribute("tipologia").equals("2")
-				&& session.getAttribute("tipologia").equals("3")
-				&& session.getAttribute("tipologia").equals("4")) {
+		if (session.getAttribute("tipologia").toString().equals("1") && session.getAttribute("tipologia").toString().equals("2")
+				&& session.getAttribute("tipologia").toString().equals("3")
+				&& session.getAttribute("tipologia").toString().equals("4")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -45,7 +45,7 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 			return;
 		}
 
-		String password = session.getAttribute("tipologia").equals("1") ? request.getParameter("password")
+		String password = session.getAttribute("tipologia").toString().equals("1") ? request.getParameter("password")
 				: model.generatePassword(15);
 
 		UtenteBean utente = new UtenteBean(request.getParameter("CF"), request.getParameter("Nome"),

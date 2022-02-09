@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Successo</title>
+<title>Errore</title>
 </head>
 <body>
 	<div align="center">
 		<!-- TODO redirect a pagina corretta e messaggio corretto in base all'operazione -->
 		<p>
-		<h3>Operazione avvenuta con successo!</h3>
+		<h3>Qualcosa è andato storto durante l'operazione scelta.</h3>
 		<p>
 			<a href="index.jsp"><button>Continua</button></a>
 		</p>

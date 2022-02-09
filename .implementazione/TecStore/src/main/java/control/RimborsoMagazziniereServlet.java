@@ -32,7 +32,7 @@ public class RimborsoMagazziniereServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologia").equals("3")) {
+		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().equals("3")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -44,8 +44,7 @@ public class RimborsoMagazziniereServlet extends HttpServlet {
 		session.setAttribute("operazione", "confermaRimborso");
 
 		try {
-
-			if (model.cambiaStato(request.getParameter("IDOrdine"), request.getParameter("Stato")))
+			if (model.cambiaStato(request.getParameter("IDOrdine"), request.getParameter("stato")))
 				redirect = "/successo.jsp";
 			else
 				redirect = "/errore.jsp";

@@ -32,7 +32,7 @@ public class AutorizzazioneVenditaServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologia").equals("2")) {
+		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().equals("2")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -44,13 +44,13 @@ public class AutorizzazioneVenditaServlet extends HttpServlet {
 		session.setAttribute("operazione", "autorizzazioneVendita");
 
 		try {
-
-			if (model.cambiaStato(request.getParameter("IDOrdine"), request.getParameter("Stato")))
+			if (model.cambiaStato(request.getParameter("IDArticolo"), request.getParameter("stato")))
 				redirect = "/successo.jsp";
 			else
 				redirect = "/errore.jsp";
 
 		} catch (SQLException e) {
+			e.printStackTrace();
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";

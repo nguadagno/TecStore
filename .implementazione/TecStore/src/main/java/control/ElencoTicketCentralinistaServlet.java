@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/elencoTicketCentralinista")
+@WebServlet("/ElencoTicketCentralinista")
 public class ElencoTicketCentralinistaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,7 +33,7 @@ public class ElencoTicketCentralinistaServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().equals("2")) {
+		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().toString().equals("2")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -50,7 +50,7 @@ public class ElencoTicketCentralinistaServlet extends HttpServlet {
 				limit = Integer.parseInt(request.getParameter("limit"));
 			ArrayList<TicketBean> elencoTicket = model.elencoTicketCentralinista(limit);
 			session.setAttribute("elencoTicket", elencoTicket);
-			redirect = "/gestioneassistenza.jsp";
+			redirect = "/gestioneAssistenza.jsp";
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");

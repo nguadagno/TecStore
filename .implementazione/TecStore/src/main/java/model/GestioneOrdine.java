@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Set;
 
 import Bean.ArticoloBean;
 import Bean.OrdineBean;
@@ -19,12 +20,13 @@ public class GestioneOrdine {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String creazioneOrdineQuery = "INSERT INTO ordine (IDCLIENTE, IDARTICOLO, QUANTITA) VALUES (?,?,?);";
+		String eliminazioneCarrelloQuery = "DELETE FROM carrello WHERE IDCliente = ?;";
 
 		try {
 			if (!GestioneAccount.exists(CF))
 				return false;
 
-			ArrayList<ArticoloBean> carrello = GestioneCarrello.getCarrello(CF);
+			ArrayList<ArticoloBean> carrello = GestioneCarrello.GetCarrello(CF);
 
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			for (ArticoloBean e : carrello) {
@@ -36,8 +38,15 @@ public class GestioneOrdine {
 				preparedStatement.executeUpdate();
 			}
 
+			preparedStatement = connection.prepareStatement(eliminazioneCarrelloQuery);
+			preparedStatement.setString(1, CF);
+
+			preparedStatement.execute();
+
 			connection.commit();
 			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -47,6 +56,7 @@ public class GestioneOrdine {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return false;
 	}
 
 	public ArrayList<OrdineBean> elencoOrdiniMagazziniere() throws SQLException {
@@ -71,6 +81,8 @@ public class GestioneOrdine {
 			}
 
 			return ordersList;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -80,6 +92,7 @@ public class GestioneOrdine {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return null;
 	}
 
 	public ArrayList<OrdineBean> ricercaOrdiniCliente(UtenteBean utente, String nome, int limit) throws SQLException {
@@ -93,13 +106,13 @@ public class GestioneOrdine {
 
 		ArrayList<OrdineBean> ordersList = new ArrayList<OrdineBean>();
 
-		String elencoOrdiniClienteQuery = "SELECT * FROM ordine WHERE IDCliente = ? AND nome LIKE `%?%%` LIMIT ?;";
+		String elencoOrdiniClienteQuery = "SELECT ordine.id as ID, idcliente, idarticolo, ordine.quantita, ordine.data, ordine.stato, codicetracciamento, nome FROM ordine, articolo WHERE idcliente = ? AND articolo.nome LIKE ? AND articolo.id = ordine.idarticolo LIMIT ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(elencoOrdiniClienteQuery);
 			preparedStatement.setString(1, CF);
-			preparedStatement.setString(2, nome);
+			preparedStatement.setString(2, "%" + nome + "%");
 			preparedStatement.setInt(3, limit);
 
 			rs = preparedStatement.executeQuery();
@@ -145,9 +158,9 @@ public class GestioneOrdine {
 				return new OrdineBean(rs.getString("ID"), rs.getString("IDCliente"), rs.getString("IDArticolo"),
 						rs.getInt("quantita"), rs.getDate("data"), rs.getString("stato"),
 						rs.getString("codiceTracciamento"));
-
 			}
-			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -157,6 +170,7 @@ public class GestioneOrdine {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return null;
 	}
 
 	public OrdineBean dettagliOrdineByID(String IDOrdine) throws SQLException {
@@ -191,31 +205,25 @@ public class GestioneOrdine {
 	}
 
 	public boolean cambiaStato(String ID, String stato) throws SQLException {
-		if (stato != "Spedito" && stato != "Rimborsato" && stato != "InAttesaDiRimborso" && stato != "Annullato")
+		final Set<String> states = Set.of("Spedito", "InElaborazione", "Rimborsato", "RimborsoRifiutato", "InAttesaRimborso", "Annullato");
+		if (!states.contains(stato))
 			return false;
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String cambiaStatoQuery = "UPDATE ordine SET stato = ? WHERE ID = ?;";
-		String getStatoQuery = "SELECT stato FROM ordine where ID = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("magazziniere", "magazziniere");
-			preparedStatement = connection.prepareStatement(getStatoQuery);
-			preparedStatement.setString(1, ID);
-			ResultSet rs = preparedStatement.executeQuery();
-			if (rs.next()) {
-				String statoOld = rs.getString("stato");
-				if (statoOld == "InElaborazione")
-					return false;
-			}
 
 			preparedStatement = connection.prepareStatement(cambiaStatoQuery);
 			preparedStatement.setString(1, stato);
 			preparedStatement.setString(2, ID);
-			preparedStatement.execute();
+			preparedStatement.executeUpdate();
 			connection.commit();
 			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -225,10 +233,11 @@ public class GestioneOrdine {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return false;
 	}
 
 	public boolean setCodiceTracciamento(String IDOrdine, String codiceTracking) throws SQLException {
-		if (codiceTracking.isEmpty())
+		if (codiceTracking == null || codiceTracking.isEmpty())
 			return false;
 
 		Connection connection = null;
@@ -238,8 +247,8 @@ public class GestioneOrdine {
 		try {
 			connection = DriverManagerConnectionPool.getConnection("magazziniere", "magazziniere");
 			preparedStatement = connection.prepareStatement(setTrackingQuery);
-			preparedStatement.setString(1, IDOrdine);
-			preparedStatement.setString(2, codiceTracking);
+			preparedStatement.setString(1, codiceTracking);
+			preparedStatement.setString(2, IDOrdine);
 			preparedStatement.execute();
 			connection.commit();
 			return true;
@@ -261,7 +270,7 @@ public class GestioneOrdine {
 
 		ArrayList<OrdineBean> ordersList = new ArrayList<OrdineBean>();
 
-		String elencoOrdiniClienteQuery = "SELECT * FROM ordine WHERE stato = 'InAttesaRimborso' LIMIT = ?;";
+		String elencoOrdiniClienteQuery = "SELECT * FROM ordine WHERE stato = 'InAttesaRimborso' LIMIT ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("magazziniere", "magazziniere");
@@ -277,6 +286,8 @@ public class GestioneOrdine {
 			}
 
 			return ordersList;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -286,5 +297,6 @@ public class GestioneOrdine {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return null;
 	}
 }

@@ -5,6 +5,25 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<%
+int tipologia = -1;
+if (session.getAttribute("tipologia") == null
+		|| session.getAttribute("tipologia").toString().isEmpty()) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+
+tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
+
+if (tipologia != 1) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+%>
 <title>Servizio Clienti</title>
 </head>
 <body>
@@ -43,8 +62,8 @@
 			<td><%=ticket.getDataUltimoMessaggio()%></td>
 		</tr>
 		<div>
-			<form action="dettagliTicket" method="post">
-				<input type="hidden" value=<%=ticket.getIDTicket()%>><input
+			<form action="DettagliTicket" method="post">
+				<input type="hidden" value=<%=ticket.getIDTicket()%><input
 					type="submit" value="Dettagli">
 
 			</form>

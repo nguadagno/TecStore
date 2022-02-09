@@ -4,16 +4,35 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<%
+int tipologia = -1;
+if (session.getAttribute("tipologia") == null
+		|| session.getAttribute("tipologia").toString().isEmpty()) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+
+tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
+
+if (tipologia !=1 && tipologia != 4) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+%>
 <title>Negozio</title>
 </head>
 <body>
 
 	<div align="center">
 		<h3>Ricerca Articolo</h3>
-		<form action="ricercaarticolo" method="post">
-			<input type="text" name="testo" maxlength="35"
-				placeholder="Titolo..." required> <input type="submit"
-				value="Cerca">
+		<form action="ricercaArticolo" method="post">
+			<input id="markBar" type="text" name="testo" maxlength="35"
+				id="testo" placeholder="Titolo..." required> <input
+				type="submit" value="Cerca">
 		</form>
 	</div>
 	<br>

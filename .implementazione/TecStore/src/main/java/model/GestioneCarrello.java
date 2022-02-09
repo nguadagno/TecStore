@@ -11,11 +11,11 @@ import Bean.UtenteBean;
 
 public class GestioneCarrello {
 
-	public ArrayList<ArticoloBean> getCarrello(UtenteBean u) throws SQLException {
-		return getCarrello(u.getCF());
+	public ArrayList<ArticoloBean> GetCarrello(UtenteBean u) throws SQLException {
+		return GetCarrello(u.getCF());
 	}
 
-	public static ArrayList<ArticoloBean> getCarrello(String CF) throws SQLException {
+	public static ArrayList<ArticoloBean> GetCarrello(String CF) throws SQLException {
 		ArrayList<ArticoloBean> carrello = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -37,6 +37,8 @@ public class GestioneCarrello {
 			}
 
 			return carrello;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -46,6 +48,7 @@ public class GestioneCarrello {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return null;
 	}
 
 	public boolean aggiuntaArticolo(String CF, ArticoloBean articolo, int quantita) throws SQLException {

@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/rispostaTicket")
+@WebServlet("/RispostaTicket")
 public class RispostaTicketServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -32,8 +32,8 @@ public class RispostaTicketServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologia").equals("1")
-				&& !session.getAttribute("tipologia").equals("2")) {
+		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().equals("1")
+				&& !session.getAttribute("tipologia").toString().equals("2")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -45,15 +45,21 @@ public class RispostaTicketServlet extends HttpServlet {
 		session.setAttribute("operazione", "rispostaTicket");
 
 		try {
+			redirect = "/errore.jsp";
 			if (model.rispostaTicket(request.getParameter("IDTicket"), session.getAttribute("CF").toString(),
-					request.getParameter("messaggio")))
-				redirect = "/successo.jsp";
-			else
-				redirect = "/errore.jsp";
+					request.getParameter("messaggio"))) {
+				if (session.getAttribute("tipologia").toString().equals("2")
+						&& model.cambiaStato(request.getParameter("IDTicket"), "InAttesaCliente"))
+					redirect = "/successo.jsp";
+				if (session.getAttribute("tipologia").toString().equals("1")
+						&& model.cambiaStato(request.getParameter("IDTicket"), "InAttesa"))
+					redirect = "/successo.jsp";
+			}
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
+			e.printStackTrace();
 		}
 
 		dd = request.getRequestDispatcher(redirect);

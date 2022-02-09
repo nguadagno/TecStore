@@ -7,15 +7,15 @@
 <meta charset="ISO-8859-1">
 <%
 int tipologia = -1;
-if (request.getSession().getAttribute("tipologia") == null
-		|| request.getSession().getAttribute("tipologia").toString().isEmpty()) {
+if (session.getAttribute("tipologia") == null
+		|| session.getAttribute("tipologia").toString().isEmpty()) {
 %>
 <meta http-equiv="refresh" content="0; URL='index.jsp'" />
 <%
 return;
 }
 
-tipologia = Integer.parseInt(request.getSession().getAttribute("tipologia").toString());
+tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
 
 if (tipologia < 2 || tipologia > 5) {
 %>
@@ -37,10 +37,10 @@ return;
 		<%
 		if (tipologia == 2) { // centralinista
 		%>
-		<form action="elencoTicketCentralinista" method="post">
+		<form action="ElencoTicketCentralinista" method="post">
 			<input type="submit" value="Gestione Ticket">
 		</form>
-		<form action="elencoVenditeCentralinista" method="post">
+		<form action="ElencoVenditeCentralinista" method="post">
 			<input type="submit" value="Gestione Vendite">
 		</form>
 
@@ -65,7 +65,7 @@ return;
 			<input type="submit">
 		</form>
 
-		<form action="nuovavendita.jsp" method="post">
+		<form action="nuovaVendita.jsp" method="post">
 			<input type="submit" value="Nuova Vendita">
 		</form>
 

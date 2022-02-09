@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/VisualizzaElencoOrdiniMagazziniere")
+@WebServlet("/ElencoOrdiniMagazziniere")
 
 public class ElencoOrdiniMagazziniereServlet extends HttpServlet {
 
@@ -34,7 +34,7 @@ public class ElencoOrdiniMagazziniereServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologia").equals("3")) {
+		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().equals("3")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -47,8 +47,8 @@ public class ElencoOrdiniMagazziniereServlet extends HttpServlet {
 
 		try {
 			ArrayList<OrdineBean> ordini = model.elencoOrdiniMagazziniere();
-			session.setAttribute("ordini", ordini);
-			redirect = "/elencoordini.jsp";
+			session.setAttribute("elenco", ordini);
+			redirect = "/elencoOrdiniMagazziniere.jsp";
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");

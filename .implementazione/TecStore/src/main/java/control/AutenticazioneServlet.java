@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/autenticazione")
+@WebServlet("/Autenticazione")
 public class AutenticazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

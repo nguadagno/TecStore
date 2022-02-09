@@ -4,7 +4,26 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Area Venditore</title>
+<%
+int tipologia = -1;
+if (session.getAttribute("tipologia") == null
+		|| session.getAttribute("tipologia").toString().isEmpty()) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+
+tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
+
+if (tipologia != 1) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+%>
+<title>Area Venditori</title>
 </head>
 <body>
 	<%
@@ -13,7 +32,7 @@
 	%>
 
 	<div align="center">
-		<form action="ricercaVendita" method="post">
+		<form action="RicercaVendita" method="post">
 			<input type="text" name="nome" maxlength="35" id="testo"
 				placeholder="Cerca vendita..." required> <input
 				type="submit" value="Cerca">
@@ -23,10 +42,16 @@
 	<br>
 	<hr>
 	<div>
-		<form action="nuovaVendita.jsp" method="post">
-			<input type="submit" value="Nuovo Articolo">
-		</form>
+	<form action="nuovaVendita.jsp" method="post">
+		<input type="submit" value="Nuovo Articolo">
+	</form>
 	</div>
+	<div>
+		<%
+		ArrayList<ArticoloBean> elencoVendite = (ArrayList<ArticoloBean>) session.getAttribute("risultati");
+		ArrayList<FotoBean> foto = (ArrayList<FotoBean>) session.getAttribute("foto");
+		%>
+
 	<%
 	if (elencoVendite == null || foto == null) {
 		return;

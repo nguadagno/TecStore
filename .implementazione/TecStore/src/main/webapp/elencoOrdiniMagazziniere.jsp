@@ -23,12 +23,12 @@ if (tipologia != 3) {
 return;
 }
 %>
-<title>Elenco Rimborsi</title>
+<title>Elenco Ordini</title>
 </head>
 <body>
 <body>
 	<div align=center>
-		<form action="ElencoRimborsiMagazziniere" method="post">
+		<form action="ElencoOrdiniMagazziniere" method="post">
 			<select name="limit">
 				<option value="10">10</option>
 				<option value="20">20</option>
@@ -40,7 +40,7 @@ return;
 
 		if (elenco == null || elenco.size() == 0) {
 		%>
-		<h3>Nessun rimborso in attesa di conferma</h3>
+		<h3>Nessun ordine in attesa di spedizione</h3>
 		<%
 		return;
 		} else {
@@ -57,7 +57,7 @@ return;
 				<td><%=a.getData().toString()%></td>
 				<td>
 					<form action="DettagliOrdine" method="post">
-						<input type="hidden" name="operazione" value="rimborso">
+						<input type="hidden" name="operazione" value="spedizione">
 						<input type="hidden" name="IDOrdine" value="<%=a.getID()%>">
 						<input type="submit" value="Dettagli">
 					</form>

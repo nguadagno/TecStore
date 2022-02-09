@@ -5,6 +5,25 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Modifica Articolo</title>
+<%
+int tipologia = -1;
+if (session.getAttribute("tipologia") == null
+		|| session.getAttribute("tipologia").toString().isEmpty()) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+
+tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
+
+if (tipologia != 1 && tipologia != 4) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+%>
 </head>
 <body>
 	<div align="center">
@@ -13,7 +32,7 @@
 			<br> <br>
 		</div>
 		<div>
-			<form action="modificaArtiolo" method="post">
+			<form action="ModificaArticolo" method="post">
 				<div>
 					<input type="hidden" name="IDArticolo"
 						value="<%=request.getParameter("IDArticolo")%>"> <label><b>Nome</b></label>

@@ -7,15 +7,15 @@
 <meta charset="ISO-8859-1">
 <%
 int tipologia = -1;
-if (request.getSession().getAttribute("tipologia") == null
-		|| request.getSession().getAttribute("tipologia").toString().isEmpty()) {
+if (session.getAttribute("tipologia") == null
+		|| session.getAttribute("tipologia").toString().isEmpty()) {
 %>
 <meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
 <%
 return;
 }
 
-tipologia = Integer.parseInt(request.getSession().getAttribute("tipologia").toString());
+tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
 
 if (tipologia != 2) {
 %>
@@ -29,7 +29,7 @@ return;
 </head>
 <body>
 	<div align="center">
-		<form action="elencoTicketCentralinista" type="post">
+		<form action="ElencoTicketCentralinista" method="post">
 			<select name="limit">
 				<option value="10">10</option>
 				<option value="20">20</option>
@@ -60,9 +60,10 @@ return;
 			<tr>
 				<td><%=ticket.getTipologia()%></td>
 				<td><%=ticket.getDataUltimoMessaggio()%></td>
-				<td><form action="dettagliTicket" method="post">
-						<input type="hidden" name="IDTicket" value=<%=ticket.getIDTicket()%>><input
-							type="submit" value="Dettagli">
+				<td><form action="DettagliTicket" method="post">
+						<input type="hidden" name="IDTicket"
+							value=<%=ticket.getIDTicket()%>><input type="submit"
+							value="Dettagli">
 					</form></td>
 			</tr>
 			<%

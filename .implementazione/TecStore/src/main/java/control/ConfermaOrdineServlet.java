@@ -32,15 +32,19 @@ public class ConfermaOrdineServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologia").equals("3")) {
+		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().equals("3")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
-			response.sendRedirect(request.getContextPath() + "/errore.jsp");
+			response.setStatus(403);
+			redirect = "/errore.jsp";
+			dd = request.getRequestDispatcher(redirect);
+			dd.forward(request, response);
+			return;
 		}
 
 		session.setAttribute("operazione", "ConfermaOrdine");
 
 		try {
-			if (model.cambiaStato(request.getParameter("IDOrdine"), request.getParameter("Stato"))
+			if (model.cambiaStato(request.getParameter("IDOrdine"), request.getParameter("stato"))
 					&& model.setCodiceTracciamento(request.getParameter("IDOrdine"), request.getParameter("Tracking")))
 				redirect = "/successo.jsp";
 			else
@@ -50,6 +54,7 @@ public class ConfermaOrdineServlet extends HttpServlet {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
+			e.printStackTrace();
 		}
 
 		dd = request.getRequestDispatcher(redirect);

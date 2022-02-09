@@ -38,7 +38,7 @@ public class GetCarrelloServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologia").equals("1")) {
+		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().equals("1")) {
 			session.setAttribute("errore", "ErroreRichiestaCarrello");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -49,10 +49,10 @@ public class GetCarrelloServlet extends HttpServlet {
 
 		UtenteBean user = (UtenteBean) session.getAttribute("user");
 
-		session.setAttribute("operazione", "getCarrello");
+		session.setAttribute("operazione", "GetCarrello");
 
 		try {
-			ArrayList<ArticoloBean> carrello = model.getCarrello(user);
+			ArrayList<ArticoloBean> carrello = model.GetCarrello(user);
 			ArrayList<FotoBean> foto = model1.getFoto(carrello);
 
 			session.setAttribute("carrello", carrello);

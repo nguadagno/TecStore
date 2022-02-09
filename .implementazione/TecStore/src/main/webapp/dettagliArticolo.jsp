@@ -5,32 +5,57 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Negozio</title>
+<%
+int tipologia = -1;
+if (session.getAttribute("tipologia") == null
+		|| session.getAttribute("tipologia").toString().isEmpty()) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+
+tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
+
+if ((tipologia != 1 && tipologia != 2 && tipologia != 4) || session.getAttribute("dettagliArticolo") == null
+		|| session.getAttribute("fotoArticolo") == null) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+%>
+<title>Dettagli articolo</title>
 </head>
 <body>
-
+	<%
+	if (tipologia == 1) {
+	%>
 	<div align="center">
-		<form action="ricercaArticolo" method="post">
+		<form action="RicercaArticolo" method="post">
 			<input type="text" name="testo" maxlength="35" id="testo"
 				placeholder="Titolo..." required> <input type="submit"
 				value="Cerca">
 		</form>
 	</div>
-	<br>
-	<br>
-	<hr>
+	<%
+	}
 
-
+	ArticoloBean risultato = (ArticoloBean) session.getAttribute("dettagliArticolo");
+	ArrayList<FotoBean> foto = (ArrayList<FotoBean>) session.getAttribute("fotoArticolo");
 
 	<%
 	ArticoloBean risultato = (ArticoloBean) session.getAttribute("dettagliArticolo");
 
-	//int tipologia= Integer.parseInt(session.getAttribute("tipologia").toString());
-	int tipologia = Integer.parseInt(request.getParameter("tipologia"));
+	int tipologia = -1;
+	if (request.getParameter("tipologia") != null)
+		tipologia = Integer.parseInt(request.getParameter("tipologia").toString());
+
 	if (risultato == null) {
 	%>
 	<h3>Articolo non Trovato!</h3>
 	<%
+	// TODO pulsante per tornare indietro
 	return;
 	}
 	%>
@@ -110,6 +135,5 @@
 			%>
 		</tr>
 	</table>
-
 </body>
 </html>

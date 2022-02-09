@@ -14,17 +14,16 @@
 </nav>
 
 <body>
+	<%
+	int tipologia = -1;
+	if (session.getAttribute("tipologia") != null)
+		tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
+	%>
 	<div align="center">
-
 		<h1>Registrazione</h1>
 
 		<h3>Compila i campi per continuare</h3>
 		<form action="registrazioneUtente" method="post">
-			<br> <br>
-			<%
-			int tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
-			%>
-			
 			<h3>
 				<i>Dati Autenticazione</i>
 			</h3>
@@ -35,7 +34,6 @@
 			<h3>
 				<i>Dati Anagrafici</i>
 			</h3>
-
 			<label for="codicefiscale">Codice Fiscale</label><br> <input
 				type="text" name="CF" id="codicefiscale" maxlength="16" required>
 			<br> <br> <label for="nome">Nome</label><br> <input
@@ -60,15 +58,25 @@
 			<label for="cap">CAP</label><br> <input type="number" name="CAP"
 				maxlength="5" id="cap" required>
 			<p>
-			<% %>
-			<h3>
-				<i>Carta di Credito</i>
+			<%
+			if(tipologia == 5) {
+			%>
+				<i>Tipologia dipendente</i>
 			</h3>
-			<h6>Avrai la possibilità di inserire la carta di credito anche
-				in un secondo momento</h6>
+			
+			 <label for="tipologia">Scegli una tipologia</label>
+				<select id="tipologia" name="tipologia">
+				  <option value="2">Centralinista</option>
+				  <option value="3">Magazziniere</option>
+				  <option value="4">Amministratore Catalogo</option>
+				  <option value="5">Amministratore Personale</option>
+			</select> 	
 
-			<label for="email">Numero Carta</label><br> <input type="text"
-				name="CartaDiCredito"> <br> <br>
+			
+			<%
+			}
+			%>
+			<h3>
 	</div>
 	<div align="center">
 		<br> <input class="final" id="conferma" type="submit"

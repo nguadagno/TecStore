@@ -5,6 +5,25 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<%
+int tipologia = -1;
+if (session.getAttribute("tipologia") == null
+		|| session.getAttribute("tipologia").toString().isEmpty()) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+
+tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
+
+if (tipologia != 1) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+%>
 <title>Carrello</title>
 </head>
 <body>
@@ -29,7 +48,7 @@
 
 		<%
 		for (ArticoloBean a : carrello) {
-			totale = +a.getPrezzo();
+			totale += a.getPrezzo();
 		%>
 		<tr>
 			<td><%=a.getNome()%></td>
@@ -41,13 +60,18 @@
 
 				</form>
 			</td>
+			<td>
+				<form action="aggiornamentoQuantitaCarrello" name="aggiornamento" method="post">
+					<input type="number" min=1 max=10 onchange="javascript:document.aggiornamento.submit();" value="<%a.getQuantita()%>">
+				</form>
+			</td>
 			<%
 			}
 			}
 			%>
 			<td><h6>
-					Totale:
-					<%=totale%></h6></td>
+			Totale:
+			<%=totale%></h6></td>
 		</tr>
 	</table>
 	<br>

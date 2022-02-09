@@ -2,6 +2,7 @@ package model;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Set;
 
 import Bean.ClienteBean;
 import Bean.MessaggioBean;
@@ -18,7 +19,7 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM ticket WHERE IDCliente = ? LIMIT = ?;";
+		String searchTicketQuery = "SELECT * FROM ticket WHERE IDCliente = ? LIMIT ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -84,7 +85,7 @@ public class GestioneAssistenza {
 		PreparedStatement preparedStatement = null;
 
 		String insertTicketQuery = "INSERT INTO ticket (IDCliente, Tipologia, Stato) VALUES (?,?,?);";
-		String getIDTicketQuery = "SELECT IDTicket FROM ticket WHERE IDCliente = ? AND Tipologia = ?;";
+		String getIDTicketQuery = "SELECT IDTicket FROM ticket WHERE IDCliente = ? AND Tipologia = ? LIMIT 1;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -102,6 +103,8 @@ public class GestioneAssistenza {
 			preparedStatement.setString(2, tipologia);
 
 			ResultSet rs = preparedStatement.executeQuery();
+
+			connection.commit();
 
 			if (rs.next())
 				return rispostaTicket(rs.getString("IDTicket"), CF, messaggio);
@@ -123,13 +126,14 @@ public class GestioneAssistenza {
 	}
 
 	public boolean cambiaStato(String IDTicket, String stato) throws SQLException {
-		if (stato != "InElaborazione" && stato != "InAttesa" && stato != "Chiuso")
+		final Set<String> states = Set.of("InElaborazione", "InAttesa", "Chiuso", "InAttesaCliente");
+		if (!states.contains(stato))
 			return false;
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String cambiaStatoQuery = "UPDATE ticket SET stato = ? WHERE IDTicket = ?;";
-		String getStatoQuery = "SELECT stato FROM ticket where ID = ?;";
+		String getStatoQuery = "SELECT stato FROM ticket where IDTicket = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("centralinista", "centralinista");
@@ -202,7 +206,7 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT IDTicket, CF, Tipologia, Data, Contenuto FROM ticket NATURAL JOIN messaggio WHERE stato = 'InAttesa' AND IDTicket = ? ORDER BY DATA ASC;";
+		String searchTicketQuery = "SELECT IDTicket, CF, Tipologia, Data, Contenuto FROM ticket NATURAL JOIN messaggio WHERE IDTicket = ? ORDER BY DATA ASC;";
 
 		try {
 			GestioneAccount gestioneaccount = new GestioneAccount();

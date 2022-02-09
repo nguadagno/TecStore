@@ -5,6 +5,25 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<%
+int tipologia = -1;
+if (session.getAttribute("tipologia") == null
+		|| session.getAttribute("tipologia").toString().isEmpty()) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+
+tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
+
+if (tipologia != 1 && tipologia != 2) {
+%>
+<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<%
+return;
+}
+%>
 <title>Messaggi</title>
 </head>
 <body>
@@ -48,13 +67,9 @@
 			}
 			%>
 		</table>
-		<br> <br> <br>
-		<div align=left>
-			<a href="rispostaTicket.jsp">
-				<button>Rispondi</button>
-			</a>
-
-		</div>
+		<br> <br> <br> <a href="rispostaTicket.jsp">
+			<button>Rispondi</button>
+		</a>
 
 	</div>
 </body>

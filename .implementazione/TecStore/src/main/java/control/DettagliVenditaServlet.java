@@ -13,13 +13,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/SelezionaVendita")
+@WebServlet("/DettagliVendita")
 
-public class SelezionaVenditaServlet extends HttpServlet {
+public class DettagliVenditaServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	public SelezionaVenditaServlet() {
+	public DettagliVenditaServlet() {
 		super();
 	}
 
@@ -34,8 +34,8 @@ public class SelezionaVenditaServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologia").equals("1")
-				&& !session.getAttribute("tipologia").equals("2")) {
+		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().equals("1")
+				&& !session.getAttribute("tipologia").toString().equals("2")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -50,7 +50,7 @@ public class SelezionaVenditaServlet extends HttpServlet {
 			vendita = model.dettagliArticolo(session.getAttribute("CF").toString());
 
 			session.setAttribute("dettagliArticolo", vendita);
-			if (session.getAttribute("tipologia").equals("1"))
+			if (session.getAttribute("tipologia").toString().equals("1"))
 				redirect = "/dettaglivenditacliente.jsp";
 			else
 				redirect = "/dettagliVenditaCentralinista.jsp";

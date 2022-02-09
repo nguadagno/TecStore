@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/VisualizzaElencoRimborsiMagazziniere")
+@WebServlet("/ElencoRimborsiMagazziniere")
 
 public class ElencoRimborsiMagazziniereServlet extends HttpServlet {
 
@@ -34,7 +34,7 @@ public class ElencoRimborsiMagazziniereServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologia").equals("3")) {
+		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().equals("3")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -46,13 +46,17 @@ public class ElencoRimborsiMagazziniereServlet extends HttpServlet {
 		session.setAttribute("operazione", "ElencoRimborsiMagazziniere");
 
 		try {
-			ArrayList<OrdineBean> rimborsi = model.elencoRimborsi(Integer.parseInt(request.getParameter("limit")));
-			session.setAttribute("rimborsi", rimborsi);
-			redirect = "/elencoRimborsi.jsp";
+			int limit = 10;
+			if (request.getParameter("limit") != null)
+				limit = Integer.parseInt(request.getParameter("limit"));
+			ArrayList<OrdineBean> rimborsi = model.elencoRimborsi(limit);
+			session.setAttribute("elenco", rimborsi);
+			redirect = "/elencoRimborsiMagazziniere.jsp";
 		} catch (SQLException e) {
 			response.setStatus(500);
 			request.getSession(true).setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
+			e.printStackTrace();
 		}
 
 		dd = request.getRequestDispatcher(redirect);

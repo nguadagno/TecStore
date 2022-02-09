@@ -19,7 +19,7 @@
 
 	<div align="center">
 		<h3>Inserisci i tuoi dati di accesso</h3>
-		<form action="autenticazione" method="post">
+		<form action="Autenticazione" method="post">
 
 			<p>
 				<input type="text" name="email">

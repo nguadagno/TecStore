@@ -33,7 +33,7 @@ public class RimborsoClienteServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (!session.getAttribute("tipologia").equals("3")) {
+		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().equals("3")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -46,7 +46,7 @@ public class RimborsoClienteServlet extends HttpServlet {
 
 		try {
 
-			if (model.cambiaStato(request.getParameter("IDOrdine"), request.getParameter("Stato")))
+			if (model.cambiaStato(request.getParameter("IDOrdine"), "InAttesaRimborso"))
 				redirect = "/successo.jsp";
 			else
 				redirect = "/errore.jsp";
