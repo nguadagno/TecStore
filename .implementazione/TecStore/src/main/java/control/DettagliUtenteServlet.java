@@ -41,16 +41,16 @@ public class DettagliUtenteServlet extends HttpServlet {
 			dd.forward(request, response);
 			return;
 		}
-		//
+
 		session.setAttribute("operazione", "dettagli");
 		try {
-			session.setAttribute("utente",
-					model.dettagliUtente(session.getAttribute("CF").toString(), request.getParameter("CF")));
+			session.setAttribute("dettagliutente", model.dettagliUtente(request.getParameter("CF")));
 			redirect = "/dettagliutente.jsp";
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
+			e.printStackTrace();
 		}
 
 		dd = request.getRequestDispatcher(redirect);

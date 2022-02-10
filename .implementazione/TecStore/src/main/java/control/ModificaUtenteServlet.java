@@ -1,9 +1,6 @@
 package control;
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.sql.SQLException;
 
 import Bean.UtenteBean;
 import model.GestioneAccount;
@@ -15,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/Modificautente")
+@WebServlet("/ModificaUtente")
 public class ModificaUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -47,29 +44,39 @@ public class ModificaUtenteServlet extends HttpServlet {
 		session.setAttribute("operazione", "modificaUtente");
 
 		try {
-			if (model.modificaUtente(request.getParameter("CF"), new UtenteBean(request.getParameter("CF"),
-					request.getParameter("nome"), request.getParameter("cognome"), request.getParameter("email"),
-					request.getParameter("password"), request.getParameter("via"),
-					Integer.parseInt(request.getParameter("numeroCivico")), request.getParameter("citta"),
-					request.getParameter("provincia"), Integer.parseInt(request.getParameter("CAP")),
-					Integer.parseInt(request.getParameter("tipologia")), request.getParameter("cartaDiCredito")))) {
+			String password = "";
+			if (session.getAttribute("tipologia") != null && session.getAttribute("tipologia").toString().equals("5"))
+				password = model.generatePassword(15);
+			else if (session.getAttribute("tipologia") != null
+					&& session.getAttribute("tipologia").toString().equals("1"))
+				password = request.getParameter("password");
+			else
+				throw new Exception();
+
+			password = model.encryptPassword(password);
+
+			int tipologia = 1;
+			if (session.getAttribute("tipologiaUtente") != null)
+				tipologia = Integer.parseInt(request.getParameter("tipologiaUtente"));
+
+			if (model.modificaUtente(session.getAttribute("CF").toString(),
+					new UtenteBean(request.getParameter("CF"), request.getParameter("nome"),
+							request.getParameter("cognome"), request.getParameter("email"), password,
+							request.getParameter("via"), Integer.parseInt(request.getParameter("numeroCivico")),
+							request.getParameter("citta"), request.getParameter("provincia"),
+							Integer.parseInt(request.getParameter("CAP")), tipologia,
+							request.getParameter("cartaDiCredito")))) {
+				if (session.getAttribute("tipologia").toString().equals("5")) {
+					session.setAttribute("password", password);
+				}
 				redirect = "/successo.jsp";
 			} else {
 				redirect = "/errore.jsp";
-
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			response.setStatus(500);
-			session.setAttribute("errore", "erroreSQL");
+			session.setAttribute("errore", "erroremodificautente");
 			redirect = "/errore.jsp";
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

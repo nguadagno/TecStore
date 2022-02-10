@@ -143,10 +143,10 @@ public class GestioneAccount {
 			throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		UtenteBean u = dettagliUtente(CF, utente.getCF());
+		UtenteBean u = dettagliUtente(utente.getCF());
 
-		String updateUtenteQuery = "UPDATE Utente SET NOME = ?, SET COGNOME = ?, SET EMAIL = ?, PASSWORD = ?,"
-				+ " VIA = ?, CAP = ?, NUMEROCIVICO = ?, ,  CITTA = ?, PROVINCIA=? WHERE CF = ?;";
+		String updateUtenteQuery = "UPDATE utente SET NOME = ?, COGNOME = ?, EMAIL = ?, PASSWORD = ?,"
+				+ " VIA = ?, CAP = ?, NUMEROCIVICO = ?, CITTA = ?, PROVINCIA = ? WHERE CF = ?;";
 		try {
 			if (getTipologia(CF) == 1)
 				connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -188,16 +188,17 @@ public class GestioneAccount {
 		}
 	}
 
-	public UtenteBean dettagliUtente(String CF, String CFtarget) throws SQLException {
+	public UtenteBean dettagliUtente(String CFtarget) throws SQLException {
 		UtenteBean result = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchUtenteQuery = "SELECT * FROM utente WHERE CF='" + CF + "';";
+		String searchUtenteQuery = "SELECT * FROM utente WHERE CF=?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(searchUtenteQuery);
+			preparedStatement.setString(1, CFtarget);
 			rs = preparedStatement.executeQuery();
 
 			if (rs.next()) {
