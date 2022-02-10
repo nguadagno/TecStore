@@ -31,7 +31,7 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().equals("5")) {
+		if (session.getAttribute("tipologia") != null && !session.getAttribute("tipologia").toString().equals("5")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -40,14 +40,16 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 			return;
 		}
 
-		String password = session.getAttribute("tipologia").toString().equals("1") ? request.getParameter("password")
+		String password = session.getAttribute("tipologia") == null ? request.getParameter("password")
 				: model.generatePassword(15);
+
+		int tipologia = session.getAttribute("tipologia") == null ? 1
+				: Integer.parseInt(request.getParameter("tipologiaUtente"));
 
 		UtenteBean utente = new UtenteBean(request.getParameter("CF"), request.getParameter("nome"),
 				request.getParameter("cognome"), request.getParameter("email"), password, request.getParameter("via"),
 				Integer.parseInt(request.getParameter("numerocivico")), request.getParameter("citta"),
-				request.getParameter("provincia"), Integer.parseInt(request.getParameter("CAP")),
-				Integer.parseInt(request.getParameter("tipologiaUtente")), "");
+				request.getParameter("provincia"), Integer.parseInt(request.getParameter("CAP")), tipologia, "");
 
 		System.out.println(utente);
 
