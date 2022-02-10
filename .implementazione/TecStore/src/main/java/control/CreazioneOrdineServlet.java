@@ -49,8 +49,7 @@ public class CreazioneOrdineServlet extends HttpServlet {
 		try {
 			GestioneAccount a = new GestioneAccount();
 
-			UtenteBean u = a.dettagliUtente(session.getAttribute("CF").toString(),
-					session.getAttribute("CF").toString());
+			UtenteBean u = a.dettagliUtente(session.getAttribute("CF").toString());
 			if (u.getCartaDiCredito() == null) {
 				redirect = "/inserimentoCartaDiCredito.jsp";
 			} else {

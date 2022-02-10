@@ -7,8 +7,8 @@
 <meta charset="ISO-8859-1">
 <%
 int tipologia = -1;
-if (session.getAttribute("tipologia") == null
-		|| session.getAttribute("tipologia").toString().isEmpty()) {
+if (session.getAttribute("tipologia") == null || session.getAttribute("tipologia").toString().isEmpty()
+		|| session.getAttribute("carrello") == null) {
 %>
 <meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
 <%
@@ -33,7 +33,7 @@ return;
 	float totale = 0;
 	if (carrello == null || foto == null) {
 	%>
-	<h3>Il Carrello é Vuoto!</h3>
+	<h3>Il Carrello &egrave; Vuoto!</h3>
 	<%
 	return;
 	} else {
@@ -61,8 +61,11 @@ return;
 				</form>
 			</td>
 			<td>
-				<form action="aggiornamentoQuantitaCarrello" name="aggiornamento" method="post">
-					<input type="number" min=1 max=10 onchange="javascript:document.aggiornamento.submit();" value="<%=a.getQuantita()%>">
+				<form action="aggiornamentoQuantitaCarrello" name="aggiornamento"
+					method="post">
+					<input type="number" min=1 max=10
+						onchange="javascript:document.aggiornamento.submit();"
+						value="<%=a.getQuantita()%>">
 				</form>
 			</td>
 			<%
@@ -70,8 +73,8 @@ return;
 			}
 			%>
 			<td><h6>
-			Totale:
-			<%=totale%></h6></td>
+					Totale:
+					<%=totale%></h6></td>
 		</tr>
 	</table>
 	<br>

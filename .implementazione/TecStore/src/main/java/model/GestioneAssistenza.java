@@ -218,7 +218,7 @@ public class GestioneAssistenza {
 			while (rs.next()) {
 				MessaggioBean m = new MessaggioBean(rs.getString("IDTicket"), rs.getString("CF"),
 						rs.getString("Contenuto"), rs.getDate("Data"),
-						gestioneaccount.dettagliUtente(rs.getString("CF"), rs.getString("CF")));
+						gestioneaccount.dettagliUtente(rs.getString("CF")));
 				result.add(m);
 			}
 			return result;

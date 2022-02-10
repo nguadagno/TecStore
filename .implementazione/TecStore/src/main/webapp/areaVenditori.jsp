@@ -6,8 +6,7 @@
 <meta charset="ISO-8859-1">
 <%
 int tipologia = -1;
-if (session.getAttribute("tipologia") == null
-		|| session.getAttribute("tipologia").toString().isEmpty()) {
+if (session.getAttribute("tipologia") == null || session.getAttribute("tipologia").toString().isEmpty()) {
 %>
 <meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
 <%
@@ -42,45 +41,45 @@ return;
 	<br>
 	<hr>
 	<div>
-	<form action="nuovaVendita.jsp" method="post">
-		<input type="submit" value="Nuovo Articolo">
-	</form>
+		<form action="nuovaVendita.jsp" method="post">
+			<input type="submit" value="Nuovo Articolo">
+		</form>
 	</div>
 	<div>
-	<%
-	if (elencoVendite == null || foto == null) {
-		return;
-	} else {
-	%>
-	<table>
-		<tr>
-			<th>Nome</th>
-			<th>Descrizione</th>
-			<th>Prezzo</th>
-			<th>ID</th>
-			<th></th>
-		</tr>
-
 		<%
-		for (ArticoloBean a : elencoVendite) {
+		if (elencoVendite == null || foto == null) {
+			return;
+		} else {
 		%>
-		<tr>
-			<td><%=a.getNome()%></td>
-			<td><%=a.getDescrizione()%></td>
-			<td><%=a.getPrezzo()%></td>
-			<td><%=a.getID()%></td>
+		<table>
+			<tr>
+				<th>Nome</th>
+				<th>Descrizione</th>
+				<th>Prezzo</th>
+				<th>ID</th>
+				<th></th>
+			</tr>
 
-			<td><form action="DettagliArticolo" method="post">
-					<input type="hidden" name="IDArticolo" value="<%=a.getID()%>">
-					<input type="submit" value="Dettagli">
-				</form></td>
+			<%
+			for (ArticoloBean a : elencoVendite) {
+			%>
+			<tr>
+				<td><%=a.getNome()%></td>
+				<td><%=a.getDescrizione()%></td>
+				<td><%=a.getPrezzo()%></td>
+				<td><%=a.getID()%></td>
 
-		</tr>
+				<td><form action="DettagliArticolo" method="post">
+						<input type="hidden" name="IDArticolo" value="<%=a.getID()%>">
+						<input type="submit" value="Dettagli">
+					</form></td>
 
-		<%
-		}
-		}
-		%>
-	</table>
+			</tr>
+
+			<%
+			}
+			}
+			%>
+		</table>
 </body>
 </html>

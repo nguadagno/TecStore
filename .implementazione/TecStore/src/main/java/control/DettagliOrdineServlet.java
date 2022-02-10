@@ -55,7 +55,7 @@ public class DettagliOrdineServlet extends HttpServlet {
 		try {
 			OrdineBean ordine = model.dettagliOrdineByID(request.getParameter("IDOrdine"));
 			session.setAttribute("ordine", ordine);
-			session.setAttribute("cliente", model2.dettagliUtente(ordine.getIDCliente(), ordine.getIDCliente()));
+			session.setAttribute("cliente", model2.dettagliUtente(ordine.getIDCliente()));
 			session.setAttribute("articolo", model1.dettagliArticolo(ordine.getIDArticolo()));
 
 			ArrayList<FotoBean> foto = model1.getFoto(request.getParameter("IDArticolo"));

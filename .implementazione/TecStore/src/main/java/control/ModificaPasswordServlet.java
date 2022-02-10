@@ -48,7 +48,7 @@ public class ModificaPasswordServlet extends HttpServlet {
 		session.setAttribute("operazione", "modificaPassword");
 
 		try {
-			UtenteBean u = model.dettagliUtente(session.getAttribute("CF").toString(), request.getParameter("CF"));
+			UtenteBean u = model.dettagliUtente(request.getParameter("CF"));
 			u.setPassword(
 					u.getTipologia() == 1 ? request.getParameter("password").toString() : model.generatePassword(15));
 			if (model.modificaUtente(u.getCF(), u)) {

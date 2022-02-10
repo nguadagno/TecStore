@@ -349,7 +349,6 @@ public class GestioneVendita {
 			preparedStatement.setString(1, CF);
 			preparedStatement.setString(2, "%" + nome + "%");
 			preparedStatement.setInt(3, limit);
-			System.out.println(preparedStatement);
 			rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
@@ -387,7 +386,6 @@ public class GestioneVendita {
 			preparedStatement.setString(1, tipologia);
 			preparedStatement.setString(2, "%" + nome + "%");
 			preparedStatement.setInt(3, limit);
-			System.out.println(preparedStatement);
 			rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
