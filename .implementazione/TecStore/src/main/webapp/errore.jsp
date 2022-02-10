@@ -11,6 +11,9 @@
 		<!-- TODO redirect a pagina corretta e messaggio corretto in base all'operazione -->
 		<p>
 		<h3>Qualcosa è andato storto durante l'operazione scelta.</h3>
+		<%=session.getAttribute("operazione").toString()%>
+		<br>
+		<%=session.getAttribute("errore").toString()%>
 		<p>
 			<a href="index.jsp"><button>Continua</button></a>
 		</p>

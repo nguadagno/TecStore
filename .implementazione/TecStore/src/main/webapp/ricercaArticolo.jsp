@@ -30,7 +30,7 @@ return;
 	<div align="center">
 		<h3>Ricerca Articolo</h3>
 		<form action="ricercaArticolo" method="post">
-			<input id="markBar" type="text" name="testo" maxlength="35"
+			<input type="text" name="testo" maxlength="35"
 				id="testo" placeholder="Titolo..." required> <input
 				type="submit" value="Cerca">
 		</form>

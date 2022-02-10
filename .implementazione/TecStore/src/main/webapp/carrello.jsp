@@ -4,6 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(":input").bind('keyup mouseup', function() {
+		$("form#aggiornamento").submit();
+	});
+</script>
 <meta charset="ISO-8859-1">
 <%
 int tipologia = -1;
@@ -29,9 +36,9 @@ return;
 <body>
 	<%
 	ArrayList<ArticoloBean> carrello = (ArrayList<ArticoloBean>) session.getAttribute("carrello");
-	FotoBean foto = (FotoBean) session.getAttribute("foto");
+	ArrayList<FotoBean> foto = (ArrayList<FotoBean>) session.getAttribute("foto");
 	float totale = 0;
-	if (carrello == null || foto == null) {
+	if (carrello == null) {
 	%>
 	<h3>Il Carrello &egrave; Vuoto!</h3>
 	<%
@@ -48,13 +55,13 @@ return;
 
 		<%
 		for (ArticoloBean a : carrello) {
-			totale += a.getPrezzo();
+			totale += (a.getPrezzo() * a.getQuantita());
 		%>
 		<tr>
 			<td><%=a.getNome()%></td>
 			<td><%=a.getPrezzo()%></td>
 			<td>
-				<form action="rimozioneArticoloCarrello" method="post">
+				<form action="rimozioneDalCarrello" method="post">
 					<input type="submit" value="Rimuovi"> <input
 						value="<%=a.getID()%>" type="hidden" name="IDArticolo">
 
@@ -63,26 +70,33 @@ return;
 			<td>
 				<form action="aggiornamentoQuantitaCarrello" name="aggiornamento"
 					method="post">
-					<input type="number" min=1 max=10
-						onchange="javascript:document.aggiornamento.submit();"
-						value="<%=a.getQuantita()%>">
+					<input value="<%=a.getID()%>" type="hidden" name="IDArticolo">
+					<input type="number" min=1 max=10 name="quantita"
+						value="<%=a.getQuantita()%>"> <input type="submit"
+						value="Aggiorna">
 				</form>
 			</td>
 			<%
 			}
 			}
 			%>
-			<td><h6>
-					Totale:
-					<%=totale%></h6></td>
+
 		</tr>
 	</table>
 	<br>
 	<br>
 	<br>
 	<hr>
-	<form action="CreazioneOrdine" method="post">
-		<input type="submit" value="Acquista!">
-	</form>
+	<div>
+
+		<h6>
+			Totale:
+			<%=totale%>&euro;
+		</h6>
+		<form action="CreazioneOrdine" method="post">
+			<input type="submit" value="Acquista!">
+		</form>
+		<a href="paginaIniziale.jsp"><button>Torna Alla Home</button></a>
+	</div>
 </body>
 </html>

@@ -7,8 +7,7 @@
 <title>Modifica Articolo</title>
 <%
 int tipologia = -1;
-if (session.getAttribute("tipologia") == null
-		|| session.getAttribute("tipologia").toString().isEmpty()) {
+if (session.getAttribute("tipologia") == null || session.getAttribute("tipologia").toString().isEmpty()) {
 %>
 <meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
 <%
@@ -35,7 +34,7 @@ return;
 			<form action="ModificaArticolo" method="post">
 				<div>
 					<input type="hidden" name="IDArticolo"
-						value="<%=request.getParameter("IDArticolo")%>"> <label><b>Nome</b></label>
+						value="<%=request.getParameter("IDArticolo")%>"><label><b>Nome</b></label>
 					<br> <input type="text" name="nome"
 						value="<%=request.getParameter("nome")%>"> <br> <br>
 					<label><b>Descrizione</b></label> <br> <input type="text"
@@ -51,13 +50,13 @@ return;
 						name="foto" accept="image/png, image/jpeg"> <br> <br>
 					<label><b>Rimborsabile</b></label> <br> <label><b>Si</b></label>
 					<input type="radio" name="rimborsabile" value="1"
-						<%=request.getParameter("rimborsabile").equals("true") ? "required" : ""%>>
+						<%=request.getParameter("rimborsabile").equals("true") ? "selected" : ""%>>
 					<br> <label><b>No</b></label> <input type="radio"
 						name="rimborsabile" value="0"
-						<%=request.getParameter("rimborsabile").equals("false") ? "required" : ""%>>
+						<%=request.getParameter("rimborsabile").equals("false") ? "selected" : ""%>>
 				</div>
 				<div align="right">
-					<a href="areaVenditori.jsp"><button>Annulla</button></a> <input
+					<a href="paginainiziale.jsp"><button>Annulla</button></a> <input
 						type="submit" value="Continua">
 				</div>
 

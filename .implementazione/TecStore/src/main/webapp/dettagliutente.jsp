@@ -36,7 +36,7 @@ return;
 
 tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
 
-if (tipologia != 1 && tipologia != 5) {
+if (tipologia != 1 || tipologia != 5) {
 %>
 <meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
 <%

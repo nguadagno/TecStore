@@ -51,6 +51,33 @@ public class GestioneCarrello {
 		return null;
 	}
 
+	public boolean aggiornamentoQuantitaCarrello(String IDArticolo, int quantita) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String aggiuntaCarrelloQuery = "UPDATE articolo set Quantita = quantita + ? where id = ?;";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			preparedStatement = connection.prepareStatement(aggiuntaCarrelloQuery);
+			preparedStatement.setInt(1, quantita);
+			preparedStatement.setString(2, IDArticolo);
+			System.out.println(preparedStatement);
+			preparedStatement.execute();
+
+			connection.commit();
+			return true;
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+
+	}
+
 	public boolean aggiuntaArticolo(String CF, ArticoloBean articolo, int quantita) throws SQLException {
 		return aggiuntaArticolo(CF, articolo.getID(), quantita);
 	}
@@ -73,10 +100,11 @@ public class GestioneCarrello {
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(aggiuntaCarrelloQuery);
+			aggiornamentoQuantitaCarrello(IDArticolo, -quantita);
 			preparedStatement.setString(1, CF);
 			preparedStatement.setString(2, IDArticolo);
 			preparedStatement.setInt(3, quantita);
-
+			System.out.println(preparedStatement);
 			preparedStatement.execute();
 
 			connection.commit();
@@ -107,10 +135,18 @@ public class GestioneCarrello {
 	public boolean rimozioneArticolo(String CF, String IDArticolo) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		String quantita = "SELECT quantita FROM carrello WHERE IDCliente = ? AND IDArticolo = ?;";
+
 		String rimozioneCarrelloQuery = "DELETE FROM carrello WHERE IDCliente = ? AND IDArticolo = ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			preparedStatement = connection.prepareStatement(quantita);
+			preparedStatement.setString(1, CF);
+			preparedStatement.setString(2, IDArticolo);
+			ResultSet rs = preparedStatement.executeQuery();
+			rs.next();
+			aggiornamentoQuantitaCarrello(IDArticolo, rs.getInt("quantita"));
 			preparedStatement = connection.prepareStatement(rimozioneCarrelloQuery);
 			preparedStatement.setString(1, CF);
 			preparedStatement.setString(2, IDArticolo);
@@ -149,9 +185,20 @@ public class GestioneCarrello {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String aggiuntaCarrelloQuery = "UPDATE carrello SET quantita = ? WHERE IDCliente = ? AND IDArticolo = ?";
-
+		String quant = "SELECT quantita FROM carrello WHERE IDCliente = ? AND IDArticolo = ?;";
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			preparedStatement = connection.prepareStatement(quant);
+			preparedStatement.setString(1, CF);
+			preparedStatement.setString(2, IDArticolo);
+			ResultSet rs = preparedStatement.executeQuery();
+			rs.next();
+			if (rs.getInt("quantita") > quantita)
+				aggiornamentoQuantitaCarrello(IDArticolo, -quantita);
+			else
+				aggiornamentoQuantitaCarrello(IDArticolo, quantita);
+
 			preparedStatement = connection.prepareStatement(aggiuntaCarrelloQuery);
 			preparedStatement.setInt(1, quantita);
 			preparedStatement.setString(2, CF);

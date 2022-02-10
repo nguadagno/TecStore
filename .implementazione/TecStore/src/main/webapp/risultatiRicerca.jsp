@@ -18,14 +18,14 @@
 	<%
 	ArrayList<ArticoloBean> risultati = (ArrayList<ArticoloBean>) session.getAttribute("risultati");
 	if (risultati == null) {
+		//anche se risultati è vuoto entra nell'else
 		return;
 	} else {
 	%><table>
 		<tr>
 			<th>Nome</th>
 			<th>Quantita</th>
-			<td>Stato</td>
-			<th>Data</th>
+			<th>Prezzo</th>
 			<th></th>
 		</tr>
 		<%
@@ -34,8 +34,7 @@
 		<tr>
 			<td><%=a.getNome()%></td>
 			<td><%=a.getQuantita()%></td>
-			<td><%=a.getStato()%></td>
-			<td><%=a.getData()%></td>
+			<td><%=a.getPrezzo()%>&euro;</td>
 			<td>
 				<form action="DettagliArticolo" method="post">
 					<input type="hidden" name="IDArticolo" value="<%=a.getID()%>">

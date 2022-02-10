@@ -222,7 +222,7 @@ public class GestioneVendita {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String aggiuntaArticoloQuery = "UPDATE articolo SET Nome = ?, Descrizione = ?, IDVenditore = ?, Quantita = ?, Prezzo = ?, Stato = ?, Rimborsabile = ? WHERE IDArticolo = ?;";
+		String aggiuntaArticoloQuery = "UPDATE articolo SET Nome = ?, Descrizione = ?, IDVenditore = ?, Quantita = ?, Prezzo = ?, Stato = ?, Rimborsabile = ? WHERE ID = ?;";
 
 		try {
 			GestioneAccount gestioneaccount = new GestioneAccount();
@@ -244,7 +244,7 @@ public class GestioneVendita {
 			preparedStatement.setString(6, tipologia == 1 ? "InAttesa" : "InVendita");
 			preparedStatement.setBoolean(7, rimborsabile);
 			preparedStatement.setString(8, IDArticolo);
-			preparedStatement.executeQuery();
+			preparedStatement.executeUpdate();
 
 			connection.commit();
 			return true;
@@ -264,7 +264,7 @@ public class GestioneVendita {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchArticoloQuery = "SELECT * FROM articolo WHERE Nome LIKE ? LIMIT ?;";
+		String searchArticoloQuery = "SELECT * FROM articolo WHERE Nome LIKE ? and stato = 'InVendita' LIMIT ? ;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");

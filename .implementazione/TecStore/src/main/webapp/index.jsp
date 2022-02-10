@@ -12,7 +12,7 @@
 <body>
 	<div align="center">
 
-		<form action="RicercaArticolo" method="post">
+		<form action="ricercaArticolo" method="post">
 			<p>
 				<br> <input type="text" name="testo" maxlength="45"
 					placeholder="Cerca..." required> <select name="limit">
@@ -56,11 +56,13 @@
 	<div align="right">
 		<p>
 			Benvenuto, <i> <%=((UtenteBean) session.getAttribute("utente")).getNome()%>
-				<%=((UtenteBean) session.getAttribute("utente")).getCognome()%>
-				<BR>
+				<%=((UtenteBean) session.getAttribute("utente")).getCognome()%> <BR>
 			</i> <a href="areaVenditori.jsp"><button>Area Venditori</button></a> <a
-				href="dettagliProfilo.jsp"><button>Dettagli profilo</button></a>
-		</p>
+				href="dettagliutente.jsp"><button>Dettagli profilo</button></a>
+		<form action="getCarrello" method="post">
+			<input type="submit" value="Carrello">
+		</form>
+
 	</div>
 	<%
 	}
