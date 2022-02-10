@@ -77,7 +77,7 @@ return;
 			<input type="submit">
 		</form>
 
-		<form action="nuovodipendente.jsp" method="post">
+		<form action="registrazione.jsp" method="post">
 			<input type="submit" value="Nuovo Dipendente">
 		</form>
 		<%

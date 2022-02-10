@@ -394,7 +394,6 @@ public class GestioneAccount {
 
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			String getPasswordQuery = "SELECT Password FROM utente WHERE email = ?;";
-			String hash;
 
 			PreparedStatement preparedStatement = connection.prepareStatement(getPasswordQuery);
 			preparedStatement.setString(1, email);

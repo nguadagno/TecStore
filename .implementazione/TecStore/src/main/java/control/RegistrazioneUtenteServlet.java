@@ -1,9 +1,6 @@
 package control;
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.sql.SQLException;
 
 import Bean.UtenteBean;
 import model.*;
@@ -34,10 +31,7 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (session.getAttribute("tipologia") != null || (!session.getAttribute("tipologia").toString().equals("1")
-				&& !session.getAttribute("tipologia").toString().equals("2")
-				&& !session.getAttribute("tipologia").toString().equals("3")
-				&& !session.getAttribute("tipologia").toString().equals("4"))) {
+		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().equals("5")) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -49,30 +43,27 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 		String password = session.getAttribute("tipologia").toString().equals("1") ? request.getParameter("password")
 				: model.generatePassword(15);
 
-		UtenteBean utente = new UtenteBean(request.getParameter("CF"), request.getParameter("Nome"),
-				request.getParameter("Cognome"), request.getParameter("Email"), password, request.getParameter("Via"),
-				Integer.parseInt(request.getParameter("NumeroCivico")), request.getParameter("Citta"),
-				request.getParameter("Provincia"), Integer.parseInt(request.getParameter("CAP")),
-				Integer.parseInt(request.getParameter("Tipologia")), request.getParameter("CartaDiCredito"));
+		UtenteBean utente = new UtenteBean(request.getParameter("CF"), request.getParameter("nome"),
+				request.getParameter("cognome"), request.getParameter("email"), password, request.getParameter("via"),
+				Integer.parseInt(request.getParameter("numerocivico")), request.getParameter("citta"),
+				request.getParameter("provincia"), Integer.parseInt(request.getParameter("CAP")),
+				Integer.parseInt(request.getParameter("tipologiaUtente")), "");
+
+		System.out.println(utente);
 
 		session.setAttribute("operazione", "registrazioneUtente");
 		try {
 			if (model.registrazioneUtente(utente)) {
-				session.setAttribute("email", request.getParameter("email"));
-				session.setAttribute("password", password);
+				session.setAttribute("emailUtente", request.getParameter("email"));
+				session.setAttribute("passwordUtente", password);
 				redirect = "/successo.jsp";
 			} else {
 				redirect = "/errore.jsp";
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
