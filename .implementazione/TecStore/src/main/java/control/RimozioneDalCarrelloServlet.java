@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/RimozioneDalCarrelloServlet")
+@WebServlet("/rimozioneDalCarrello")
 
 public class RimozioneDalCarrelloServlet extends HttpServlet {
 
@@ -44,9 +44,10 @@ public class RimozioneDalCarrelloServlet extends HttpServlet {
 		session.setAttribute("operazione", "rimozioneArticoloCarrello");
 
 		try {
-			if (model.rimozioneArticolo(session.getAttribute("CF").toString(), request.getParameter("IDArticolo")))
-				redirect = "/successo.jsp";
-			else
+			if (model.rimozioneArticolo(session.getAttribute("CF").toString(), request.getParameter("IDArticolo"))) {
+				session.setAttribute("carrello", model.GetCarrello(session.getAttribute("CF").toString()));
+				redirect = "/carrello.jsp";
+			} else
 				redirect = "/errore.jsp";
 
 		} catch (SQLException e) {

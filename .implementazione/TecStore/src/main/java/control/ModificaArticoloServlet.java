@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/ModificaArticoloServlet")
+@WebServlet("/ModificaArticolo")
 
 public class ModificaArticoloServlet extends HttpServlet {
 
@@ -36,7 +36,7 @@ public class ModificaArticoloServlet extends HttpServlet {
 		RequestDispatcher dd;
 
 		if (session.getAttribute("tipologia") == null || (!session.getAttribute("tipologia").toString().equals("1")
-				|| !session.getAttribute("tipologia").toString().equals("4"))) {
+				&& !session.getAttribute("tipologia").toString().equals("4"))) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -49,8 +49,7 @@ public class ModificaArticoloServlet extends HttpServlet {
 		String IDArticolo = request.getParameter("IDArticolo");
 		String nome = request.getParameter("nome");
 		String descrizione = request.getParameter("descrizione");
-		String IDVenditore = session.getAttribute("IDVenditore") == null ? null
-				: session.getAttribute("IDVenditore").toString();
+		String IDVenditore = session.getAttribute("CF") == null ? null : session.getAttribute("CF").toString();
 		int quantita = request.getParameter("quantita") == null ? -1
 				: Integer.parseInt(request.getParameter("quantita"));
 		float prezzo = request.getParameter("prezzo") == null ? -1 : Float.parseFloat(request.getParameter("prezzo"));
@@ -58,23 +57,27 @@ public class ModificaArticoloServlet extends HttpServlet {
 				: Boolean.parseBoolean(request.getParameter("rimborsabile"));
 		@SuppressWarnings("unchecked")
 		ArrayList<FotoBean> foto = (ArrayList<FotoBean>) request.getAttribute("foto");
-
+		System.out.println(IDArticolo + " " + nome + " " + descrizione + " " + IDVenditore + " " + quantita + " "
+				+ prezzo + " " + rimborsabile);
 		if (IDArticolo == null || nome == null || descrizione == null || IDVenditore == null || rimborsabile == null
 				|| IDArticolo.isEmpty() || nome.isEmpty() || descrizione.isEmpty() || IDVenditore.isEmpty()
 				|| quantita < 1 || prezzo < 0.01) {
+			session.setAttribute("errore", "Errore Parametri Null");
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
+			return;
 		}
 
 		try {
 			if (model.modificaArticolo(IDArticolo, nome, descrizione, IDVenditore, quantita, prezzo, rimborsabile)
-					&& model.sovrascritturaFoto(IDArticolo, foto))
+			// && model.sovrascritturaFoto(IDArticolo, foto)
+			)
 				redirect = "/successo.jsp";
-			else
+			else {
+				session.setAttribute("errore", "ErroreModel");
 				redirect = "/errore.jsp";
-			dd = request.getRequestDispatcher(redirect);
-			dd.forward(request, response);
+			}
 
 		} catch (SQLException e) {
 			response.setStatus(500);
@@ -82,8 +85,10 @@ public class ModificaArticoloServlet extends HttpServlet {
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
+			e.printStackTrace();
+			return;
 		}
-
+		dd = request.getRequestDispatcher(redirect);
 		dd.forward(request, response);
 		return;
 	}

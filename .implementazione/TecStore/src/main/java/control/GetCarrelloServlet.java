@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/GetCarrelloServlet")
+@WebServlet("/getCarrello")
 
 public class GetCarrelloServlet extends HttpServlet {
 
@@ -47,12 +47,10 @@ public class GetCarrelloServlet extends HttpServlet {
 			return;
 		}
 
-		UtenteBean user = (UtenteBean) session.getAttribute("user");
-
 		session.setAttribute("operazione", "GetCarrello");
 
 		try {
-			ArrayList<ArticoloBean> carrello = model.GetCarrello(user);
+			ArrayList<ArticoloBean> carrello = model.GetCarrello(session.getAttribute("CF").toString());
 			ArrayList<FotoBean> foto = model1.getFoto(carrello);
 
 			session.setAttribute("carrello", carrello);
@@ -62,6 +60,7 @@ public class GetCarrelloServlet extends HttpServlet {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
+			e.printStackTrace();
 		}
 
 		dd = request.getRequestDispatcher(redirect);

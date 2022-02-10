@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/AggiornamentoCarrelloServlet")
+@WebServlet("/aggiornamentoQuantitaCarrello")
 
 public class AggiornamentoQuantitaCarrelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -39,10 +39,11 @@ public class AggiornamentoQuantitaCarrelloServlet extends HttpServlet {
 
 		try {
 			if (model.aggiornamentoQuantita(session.getAttribute("CF").toString(), request.getParameter("IDArticolo"),
-					Integer.parseInt(request.getParameter("quantita"))))
-				redirect = "/successo.jsp";
-			else
-				redirect = "/successo.jsp";
+					Integer.parseInt(request.getParameter("quantita")))) {
+				session.setAttribute("carrello", model.GetCarrello(session.getAttribute("CF").toString()));
+				redirect = "/carrello.jsp";
+			} else
+				redirect = "/errore.jsp";
 
 		} catch (SQLException e) {
 			response.setStatus(500);

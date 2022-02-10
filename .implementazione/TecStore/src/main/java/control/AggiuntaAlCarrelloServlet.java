@@ -48,6 +48,7 @@ public class AggiuntaAlCarrelloServlet extends HttpServlet {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
+			e.printStackTrace();
 		}
 
 		dd = request.getRequestDispatcher(redirect);
