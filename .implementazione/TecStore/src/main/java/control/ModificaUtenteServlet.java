@@ -53,9 +53,8 @@ public class ModificaUtenteServlet extends HttpServlet {
 			else
 				throw new Exception();
 
-			password = model.encryptPassword(password);
-
 			int tipologia = 1;
+
 			if (session.getAttribute("tipologiaUtente") != null)
 				tipologia = Integer.parseInt(request.getParameter("tipologiaUtente"));
 
@@ -67,7 +66,8 @@ public class ModificaUtenteServlet extends HttpServlet {
 							Integer.parseInt(request.getParameter("CAP")), tipologia,
 							request.getParameter("cartaDiCredito")))) {
 				if (session.getAttribute("tipologia").toString().equals("5")) {
-					session.setAttribute("password", password);
+					session.setAttribute("passwordUtente", password);
+					session.setAttribute("emailUtente", request.getParameter("email"));
 				}
 				redirect = "/successo.jsp";
 			} else {

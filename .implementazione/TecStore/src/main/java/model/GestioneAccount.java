@@ -401,11 +401,8 @@ public class GestioneAccount {
 			ResultSet rs = preparedStatement.executeQuery();
 
 			if (rs.next())
-				hash = rs.getString("Password");
-			else
-				return false;
-
-			return (BCrypt.checkpw(password, hash));
+				return (BCrypt.checkpw(password, rs.getString("Password")));
+			return false;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
