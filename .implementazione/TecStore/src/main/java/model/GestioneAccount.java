@@ -9,12 +9,16 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 import Bean.UtenteBean;
 
 public class GestioneAccount {
+	String key = "9z$C&F)J@NcRfUjX";
+
 	public boolean exists(UtenteBean utente) throws SQLException {
 		return exists(utente.getCF());
 	}
@@ -146,14 +150,16 @@ public class GestioneAccount {
 		UtenteBean u = dettagliUtente(utente.getCF());
 
 		String updateUtenteQuery = "UPDATE utente SET NOME = ?, COGNOME = ?, EMAIL = ?, PASSWORD = ?,"
-				+ " VIA = ?, CAP = ?, NUMEROCIVICO = ?, CITTA = ?, PROVINCIA = ? WHERE CF = ?;";
+				+ " VIA = ?, CAP = ?, NUMEROCIVICO = ?, CITTA = ?, PROVINCIA = ?, CARTADICREDITO = ? WHERE CF = ?;";
 		try {
-			if (getTipologia(CF) == 1)
+			if (u.getTipologia() == 1)
 				connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
-			else if (getTipologia(CF) == 5)
+			else if (u.getTipologia() == 5)
 				connection = DriverManagerConnectionPool.getConnection("ammpersonale", "ammpersonale");
 			else
 				return false;
+
+			System.out.println("qui");
 
 			if (utente == null || (!utente.getEmail().equals(u.getEmail()) && !utente.checkEmail(utente.getEmail())))
 				return false;
@@ -163,6 +169,8 @@ public class GestioneAccount {
 					utente.setPassword(encryptPassword(utente.getPassword()));
 				}
 			}
+
+			System.out.println("qua");
 
 			preparedStatement = connection.prepareStatement(updateUtenteQuery);
 			preparedStatement.setString(1, utente.getNome());
@@ -174,10 +182,14 @@ public class GestioneAccount {
 			preparedStatement.setInt(7, utente.getNumeroCivico());
 			preparedStatement.setString(8, utente.getCitta());
 			preparedStatement.setString(9, utente.getProvincia());
-			preparedStatement.setString(10, utente.getCF());
+			preparedStatement.setString(10, utente.getCartaDiCredito());
+			preparedStatement.setString(11, utente.getCF());
 			preparedStatement.executeUpdate();
 			connection.commit();
+			System.out.println("quo");
 			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (preparedStatement != null)
@@ -186,6 +198,7 @@ public class GestioneAccount {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return false;
 	}
 
 	public UtenteBean dettagliUtente(String CFtarget) throws SQLException {
@@ -415,5 +428,27 @@ public class GestioneAccount {
 		}
 
 		return false;
+	}
+
+	public String encryptString(String text) {
+		try {
+			Cipher cipher = Cipher.getInstance("AES");
+			cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(key.getBytes(), "AES"));
+			return cipher.doFinal(text.getBytes()).toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	public String decryptString(String text) {
+		try {
+			Cipher cipher = Cipher.getInstance("AES");
+			cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(key.getBytes(), "AES"));
+			return cipher.doFinal(text.getBytes()).toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 }

@@ -44,27 +44,46 @@ public class ModificaUtenteServlet extends HttpServlet {
 		session.setAttribute("operazione", "modificaUtente");
 
 		try {
+			UtenteBean oldUtente = model.dettagliUtente(session.getAttribute("CF").toString());
 			String password = "";
 			if (session.getAttribute("tipologia") != null && session.getAttribute("tipologia").toString().equals("5"))
 				password = model.generatePassword(15);
 			else if (session.getAttribute("tipologia") != null
-					&& session.getAttribute("tipologia").toString().equals("1"))
+					&& session.getAttribute("tipologia").toString().equals("1")
+					&& request.getParameter("numeroCarta") == null)
 				password = request.getParameter("password");
 			else
-				throw new Exception();
+				password = oldUtente.getPassword();
 
 			int tipologia = 1;
 
 			if (session.getAttribute("tipologiaUtente") != null)
 				tipologia = Integer.parseInt(request.getParameter("tipologiaUtente"));
 
-			if (model.modificaUtente(session.getAttribute("CF").toString(),
-					new UtenteBean(request.getParameter("CF"), request.getParameter("nome"),
-							request.getParameter("cognome"), request.getParameter("email"), password,
-							request.getParameter("via"), Integer.parseInt(request.getParameter("numeroCivico")),
-							request.getParameter("citta"), request.getParameter("provincia"),
-							Integer.parseInt(request.getParameter("CAP")), tipologia,
-							request.getParameter("cartaDiCredito")))) {
+			String CF = request.getParameter("CF") == null ? oldUtente.getCF() : request.getParameter("CF");
+			String nome = request.getParameter("nome") == null ? oldUtente.getNome() : request.getParameter("nome");
+			String cognome = request.getParameter("cognome") == null ? oldUtente.getCognome()
+					: request.getParameter("cognome");
+			String email = request.getParameter("email") == null ? oldUtente.getEmail() : request.getParameter("email");
+			String via = request.getParameter("via") == null ? oldUtente.getVia() : request.getParameter("via");
+			String citta = request.getParameter("citta") == null ? oldUtente.getCitta() : request.getParameter("citta");
+			String provincia = request.getParameter("provincia") == null ? oldUtente.getProvincia()
+					: request.getParameter("provincia");
+			int CAP = request.getParameter("CAP") == null ? oldUtente.getCAP()
+					: Integer.parseInt(request.getParameter("CAP"));
+			int numeroCivico = request.getParameter("numeroCivico") == null ? oldUtente.getNumeroCivico()
+					: Integer.parseInt(request.getParameter("numeroCivico"));
+			String cartaDiCredito = request.getParameter("numeroCarta") == null || request.getParameter("CVV") == null
+					|| request.getParameter("anno") == null || request.getParameter("mese") == null
+							? oldUtente.getCartaDiCredito()
+							: model.encryptString(request.getParameter("numeroCarta") + request.getParameter("CVV")
+									+ request.getParameter("anno") + request.getParameter("mese"));
+
+			System.out.println(new UtenteBean(CF, nome, cognome, email, password, via, numeroCivico, citta, provincia,
+					CAP, tipologia, cartaDiCredito));
+
+			if (model.modificaUtente(session.getAttribute("CF").toString(), new UtenteBean(CF, nome, cognome, email,
+					password, via, numeroCivico, citta, provincia, CAP, tipologia, cartaDiCredito))) {
 				if (session.getAttribute("tipologia").toString().equals("5")) {
 					session.setAttribute("passwordUtente", password);
 					session.setAttribute("emailUtente", request.getParameter("email"));
