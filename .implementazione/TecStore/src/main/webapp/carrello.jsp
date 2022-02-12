@@ -96,7 +96,7 @@ return;
 		<form action="CreazioneOrdine" method="post">
 			<input type="submit" value="Acquista!">
 		</form>
-		<a href="paginaIniziale.jsp"><button>Torna Alla Home</button></a>
+		<a href="paginainiziale.jsp"><button>Torna Alla Home</button></a>
 	</div>
 </body>
 </html>
