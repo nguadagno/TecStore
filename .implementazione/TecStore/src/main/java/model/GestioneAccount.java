@@ -158,19 +158,17 @@ public class GestioneAccount {
 				connection = DriverManagerConnectionPool.getConnection("ammpersonale", "ammpersonale");
 			else
 				return false;
-
-			System.out.println("qui");
-
 			if (utente == null || (!utente.getEmail().equals(u.getEmail()) && !utente.checkEmail(utente.getEmail())))
 				return false;
 
 			if (!utente.getPassword().equals(u.getPassword())) {
+				System.out.println(utente.getPassword());
+				System.out.println(u.getPassword());
+				System.out.println(utente.getPassword().equals(u.getPassword()));
 				if (utente.checkPassword(utente.getPassword())) {
 					utente.setPassword(encryptPassword(utente.getPassword()));
 				}
 			}
-
-			System.out.println("qua");
 
 			preparedStatement = connection.prepareStatement(updateUtenteQuery);
 			preparedStatement.setString(1, utente.getNome());
@@ -186,7 +184,6 @@ public class GestioneAccount {
 			preparedStatement.setString(11, utente.getCF());
 			preparedStatement.executeUpdate();
 			connection.commit();
-			System.out.println("quo");
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

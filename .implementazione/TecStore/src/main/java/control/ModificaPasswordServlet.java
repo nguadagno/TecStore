@@ -48,23 +48,29 @@ public class ModificaPasswordServlet extends HttpServlet {
 		session.setAttribute("operazione", "modificaPassword");
 
 		try {
-			UtenteBean u = model.dettagliUtente(request.getParameter("CF"));
+			UtenteBean u = model.dettagliUtente(session.getAttribute("CF").toString());
 			u.setPassword(
-					u.getTipologia() == 1 ? request.getParameter("password").toString() : model.generatePassword(15));
-			if (model.modificaUtente(u.getCF(), u)) {
-				session.setAttribute("email", u.getEmail());
-				session.setAttribute("password", u.getPassword());
+					u.getTipologia() == 1
+							? request.getParameter("password").toString().length() > 10
+									&& request.getParameter("password").toString().length() < 64
+											? request.getParameter("password").toString()
+											: null
+							: model.generatePassword(15));
+			
+			if (u.getPassword()!=null && model.modificaUtente(u.getCF(), u)) {
+
+				if (session.getAttribute("tipologia").toString().equals("5")) {
+					session.setAttribute("emailUtente", u.getEmail());
+					session.setAttribute("passwordUtente", u.getPassword());
+				}
 				redirect = "/successo.jsp";
 			} else {
 				redirect = "/errore.jsp";
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		} catch (InvalidKeySpecException e) {
 			e.printStackTrace();
 		}
 
