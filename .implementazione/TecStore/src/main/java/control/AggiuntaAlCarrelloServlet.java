@@ -2,7 +2,10 @@ package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+
+import Bean.ArticoloBean;
 import model.GestioneCarrello;
+import model.GestioneVendita;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,6 +26,7 @@ public class AggiuntaAlCarrelloServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		GestioneCarrello model = new GestioneCarrello();
+		GestioneVendita model1 = new GestioneVendita();
 		HttpSession session = request.getSession(true);
 		String redirect = "";
 		RequestDispatcher dd;
@@ -39,11 +43,20 @@ public class AggiuntaAlCarrelloServlet extends HttpServlet {
 		session.setAttribute("successo", "AggiuntaAlCarrello");
 
 		try {
-			if (model.aggiuntaArticolo(session.getAttribute("CF").toString(), request.getParameter("IDArticolo"),
-					Integer.parseInt(request.getParameter("quantita"))))
-				redirect = "/successo.jsp";
-			else
+			ArticoloBean art = model1.dettagliArticolo(request.getParameter("IDArticolo"));
+			if (art.getQuantita() >= Integer.parseInt(request.getParameter("quantita").toString())) {
+				if (model.aggiuntaArticolo(session.getAttribute("CF").toString(), request.getParameter("IDArticolo"),
+						Integer.parseInt(request.getParameter("quantita"))))
+					redirect = "/successo.jsp";
+				else {
+					session.setAttribute("errore", "Errore aggiunta Articolo");
+					redirect = "/errore.jsp";
+				}
+
+			} else {
+				session.setAttribute("errore", "Errore quantita");
 				redirect = "/errore.jsp";
+			}
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");

@@ -33,7 +33,7 @@
 		%>
 		<tr>
 			<td><%=a.getNome()%></td>
-			<td><%=a.getQuantita()%></td>
+			<td><%=a.getQuantita() > 0 ? a.getQuantita() : "Non Disponibile"%></td>
 			<td><%=a.getPrezzo()%>&euro;</td>
 			<td>
 				<form action="DettagliArticolo" method="post">

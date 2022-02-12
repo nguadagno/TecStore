@@ -194,10 +194,7 @@ public class GestioneCarrello {
 			preparedStatement.setString(2, IDArticolo);
 			ResultSet rs = preparedStatement.executeQuery();
 			rs.next();
-			if (rs.getInt("quantita") > quantita)
-				aggiornamentoQuantitaCarrello(IDArticolo, -quantita);
-			else
-				aggiornamentoQuantitaCarrello(IDArticolo, quantita);
+			aggiornamentoQuantitaCarrello(IDArticolo, -(quantita - rs.getInt("quantita")));
 
 			preparedStatement = connection.prepareStatement(aggiuntaCarrelloQuery);
 			preparedStatement.setInt(1, quantita);

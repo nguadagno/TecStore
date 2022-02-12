@@ -99,18 +99,10 @@ return;
 		<form action="AggiuntaAlCarrello" method="post">
 			<input type="submit" value="Aggiungi al Carrello"> <input
 				type="hidden" name="IDArticolo" value="<%=risultato.getID()%>">
-			<select name="quantita">
-				<option value="10">1</option>
-				<option value="20">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-				<option value="6">6</option>
-				<option value="7">7</option>
-				<option value="8">8</option>
-				<option value="9">9</option>
-				<option value="10">10</option>
-			</select>
+			<input type="number" name="quantita" style="width: 50px;" value="1"
+				step="1" min="1"
+				max="<%=10 > risultato.getQuantita() ? risultato.getQuantita() : 10%>"
+				required>
 		</form>
 	</div>
 	<%
