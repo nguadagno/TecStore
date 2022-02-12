@@ -7,8 +7,7 @@
 <meta charset="ISO-8859-1">
 <%
 int tipologia = -1;
-if (session.getAttribute("tipologia") == null
-		|| session.getAttribute("tipologia").toString().isEmpty()) {
+if (session.getAttribute("tipologia") == null || session.getAttribute("tipologia").toString().isEmpty()) {
 %>
 <meta http-equiv="refresh" content="0; URL='index.jsp'" />
 <%
@@ -45,7 +44,6 @@ return;
 		</form>
 
 		<%
-		return;
 		} else if (tipologia == 3) { // magazziniere
 		%>
 
@@ -57,7 +55,6 @@ return;
 			<input type="submit" value="Gestione Ordini">
 		</form>
 		<%
-		return;
 		} else if (tipologia == 4) { // amministratore catalogo
 		%>
 		<form action="RicercaVendita" method="post">
@@ -81,9 +78,13 @@ return;
 			<input type="submit" value="Nuovo Dipendente">
 		</form>
 		<%
-		return;
 		}
 		%>
+	</div>
+	<div>
+		<form action="Deautenticazione" method="post">
+			<input type="submit" value="LogOut">
+		</form>
 	</div>
 </body>
 </html>
