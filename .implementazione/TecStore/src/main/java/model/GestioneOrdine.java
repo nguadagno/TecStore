@@ -112,7 +112,7 @@ public class GestioneOrdine {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(elencoOrdiniClienteQuery);
 			preparedStatement.setString(1, CF);
-			preparedStatement.setString(2, "%" + nome + "%");
+			preparedStatement.setString(2, "%" + (nome == null ? "" : nome) + "%");
 			preparedStatement.setInt(3, limit);
 
 			rs = preparedStatement.executeQuery();
@@ -205,7 +205,8 @@ public class GestioneOrdine {
 	}
 
 	public boolean cambiaStato(String ID, String stato) throws SQLException {
-		final Set<String> states = Set.of("Spedito", "InElaborazione", "Rimborsato", "RimborsoRifiutato", "InAttesaRimborso", "Annullato");
+		final Set<String> states = Set.of("Spedito", "InElaborazione", "Rimborsato", "RimborsoRifiutato",
+				"InAttesaRimborso", "Annullato");
 		if (!states.contains(stato))
 			return false;
 

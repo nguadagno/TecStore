@@ -70,6 +70,11 @@
 			</form>
 		</div>
 		<div>
+			<form action="ElencoOrdiniCliente" method="post">
+				<input type="submit" value="Storico Ordini">
+			</form>
+		</div>
+		<div>
 			<form action="Deautenticazione" method="post">
 				<input type="submit" value="LogOut">
 			</form>
