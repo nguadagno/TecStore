@@ -57,12 +57,13 @@
 		<p>
 			Benvenuto, <i> <%=((UtenteBean) session.getAttribute("utente")).getNome()%>
 				<%=((UtenteBean) session.getAttribute("utente")).getCognome()%> <BR>
-			</i> <a href="areaVenditori.jsp"><button>Area Venditori</button></a> <a
-				href="dettagliutente.jsp"><button>Dettagli profilo</button></a>
+			</i> <a href="areaVenditori.jsp"><button>Area Venditori</button></a>
+		<form action="DettagliUtente" method="post">
+			<input type="submit" value="Dettagli Utente">
+		</form>
 		<form action="getCarrello" method="post">
 			<input type="submit" value="Carrello">
 		</form>
-
 	</div>
 	<%
 	}
