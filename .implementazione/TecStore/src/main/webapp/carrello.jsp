@@ -4,13 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
-	$(":input").bind('keyup mouseup', function() {
-		$("form#aggiornamento").submit();
-	});
-</script>
+
 <meta charset="ISO-8859-1">
 <%
 int tipologia = -1;
