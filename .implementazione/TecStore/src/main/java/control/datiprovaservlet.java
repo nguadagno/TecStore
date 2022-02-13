@@ -53,15 +53,15 @@ public class datiprovaservlet extends HttpServlet {
 			g2.inserimentoNuovoArticolo("art4", "descr4", "CF1", 40, (float) 99.50, false);
 
 
-			g2.inserimentoNuovoArticolo("art0", "descr1", "CF4", 10, (float) 15.50, true);
-			g2.inserimentoNuovoArticolo("art2we", "descr2", "CF4", 15, (float) 30.50, true);
-			g2.inserimentoNuovoArticolo("art3q", "descr3", "CF4", 20, (float) 99.50, false);
-			g2.inserimentoNuovoArticolo("art4e", "descr4", "CF4", 40, (float) 99.50, false);
+			g2.inserimentoNuovoArticolo("art10", "descr1", "CF4", 10, (float) 15.50, true);
+			g2.inserimentoNuovoArticolo("art20", "descr2", "CF4", 15, (float) 30.50, true);
+			g2.inserimentoNuovoArticolo("art30", "descr3", "CF4", 20, (float) 99.50, false);
+			g2.inserimentoNuovoArticolo("art40", "descr4", "CF4", 40, (float) 99.50, false);
 
-			ArticoloBean a1 = g2.ricercaArticolo("art1", 10).get(0);
-			ArticoloBean a2 = g2.ricercaArticolo("art2", 10).get(0);
-			ArticoloBean a3 = g2.ricercaArticolo("art3", 10).get(0);
-			ArticoloBean a4 = g2.ricercaArticolo("art4", 10).get(0);
+			ArticoloBean a1 = g2.ricercaArticolo("art10", 10).get(0);
+			ArticoloBean a2 = g2.ricercaArticolo("art20", 10).get(0);
+			ArticoloBean a3 = g2.ricercaArticolo("art30", 10).get(0);
+			ArticoloBean a4 = g2.ricercaArticolo("art40", 10).get(0);
 
 			g4.aggiuntaArticolo("CF1", a1.getID(), 2);
 			g4.aggiuntaArticolo("CF1", a2.getID(), 4);
