@@ -54,24 +54,16 @@ public class RicercaOrdiniClienteServlet extends HttpServlet {
 			int limit = 10;
 			if (request.getParameter("limit") != null)
 				limit = Integer.parseInt(request.getParameter("limit"));
-			ArrayList<ArticoloBean> articoli = model1.ricercaArticolo(request.getParameter("nome"), limit);
 			ArrayList<OrdineBean> ordini = model.ricercaOrdiniCliente(session.getAttribute("CF").toString(),
 					request.getParameter("nome"), limit);
-
 			ArrayList<FotoBean> foto = model1.getFotoOrdini(ordini);
-			for (int i = 0; i < articoli.size(); i++) {
-				int j;
-				for (j = 0; j < ordini.size(); j++) {
-					if (articoli.get(i).getID().equals(ordini.get(j).getID()))
-						break;
-				}
-				if (j == ordini.size())
-					articoli.remove(i);
+
+			ArrayList<ArticoloBean> articoli = new ArrayList<ArticoloBean>();
+
+			for (OrdineBean o : ordini) {
+				articoli.add(model1.dettagliArticolo(o.getIDArticolo()));
 			}
-			articoli.sort(null);
-			ordini.sort(null);
-			System.out.println(articoli);
-			System.out.println(ordini);
+			
 			session.setAttribute("articoli", articoli);
 			session.setAttribute("ordini", ordini);
 			session.setAttribute("foto", foto);
