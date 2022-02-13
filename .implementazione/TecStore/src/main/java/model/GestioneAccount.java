@@ -162,9 +162,6 @@ public class GestioneAccount {
 				return false;
 
 			if (!utente.getPassword().equals(u.getPassword())) {
-				System.out.println(utente.getPassword());
-				System.out.println(u.getPassword());
-				System.out.println(utente.getPassword().equals(u.getPassword()));
 				if (utente.checkPassword(utente.getPassword())) {
 					utente.setPassword(encryptPassword(utente.getPassword()));
 				}

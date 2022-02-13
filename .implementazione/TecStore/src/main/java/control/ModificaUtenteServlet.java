@@ -54,7 +54,7 @@ public class ModificaUtenteServlet extends HttpServlet {
 				password = request.getParameter("password");
 			else
 				password = oldUtente.getPassword();
-			System.out.println(password);
+
 			int tipologia = 1;
 
 			if (session.getAttribute("tipologiaUtente") != null)
@@ -78,9 +78,6 @@ public class ModificaUtenteServlet extends HttpServlet {
 							? oldUtente.getCartaDiCredito()
 							: model.encryptString(request.getParameter("numeroCarta") + request.getParameter("CVV")
 									+ request.getParameter("anno") + request.getParameter("mese"));
-
-			System.out.println(new UtenteBean(CF, nome, cognome, email, password, via, numeroCivico, citta, provincia,
-					CAP, tipologia, cartaDiCredito));
 
 			if (model.modificaUtente(session.getAttribute("CF").toString(), new UtenteBean(CF, nome, cognome, email,
 					password, via, numeroCivico, citta, provincia, CAP, tipologia, cartaDiCredito))) {
