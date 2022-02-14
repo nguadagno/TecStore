@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+
 <%
 int tipologia = -1;
 if (session.getAttribute("tipologia") == null
@@ -24,6 +25,7 @@ if (tipologia != 1 && tipologia != 2) {
 return;
 }
 %>
+
 <title>Messaggi</title>
 </head>
 <body>

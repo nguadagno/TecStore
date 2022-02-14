@@ -7,8 +7,7 @@
 <meta charset="ISO-8859-1">
 <%
 int tipologia = -1;
-if (session.getAttribute("tipologia") == null
-		|| session.getAttribute("tipologia").toString().isEmpty()) {
+if (session.getAttribute("tipologia") == null || session.getAttribute("tipologia").toString().isEmpty()) {
 %>
 <meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
 <%
@@ -27,16 +26,14 @@ return;
 <title>Servizio Clienti</title>
 </head>
 <body>
-	<form>
-		<%
-		ArrayList<TicketBean> elenco = (ArrayList<TicketBean>) session.getAttribute("elenco");
-		%>
-		<div>
-			<a href="creazioneTicket.jsp">
-				<button>Nuovo Ticket</button>
-			</a>
-		</div>
-	</form>
+	<%
+	ArrayList<TicketBean> elenco = (ArrayList<TicketBean>) session.getAttribute("elenco");
+	%>
+	<div>
+		<a href="creazioneTicket.jsp">
+			<button>Nuovo Ticket</button>
+		</a>
+	</div>
 
 	<%
 	if (elenco == null) {
@@ -49,25 +46,34 @@ return;
 	%>
 	<table>
 		<tr>
-			<th>Codice Ticket</th>
+			<th>Stato</th>
 			<th>Tipologia</th>
 			<th>Data ultimo messaggio</th>
 			<th></th>
 		</tr>
 		<%
 		for (TicketBean ticket : elenco) {
+			String stato = "";
+			if (ticket.getStato().equals("InElaborazione"))
+				stato = "In Elaborazione";
+			else if (ticket.getStato().equals("InAttesa"))
+				stato = "In Attesa di Risposta";
+			else if (ticket.getStato().equals("Chiuso"))
+				stato = "Chiuso";
+			else if (ticket.getStato().equals("InAttesaCliente"))
+				stato = "In Attesa di Risposta da parte del cliente";
 		%>
 		<tr>
+			<td><%=stato%>
 			<td><%=ticket.getTipologia()%></td>
 			<td><%=ticket.getDataUltimoMessaggio()%></td>
-		</tr>
-		<div>
-			<form action="DettagliTicket" method="post">
-				<input type="hidden" value=<%=ticket.getIDTicket()%>><input
-					type="submit" value="Dettagli">
+			<td><form action="DettagliTicket" method="post">
+					<input type="hidden" name="IDTicket"
+						value=<%=ticket.getIDTicket()%>><input type="submit"
+						value="Dettagli">
 
-			</form>
-		</div>
+				</form></td>
+		</tr>
 		<%
 		}
 		%>

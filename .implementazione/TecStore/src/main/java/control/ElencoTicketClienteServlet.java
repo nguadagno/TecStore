@@ -46,15 +46,17 @@ public class ElencoTicketClienteServlet extends HttpServlet {
 		session.setAttribute("operazione", "elencoTicket");
 
 		try {
-			ArrayList<TicketBean> elenco = model.elencoTicketCliente(request.getParameter("CF"),
-					Integer.parseInt(request.getParameter("CF")));
+			int limit = 10;
+			if (request.getParameter("limit") != null)
+				limit = Integer.parseInt(request.getParameter("limit"));
+			ArrayList<TicketBean> elenco = model.elencoTicketCliente(session.getAttribute("CF").toString(), limit);
 			session.setAttribute("elenco", elenco);
 			redirect = "/centroassistenza.jsp";
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
-
+			e.printStackTrace();
 		}
 
 		dd = request.getRequestDispatcher(redirect);

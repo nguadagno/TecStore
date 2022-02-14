@@ -7,15 +7,12 @@
 <meta charset="ISO-8859-1">
 <%
 int tipologia = -1;
-if (session.getAttribute("tipologia") == null || session.getAttribute("tipologia").toString().isEmpty()) {
-%>
-<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
-<%
-return;
-} else
-tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
 
-if ((tipologia != 1 && tipologia != 2 && tipologia != 4) || session.getAttribute("dettagliArticolo") == null
+if (session.getAttribute("tipologia") != null)
+	tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
+
+if ((tipologia != 1 && tipologia != 2 && tipologia != 4 && tipologia != -1)
+		|| session.getAttribute("dettagliArticolo") == null
 //|| session.getAttribute("fotoArticolo") == null
 ) {
 %>
@@ -53,7 +50,6 @@ return;
 	return;
 	}
 	%>
-
 	<div align="center">
 		<h2>Nome:</h2>
 		<h4><%=risultato.getNome()%></h4>
@@ -115,6 +111,18 @@ return;
 				name="stato" value="InVendita"><br> <label><b>Rifiuta
 					Vendita</b></label> <input type="radio" name="stato" value="Rifiutato">
 			<br> <br> <input type="submit" value="Conferma">
+		</form>
+	</div>
+	<%
+	}
+
+	if (tipologia == -1) {
+	%>
+	<div align="right">
+		<form action="autenticazione.jsp" method="post">
+			<h4>Per aggiungere articoli al carrello è necessario essere
+				autenticati.</h4>
+			<input type="submit" value="Autenticazione">
 		</form>
 	</div>
 	<%

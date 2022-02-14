@@ -54,7 +54,7 @@ public class ModificaUtenteServlet extends HttpServlet {
 				password = request.getParameter("password");
 			else
 				password = oldUtente.getPassword();
-
+      
 			int tipologia = 1;
 
 			if (session.getAttribute("tipologiaUtente") != null)
