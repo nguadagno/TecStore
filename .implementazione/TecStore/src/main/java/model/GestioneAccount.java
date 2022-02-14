@@ -63,9 +63,8 @@ public class GestioneAccount {
 				|| utente.getEmail() == null || utente.getPassword() == null || utente.getVia() == null
 				|| utente.getProvincia() == null || utente.getCitta() == null || utente.getCF().isEmpty()
 				|| utente.getNome().isEmpty() || utente.getCognome().isEmpty() || utente.getEmail().isEmpty()
-				|| utente.getPassword().isEmpty() || utente.getVia().isEmpty() || utente.getNumeroCivico() < 0
-				|| utente.getProvincia().isEmpty() || utente.getCitta().isEmpty() || utente.getCAP() < 0
-				|| utente.getTipologia() < 0)
+				|| utente.getVia().isEmpty() || utente.getNumeroCivico() < 0 || utente.getProvincia().isEmpty()
+				|| utente.getCitta().isEmpty() || utente.getCAP() < 0 || utente.getTipologia() < 0)
 			return false;
 
 		String registrazioneUtente = "INSERT INTO utente (`CF`, `NOME`, `COGNOME`, `EMAIL`, `PASSWORD`, `VIA`, `NUMEROCIVICO`, `PROVINCIA`, `CITTA`, `CAP`, `TIPOLOGIA`) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
@@ -85,7 +84,7 @@ public class GestioneAccount {
 			preparedStatement.setInt(10, utente.getCAP());
 			preparedStatement.setInt(11, utente.getTipologia());
 
-			preparedStatement.executeUpdate();
+			preparedStatement.execute();
 
 			connection.commit();
 			return true;
@@ -107,7 +106,7 @@ public class GestioneAccount {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String deleteSQL = "DELETE FROM WHERE CF = ?;";
+		String deleteSQL = "DELETE FROM utente WHERE CF = ?;";
 
 		try {
 			if (getTipologia(CF) == 1)
@@ -263,7 +262,7 @@ public class GestioneAccount {
 		return null;
 	}
 
-	public ArrayList<UtenteBean> ricercaDipendenti(String CF, String testo) throws SQLException {
+	public ArrayList<UtenteBean> ricercaDipendenti(String testo) throws SQLException {
 		ArrayList<UtenteBean> result = new ArrayList<UtenteBean>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -271,10 +270,8 @@ public class GestioneAccount {
 		String searchTicketQuery = "SELECT * FROM utente WHERE (nome LIKE ? OR cognome LIKE ? OR CF LIKE ?) AND tipologia != 1;";
 
 		try {
-			if (getTipologia(CF) == 5)
-				connection = DriverManagerConnectionPool.getConnection("ammpersonale", "ammpersonale");
-			else
-				return result;
+			connection = DriverManagerConnectionPool.getConnection("ammpersonale", "ammpersonale");
+
 			preparedStatement = connection.prepareStatement(searchTicketQuery);
 			preparedStatement.setString(1, "%" + testo + "%");
 			preparedStatement.setString(2, "%" + testo + "%");
@@ -289,6 +286,8 @@ public class GestioneAccount {
 				result.add(u);
 			}
 			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -298,6 +297,7 @@ public class GestioneAccount {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return null;
 	}
 
 	public boolean autenticazione(String email, String password) throws SQLException {
