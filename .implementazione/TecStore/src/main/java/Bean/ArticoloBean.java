@@ -60,6 +60,9 @@ public class ArticoloBean {
 	public String getID() {
 		return ID;
 	}
+	public void setID(String id) {
+		this.ID = id;
+	}
 
 	public String getNome() {
 		return nome;
