@@ -44,12 +44,19 @@ public class ConfermaOrdineServlet extends HttpServlet {
 		session.setAttribute("operazione", "ConfermaOrdine");
 
 		try {
-			if (model.cambiaStato(request.getParameter("IDOrdine"), request.getParameter("stato"))
-					&& model.setCodiceTracciamento(request.getParameter("IDOrdine"), request.getParameter("Tracking")))
+			if (model.cambiaStato(request.getParameter("IDOrdine"), request.getParameter("stato"))) {
 				redirect = "/successo.jsp";
-			else
+				if (request.getParameter("stato").equals("Spedito")) {
+					if (!model.setCodiceTracciamento(request.getParameter("IDOrdine"),
+							request.getParameter("Tracking"))) {
+						session.setAttribute("errore", "cambiastato_tracking");
+						redirect = "/errore.jsp";
+					}
+				}
+			} else {
+				session.setAttribute("errore", "cambiastato_tracking");
 				redirect = "/errore.jsp";
-
+			}
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");

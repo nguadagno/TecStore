@@ -32,7 +32,8 @@ public class AnnullamentoOrdineServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().equals("3")) {
+		if (session.getAttribute("tipologia") == null || (!session.getAttribute("tipologia").toString().equals("3")
+				&& !session.getAttribute("tipologia").toString().equals("1"))) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -44,7 +45,7 @@ public class AnnullamentoOrdineServlet extends HttpServlet {
 		session.setAttribute("operazione", "annullamentoOrdine");
 
 		try {
-			if (model.cambiaStato(request.getParameter("IDOrdine"), request.getParameter("Stato")))
+			if (model.cambiaStato(request.getParameter("IDOrdine"), "Annullato"))
 				redirect = "/successo.jsp";
 			else
 				redirect = "/errore.jsp";
@@ -53,6 +54,7 @@ public class AnnullamentoOrdineServlet extends HttpServlet {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
+			e.printStackTrace();
 		}
 
 		dd = request.getRequestDispatcher(redirect);

@@ -15,7 +15,7 @@ return;
 
 tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
 
-if (tipologia != 3) {
+if (tipologia != 3 && tipologia != 1) {
 %>
 <meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
 <%
@@ -37,8 +37,10 @@ return;
 	return;
 	}
 
-	if (request.getParameter("operazione") != null) {
-	if (request.getParameter("operazione").equals("spedizione")) {
+	if (tipologia == 3) {
+	if (session.getAttribute("operazione").toString() != null) {
+
+		if (session.getAttribute("operazione").toString().equals("spedizione")) {
 	%>
 	<div align=center>
 		<h2>
@@ -70,13 +72,14 @@ return;
 			<div>
 				<form action="ConfermaOrdine" method="post">
 					<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
-					<input type=hidden name=stato value="Rimborsato"><input
-						type="submit" value="Conferma rimborso">
+					<input type=hidden name=stato value="Spedito"> <input
+						type=text max=15 name=Tracking> <BR> <input
+						type="submit" value="Conferma spedizione">
 				</form>
 				<form action="ConfermaOrdine" method="post">
 					<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
-					<input type=hidden name=stato value="RimborsoRifiutato"><input
-						type="submit" value="Rifiuta rimborso">
+					<input type=hidden name=stato value="Annullato"><input
+						type="submit" value="Annulla ordine">
 				</form>
 			</div>
 		</div>
@@ -112,53 +115,70 @@ return;
 			<hr>
 			<br>
 		</div>
-			<div>
-				<form action="RimborsoMagazziniere" method="post">
-					<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
-					<input type=hidden name=stato value="Rimborsato"><input
-						type="submit" value="Conferma rimborso">
-				</form>
-				<form action="RimborsoMagazziniere" method="post">
-					<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
-					<input type=hidden name=stato value="RimborsoRifiutato"> <input
-						type="submit" value="Rifiuta rimborso">
-				</form>
-			</div>
+		<div>
+			<form action="RimborsoMagazziniere" method="post">
+				<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
+				<input type=hidden name=stato value="Rimborsato"><input
+					type="submit" value="Conferma rimborso">
+			</form>
+			<form action="RimborsoMagazziniere" method="post">
+				<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
+				<input type=hidden name=stato value="RimborsoRifiutato"> <input
+					type="submit" value="Rifiuta rimborso">
+			</form>
 		</div>
-
 	</div>
+
 	<%
 	}
 	}
-	else {
+	} else {
 	%>
+	<div>
+		<div>
+			<h4>
+				<b>Nome articolo:</b>
+			</h4>
+			<label><%=articolo.getNome()%></label>
+		</div>
 		<div>
 			<h4>
 				<b> Prezzo: </b>
 				<%=articolo.getPrezzo()%>&euro;
-
 			</h4>
 		</div>
-		<div>
-			<h4>
-				<b>Indirizzo di spedizione:</b>
-			</h4>
-			<label><b>Via:</b><%=cliente.getVia()%>, <b>N:</b> <%=cliente.getNumeroCivico()%>.</label><br>
-			<label><b>Citta:</b> <%=cliente.getCitta()%>, <%=cliente.getProvincia()%>,<b>
-					CAP:</b> <%=cliente.getCAP()%> </label><br> <br> <br>
-			<hr>
-			<br>
-		</div>
-			<div>
-				<form action="RimborsoCliente" method="post">
-					<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
-					<input type="submit" value="Richiedi rimborso">
-				</form>
-				<form action="AnnullamentoOrdine" method="post">
-					<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
-					 <input type="submit" value="Richiedi annullamento ordine">
-				</form>
-			</div>
+	</div>
+	<div>
+		<h4>
+			<b>Indirizzo di spedizione:</b>
+		</h4>
+		<label><b>Via:</b><%=cliente.getVia()%>, <b>N:</b> <%=cliente.getNumeroCivico()%>.</label><br>
+		<label><b>Citta:</b> <%=cliente.getCitta()%>, <%=cliente.getProvincia()%>,<b>
+				CAP:</b> <%=cliente.getCAP()%> </label><br> <br> <br>
+		<hr>
+		<br>
+	</div>
+	<div>
+		<%
+		if (ordine.getStato().equals("Spedito")) {
+		%>
+		<form action="RimborsoCliente" method="post">
+			<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
+			<input type="submit" value="Richiedi rimborso">
+		</form>
+		<%
+		}
+		if (!ordine.getStato().equals("Spedito") && !ordine.getStato().equals("Annullato")
+				&& !ordine.getStato().equals("Rimborsato") && !ordine.getStato().equals("RimborsoRifiutato")) {
+		%>
+		<form action="AnnullamentoOrdine" method="post">
+			<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
+			<input type="submit" value="Richiedi annullamento ordine">
+		</form>
+		<%
+		}
+		%>
+	</div>
 	<%
 	}
 	%>

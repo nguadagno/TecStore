@@ -112,7 +112,7 @@ public class GestioneOrdine {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(elencoOrdiniClienteQuery);
 			preparedStatement.setString(1, CF);
-			preparedStatement.setString(2, "%" + nome + "%");
+			preparedStatement.setString(2, "%" + (nome == null ? "" : nome) + "%");
 			preparedStatement.setInt(3, limit);
 
 			rs = preparedStatement.executeQuery();
@@ -205,7 +205,8 @@ public class GestioneOrdine {
 	}
 
 	public boolean cambiaStato(String ID, String stato) throws SQLException {
-		final Set<String> states = Set.of("Spedito", "InElaborazione", "Rimborsato", "RimborsoRifiutato", "InAttesaRimborso", "Annullato");
+		final Set<String> states = Set.of("Spedito", "InElaborazione", "Rimborsato", "RimborsoRifiutato",
+				"InAttesaRimborso", "Annullato");
 		if (!states.contains(stato))
 			return false;
 
@@ -214,6 +215,15 @@ public class GestioneOrdine {
 		String cambiaStatoQuery = "UPDATE ordine SET stato = ? WHERE ID = ?;";
 
 		try {
+			String statoOld = getStatoOrdine(ID);
+			if ((statoOld.equals("Spedito") && stato.equals("Annullato"))
+					|| (statoOld.equals("Rimborsato") || (statoOld.equals("Annullato")))
+					|| (statoOld.equals("InAttesaRimborso")
+							&& (!stato.equals("Rimborsato") && !stato.equals("RimborsoRifiutato")))
+					|| (statoOld.equals("InElaborazione") && (!stato.equals("Spedito") && !stato.equals("Annullato")))
+					|| (statoOld.equals("InAttesa") && (!stato.equals("Spedito") && !stato.equals("Annullato"))))
+				return false;
+
 			connection = DriverManagerConnectionPool.getConnection("magazziniere", "magazziniere");
 
 			preparedStatement = connection.prepareStatement(cambiaStatoQuery);
@@ -221,6 +231,7 @@ public class GestioneOrdine {
 			preparedStatement.setString(2, ID);
 			preparedStatement.executeUpdate();
 			connection.commit();
+
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -234,6 +245,33 @@ public class GestioneOrdine {
 			}
 		}
 		return false;
+	}
+
+	public String getStatoOrdine(String ID) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String cambiaStatoQuery = "SELECT stato FROM ordine WHERE ID = ?;";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection("magazziniere", "magazziniere");
+
+			preparedStatement = connection.prepareStatement(cambiaStatoQuery);
+			preparedStatement.setString(1, ID);
+			ResultSet rs = preparedStatement.executeQuery();
+			if (rs.next())
+				return rs.getString("stato");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		return "";
 	}
 
 	public boolean setCodiceTracciamento(String IDOrdine, String codiceTracking) throws SQLException {

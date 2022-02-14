@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import Bean.ArticoloBean;
 import Bean.FotoBean;
 import Bean.OrdineBean;
 import model.GestioneOrdine;
@@ -50,11 +51,20 @@ public class RicercaOrdiniClienteServlet extends HttpServlet {
 		session.setAttribute("operazione", "ElencoOrdiniCliente");
 
 		try {
+			int limit = 10;
+			if (request.getParameter("limit") != null)
+				limit = Integer.parseInt(request.getParameter("limit"));
 			ArrayList<OrdineBean> ordini = model.ricercaOrdiniCliente(session.getAttribute("CF").toString(),
-					request.getParameter("nome"), Integer.parseInt(request.getParameter("limit")));
-
+					request.getParameter("nome"), limit);
 			ArrayList<FotoBean> foto = model1.getFotoOrdini(ordini);
 
+			ArrayList<ArticoloBean> articoli = new ArrayList<ArticoloBean>();
+
+			for (OrdineBean o : ordini) {
+				articoli.add(model1.dettagliArticolo(o.getIDArticolo()));
+			}
+			
+			session.setAttribute("articoli", articoli);
 			session.setAttribute("ordini", ordini);
 			session.setAttribute("foto", foto);
 

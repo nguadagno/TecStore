@@ -50,13 +50,14 @@ public class DettagliOrdineServlet extends HttpServlet {
 			return;
 		}
 
-		session.setAttribute("operazione", "dettagliOrdine");
-
 		try {
 			OrdineBean ordine = model.dettagliOrdineByID(request.getParameter("IDOrdine"));
 			session.setAttribute("ordine", ordine);
 			session.setAttribute("cliente", model2.dettagliUtente(ordine.getIDCliente()));
 			session.setAttribute("articolo", model1.dettagliArticolo(ordine.getIDArticolo()));
+
+			session.setAttribute("operazione",
+					request.getParameter("operazione") == null ? "" : request.getParameter("operazione"));
 
 			ArrayList<FotoBean> foto = model1.getFoto(request.getParameter("IDArticolo"));
 			session.setAttribute("foto", foto);
@@ -68,6 +69,7 @@ public class DettagliOrdineServlet extends HttpServlet {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
 			redirect = "/errore.jsp";
+			e.printStackTrace();
 		}
 
 		dd = request.getRequestDispatcher(redirect);

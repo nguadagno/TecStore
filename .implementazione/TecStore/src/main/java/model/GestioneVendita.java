@@ -293,6 +293,39 @@ public class GestioneVendita {
 		}
 	}
 
+	public ArrayList<ArticoloBean> ricercaArticolo(String nome) throws SQLException {
+		ArrayList<ArticoloBean> result = new ArrayList<ArticoloBean>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		String searchArticoloQuery = "SELECT * FROM articolo WHERE Nome LIKE ? and stato = 'InVendita';";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			preparedStatement = connection.prepareStatement(searchArticoloQuery);
+			preparedStatement.setString(1, "%" + nome + "%");
+			rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				ArticoloBean articolo = new ArticoloBean(rs.getString("ID"), rs.getString("Nome"),
+						rs.getString("Descrizione"), rs.getString("IDVenditore"), rs.getInt("Quantita"),
+						rs.getFloat("Prezzo"), rs.getString("Stato"), rs.getString("IDCentralinista"),
+						rs.getDate("Data"), rs.getBoolean("Rimborsabile"));
+				result.add(articolo);
+			}
+
+			return result;
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+
 	public ArrayList<ArticoloBean> elencoVenditeCentralinista(int limit) throws SQLException {
 		ArrayList<ArticoloBean> result = new ArrayList<ArticoloBean>();
 		Connection connection = null;
