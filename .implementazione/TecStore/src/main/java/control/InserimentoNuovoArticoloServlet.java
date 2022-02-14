@@ -35,7 +35,8 @@ public class InserimentoNuovoArticoloServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (session.getAttribute("tipologia") == null || (!session.getAttribute("tipologia").toString().equals("1") && !session.getAttribute("tipologia").toString().equals("4"))) {
+		if (session.getAttribute("tipologia") == null || (!session.getAttribute("tipologia").toString().equals("1")
+				&& !session.getAttribute("tipologia").toString().equals("4"))) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -48,8 +49,7 @@ public class InserimentoNuovoArticoloServlet extends HttpServlet {
 
 		String nome = request.getParameter("nome");
 		String descrizione = request.getParameter("descrizione");
-		String IDVenditore = session.getAttribute("CF") == null ? null
-				: session.getAttribute("CF").toString();
+		String IDVenditore = session.getAttribute("CF") == null ? null : session.getAttribute("CF").toString();
 		int quantita = request.getParameter("quantita") == null ? -1
 				: Integer.parseInt(request.getParameter("quantita"));
 		float prezzo = request.getParameter("prezzo") == null ? -1 : Float.parseFloat(request.getParameter("prezzo"));
@@ -69,7 +69,7 @@ public class InserimentoNuovoArticoloServlet extends HttpServlet {
 		try {
 			String IDArticolo;
 			if (!(IDArticolo = model.inserimentoNuovoArticolo(nome, descrizione, IDVenditore, quantita, prezzo,
-					rimborsabile)).isEmpty() )//&& model.inserimentoFoto(IDArticolo, foto))
+					rimborsabile)).isEmpty())// && model.inserimentoFoto(IDArticolo, foto))
 				redirect = "/successo.jsp";
 			else
 				redirect = "/errore.jsp";
@@ -82,6 +82,7 @@ public class InserimentoNuovoArticoloServlet extends HttpServlet {
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
+			return;
 		}
 
 		dd.forward(request, response);
