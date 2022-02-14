@@ -61,7 +61,6 @@ public class GestioneCarrello {
 			preparedStatement = connection.prepareStatement(aggiuntaCarrelloQuery);
 			preparedStatement.setInt(1, quantita);
 			preparedStatement.setString(2, IDArticolo);
-			System.out.println(preparedStatement);
 			preparedStatement.execute();
 
 			connection.commit();
@@ -104,7 +103,6 @@ public class GestioneCarrello {
 			preparedStatement.setString(1, CF);
 			preparedStatement.setString(2, IDArticolo);
 			preparedStatement.setInt(3, quantita);
-			System.out.println(preparedStatement);
 			preparedStatement.execute();
 
 			connection.commit();

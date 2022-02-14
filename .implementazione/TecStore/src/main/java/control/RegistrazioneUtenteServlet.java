@@ -51,8 +51,6 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 				Integer.parseInt(request.getParameter("numerocivico")), request.getParameter("citta"),
 				request.getParameter("provincia"), Integer.parseInt(request.getParameter("CAP")), tipologia, "");
 
-		System.out.println(utente);
-
 		session.setAttribute("operazione", "registrazioneUtente");
 		try {
 			if (model.registrazioneUtente(utente)) {

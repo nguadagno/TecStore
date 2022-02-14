@@ -57,8 +57,7 @@ public class ModificaArticoloServlet extends HttpServlet {
 				: Boolean.parseBoolean(request.getParameter("rimborsabile"));
 		@SuppressWarnings("unchecked")
 		ArrayList<FotoBean> foto = (ArrayList<FotoBean>) request.getAttribute("foto");
-		System.out.println(IDArticolo + " " + nome + " " + descrizione + " " + IDVenditore + " " + quantita + " "
-				+ prezzo + " " + rimborsabile);
+		
 		if (IDArticolo == null || nome == null || descrizione == null || IDVenditore == null || rimborsabile == null
 				|| IDArticolo.isEmpty() || nome.isEmpty() || descrizione.isEmpty() || IDVenditore.isEmpty()
 				|| quantita < 1 || prezzo < 0.01) {
