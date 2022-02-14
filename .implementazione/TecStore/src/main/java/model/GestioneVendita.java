@@ -160,6 +160,11 @@ public class GestioneVendita {
 		}
 	}
 
+	public String inserimentoNuovoArticolo(ArticoloBean a) throws SQLException {
+		return inserimentoNuovoArticolo(a.getNome(), a.getDescrizione(), a.getIDVenditore(), a.getQuantita(),
+				a.getPrezzo(), a.isRimborsabile());
+	}
+
 	public String inserimentoNuovoArticolo(String nome, String descrizione, String IDVenditore, int quantita,
 			float prezzo, Boolean rimborsabile) throws SQLException {
 		if (nome == null || descrizione == null || IDVenditore == null || rimborsabile == null || quantita < 1
@@ -204,6 +209,9 @@ public class GestioneVendita {
 
 			connection.commit();
 			return IDArticolo;
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -213,6 +221,13 @@ public class GestioneVendita {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return "";
+
+	}
+
+	public boolean modificaArticolo(ArticoloBean a) throws SQLException {
+		return modificaArticolo(a.getID(), a.getNome(), a.getDescrizione(), a.getIDVenditore(), a.getQuantita(),
+				a.getPrezzo(), a.isRimborsabile());
 	}
 
 	public boolean modificaArticolo(String IDArticolo, String nome, String descrizione, String IDVenditore,
