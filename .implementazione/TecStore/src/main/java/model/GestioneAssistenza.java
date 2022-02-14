@@ -4,13 +4,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Set;
 
-import Bean.ClienteBean;
 import Bean.MessaggioBean;
 import Bean.TicketBean;
 import Bean.UtenteBean;
 
 public class GestioneAssistenza {
-	public ArrayList<TicketBean> elencoTicketCliente(ClienteBean c, int limit) throws SQLException {
+	public ArrayList<TicketBean> elencoTicketCliente(UtenteBean c, int limit) throws SQLException {
 		return elencoTicketCliente(c.getCF(), limit);
 	}
 

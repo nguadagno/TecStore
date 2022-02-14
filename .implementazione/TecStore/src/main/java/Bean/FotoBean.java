@@ -49,7 +49,8 @@ public class FotoBean {
 	}
 
 	public void setFoto(byte[] foto) {
-		this.foto = foto;
+		if (foto != null && foto.length != 0)
+			this.foto = foto;
 	}
 
 }

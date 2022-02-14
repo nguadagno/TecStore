@@ -2,6 +2,7 @@ package Bean;
 
 import java.sql.Date;
 import java.util.Objects;
+import java.util.Set;
 
 public class TicketBean {
 
@@ -59,7 +60,9 @@ public class TicketBean {
 	}
 
 	public void setStato(String stato) {
-		this.stato = stato;
+		final Set<String> states = Set.of("InElaborazione", "InAttesa", "Chiuso", "InAttesaCliente");
+		if (states.contains(stato))
+			this.stato = stato;
 	}
 
 	public Date getDataUltimoMessaggio() {

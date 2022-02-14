@@ -60,8 +60,10 @@ public class ArticoloBean {
 	public String getID() {
 		return ID;
 	}
+
 	public void setID(String id) {
-		this.ID = id;
+		if (id != null && !id.isEmpty())
+			this.ID = id;
 	}
 
 	public String getNome() {
@@ -69,7 +71,8 @@ public class ArticoloBean {
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		if (nome != null && !nome.isEmpty())
+			this.nome = nome;
 	}
 
 	public String getDescrizione() {
@@ -77,7 +80,8 @@ public class ArticoloBean {
 	}
 
 	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
+		if (descrizione != null && !descrizione.isEmpty())
+			this.descrizione = descrizione;
 	}
 
 	public String getIDVenditore() {
@@ -117,7 +121,8 @@ public class ArticoloBean {
 	}
 
 	public void setIDCentralinista(String iDCentralinista) {
-		IDCentralinista = iDCentralinista;
+		if (iDCentralinista != null && !iDCentralinista.isEmpty())
+			IDCentralinista = iDCentralinista;
 	}
 
 	public Date getData() {
@@ -125,7 +130,8 @@ public class ArticoloBean {
 	}
 
 	public void setData(Date data) {
-		this.data = data;
+		if (data != null)
+			this.data = data;
 	}
 
 	public boolean isRimborsabile() {

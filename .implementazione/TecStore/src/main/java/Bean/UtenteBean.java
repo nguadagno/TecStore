@@ -70,6 +70,12 @@ public class UtenteBean {
 		// https://web.archive.org/web/20220106162522/https://www.w3resource.com/javascript/form/email-validation.php
 		return email.matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$");
 	}
+	
+	public boolean checkCartaDiCredito(String cartaDiCredito) {
+		// Reference: https://stackoverflow.com/a/9315696
+		return cartaDiCredito.matches(
+				"^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})$");
+	}
 
 	public boolean checkPassword(String password) {
 		return (password.length() >= 10) && (password.length() <= 64);
@@ -107,7 +113,8 @@ public class UtenteBean {
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		if (nome != null && !nome.isEmpty())
+			this.nome = nome;
 	}
 
 	public String getCognome() {
@@ -115,7 +122,8 @@ public class UtenteBean {
 	}
 
 	public void setCognome(String cognome) {
-		this.cognome = cognome;
+		if (cognome != null && !cognome.isEmpty())
+			this.cognome = cognome;
 	}
 
 	public String getEmail() {
@@ -141,7 +149,8 @@ public class UtenteBean {
 	}
 
 	public void setVia(String via) {
-		this.via = via;
+		if (via != null && !via.isEmpty())
+			this.via = via;
 	}
 
 	public int getNumeroCivico() {
@@ -157,7 +166,8 @@ public class UtenteBean {
 	}
 
 	public void setCitta(String citta) {
-		this.citta = citta;
+		if (citta != null && !citta.isEmpty())
+			this.citta = citta;
 	}
 
 	public String getProvincia() {
@@ -165,7 +175,8 @@ public class UtenteBean {
 	}
 
 	public void setProvincia(String provincia) {
-		this.provincia = provincia;
+		if (provincia != null && !provincia.isEmpty())
+			this.provincia = provincia;
 	}
 
 	public int getCAP() {
@@ -189,7 +200,8 @@ public class UtenteBean {
 	}
 
 	public void setCartaDiCredito(String cartaDiCredito) {
-		this.cartaDiCredito = cartaDiCredito;
+		if (cartaDiCredito != null && !cartaDiCredito.isEmpty() && checkCartaDiCredito(cartaDiCredito))
+			this.cartaDiCredito = cartaDiCredito;
 	}
 
 }
