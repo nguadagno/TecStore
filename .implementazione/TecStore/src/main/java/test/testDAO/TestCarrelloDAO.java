@@ -15,6 +15,7 @@ import org.junit.runners.MethodSorters;
 
 import Bean.ArticoloBean;
 import Bean.UtenteBean;
+import model.DriverManagerConnectionPool;
 import model.GestioneAccount;
 import model.GestioneCarrello;
 import model.GestioneVendita;
@@ -63,11 +64,7 @@ class TestCarrelloDAO {
 
 	@AfterAll
 	void tearDownAfterClass() throws Exception {
-		gestioneAccount.eliminaUtente(utente.getCF(), utente.getCF());
-		gestioneVendita.rimozioneArticolo(utente.getCF(), articolo.getID());
-		gestioneVendita.rimozioneArticolo(utente.getCF(), articolo1.getID());
-		gestioneVendita.rimozioneArticolo(utente.getCF(), articolo2.getID());
-		gestioneVendita.rimozioneArticolo(utente.getCF(), articolo3.getID());
+		DriverManagerConnectionPool.resetDB(DriverManagerConnectionPool.getConnection("root", "root"));
 	}
 
 	@Test

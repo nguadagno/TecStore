@@ -2,12 +2,14 @@ package test.testDAO;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.FileNotFoundException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Bean.UtenteBean;
+import model.DriverManagerConnectionPool;
 import model.GestioneAccount;
 
 import org.junit.FixMethodOrder;
@@ -44,11 +46,10 @@ class TestUtenteDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@AfterAll
-	public void cleanUp() throws SQLException {
-		gestioneAccount.eliminaUtente(utente.getCF(), utente.getCF());
-		gestioneAccount.eliminaUtente(dipendente.getCF(), dipendente.getCF());
+	public void cleanUp() throws SQLException, FileNotFoundException {
+		DriverManagerConnectionPool.resetDB(DriverManagerConnectionPool.getConnection("root", "root"));
 	}
 
 	@SuppressWarnings("static-access")
