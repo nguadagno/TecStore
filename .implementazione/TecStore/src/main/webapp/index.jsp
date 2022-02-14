@@ -70,9 +70,15 @@
 			</form>
 		</div>
 		<div>
+      
+			<form action="ElencoOrdiniCliente" method="post">
+				<input type="submit" value="Storico Ordini">
+      </form> 
+      
 			<form action="ElencoTicketCliente" method="post">
 				<input type="submit" value="Servizio Clienti">
 			</form>
+        
 		</div>
 		<div>
 			<form action="Deautenticazione" method="post">
