@@ -11,6 +11,7 @@ import Bean.UtenteBean;
 import model.GestioneAccount;
 
 import org.junit.FixMethodOrder;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -20,12 +21,12 @@ import org.junit.runners.MethodSorters;
 @TestInstance(Lifecycle.PER_CLASS)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class TestUtenteDAO {
-	GestioneAccount model = new GestioneAccount();
+	GestioneAccount gestioneAccount = new GestioneAccount();
 	String passwordUtente = "password123";
 	UtenteBean utente = new UtenteBean("RSSMRA84B02H501C", "Mario", "Rossi", "mariorossi@email.tld", passwordUtente,
 			"Roma", 1, "Roma", "RM", 100, 1, "");
 	UtenteBean dipendente = new UtenteBean("VRDLGU80A01F205T", "Luigi", "Verdi", "luigiverdi@email.tld",
-			model.generatePassword(15), "Milano", 1, "Milano", "MI", 200, 2, "");
+			gestioneAccount.generatePassword(15), "Milano", 1, "Milano", "MI", 200, 2, "");
 
 	public TestUtenteDAO() {
 	}
@@ -33,8 +34,8 @@ class TestUtenteDAO {
 	@BeforeAll
 	public void setUp() {
 		try {
-			model.registrazioneUtente(utente);
-			model.registrazioneUtente(dipendente);
+			gestioneAccount.registrazioneUtente(utente);
+			gestioneAccount.registrazioneUtente(dipendente);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (InvalidKeySpecException e) {
@@ -43,12 +44,28 @@ class TestUtenteDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	@AfterAll
+	public void cleanUp() throws SQLException {
+		gestioneAccount.eliminaUtente(utente.getCF(), utente.getCF());
+		gestioneAccount.eliminaUtente(dipendente.getCF(), dipendente.getCF());
+	}
 
 	@SuppressWarnings("static-access")
 	@Test
 	public void exists() {
 		try {
-			assertEquals(true, model.exists(utente.getCF()));
+			assertEquals(true, gestioneAccount.exists(utente.getCF()));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@SuppressWarnings("static-access")
+	@Test
+	public void existsNot() {
+		try {
+			assertEquals(false, gestioneAccount.exists(""));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -57,7 +74,25 @@ class TestUtenteDAO {
 	@Test
 	public void autenticazione() {
 		try {
-			assertEquals(true, model.autenticazione(utente.getEmail(), passwordUtente));
+			assertEquals(true, gestioneAccount.autenticazione(utente.getEmail(), passwordUtente));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void autenticazioneNoPassword() {
+		try {
+			assertEquals(false, gestioneAccount.autenticazione(utente.getEmail(), ""));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void autenticazioneNoEmail() {
+		try {
+			assertEquals(false, gestioneAccount.autenticazione("", passwordUtente));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -66,13 +101,32 @@ class TestUtenteDAO {
 	@Test
 	public void dettagliUtente() {
 		try {
-			UtenteBean u = model.dettagliUtente(utente.getCF());
-			boolean status = (u.getCAP() == utente.getCAP() && u.getCognome().equals((utente.getCognome()))
-					&& u.getNome().equals(utente.getNome()) && u.getEmail().equals(utente.getEmail())
-					&& u.getProvincia().equals(utente.getProvincia()) && u.getTipologia() == utente.getTipologia()
-					&& u.getVia().equals(utente.getVia()) && u.getNumeroCivico() == utente.getNumeroCivico()
-					&& u.getTipologia() == utente.getTipologia());
+			UtenteBean u = gestioneAccount.dettagliUtente(utente.getCF());
+			boolean status = false;
+			if (u != null)
+				status = (u.getCAP() == utente.getCAP() && u.getCognome().equals((utente.getCognome()))
+						&& u.getNome().equals(utente.getNome()) && u.getEmail().equals(utente.getEmail())
+						&& u.getProvincia().equals(utente.getProvincia()) && u.getTipologia() == utente.getTipologia()
+						&& u.getVia().equals(utente.getVia()) && u.getNumeroCivico() == utente.getNumeroCivico()
+						&& u.getTipologia() == utente.getTipologia());
 			assertEquals(true, status);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void dettagliUtenteNot() {
+		try {
+			UtenteBean u = gestioneAccount.dettagliUtente("");
+			boolean status = false;
+			if (u != null)
+				status = (u.getCAP() == utente.getCAP() && u.getCognome().equals((utente.getCognome()))
+						&& u.getNome().equals(utente.getNome()) && u.getEmail().equals(utente.getEmail())
+						&& u.getProvincia().equals(utente.getProvincia()) && u.getTipologia() == utente.getTipologia()
+						&& u.getVia().equals(utente.getVia()) && u.getNumeroCivico() == utente.getNumeroCivico()
+						&& u.getTipologia() == utente.getTipologia());
+			assertEquals(false, status);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -81,9 +135,17 @@ class TestUtenteDAO {
 	@Test
 	public void getTipologia() {
 		try {
-			UtenteBean u = model.dettagliUtente(utente.getCF());
-
+			UtenteBean u = gestioneAccount.dettagliUtente(utente.getCF());
 			assertEquals(u.getTipologia(), utente.getTipologia());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void getTipologiaNot() {
+		try {
+			assertEquals(null, gestioneAccount.dettagliUtente(""));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -93,9 +155,19 @@ class TestUtenteDAO {
 	public void modificaUtente() throws NoSuchAlgorithmException, InvalidKeySpecException {
 		try {
 			utente.setCognome("Verdi");
-			model.modificaUtente(utente.getCF(), utente);
-			UtenteBean u = model.dettagliUtente(utente.getCF());
-			assertEquals("Verdi", u.getCognome());
+			gestioneAccount.modificaUtente(utente.getCF(), utente);
+			assertEquals("Verdi", gestioneAccount.dettagliUtente(utente.getCF()).getCognome());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void modificaUtenteNot() throws NoSuchAlgorithmException, InvalidKeySpecException {
+		try {
+			utente.setCognome("");
+			gestioneAccount.modificaUtente(utente.getCF(), utente);
+			assertNotEquals("", gestioneAccount.dettagliUtente(utente.getCF()).getCognome());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -106,8 +178,20 @@ class TestUtenteDAO {
 		try {
 			passwordUtente = "password12345";
 			utente.setPassword(passwordUtente);
-			assertEquals(true, model.modificaUtente(utente.getCF(), utente)
-					&& model.autenticazione(utente.getEmail(), passwordUtente));
+			assertEquals(true, gestioneAccount.modificaUtente(utente.getCF(), utente)
+					&& gestioneAccount.autenticazione(utente.getEmail(), passwordUtente));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void modificaPasswordNot() throws NoSuchAlgorithmException, InvalidKeySpecException {
+		try {
+			passwordUtente = "";
+			utente.setPassword(passwordUtente);
+			assertEquals(false, gestioneAccount.modificaUtente(utente.getCF(), utente)
+					&& gestioneAccount.autenticazione(utente.getEmail(), passwordUtente));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -116,7 +200,7 @@ class TestUtenteDAO {
 	@Test
 	public void ricercaDipendenti() {
 		try {
-			ArrayList<UtenteBean> risultati = model.ricercaDipendenti("erdi");
+			ArrayList<UtenteBean> risultati = gestioneAccount.ricercaDipendenti("erdi");
 			boolean status = false;
 			for (UtenteBean u : risultati) {
 				status = (u.getCAP() == dipendente.getCAP() && u.getCognome().equals((dipendente.getCognome()))
@@ -135,12 +219,34 @@ class TestUtenteDAO {
 		}
 	}
 
+	@Test
+	public void ricercaDipendentiNot() {
+		try {
+			ArrayList<UtenteBean> risultati = gestioneAccount.ricercaDipendenti("");
+			boolean status = false;
+			for (UtenteBean u : risultati) {
+				status = (u.getCAP() == dipendente.getCAP() && u.getCognome().equals((dipendente.getCognome()))
+						&& u.getNome().equals(dipendente.getNome()) && u.getEmail().equals(dipendente.getEmail())
+						&& u.getProvincia().equals(dipendente.getProvincia())
+						&& u.getTipologia() == dipendente.getTipologia() && u.getVia().equals(dipendente.getVia())
+						&& u.getNumeroCivico() == dipendente.getNumeroCivico()
+						&& u.getTipologia() == dipendente.getTipologia());
+
+				if (status == true)
+					break;
+			}
+			assertEquals(false, status);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	@SuppressWarnings("static-access")
 	@Test
 	public void zEliminaUtente() {
 		try {
-			model.eliminaUtente(utente.getCF(), utente.getCF());
-			assertEquals(false, model.exists(utente.getCF()));
+			gestioneAccount.eliminaUtente(utente.getCF(), utente.getCF());
+			assertEquals(false, gestioneAccount.exists(utente.getCF()));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -150,8 +256,8 @@ class TestUtenteDAO {
 	@Test
 	public void zEliminaDipendente() {
 		try {
-			model.eliminaUtente(utente.getCF(), dipendente.getCF());
-			assertEquals(false, model.exists(dipendente.getCF()));
+			gestioneAccount.eliminaUtente(utente.getCF(), dipendente.getCF());
+			assertEquals(false, gestioneAccount.exists(dipendente.getCF()));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
