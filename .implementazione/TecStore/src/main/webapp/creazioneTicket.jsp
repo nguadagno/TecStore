@@ -6,8 +6,7 @@
 <meta charset="ISO-8859-1">
 <%
 int tipologia = -1;
-if (session.getAttribute("tipologia") == null
-		|| session.getAttribute("tipologia").toString().isEmpty()) {
+if (session.getAttribute("tipologia") == null || session.getAttribute("tipologia").toString().isEmpty()) {
 %>
 <meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
 <%
@@ -27,13 +26,22 @@ return;
 </head>
 <body>
 
+	<h1>Creazione ticket</h1>
+
 	<br>
 	<br>
 	<br>
 
-	<form action="CreazioneTIcket" method="post">
+	<form action="CreazioneTicket" method="post">
 		<div align="center">
-			<input type="text" name="messaggio"
+			<label for="tipologia"> <b>Seleziona il tipo di ticket</b>
+			</label> <select name="tipologia" id="tipologia" required>
+				<option value="Amministrativo">Amministrativo</option>
+				<option value="Ordini">Ordini</option>
+				<option value="Spedizione">Spedizione</option>
+				<option value="Rimborso">Rimborso</option>
+				<option value="Profilo">Profilo</option>
+			</select> <BR> <BR> <BR> <input type="text" name="messaggio"
 				style="width: 300px; height: 300px;" required>
 		</div>
 		<br> <br> <br>

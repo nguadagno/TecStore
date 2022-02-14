@@ -19,7 +19,7 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT * FROM ticket WHERE IDCliente = ? LIMIT ?;";
+		String searchTicketQuery = "SELECT IDTicket, IDCliente, Tipologia, Stato, MAX(Data) AS Data FROM ticket NATURAL JOIN messaggio WHERE ticket.IDCliente = ? GROUP BY IDTicket LIMIT ?;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -96,8 +96,6 @@ public class GestioneAssistenza {
 
 			preparedStatement.execute();
 
-			connection.commit();
-
 			preparedStatement = connection.prepareStatement(getIDTicketQuery);
 			preparedStatement.setString(1, CF);
 			preparedStatement.setString(2, tipologia);
@@ -110,6 +108,8 @@ public class GestioneAssistenza {
 				return rispostaTicket(rs.getString("IDTicket"), CF, messaggio);
 			else
 				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -119,6 +119,7 @@ public class GestioneAssistenza {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return false;
 	}
 
 	public boolean cambiaStato(TicketBean ticket, String stato) throws SQLException {
@@ -262,6 +263,8 @@ public class GestioneAssistenza {
 
 			connection.commit();
 			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -271,6 +274,7 @@ public class GestioneAssistenza {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return false;
 	}
 
 }

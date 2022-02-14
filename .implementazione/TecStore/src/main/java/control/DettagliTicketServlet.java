@@ -49,6 +49,8 @@ public class DettagliTicketServlet extends HttpServlet {
 				response.setStatus(500);
 				request.getSession(true).setAttribute("errore", "IDTicket mancante");
 				redirect = "/errore.jsp";
+				dd = request.getRequestDispatcher(redirect);
+				dd.forward(request, response);
 				return;
 			}
 
