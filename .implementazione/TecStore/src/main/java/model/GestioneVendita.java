@@ -521,7 +521,7 @@ public class GestioneVendita {
 	public boolean rimozioneArticolo(String CF, String IDArticolo) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String rimozioneArticoloQuery = "UPDATE articolo SET stato='annullata' WHERE IDArticolo = ?;";
+		String rimozioneArticoloQuery = "UPDATE articolo SET stato='annullata' WHERE ID = ?;";
 
 		try {
 			GestioneAccount gestioneaccount = new GestioneAccount();
