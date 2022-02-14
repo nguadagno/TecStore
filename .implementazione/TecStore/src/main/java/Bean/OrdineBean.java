@@ -30,8 +30,8 @@ public class OrdineBean {
 
 	@Override
 	public String toString() {
-		return "OrdineBean [ID=" + ID + ", IDArticolo=" + IDArticolo + ", quantita=" + quantita + ", data=" + data
-				+ ", stato=" + stato + ", codiceTracciamento=" + codiceTracciamento + "]";
+		return "OrdineBean [ID=" + ID + ", IDCliente=" + IDCliente + ", IDArticolo=" + IDArticolo + ", quantita="
+				+ quantita + ", data=" + data + ", stato=" + stato + ", codiceTracciamento=" + codiceTracciamento + "]";
 	}
 
 	@Override
