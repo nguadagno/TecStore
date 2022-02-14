@@ -31,7 +31,8 @@ public class ChiusuraTicketServlet extends HttpServlet {
 		String redirect = "";
 		RequestDispatcher dd;
 
-		if (session.getAttribute("tipologia") == null || !session.getAttribute("tipologia").toString().equals("1")) {
+		if (session.getAttribute("tipologia") == null || (!session.getAttribute("tipologia").toString().equals("1")
+				&& !session.getAttribute("tipologia").toString().equals("2"))) {
 			session.setAttribute("errore", "AccessoNonAutorizzato");
 			response.setStatus(403);
 			redirect = "/errore.jsp";
@@ -42,10 +43,12 @@ public class ChiusuraTicketServlet extends HttpServlet {
 		session.setAttribute("operazione", "chiusuraTicket");
 
 		try {
-			if (model.cambiaStato(request.getParameter("IDTicket"), "chiuso"))
+			if (model.cambiaStato(request.getParameter("IDTicket"), "Chiuso"))
 				redirect = "/successo.jsp";
-			else
+			else {
+				session.setAttribute("errore", "chiusuraTicket");
 				redirect = "/errore.jsp";
+			}
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");

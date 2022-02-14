@@ -8,8 +8,7 @@
 
 <%
 int tipologia = -1;
-if (session.getAttribute("tipologia") == null
-		|| session.getAttribute("tipologia").toString().isEmpty()) {
+if (session.getAttribute("tipologia") == null || session.getAttribute("tipologia").toString().isEmpty()) {
 %>
 <meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
 <%
@@ -32,6 +31,9 @@ return;
 	<div align=center>
 		<%
 		ArrayList<MessaggioBean> elenco = (ArrayList<MessaggioBean>) session.getAttribute("messaggi");
+		String IDTicket = "";
+		if (elenco != null)
+			IDTicket = elenco.get(0).getIDTicket();
 		%>
 		<table>
 			<tr>
@@ -72,7 +74,10 @@ return;
 		<br> <br> <br> <a href="rispostaTicket.jsp">
 			<button>Rispondi</button>
 		</a>
-
+		<form action="ChiusuraTicket" method=post>
+			<input type=hidden name=IDTicket value=<%=IDTicket%>> <input
+				type=submit value="Chiusura ticket">
+		</form>
 	</div>
 </body>
 </html>
