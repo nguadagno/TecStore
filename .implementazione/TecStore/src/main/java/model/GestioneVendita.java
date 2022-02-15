@@ -1,5 +1,6 @@
 package model;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,8 +14,33 @@ import Bean.OrdineBean;
 
 public class GestioneVendita {
 
-	public ArrayList<FotoBean> getFoto(String IDArticolo) throws SQLException {
-		ArrayList<FotoBean> foto = new ArrayList<FotoBean>();
+	public byte[] getFoto(String IDFoto) throws SQLException {
+		Connection connection = null;
+
+		String getFotoQuery = "SELECT * FROM foto WHERE ID = ?;";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			PreparedStatement preparedStatement = connection.prepareStatement(getFotoQuery);
+			preparedStatement.setString(1, IDFoto);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			if (rs.next()) {
+				return rs.getBytes("foto");
+			}
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		return null;
+	}
+
+	public ArrayList<FotoBean> getAllFoto(String IDArticolo) throws SQLException {
 		Connection connection = null;
 
 		String getFotoQuery = "SELECT * FROM foto WHERE IDArticolo = ?;";
@@ -24,9 +50,10 @@ public class GestioneVendita {
 			PreparedStatement preparedStatement = connection.prepareStatement(getFotoQuery);
 			preparedStatement.setString(1, IDArticolo);
 			ResultSet rs = preparedStatement.executeQuery();
+			ArrayList<FotoBean> foto = new ArrayList<FotoBean>();
 
 			while (rs.next()) {
-				FotoBean f = new FotoBean(rs.getString("ID"), rs.getString("IDArticolo"), rs.getBytes("foto"));
+				FotoBean f = new FotoBean(rs.getString("ID"), rs.getString("IDArticolo"), rs.getBlob("foto"));
 				foto.add(f);
 			}
 			return foto;
@@ -54,8 +81,8 @@ public class GestioneVendita {
 				preparedStatement.setString(1, a.getID());
 				ResultSet rs = preparedStatement.executeQuery();
 
-				if (rs.next()) {
-					FotoBean f = new FotoBean(rs.getString("ID"), rs.getString("IDArticolo"), rs.getBytes("foto"));
+				while (rs.next()) {
+					FotoBean f = new FotoBean(rs.getString("ID"), rs.getString("IDArticolo"), rs.getBlob("foto"));
 					foto.add(f);
 				}
 			}
@@ -85,7 +112,7 @@ public class GestioneVendita {
 				ResultSet rs = preparedStatement.executeQuery();
 
 				if (rs.next()) {
-					FotoBean f = new FotoBean(rs.getString("ID"), rs.getString("IDArticolo"), rs.getBytes("foto"));
+					FotoBean f = new FotoBean(rs.getString("ID"), rs.getString("IDArticolo"), rs.getBlob("foto"));
 					foto.add(f);
 				}
 			}
@@ -145,8 +172,9 @@ public class GestioneVendita {
 			for (FotoBean f : foto) {
 				PreparedStatement preparedStatement = connection.prepareStatement(insertFotoQuery);
 				preparedStatement.setString(1, IDArticolo);
-				preparedStatement.setBytes(2, f.getFoto());
+				preparedStatement.setBlob(2, f.getFoto());
 				preparedStatement.execute();
+				connection.commit();
 			}
 			return true;
 		} finally {
@@ -158,6 +186,34 @@ public class GestioneVendita {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+	}
+
+	public boolean inserimentoFoto(String IDArticolo, InputStream foto) throws SQLException {
+		String insertFotoQuery = "INSERT INTO foto (IDArticolo, Foto) VALUES (?, ?);";
+		Connection connection = null;
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+
+			PreparedStatement preparedStatement = connection.prepareStatement(insertFotoQuery);
+			preparedStatement.setString(1, IDArticolo);
+			preparedStatement.setBlob(2, foto);
+			preparedStatement.executeUpdate();
+
+			connection.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		return false;
 	}
 
 	public String inserimentoNuovoArticolo(ArticoloBean a) throws SQLException {

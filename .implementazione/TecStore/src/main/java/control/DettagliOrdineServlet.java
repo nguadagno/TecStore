@@ -59,7 +59,7 @@ public class DettagliOrdineServlet extends HttpServlet {
 			session.setAttribute("operazione",
 					request.getParameter("operazione") == null ? "" : request.getParameter("operazione"));
 
-			ArrayList<FotoBean> foto = model1.getFoto(request.getParameter("IDArticolo"));
+			ArrayList<FotoBean> foto = model1.getAllFoto(request.getParameter("IDArticolo"));
 			session.setAttribute("foto", foto);
 
 			if (session.getAttribute("tipologia").toString().equals("3"))

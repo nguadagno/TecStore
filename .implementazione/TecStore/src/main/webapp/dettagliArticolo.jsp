@@ -4,33 +4,77 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+.photo-gallery {
+	color: #313437;
+	background-color: #fff;
+}
+
+.photo-gallery p {
+	color: #7d8285;
+}
+
+.photo-gallery h2 {
+	font-weight: bold;
+	margin-bottom: 40px;
+	padding-top: 40px;
+	color: inherit;
+}
+
+@media ( max-width :767px) {
+	.photo-gallery h2 {
+		margin-bottom: 25px;
+		padding-top: 25px;
+		font-size: 24px;
+	}
+}
+
+.photo-gallery .intro {
+	font-size: 16px;
+	max-width: 500px;
+	margin: 0 auto 40px;
+}
+
+.photo-gallery .intro p {
+	margin-bottom: 0;
+}
+
+.photo-gallery .photos {
+	padding-bottom: 20px;
+}
+
+.photo-gallery .item {
+	padding-bottom: 30px;
+}
+</style>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+
 <%
 int tipologia = -1;
-
 if (session.getAttribute("tipologia") != null)
 	tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
 
 if ((tipologia != 1 && tipologia != 2 && tipologia != 4 && tipologia != -1)
-		|| session.getAttribute("dettagliArticolo") == null
-//|| session.getAttribute("fotoArticolo") == null
-) {
+		|| session.getAttribute("dettagliArticolo") == null || session.getAttribute("fotoArticolo") == null) {
 %>
-<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<meta http-equiv="refresh" content="0;URL ='paginainiziale.jsp'" />
 <%
 return;
 }
 %>
-
 <title>Dettagli articolo</title>
 </head>
 <body>
-
 	<%
 	if (tipologia == 1) {
 	%>
 	<div align="center">
-		<form action="RicercaArticolo" method="post">
+		<form action="ricercaArticolo" method="post">
 			<input type="text" name="testo" maxlength="35" id="testo"
 				placeholder="Titolo..." required> <input type="submit"
 				value="Cerca">
@@ -45,28 +89,61 @@ return;
 	if (risultato == null) {
 	%>
 	<h3>Articolo non Trovato!</h3>
+	<a href=paginainiziale.jsp>Torna indietro</a>
 	<%
-	// TODO pulsante per tornare indietro
 	return;
 	}
 	%>
+	<div class="photo-gallery">
+		<div class="container">
+			<div class="row photos">
+				<%
+				for (FotoBean f : foto) {
+				%>
+				<div class="col-sm-6 col-md-4 col-lg-3 item">
+					<a href="img?id=<%=f.getID()%>" data-lightbox="photos"><img
+						style="max-width: 50px" class="img-fluid"
+						src="img?id=<%=f.getID()%>"></a>
+				</div>
+				<%
+				}
+				%>
+			</div>
+		</div>
+	</div>
+
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+
 	<div align="center">
 		<h2>Nome:</h2>
-		<h4><%=risultato.getNome()%></h4>
+		<h4>
+			<%=risultato.getNome()%>
+		</h4>
 	</div>
 	<div align="center">
 		<h2>Prezzo:</h2>
-		<h4><%=risultato.getPrezzo()%></h4>
+		<h4>
+			<%=risultato.getPrezzo()%>
+		</h4>
 	</div>
 	<div align="center">
 		<h2>Quantita disponibile:</h2>
-		<h4><%=risultato.getQuantita()%></h4>
+		<h4>
+			<%=risultato.getQuantita()%>
+		</h4>
 	</div>
 	<div align="center">
 		<h2>Descrizione:</h2>
-		<h4><%=risultato.getDescrizione()%></h4>
+		<h4>
+			<%=risultato.getDescrizione()%>
+		</h4>
 	</div>
-
 	<%
 	if (tipologia == 1 || tipologia == 4) {
 		if ((session.getAttribute("CF").toString().equals(request.getParameter("IDVenditore"))) || tipologia == 4) {
@@ -86,10 +163,10 @@ return;
 				type="submit" value="Modifica">
 		</form>
 	</div>
-
-
 	<%
-	} else {
+	}
+
+	else {
 	%>
 	<div align="right">
 		<form action="AggiuntaAlCarrello" method="post">
@@ -103,6 +180,7 @@ return;
 	</div>
 	<%
 	}
+
 	} else if (tipologia == 2) {
 	%>
 	<div align="right">
