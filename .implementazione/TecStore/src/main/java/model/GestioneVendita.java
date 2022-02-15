@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.Blob;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,7 +40,7 @@ public class GestioneVendita {
 		return null;
 	}
 
-	public ArrayList<FotoBean> getAllFoto(String IDarticolo) throws SQLException {
+	public ArrayList<FotoBean> getAllFoto(String IDArticolo) throws SQLException {
 		Connection connection = null;
 
 		String getFotoQuery = "SELECT * FROM foto WHERE IDArticolo = ?;";
@@ -48,7 +48,7 @@ public class GestioneVendita {
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			PreparedStatement preparedStatement = connection.prepareStatement(getFotoQuery);
-			preparedStatement.setString(1, IDarticolo);
+			preparedStatement.setString(1, IDArticolo);
 			ResultSet rs = preparedStatement.executeQuery();
 			ArrayList<FotoBean> foto = new ArrayList<FotoBean>();
 
@@ -174,6 +174,7 @@ public class GestioneVendita {
 				preparedStatement.setString(1, IDArticolo);
 				preparedStatement.setBlob(2, f.getFoto());
 				preparedStatement.execute();
+				connection.commit();
 			}
 			return true;
 		} finally {
@@ -187,7 +188,7 @@ public class GestioneVendita {
 		}
 	}
 
-	public boolean inserimentoFoto(String IDArticolo, Blob foto) throws SQLException {
+	public boolean inserimentoFoto(String IDArticolo, InputStream foto) throws SQLException {
 		String insertFotoQuery = "INSERT INTO foto (IDArticolo, Foto) VALUES (?, ?);";
 		Connection connection = null;
 
@@ -197,8 +198,12 @@ public class GestioneVendita {
 			PreparedStatement preparedStatement = connection.prepareStatement(insertFotoQuery);
 			preparedStatement.setString(1, IDArticolo);
 			preparedStatement.setBlob(2, foto);
-			preparedStatement.execute();
+			preparedStatement.executeUpdate();
+
+			connection.commit();
 			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -208,6 +213,7 @@ public class GestioneVendita {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return false;
 	}
 
 	public String inserimentoNuovoArticolo(ArticoloBean a) throws SQLException {
