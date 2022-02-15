@@ -22,9 +22,10 @@
 	<%
 	ArrayList<OrdineBean> ordini = (ArrayList<OrdineBean>) session.getAttribute("ordini");
 	ArrayList<ArticoloBean> articoli = (ArrayList<ArticoloBean>) session.getAttribute("articoli");
+	ArrayList<FotoBean> foto = (ArrayList<FotoBean>) session.getAttribute("foto");
 
-	if (ordini == null || ordini.size() == 0 || articoli == null || articoli.size() == 0
-			|| articoli.size() != ordini.size()) {
+	if (ordini == null || ordini.size() == 0 || articoli == null || articoli.size() == 0 || articoli.size() != ordini.size()
+			|| foto == null) {
 	%>
 	<h3>Nessun Ordine effettuato</h3>
 	<%
@@ -32,6 +33,7 @@
 	} else {
 	%><table>
 		<tr>
+			<th></th>
 			<th>Nome</th>
 			<th>Stato</th>
 			<th>Quantita</th>
@@ -42,14 +44,25 @@
 		for (int i = 0; i < ordini.size(); i++) {
 		%>
 		<tr>
+			<%
+			for (FotoBean f : foto) {
+				if (f.getIDArticolo().equals(ordini.get(i).getIDArticolo())) {
+			%>
+			<td><img style="max-width: 50px;" src="img?id=<%=f.getID()%>"></td>
+			<%
+			break;
+			}
+			}
+			%>
 			<td><%=articoli.get(i).getNome()%></td>
 			<td><%=ordini.get(i).getStato()%></td>
 			<td><%=ordini.get(i).getQuantita()%></td>
 			<td><%=ordini.get(i).getData()%></td>
 			<td>
 				<form action="DettagliOrdine" method="post">
-					<input type="hidden" name="IDOrdine" value="<%=ordini.get(i).getID()%>">
-					<input type="submit" value="Dettagli">
+					<input type="hidden" name="IDOrdine"
+						value="<%=ordini.get(i).getID()%>"> <input type="submit"
+						value="Dettagli">
 				</form>
 			</td>
 			<%
