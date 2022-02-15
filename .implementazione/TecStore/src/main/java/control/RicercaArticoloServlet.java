@@ -47,8 +47,10 @@ public class RicercaArticoloServlet extends HttpServlet {
 		session.setAttribute("operazione", "ricercaArticolo");
 
 		try {
-			ArrayList<ArticoloBean> risultati = model.ricercaArticolo(request.getParameter("testo"),
-					Integer.parseInt(request.getParameter("limit").toString()));
+			int limit = 10;
+			if (request.getParameter("limit") != null)
+				limit = Integer.parseInt(request.getParameter("limit").toString());
+			ArrayList<ArticoloBean> risultati = model.ricercaArticolo(request.getParameter("testo"), limit);
 			ArrayList<FotoBean> foto = model.getFoto(risultati);
 
 			session.setAttribute("risultati", risultati);

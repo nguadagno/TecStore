@@ -1,14 +1,16 @@
 package Bean;
 
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class FotoBean {
 
 	private String ID;
 	private String IDArticolo;
-	private byte[] foto;
+	private Blob foto;
 
-	public FotoBean(String iD, String iDArticolo, byte[] foto) {
+	public FotoBean(String iD, String iDArticolo, Blob foto) {
 		super();
 		ID = iD;
 		IDArticolo = iDArticolo;
@@ -20,7 +22,7 @@ public class FotoBean {
 
 	@Override
 	public String toString() {
-		return "FotoBeans [ID=" + ID + ", IDArticolo=" + IDArticolo + "]";
+		return "FotoBean [ID=" + ID + ", IDArticolo=" + IDArticolo + "]";
 	}
 
 	@Override
@@ -44,12 +46,12 @@ public class FotoBean {
 		return IDArticolo;
 	}
 
-	public byte[] getFoto() {
+	public Blob getFoto() {
 		return foto;
 	}
 
-	public void setFoto(byte[] foto) {
-		if (foto != null && foto.length != 0)
+	public void setFoto(Blob foto) throws SQLException {
+		if (foto != null && foto.length() != 0)
 			this.foto = foto;
 	}
 

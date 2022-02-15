@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Elenco Vendite</title>
+<title>Ricerca Articolo</title>
 </head>
 <body>
 	<div align="center">
-		<h3>Ricerca Vendita</h3>
-		<form action="RicercaVendita" method="post">
+		<h3>Ricerca Articolo</h3>
+		<form action="ricercaArticolo" method="post">
 			<input type="text" name="nome" maxlength="35" required> <input
 				type="submit" value="Cerca">
 		</form>
@@ -17,12 +17,16 @@
 
 	<%
 	ArrayList<ArticoloBean> risultati = (ArrayList<ArticoloBean>) session.getAttribute("risultati");
-	if (risultati == null) {
-		//anche se risultati è vuoto entra nell'else
-		return;
+	ArrayList<FotoBean> foto = (ArrayList<FotoBean>) session.getAttribute("foto");
+	if (risultati == null || foto == null) {
+	%>
+	<h3>Nessun Articolo Trovato!</h3>
+	<%
+	return;
 	} else {
 	%><table>
 		<tr>
+			<th></th>
 			<th>Nome</th>
 			<th>Quantita</th>
 			<th>Prezzo</th>
@@ -32,6 +36,16 @@
 		for (ArticoloBean a : risultati) {
 		%>
 		<tr>
+			<%
+			for (FotoBean f : foto) {
+				if (f.getIDArticolo().equals(a.getID())) {
+			%>
+			<td><img style="max-width: 50px;" src="img?id=<%=f.getID()%>"></td>
+			<%
+			break;
+			}
+			}
+			%>
 			<td><%=a.getNome()%></td>
 			<td><%=a.getQuantita() > 0 ? a.getQuantita() : "Non Disponibile"%></td>
 			<td><%=a.getPrezzo()%>&euro;</td>
