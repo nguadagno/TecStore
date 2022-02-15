@@ -22,7 +22,7 @@ public class FotoBean {
 
 	@Override
 	public String toString() {
-		return "FotoBeans [ID=" + ID + ", IDArticolo=" + IDArticolo + "]";
+		return "FotoBean [ID=" + ID + ", IDArticolo=" + IDArticolo + "]";
 	}
 
 	@Override
