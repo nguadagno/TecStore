@@ -172,7 +172,7 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		String searchTicketQuery = "SELECT IDTicket, CF, Tipologia, Stato, MAX(Data) AS Data FROM ticket NATURAL JOIN messaggio WHERE stato = 'InAttesa' AND IDTicket = ? GROUP BY IDTicket;";
+		String searchTicketQuery = "SELECT IDTicket, CF, Tipologia, Stato, MAX(Data) AS Data FROM ticket NATURAL JOIN messaggio WHERE IDTicket = ? GROUP BY IDTicket;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
@@ -181,7 +181,7 @@ public class GestioneAssistenza {
 			rs = preparedStatement.executeQuery();
 
 			if (rs.next()) {
-				result = new TicketBean(rs.getString("IDTicket"), rs.getString("IDCliente"), rs.getString("Tipologia"),
+				result = new TicketBean(rs.getString("IDTicket"), rs.getString("CF"), rs.getString("Tipologia"),
 						rs.getString("Stato"), rs.getDate("data"));
 				return result;
 			}
@@ -217,8 +217,7 @@ public class GestioneAssistenza {
 
 			while (rs.next()) {
 				MessaggioBean m = new MessaggioBean(rs.getString("IDTicket"), rs.getString("CF"),
-						rs.getString("Contenuto"), rs.getDate("Data"),
-						gestioneaccount.dettagliUtente(rs.getString("CF")));
+						rs.getString("Contenuto"), rs.getDate("Data"));
 				result.add(m);
 			}
 			return result;
