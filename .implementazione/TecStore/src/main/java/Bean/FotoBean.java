@@ -1,5 +1,7 @@
 package Bean;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -8,13 +10,20 @@ public class FotoBean {
 
 	private String ID;
 	private String IDArticolo;
-	private Blob foto;
+	private byte[] foto;
 
-	public FotoBean(String iD, String iDArticolo, Blob foto) {
+	public FotoBean(String iD, String iDArticolo, InputStream foto) throws IOException {
 		super();
 		ID = iD;
 		IDArticolo = iDArticolo;
-		this.foto = foto;
+		this.foto = foto.readAllBytes();
+	}
+
+	public FotoBean(String iD, String iDArticolo, Blob foto) throws SQLException {
+		super();
+		ID = iD;
+		IDArticolo = iDArticolo;
+		this.foto = foto.getBytes(1, (int) foto.length());
 	}
 
 	public FotoBean() {
@@ -46,13 +55,12 @@ public class FotoBean {
 		return IDArticolo;
 	}
 
-	public Blob getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
 
-	public void setFoto(Blob foto) throws SQLException {
-		if (foto != null && foto.length() != 0)
-			this.foto = foto;
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 
 }
