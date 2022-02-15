@@ -5,70 +5,54 @@
 <html>
 <head>
 <style>
-/* Reference: https://www.w3schools.com/howto/howto_js_slideshow_gallery.asp */
-* {
-	box-sizing: border-box;
+.photo-gallery {
+	color: #313437;
+	background-color: #fff;
 }
 
-.container {
-	position: relative;
+.photo-gallery p {
+	color: #7d8285;
 }
 
-.cursor {
-	cursor: pointer;
-}
-
-.prev, .next {
-	cursor: pointer;
-	position: absolute;
-	top: 40%;
-	width: auto;
-	padding: 16px;
-	margin-top: -50px;
-	color: white;
+.photo-gallery h2 {
 	font-weight: bold;
-	font-size: 20px;
-	border-radius: 0 3px 3px 0;
-	user-select: none;
-	-webkit-user-select: none;
+	margin-bottom: 40px;
+	padding-top: 40px;
+	color: inherit;
 }
 
-.next {
-	right: 0;
-	border-radius: 3px 0 0 3px;
+@media ( max-width :767px) {
+	.photo-gallery h2 {
+		margin-bottom: 25px;
+		padding-top: 25px;
+		font-size: 24px;
+	}
 }
 
-.prev:hover, .next:hover {
-	background-color: rgba(0, 0, 0, 0.8);
+.photo-gallery .intro {
+	font-size: 16px;
+	max-width: 500px;
+	margin: 0 auto 40px;
 }
 
-.caption-container {
-	text-align: center;
-	background-color: #222;
-	padding: 2px 16px;
-	color: white;
+.photo-gallery .intro p {
+	margin-bottom: 0;
 }
 
-.row:after {
-	content: "";
-	display: table;
-	clear: both;
+.photo-gallery .photos {
+	padding-bottom: 20px;
 }
 
-.column {
-	float: left;
-	width: 16.66%;
-}
-
-.demo {
-	opacity: 0.6;
-}
-
-.active, .demo:hover {
-	opacity: 1;
+.photo-gallery .item {
+	padding-bottom: 30px;
 }
 </style>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
 
 <%
 int tipologia = -1;
@@ -108,21 +92,34 @@ return;
 	<a href=paginainiziale.jsp>Torna indietro</a>
 	<%
 	return;
-
 	}
-
-	for (FotoBean f : foto) {
 	%>
-	<div class="container">
-		<div class="mySlides">
-			<img src="img?id=<%=f.getID()%>" style="width: 100%">
+	<div class="photo-gallery">
+		<div class="container">
+			<div class="row photos">
+				<%
+				for (FotoBean f : foto) {
+				%>
+				<div class="col-sm-6 col-md-4 col-lg-3 item">
+					<a href="img?id=<%=f.getID()%>" data-lightbox="photos"><img
+						style="max-width: 50px" class="img-fluid"
+						src="img?id=<%=f.getID()%>"></a>
+				</div>
+				<%
+				}
+				%>
+			</div>
 		</div>
-		<a class="prev" onclick="plusSlides(-1)">&#10094; </a> <a class="next"
-			onclick="plusSlides(1)">&#10095; </a>
 	</div>
-	<%
-	}
-	%>
+
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+
 	<div align="center">
 		<h2>Nome:</h2>
 		<h4>

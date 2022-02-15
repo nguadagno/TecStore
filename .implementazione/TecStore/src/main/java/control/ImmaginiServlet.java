@@ -3,17 +3,16 @@ package control;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-import Bean.FotoBean;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import model.GestioneVendita;
 
@@ -21,6 +20,7 @@ import model.GestioneVendita;
 @MultipartConfig(maxFileSize = 16177215)
 public class ImmaginiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	GestioneVendita gestioneVendita = new GestioneVendita();
 
 	public ImmaginiServlet() {
 		super();
@@ -31,22 +31,11 @@ public class ImmaginiServlet extends HttpServlet {
 		try {
 			// Reference:
 			// https://codebun.com/how-to-upload-and-retrieve-image-from-mysql-in-jsp-and-servlet/
-			GestioneVendita gestioneVendita = new GestioneVendita();
-
 			if (request.getParameter("id") != null) {
 				OutputStream os = response.getOutputStream();
 				os.write(gestioneVendita.getFoto(request.getParameter("id")));
 				os.flush();
 				os.close();
-			} else {
-				Part part = request.getPart("photo");
-				if (part != null) {
-					System.out.println(part.getName());
-					System.out.println(part.getSize());
-					System.out.println(part.getContentType());
-					InputStream inputStream = part.getInputStream();
-					gestioneVendita.inserimentoFoto(request.getParameter("IDarticolo"), (Blob) inputStream);
-				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -55,6 +44,28 @@ public class ImmaginiServlet extends HttpServlet {
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		String redirect = "paginainiziale.jsp";
+		RequestDispatcher dd;
+		HttpSession session = request.getSession(true);
+		Part part = request.getPart("foto");
+		if (part != null) {
+			InputStream inputStream = part.getInputStream();
+			try {
+				if (gestioneVendita.inserimentoFoto(session.getAttribute("IDArticolo").toString(), inputStream))
+					redirect = "inserimentoImmagini.jsp";
+				else {
+					response.setStatus(500);
+					session.setAttribute("errore", "errore inserimento immagine");
+					redirect = "/errore.jsp";
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		dd = request.getRequestDispatcher(redirect);
+		dd.forward(request, response);
+		return;
 	}
 }

@@ -2,13 +2,10 @@ package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-import Bean.FotoBean;
 import model.GestioneVendita;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -65,20 +62,13 @@ public class InserimentoNuovoArticoloServlet extends HttpServlet {
 		}
 
 		try {
-			String IDArticolo;
-			if (!(IDArticolo = model.inserimentoNuovoArticolo(nome, descrizione, IDVenditore, quantita, prezzo,
-					rimborsabile)).isEmpty()) {
-				redirect = "/successo.jsp";
-
-				RequestDispatcher dispatcher = getServletContext()
-						.getRequestDispatcher("/img?idarticolo=" + IDArticolo);
-				dispatcher.include(request, response);
-
+			String IDArticolo = model.inserimentoNuovoArticolo(nome, descrizione, IDVenditore, quantita, prezzo,
+					rimborsabile);
+			if (!IDArticolo.isEmpty()) {
+				session.setAttribute("IDArticolo", IDArticolo);
+				redirect = "/inserimentoImmagini.jsp";
 			} else
 				redirect = "/errore.jsp";
-			dd = request.getRequestDispatcher(redirect);
-			dd.forward(request, response);
-
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");
@@ -88,6 +78,7 @@ public class InserimentoNuovoArticoloServlet extends HttpServlet {
 			return;
 		}
 
+		dd = request.getRequestDispatcher(redirect);
 		dd.forward(request, response);
 		return;
 	}
