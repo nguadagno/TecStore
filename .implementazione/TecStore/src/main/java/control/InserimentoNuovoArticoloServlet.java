@@ -8,6 +8,7 @@ import Bean.FotoBean;
 import model.GestioneVendita;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,7 +16,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/InserimentoArticolo")
-
 public class InserimentoNuovoArticoloServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -55,8 +55,6 @@ public class InserimentoNuovoArticoloServlet extends HttpServlet {
 		float prezzo = request.getParameter("prezzo") == null ? -1 : Float.parseFloat(request.getParameter("prezzo"));
 		Boolean rimborsabile = request.getParameter("rimborsabile") == null ? null
 				: Boolean.parseBoolean(request.getParameter("rimborsabile"));
-		@SuppressWarnings("unchecked")
-		ArrayList<FotoBean> foto = (ArrayList<FotoBean>) request.getAttribute("foto");
 
 		if (nome == null || descrizione == null || IDVenditore == null || rimborsabile == null || nome.isEmpty()
 				|| descrizione.isEmpty() || IDVenditore.isEmpty() || quantita < 1 || prezzo < 0.01) {
@@ -69,9 +67,14 @@ public class InserimentoNuovoArticoloServlet extends HttpServlet {
 		try {
 			String IDArticolo;
 			if (!(IDArticolo = model.inserimentoNuovoArticolo(nome, descrizione, IDVenditore, quantita, prezzo,
-					rimborsabile)).isEmpty())// && model.inserimentoFoto(IDArticolo, foto))
+					rimborsabile)).isEmpty()) {
 				redirect = "/successo.jsp";
-			else
+
+				RequestDispatcher dispatcher = getServletContext()
+						.getRequestDispatcher("/img?idarticolo=" + IDArticolo);
+				dispatcher.include(request, response);
+
+			} else
 				redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);

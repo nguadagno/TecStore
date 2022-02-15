@@ -4,28 +4,88 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+/* Reference: https://www.w3schools.com/howto/howto_js_slideshow_gallery.asp */
+* {
+	box-sizing: border-box;
+}
+
+.container {
+	position: relative;
+}
+
+.cursor {
+	cursor: pointer;
+}
+
+.prev, .next {
+	cursor: pointer;
+	position: absolute;
+	top: 40%;
+	width: auto;
+	padding: 16px;
+	margin-top: -50px;
+	color: white;
+	font-weight: bold;
+	font-size: 20px;
+	border-radius: 0 3px 3px 0;
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+.next {
+	right: 0;
+	border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+.caption-container {
+	text-align: center;
+	background-color: #222;
+	padding: 2px 16px;
+	color: white;
+}
+
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.column {
+	float: left;
+	width: 16.66%;
+}
+
+.demo {
+	opacity: 0.6;
+}
+
+.active, .demo:hover {
+	opacity: 1;
+}
+</style>
 <meta charset="ISO-8859-1">
+
 <%
 int tipologia = -1;
-
 if (session.getAttribute("tipologia") != null)
 	tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
 
 if ((tipologia != 1 && tipologia != 2 && tipologia != 4 && tipologia != -1)
-		|| session.getAttribute("dettagliArticolo") == null
-//|| session.getAttribute("fotoArticolo") == null
-) {
+		|| session.getAttribute("dettagliArticolo") == null || session.getAttribute("fotoArticolo") == null) {
 %>
-<meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
+<meta http-equiv="refresh" content="0;URL ='paginainiziale.jsp'" />
 <%
 return;
 }
 %>
-
 <title>Dettagli articolo</title>
 </head>
 <body>
-
 	<%
 	if (tipologia == 1) {
 	%>
@@ -45,28 +105,48 @@ return;
 	if (risultato == null) {
 	%>
 	<h3>Articolo non Trovato!</h3>
+	<a href=paginainiziale.jsp>Torna indietro</a>
 	<%
-	// TODO pulsante per tornare indietro
 	return;
+
+	}
+
+	for (FotoBean f : foto) {
+	%>
+	<div class="container">
+		<div class="mySlides">
+			<img src="img?id=<%=f.getID()%>" style="width: 100%">
+		</div>
+		<a class="prev" onclick="plusSlides(-1)">&#10094; </a> <a class="next"
+			onclick="plusSlides(1)">&#10095; </a>
+	</div>
+	<%
 	}
 	%>
 	<div align="center">
 		<h2>Nome:</h2>
-		<h4><%=risultato.getNome()%></h4>
+		<h4>
+			<%=risultato.getNome()%>
+		</h4>
 	</div>
 	<div align="center">
 		<h2>Prezzo:</h2>
-		<h4><%=risultato.getPrezzo()%></h4>
+		<h4>
+			<%=risultato.getPrezzo()%>
+		</h4>
 	</div>
 	<div align="center">
 		<h2>Quantita disponibile:</h2>
-		<h4><%=risultato.getQuantita()%></h4>
+		<h4>
+			<%=risultato.getQuantita()%>
+		</h4>
 	</div>
 	<div align="center">
 		<h2>Descrizione:</h2>
-		<h4><%=risultato.getDescrizione()%></h4>
+		<h4>
+			<%=risultato.getDescrizione()%>
+		</h4>
 	</div>
-
 	<%
 	if (tipologia == 1 || tipologia == 4) {
 		if ((session.getAttribute("CF").toString().equals(request.getParameter("IDVenditore"))) || tipologia == 4) {
@@ -86,10 +166,10 @@ return;
 				type="submit" value="Modifica">
 		</form>
 	</div>
-
-
 	<%
-	} else {
+	}
+
+	else {
 	%>
 	<div align="right">
 		<form action="AggiuntaAlCarrello" method="post">
@@ -103,6 +183,7 @@ return;
 	</div>
 	<%
 	}
+
 	} else if (tipologia == 2) {
 	%>
 	<div align="right">

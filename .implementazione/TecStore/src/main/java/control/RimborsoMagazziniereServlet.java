@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/RimborsoMagazziniere")
-
 public class RimborsoMagazziniereServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
