@@ -1091,34 +1091,6 @@ Inserisce la nuova password e fa click su ``Conferma".
 \hline
 \end {tabular}
 
-\subsubsection{Recupero password}
-\label{UC:recuperopassword}
-\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
-\hline
-\textbf{ID} &UC\showmycounter \bigskip RecuperoPassword \\
-\hline
-\textbf{Descrizione} & Un cliente vuole recuperare la sua password smarrita. \\
-\hline
-\textbf{Partecipanti} & Cliente \\
-\hline
-\textbf{Condizione d'ingresso} & Un cliente non autenticato è nella pagina di autenticazione (\ref{UC:autenticazione}). \\
-\hline
-\textbf{Flusso di eventi} &
-\begin{minipage}{12cm}
-\begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Cliente} & \textbf{Sistema} \\
-Fa click su ``Password dimenticata?". \\
-	& Mostra all'utente un modulo per l'inserimento della email. \\
-Inserisce la email e fa click su ``Conferma". \\
-	& Mostra una pagina di conferma e invia un link temporaneo via email. \\
-Usa il link ricevuto per accedere al modulo di modifica password (\ref{UC:modificapassword}).
-\end{tabular}
-\end{minipage} \\
-\hline
-\textbf{Condizione d'uscita} & La nuova password viene memorizzata. \\
-\hline
-\end {tabular}
-
 \newpage
 
 \subsection{Centralinista}
@@ -2016,18 +1988,6 @@ Fare riferimento a \ref{UC:ticketlist}. \\
 \item All'utente viene mostrata una pagina di conferma.
 \end{enumerate}
 
-\subsubsection{Cliente recupera password}
-\label{SD:recuperopw}
-
-\begin{center}
-\includegraphics[width=\textwidth]{SequenceDiagram/ClientePasswordRecupero}
-\end{center}
-
-\begin{enumerate}
-\item Se un cliente dimentica la sua password, può richiedere di modificarla dalla pagina per l'autenticazione.
-\item Il sistema provvede a inviare una mail con un link temporaneo per creare una nuova password.
-\end{enumerate}
-
 \subsubsection{Cliente modifica password}
 \label{SD:modificapw}
 
@@ -2515,17 +2475,81 @@ Fare riferimento a \ref{UC:ticketlist}. \\
  \vspace{5pt}
  \end{minipage} \\ \hline
  
- \textbf{Registrazione} & Indirizzo & $\checkmark$ & \begin{minipage}{3.5cm}
+ \textbf{Registrazione} & Via & $\checkmark$ & \begin{minipage}{3.5cm}
  \vspace{5pt}
  \begin{itemize}
- \item Lunghezza minima 5 caratteri
+ \item Lunghezza minima 2 caratteri
  \item Lunghezza massima 64 caratteri
- \item Testo rispettante il formato previsto dal documento allegato
- \begin{verbatim}
- standard_
- composizione_
- indirizzi.pdf
- \end{verbatim} 
+ 
+ \end{itemize}
+ \vspace{5pt}
+ \end{minipage} & \begin{minipage}{4cm}
+ \vspace{5pt}
+ \begin{itemize}
+ \item Lunghezza inadeguata
+ \item Campo vuoto
+ \item Formato inadeguato
+ \end{itemize}
+ \vspace{5pt}
+ \end{minipage} \\ \hline
+ 
+ \textbf{Registrazione} & Numero civico & $\checkmark$ & \begin{minipage}{3.5cm}
+ \vspace{5pt}
+ \begin{itemize}
+ \item Lunghezza minima 1 carattere
+ \item Lunghezza massima 6 caratteri
+ 
+ \end{itemize}
+ \vspace{5pt}
+ \end{minipage} & \begin{minipage}{4cm}
+ \vspace{5pt}
+ \begin{itemize}
+ \item Lunghezza inadeguata
+ \item Campo vuoto
+ \item Formato inadeguato
+ \end{itemize}
+ \vspace{5pt}
+ \end{minipage} \\ \hline
+ 
+\textbf{Registrazione} & Città & $\checkmark$ & \begin{minipage}{3.5cm}
+ \vspace{5pt}
+ \begin{itemize}
+ \item Lunghezza minima 2 caratteri
+ \item Lunghezza massima 64 caratteri
+ 
+ \end{itemize}
+ \vspace{5pt}
+ \end{minipage} & \begin{minipage}{4cm}
+ \vspace{5pt}
+ \begin{itemize}
+ \item Lunghezza inadeguata
+ \item Campo vuoto
+ \item Formato inadeguato
+ \end{itemize}
+ \vspace{5pt}
+ \end{minipage} \\ \hline
+ 
+\textbf{Registrazione} & Provincia & $\checkmark$ & \begin{minipage}{3.5cm}
+ \vspace{5pt}
+ \begin{itemize}
+ \item Lunghezza di 2 caratteri
+ 
+ \end{itemize}
+ \vspace{5pt}
+ \end{minipage} & \begin{minipage}{4cm}
+ \vspace{5pt}
+ \begin{itemize}
+ \item Lunghezza inadeguata
+ \item Campo vuoto
+ \item Formato inadeguato
+ \end{itemize}
+ \vspace{5pt}
+ \end{minipage} \\ \hline
+ 
+\textbf{Registrazione} & CAP & $\checkmark$ & \begin{minipage}{3.5cm}
+ \vspace{5pt}
+ \begin{itemize}
+ \item Lunghezza di 5 caratteri
  
  \end{itemize}
  \vspace{5pt}
@@ -2894,17 +2918,81 @@ Fare riferimento a \ref{UC:ticketlist}. \\
  \vspace{5pt}
  \end{minipage} \\ \hline
  
- \textbf{InserimentoDipendente} & Indirizzo & $\checkmark$ & \begin{minipage}{3.5cm}
+\textbf{Registrazione} & Via & $\checkmark$ & \begin{minipage}{3.5cm}
  \vspace{5pt}
  \begin{itemize}
- \item Lunghezza minima 5 caratteri
+ \item Lunghezza minima 2 caratteri
  \item Lunghezza massima 64 caratteri
- \item Testo rispettante il formato previsto dal documento allegato
- \begin{verbatim}
- standard_
- composizione_
- indirizzi.pdf
- \end{verbatim} 
+ 
+ \end{itemize}
+ \vspace{5pt}
+ \end{minipage} & \begin{minipage}{4cm}
+ \vspace{5pt}
+ \begin{itemize}
+ \item Lunghezza inadeguata
+ \item Campo vuoto
+ \item Formato inadeguato
+ \end{itemize}
+ \vspace{5pt}
+ \end{minipage} \\ \hline
+ 
+ \textbf{Registrazione} & Numero civico & $\checkmark$ & \begin{minipage}{3.5cm}
+ \vspace{5pt}
+ \begin{itemize}
+ \item Lunghezza minima 1 carattere
+ \item Lunghezza massima 6 caratteri
+ 
+ \end{itemize}
+ \vspace{5pt}
+ \end{minipage} & \begin{minipage}{4cm}
+ \vspace{5pt}
+ \begin{itemize}
+ \item Lunghezza inadeguata
+ \item Campo vuoto
+ \item Formato inadeguato
+ \end{itemize}
+ \vspace{5pt}
+ \end{minipage} \\ \hline
+ 
+\textbf{Registrazione} & Città & $\checkmark$ & \begin{minipage}{3.5cm}
+ \vspace{5pt}
+ \begin{itemize}
+ \item Lunghezza minima 2 caratteri
+ \item Lunghezza massima 64 caratteri
+ 
+ \end{itemize}
+ \vspace{5pt}
+ \end{minipage} & \begin{minipage}{4cm}
+ \vspace{5pt}
+ \begin{itemize}
+ \item Lunghezza inadeguata
+ \item Campo vuoto
+ \item Formato inadeguato
+ \end{itemize}
+ \vspace{5pt}
+ \end{minipage} \\ \hline
+ 
+\textbf{Registrazione} & Provincia & $\checkmark$ & \begin{minipage}{3.5cm}
+ \vspace{5pt}
+ \begin{itemize}
+ \item Lunghezza di 2 caratteri
+ 
+ \end{itemize}
+ \vspace{5pt}
+ \end{minipage} & \begin{minipage}{4cm}
+ \vspace{5pt}
+ \begin{itemize}
+ \item Lunghezza inadeguata
+ \item Campo vuoto
+ \item Formato inadeguato
+ \end{itemize}
+ \vspace{5pt}
+ \end{minipage} \\ \hline
+ 
+\textbf{Registrazione} & CAP & $\checkmark$ & \begin{minipage}{3.5cm}
+ \vspace{5pt}
+ \begin{itemize}
+ \item Lunghezza di 5 caratteri
  
  \end{itemize}
  \vspace{5pt}
