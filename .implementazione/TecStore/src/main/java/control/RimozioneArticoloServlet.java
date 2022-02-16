@@ -47,10 +47,12 @@ public class RimozioneArticoloServlet extends HttpServlet {
 		try {
 			if (session.getAttribute("IDVenditore").equals(session.getAttribute("CF"))) {
 				model.rimozioneArticolo(session.getAttribute("CF").toString(), request.getParameter("IDArticolo"));
+				session.setAttribute("successo", "rimozioneArticolo");
 				redirect = "/successo.jsp";
-			} else
+			} else {
+				session.setAttribute("errore", "rimozioneArticolo");
 				redirect = "/errore.jsp";
-
+			}
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");

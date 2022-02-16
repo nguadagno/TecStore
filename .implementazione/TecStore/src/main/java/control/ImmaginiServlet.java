@@ -57,7 +57,7 @@ public class ImmaginiServlet extends HttpServlet {
 					redirect = "inserimentoImmagini.jsp";
 				else {
 					response.setStatus(500);
-					session.setAttribute("errore", "errore inserimento immagine");
+					session.setAttribute("errore", "erroreInserimentoImmagine");
 					redirect = "/errore.jsp";
 				}
 			} catch (SQLException e) {

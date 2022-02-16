@@ -50,8 +50,10 @@ public class DettagliUtenteServlet extends HttpServlet {
 			} else if (session.getAttribute("tipologia").toString().equals("5")) {
 				session.setAttribute("dettagliutente", model.dettagliUtente(request.getParameter("CF")));
 				redirect = "/dettagliutente.jsp";
-			} else
+			} else {
+				session.setAttribute("errore", "AccessoNonAutorizzato");
 				redirect = "/errore.jsp";
+			}
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");

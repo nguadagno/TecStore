@@ -46,15 +46,16 @@ public class AggiuntaAlCarrelloServlet extends HttpServlet {
 			ArticoloBean art = model1.dettagliArticolo(request.getParameter("IDArticolo"));
 			if (art.getQuantita() >= Integer.parseInt(request.getParameter("quantita").toString())) {
 				if (model.aggiuntaArticolo(session.getAttribute("CF").toString(), request.getParameter("IDArticolo"),
-						Integer.parseInt(request.getParameter("quantita"))))
+						Integer.parseInt(request.getParameter("quantita")))) {
+					session.setAttribute("successo", "aggiuntaCarrello");
 					redirect = "/successo.jsp";
-				else {
-					session.setAttribute("errore", "Errore aggiunta Articolo");
+				} else {
+					session.setAttribute("errore", "arroreAggiuntaCarrello");
 					redirect = "/errore.jsp";
 				}
 
 			} else {
-				session.setAttribute("errore", "Errore quantita");
+				session.setAttribute("errore", "erroreQuantitaAggiuntaCarrello");
 				redirect = "/errore.jsp";
 			}
 		} catch (SQLException e) {

@@ -43,11 +43,13 @@ public class RimborsoMagazziniereServlet extends HttpServlet {
 		session.setAttribute("operazione", "confermaRimborso");
 
 		try {
-			if (model.cambiaStato(request.getParameter("IDOrdine"), request.getParameter("stato")))
+			if (model.cambiaStato(request.getParameter("IDOrdine"), request.getParameter("stato"))) {
+				session.setAttribute("successo", "confermaRimborso");
 				redirect = "/successo.jsp";
-			else
+			} else {
+				session.setAttribute("errore", "confermaRimborso");
 				redirect = "/errore.jsp";
-
+			}
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");

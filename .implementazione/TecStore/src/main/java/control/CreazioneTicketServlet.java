@@ -44,9 +44,10 @@ public class CreazioneTicketServlet extends HttpServlet {
 
 		try {
 			if (model.creazioneTicket(session.getAttribute("CF").toString(), request.getParameter("tipologia"),
-					request.getParameter("messaggio")))
+					request.getParameter("messaggio"))) {
+				session.setAttribute("successo", "creazioneTicket");
 				redirect = "/successo.jsp";
-			else {
+			} else {
 				session.setAttribute("errore", "creazioneTicket");
 				redirect = "/errore.jsp";
 			}

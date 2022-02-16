@@ -44,10 +44,13 @@ public class AutorizzazioneVenditaServlet extends HttpServlet {
 		session.setAttribute("operazione", "autorizzazioneVendita");
 
 		try {
-			if (model.cambiaStato(request.getParameter("IDArticolo"), request.getParameter("stato")))
+			if (model.cambiaStato(request.getParameter("IDArticolo"), request.getParameter("stato"))) {
+				session.setAttribute("successo", "cambiaStato");
 				redirect = "/successo.jsp";
-			else
+			} else {
+				session.setAttribute("errore", "cambiaStato");
 				redirect = "/errore.jsp";
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();

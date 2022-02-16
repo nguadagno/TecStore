@@ -42,8 +42,10 @@ public class AggiornamentoQuantitaCarrelloServlet extends HttpServlet {
 					Integer.parseInt(request.getParameter("quantita")))) {
 				session.setAttribute("carrello", model.GetCarrello(session.getAttribute("CF").toString()));
 				redirect = "/carrello.jsp";
-			} else
+			} else {
+				session.setAttribute("errore", "erroreAggiornamentoQuantitaCarrello");
 				redirect = "/errore.jsp";
+			}
 
 		} catch (SQLException e) {
 			response.setStatus(500);

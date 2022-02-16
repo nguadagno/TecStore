@@ -43,9 +43,10 @@ public class ChiusuraTicketServlet extends HttpServlet {
 		session.setAttribute("operazione", "chiusuraTicket");
 
 		try {
-			if (model.cambiaStato(request.getParameter("IDTicket"), "Chiuso"))
+			if (model.cambiaStato(request.getParameter("IDTicket"), "Chiuso")) {
+				session.setAttribute("successo", "chiusuraTicket");
 				redirect = "/successo.jsp";
-			else {
+			} else {
 				session.setAttribute("errore", "chiusuraTicket");
 				redirect = "/errore.jsp";
 			}

@@ -56,15 +56,17 @@ public class ModificaPasswordServlet extends HttpServlet {
 											? request.getParameter("password").toString()
 											: null
 							: model.generatePassword(15));
-			
-			if (u.getPassword()!=null && model.modificaUtente(u.getCF(), u)) {
+
+			if (u.getPassword() != null && model.modificaUtente(u.getCF(), u)) {
 
 				if (session.getAttribute("tipologia").toString().equals("5")) {
 					session.setAttribute("emailUtente", u.getEmail());
 					session.setAttribute("passwordUtente", u.getPassword());
 				}
+				session.setAttribute("successo", "modificaPassword");
 				redirect = "/successo.jsp";
 			} else {
+				session.setAttribute("errore", "modificaPassword");
 				redirect = "/errore.jsp";
 			}
 		} catch (Exception e) {

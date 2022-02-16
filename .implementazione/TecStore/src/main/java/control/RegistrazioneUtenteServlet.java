@@ -56,8 +56,10 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 			if (model.registrazioneUtente(utente)) {
 				session.setAttribute("emailUtente", request.getParameter("email"));
 				session.setAttribute("passwordUtente", password);
+				session.setAttribute("successo", "registrazione");
 				redirect = "/successo.jsp";
 			} else {
+				session.setAttribute("errore", "registrazione");
 				redirect = "/errore.jsp";
 			}
 		} catch (Exception e) {
