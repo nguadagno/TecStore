@@ -1,0 +1,1119 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{fancyvrb}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{makecell}
+
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+\newcounter{mycounter} 
+\newcommand\showmycounter{\stepcounter{mycounter}\themycounter}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\author{Natale Guadagno, Paolo Patrone}
+\title{Test Plan - TecStore}
+\renewcommand{\contentsname}{Contenuti}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+        citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue,
+    linktocpage
+}
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\newgeometry{a4paper,textwidth=345pt,textheight=598pt}
+\section*{Partecipanti}
+\begin{center}
+\begin{tabular} {|c|c|}
+\hline
+\textbf{Nome} & \textbf{Matricola} \\
+\hline
+Guadagno Natale & 0512106546 \\
+Patrone Paolo & 0512106153 \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\section*{Revision History}
+\begin{center}
+\begin{tabular} {|c|c|c|}
+\hline
+\textbf{Data} & \textbf{Versione} & \textbf{Descrizione} \\
+16/2/2022 & 0.1 & Prima stesura \\
+\hline
+
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\section{Funzionalità da testare}
+
+\subsection{Gestione Account}
+\begin{itemize}
+\item Registrazione utente (cliente)
+\item Registrazione utente (dipendente)
+\item Autenticazione utente (tutte le tipologie)
+\item Modifica password (cliente)
+\item Generazione password (dipendente)
+\item Ricerca dipendenti
+\item Eliminazione account
+\end{itemize}
+
+\subsection{Gestione Vendita}
+\begin{itemize}
+\item Inserimento di un nuovo articolo
+\item Ricerca di un articolo per nome
+\item Ricerca degli articoli messi in vendita
+\item Modifica di un articolo
+\item Elenco articoli da accettare (centralinista)
+\item Rimozione di un articolo
+\end{itemize}
+
+\subsection{Gestione Carrello}
+\begin{itemize}
+\item Aggiunta di un articolo al carrello
+\item Aggiornamento quantità di un articolo nel carrello
+\item Elenco degli articoli nel carrello
+\item Rimozione di un articolo dal carrello
+\end{itemize}
+
+\subsection{Gestione Ordine}
+\begin{itemize}
+\item Creazione di un ordine
+\item Elenco degli ordini in attesa di spedizione (magazziniere)
+\item Visualizzazione dei dettagli di un ordine (magazziniere)
+\item Storico degli ordini effettuati
+\item Visualizzazione dei dettagli di un ordine (cliente)
+\item Richiesta di rimborso per un ordine effettuato (cliente)
+\item Dettagli di un rimborso e approvazione (magazziniere)
+\end{itemize}
+
+\subsection{Gestione Assistenza}
+\begin{itemize}
+\item Creazione di un ticket
+\item Elenco dei ticket in attesa di risposta (centralinista)
+\item Elenco dei ticket aperti (cliente)
+\item Elenco dei messaggi relativi ad un ticket
+\item Risposta ad un ticket
+\item Chiusura di un ticket
+\end{itemize}
+
+\section{Criteri di successo e fallimento}
+Per ogni singolo test, lo si formulerà evitando di creare scenari volutamente favorevoli, in modo da poter rilevare eventuali criticità o errori nel sistema. \\
+In caso di fallimento di un test, ci si adopererà per correggere il codice scritto in precedenza affinché il test venga eseguito con successo.
+
+\section{Approccio al testing}
+Si è scelto di dividere il testing in più fasi:
+
+\begin{itemize}
+\item Testing ``Black box", in cui si useranno dati vicini alla realtà dell'uso del sistema, ignorando totalmente la struttura interna delle funzioni testate. Si utilizzerà la tecnica del Category Partition per ridurre il numero di test necessari ed evitare ridondanze.
+
+\item Testing ``White box", in cui si useranno anche dati volutamente errati o incompleti per ottenere una copertura quasi totale dei percorsi possibili all'interno delle funzioni critiche.
+
+\item Testing con la libreria Selenium, per verificare che il sistema e le sue interfacce rispondano nei modi previsti alle varie operazioni di un utente.
+\end{itemize}
+
+\section{Necessario per il testing}
+\begin{itemize}
+\item Eclipse IDE per i test JUnit
+\item Selenium IDE per i test Selenium
+\item Apache Tomcat 10 su cui è in esecuzione il sistema
+\item DBMS MariaDB su cui sono memorizzati i dati del sistema
+\end{itemize}
+
+\newpage
+\newgeometry{top=0.5in,bottom=0.5in,right=0.5in,left=0.2in}
+\section{Test Gestione Account}
+\subsection{Registrazione e modifica cliente}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Email} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza email (LE) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Lunghezza $\leq$ 6 caratteri [property \textbf{invalidLEValue}]
+\item Formato corretto [property \textbf{validFEValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+
+Formato email (FE) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Formato incorretto (\verb+^\w\@\w\.\w$+) [property \textbf{invalidFEValue}]
+\item Formato corretto [\emph{if \textbf{validLEValue}}] [property \textbf{validFEValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+Esistenza nel database (XE)  & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Esiste nel database [\emph{if \textbf{validFEValue}}] [property \textbf{invalidXEValue}]
+\item Non esiste nel database [\emph{if \textbf{validFEValue}}] [property \textbf{validXEValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Password} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza password (LP) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+Lunghezza < 10 || Lunghezza > 64+ [property \textbf{invalidLPValue}]
+\item Formato corretto [property \textbf{validLPValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Conferma password} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza confermaPassword (LCP) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+Lunghezza < 10 || Lunghezza > 64+ [property \textbf{invalidLCPValue}]
+\item Formato corretto [property \textbf{validLCPValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+Conferma password (CP) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Password non corrispondente (\verb+password != confermaPassword+) [\emph{if \textbf{validCPValue}}] [property \textbf{invalidUPValue}]
+\item Password corrispondente (\verb+password == confermaPassword+) [\emph{if \textbf{validCPValue}}] [property \textbf{validUPValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Codice Fiscale} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza codiceFiscale (LCF) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Lunghezza $\neq$ 16 caratteri [property \textbf{invalidLCFValue}]
+\item Formato corretto [property \textbf{validLCFValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+Formato codiceFiscale (FCF) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Formato non corretto (\verb+^[A-Z][AEIOU][AEIOUX]|[AEIOU]X{2}|+
+\verb+[B-DF-HJ-NP-TV-Z]{2}[A-Z]$+) [\emph{if \textbf{validLCFValue}}] [property \textbf{invalidFCFValue}]
+\item Formato corretto [\emph{if \textbf{validLCFValue}}] [property \textbf{validFCFValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Nome} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza nome (LN) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+Lunghezza < 3 ||+ \verb+Lunghezza > 24+ [property \textbf{invalidLNValue}]
+\item Formato corretto [property \textbf{validLNValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Cognome} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza cognome (LC) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+Lunghezza < 3 ||+ \verb+Lunghezza > 24+  [property \textbf{invalidLCValue}]
+\item Formato corretto [property \textbf{validLCValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Città} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza città (LCT) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+Lunghezza < 2 ||+ \verb+Lunghezza > 24+  [property \textbf{invalidLCTalue}]
+\item Formato corretto [property \textbf{validLCTalue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Via} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza via (LVT) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+Lunghezza < 2 ||+ \verb+Lunghezza > 24+  [property \textbf{invalidLVTalue}]
+\item Formato corretto [property \textbf{validLVTalue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Provincia} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza provincia (LVP) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Lunghezza $\neq$ 2 caratteri [property \textbf{invalidLVPValue}]
+\item Formato corretto [property \textbf{validLVPalue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+Formato provincia (FP) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Formato incorretto (\verb+^[A-Z]{2}$+) [property \textbf{invalidFPValue}]
+\item Formato corretto [property \textbf{validFPValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Numero civico} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza numero civico (LNC) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+Lunghezza < 1 || Lunghezza > 6+ [property \textbf{invalidLNCValue}]
+\item Formato corretto [property \textbf{validLVPalue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+Formato numero civico (FNC) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Formato incorretto (\verb_^[1-9][0-9]*$_) [property \textbf{invalidFNCValue}]
+\item Formato corretto [property \textbf{validFNCValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: CAP} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza CAP (LCAP) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Lunghezza $\neq$ 5 caratteri [property \textbf{invalidLCAPValue}]
+\item Formato corretto [property \textbf{validLCAPalue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+Formato CAP (FCAP) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Formato incorretto (\verb_^[0-9]{5}$_) [property \textbf{invalidFCAPValue}]
+\item Formato corretto [property \textbf{validFCAPValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Casi di test}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} \textbf{\#} & \textbf{Combinazione di input} & \textbf{Esito previsto}  \\ \hline
+1 & \makecell{LE2 FE2 XE2 LP2 LCP2 CP2 LCF2 FCF2 LN2 LC2 LCT2\\ LVT2 LVP2 FP2 LNC2 FNC2 LCAP2 FCAP2} & \makecell{Registrazione o modifica \\ effettuata con successo} \\ \hline
+2 & \makecell{LE2 FE2 XE1 LP2 LCP2 CP2 LCF2 FCF2 LN2 LC2 LCT2\\ LVT2 LVP2 FP2 LNC2 FNC2 LCAP2 FCAP2}  & \makecell{Registrazione o modifica errata:\\ email già esistente} \\ \hline
+3 & \makecell{LE2 FE2 XE2 LP1 LCP2 CP2 LCF2 FCF2 LN2 LC2 LCT2\\ LVT2 LVP2 FP2 LNC2 FNC2 LCAP2 FCAP2}  & \makecell{Registrazione o modifica errata:\\ lunghezza password inadeguata} \\ \hline
+4 &\makecell{LE2 FE2 XE2 LP2 LCP2 CP1 LCF2 FCF2 LN2 LC2 LCT2\\ LVT2 LVP2 FP2 LNC2 FNC2 LCAP2 FCAP2}  & \makecell{ Registrazione o modifica errata:\\ Password e confermaPassoword \\ non coincidono} \\ \hline
+5 & \makecell{LE2 FE2 XE2 LP2 LCP2 CP2 LCF2 FCF1 LN2 LC2 LCT2\\ LVT2 LVP2 FP2 LNC2 FNC2 LCAP2 FCAP2}  & \makecell{Registrazione o modifica errata:\\ formato codice fiscale errato} \\ \hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\subsection{Registrazione e modifica dipendente}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Email} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza email (LE) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Lunghezza $\leq$ 6 caratteri [property \textbf{invalidLEValue}]
+\item Formato corretto [property \textbf{validFEValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+
+Formato email (FE) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Formato incorretto (\verb+^\w\@\w\.\w$+) [property \textbf{invalidFEValue}]
+\item Formato corretto [\emph{if \textbf{validLEValue}}] [property \textbf{validFEValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+Esistenza nel database (XE)  & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Esiste nel database [\emph{if \textbf{validFEValue}}] [property \textbf{invalidXEValue}]
+\item Non esiste nel database [\emph{if \textbf{validFEValue}}] [property \textbf{validXEValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Codice Fiscale} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza codiceFiscale (LCF) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Lunghezza $\neq$ 16 caratteri [property \textbf{invalidLCFValue}]
+\item Formato corretto [property \textbf{validLCFValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+Formato codiceFiscale (FCF) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Formato non corretto (\verb+^[A-Z][AEIOU][AEIOUX]|[AEIOU]X{2}|+
+\verb+[B-DF-HJ-NP-TV-Z]{2}[A-Z]$+) [\emph{if \textbf{validLCFValue}}] [property \textbf{invalidFCFValue}]
+\item Formato corretto [\emph{if \textbf{validLCFValue}}] [property \textbf{validFCFValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Nome} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza nome (LN) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Lunghezza $<$ 4 caratteri [property \textbf{invalidLNValue}]
+\item Formato corretto [property \textbf{validLNValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Cognome} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza cognome (LC) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Lunghezza $<$ 4 caratteri [property \textbf{invalidLCValue}]
+\item Formato corretto [property \textbf{validLCValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Città} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza città (LCT) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Lunghezza $<$ 4 caratteri [property \textbf{invalidLCTalue}]
+\item Formato corretto [property \textbf{validLCTalue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Via} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza via (LVT) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Lunghezza $<$ 4 caratteri [property \textbf{invalidLVTalue}]
+\item Formato corretto [property \textbf{validLVTalue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Provincia} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza provincia (LVP) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Lunghezza $\neq$ 2 caratteri [property \textbf{invalidLVPValue}]
+\item Formato corretto [property \textbf{validLVPalue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+Formato provincia (FP) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Formato incorretto (\verb+^[A-Z]{2}$+) [property \textbf{invalidFPValue}]
+\item Formato corretto [property \textbf{validFPValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Numero civico} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza numero civico (LNC) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Lunghezza $<$ 1 caratteri [property \textbf{invalidLNCValue}]
+\item Formato corretto [property \textbf{validLVPalue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+Formato numero civico (FNC) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Formato incorretto (\verb_^[1-9][0-9]*$_) [property \textbf{invalidFNCValue}]
+\item Formato corretto [property \textbf{validFNCValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: CAP} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza CAP (LCAP) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Lunghezza $\neq$ 5 caratteri [property \textbf{invalidLCAPValue}]
+\item Formato corretto [property \textbf{validLCAPValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+Formato CAP (FCAP) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Formato incorretto (\verb_^[0-9]{5}$_) [property \textbf{invalidFCAPValue}]
+\item Formato corretto [property \textbf{validFCAPValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Tipologia dipendente} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Tipologia (TP) & \begin{minipage}{11cm}
+\begin{enumerate}
+\item Valore incorretto (\verb+tipologia!="Centralinista &&"+ \verb+tipologia!="Magazziniere" &&+ \verb+tipologia!="Amministratore Catalogo" &&+ \verb+tipologia!="Amministratore Personale"+ [property \textbf{invalidTPValue}]
+\item Formato corretto [property \textbf{validTPValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Casi di test}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} \textbf{\#} & \textbf{Combinazione di input} & \textbf{Esito previsto}  \\ \hline
+1 & \makecell{LE2 FE2 XE2 LCF2 FCF2 LN2 LC2 LCT2 LVT2\\ LVP2 FP2 LNC2 FNC2 LCAP2 FCAP2 TP2} & \makecell{Registrazione o modifica \\ effettuata con successo} \\ \hline
+2 & \makecell{LE2 FE2 XE2 LCF2 FCF2 LN2 LC2 LCT2 LVT2\\ LVP2 FP2 LNC2 FNC2 LCAP2 FCAP2 TP1} & \makecell{Registrazione o modifica errata:\\ tipologia dipendente errata} \\ \hline
+3 & \makecell{LE2 FE2 XE1 LCF2 FCF2 LN2 LC2 LCT2 LVT2\\ LVP2 FP2 LNC2 FNC2 LCAP2 FCAP2 TP2} & \makecell{Registrazione o modifica errata:\\ email già esistente} \\ \hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\subsection{Autenticazione}
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Email} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza email (LE) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Lunghezza $\leq$ 6 caratteri [property \textbf{invalidLEValue}]
+\item Formato corretto [property \textbf{validFEValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+Formato email (FE) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Formato incorretto (\verb+^\w\@\w\.\w$+) [property \textbf{invalidFEValue}]
+\item Formato corretto [\emph{if \textbf{validLEValue}}] [property \textbf{validFEValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+Esistenza nel database (XE) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Non esiste nel database [\emph{if \textbf{validFEValue}}] [property \textbf{invalidXEValue}]
+\item Esiste nel database ma la password non coincide [\emph{if \textbf{validFEValue}}] [property \textbf{invalidXEValue}]
+\item Esiste nel database [\emph{if \textbf{validFEValue}}] [property \textbf{validXEValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Password} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza password (LP) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Lunghezza $\leq$ 9 caratteri [property \textbf{invalidLPValue}]
+\item Formato corretto [property \textbf{validLPValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Casi di test}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} \textbf{\#} & \textbf{Combinazione di input} & \textbf{Esito previsto}  \\ \hline
+1 & \makecell{LE2 FE2 XE3 LP2} & \makecell{Autenticazione \\ effettuata con successo} \\ \hline
+2 & \makecell{LE2 FE2 XE2 LP2} & \makecell{Autenticazione fallita:\\ password errata} \\ \hline
+3 & \makecell{LE2 FE2 XE1 LP2} & \makecell{Autenticazione fallita:\\ email errata} \\ \hline
+\end{tabular}
+\end{center}
+
+\newpage
+\subsection{Inserimento e modifica articolo}
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Nome} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza nome (LNA) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Lunghezza $\leq$ 5 caratteri [property \textbf{invalidLNAValue}]
+\item Formato corretto [property \textbf{validLNAValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Descrizione} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza descrizione (LDA) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Lunghezza $\leq$ 25 caratteri [property \textbf{invalidLDAValue}]
+\item Formato corretto [property \textbf{validLDAValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Quantità} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Numero quantità (QA) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Quantità $\leq$ 0 [property \textbf{invalidQAValue}]
+\item Formato corretto [property \textbf{validQAValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Prezzo} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Prezzo (PRA) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item Prezzo $\leq$ 0 \texteuro [property \textbf{invalidPRAValue}]
+\item Formato corretto [property \textbf{validPRAValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Rimborsabile} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Rimborsabile (RBA) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+Rimborsabile != "Sì" &&+ \verb+Rimborsabile != "No" + [property \textbf{invalidRBAValue}]
+\item Formato corretto [property \textbf{validRBAValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Casi di test}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} \textbf{\#} & \textbf{Combinazione di input} & \textbf{Esito previsto}  \\ \hline
+1 & \makecell{LNA2 LDA2 QA2 PRA2 RBA2} & \makecell{Inserimento o modifica articolo effettuata con successo} \\ \hline
+2 & \makecell{LNA1 LDA2 QA2 PRA2 RBA2} & \makecell{Inserimento o modifica articolo fallita:\\ lunghezza nome invalida } \\ \hline
+3 & \makecell{LNA2 LDA2 QA1 PRA2 RBA2} & \makecell{Inserimento o modifica articolo fallita:\\ quantità invalida} \\ \hline
+3 & \makecell{LNA2 LDA2 QA2 PRA1 RBA2} & \makecell{Inserimento o modifica articolo fallita:\\ prezzo invalido} \\ \hline
+\end{tabular}
+\end{center}
+
+\newpage
+\subsection{Inserimento foto}
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Foto} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Foto (FOA) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+MimeType != "image/png" &&+ \verb+MimeType != "image/jpeg"+ [property \textbf{invalidFOAValue}]
+\item Formato corretto [property \textbf{validFOAValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Casi di test}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} \textbf{\#} & \textbf{Combinazione di input} & \textbf{Esito previsto}  \\ \hline
+1 & \makecell{FOA2} & \makecell{Inserimento foto articolo effettuata con successo} \\ \hline
+2 & \makecell{FOA1} & \makecell{Inserimento foto articolo non effettuata: \\ formato immagine errato} \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Ricerca articolo}
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Nome} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Nome (NA) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+Lunghezza > 0 &&+ \verb+Lunghezza < 25+ [property \textbf{invalidNAValue}]
+\item Formato corretto [property \textbf{validNAValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Casi di test}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} \textbf{\#} & \textbf{Combinazione di input} & \textbf{Esito previsto}  \\ \hline
+1 & \makecell{NA2} & \makecell{Ricerca articolo effettuata con successo} \\ \hline
+2 & \makecell{NA1} & \makecell{Inserimento foto articolo non effettuata: \\ lunghezza errata} \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Ricerca vendita}
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Nome} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Nome (NA) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+Lunghezza > 0 &&+ \verb+Lunghezza < 25+ [property \textbf{invalidNAValue}]
+\item Formato corretto [property \textbf{validNAValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Casi di test}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} \textbf{\#} & \textbf{Combinazione di input} & \textbf{Esito previsto}  \\ \hline
+1 & \makecell{NA2} & \makecell{Ricerca articolo effettuata con successo} \\ \hline
+2 & \makecell{NA1} & \makecell{Inserimento foto articolo non effettuata: \\ lunghezza errata} \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Storico ordini}
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Nome} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Nome (NA) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+Lunghezza > 0 &&+ \verb+Lunghezza < 25+ [property \textbf{invalidNAValue}]
+\item Formato corretto [property \textbf{validNAValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Casi di test}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} \textbf{\#} & \textbf{Combinazione di input} & \textbf{Esito previsto}  \\ \hline
+1 & \makecell{NA2} & \makecell{Ricerca articolo effettuata con successo} \\ \hline
+2 & \makecell{NA1} & \makecell{Inserimento foto articolo non effettuata: \\ lunghezza errata} \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Conferma vendita}
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Conferma} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Conferma (CV) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+Conferma != "Conferma" &&+ \verb+Rimborsabile != "Rifiuta" + [property \textbf{invalidCVValue}]
+\item Formato corretto [property \textbf{validCVValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Casi di test}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} \textbf{\#} & \textbf{Combinazione di input} & \textbf{Esito previsto}  \\ \hline
+1 & \makecell{CV2} & \makecell{Conferma vendita effettuata con successo} \\ \hline
+2 & \makecell{CV1} & \makecell{Conferma vendita fallita: \\ stato non corretto} \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Conferma spedizione}
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Conferma} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Conferma (CS) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+Conferma != "Conferma" &&+ \verb+Rimborsabile != "Annulla" + [property \textbf{invalidCSValue}]
+\item Formato corretto [property \textbf{validCSValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Casi di test}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} \textbf{\#} & \textbf{Combinazione di input} & \textbf{Esito previsto}  \\ \hline
+1 & \makecell{CS2} & \makecell{Conferma spedizione effettuata con successo} \\ \hline
+2 & \makecell{CS1} & \makecell{Conferma spedizione fallita: \\ stato non corretto} \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Aggiornamento quantità carrello}
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Quantità} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Quantità (QC) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+Quantità < 1 || Quantità > 10+ [property \textbf{invalidQCValue}]
+\item Formato corretto [property \textbf{validQCValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Casi di test}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} \textbf{\#} & \textbf{Combinazione di input} & \textbf{Esito previsto}  \\ \hline
+1 & \makecell{QC2} & \makecell{Aggiornamento quantità effettuata con successo} \\ \hline
+2 & \makecell{QC1} & \makecell{Aggiornamento quantità fallito: \\ valore non corretto} \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Aggiunta articolo al carrello}
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Quantità} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Quantità (QC) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+Quantità < 1 || Quantità > 10+ [property \textbf{invalidQCValue}]
+\item Formato corretto [property \textbf{validQCValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Casi di test}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} \textbf{\#} & \textbf{Combinazione di input} & \textbf{Esito previsto}  \\ \hline
+1 & \makecell{QC2} & \makecell{Aggiunta articolo effettuata con successo} \\ \hline
+2 & \makecell{QC1} & \makecell{Aggiunta articolo fallita: \\ valore non corretto} \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Creazione ticket}
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Messaggio} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza messaggio (LM) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+Lunghezza < 16 || Lunghezza > 1024+ [property \textbf{invalidLMValue}]
+\item Formato corretto [property \textbf{validLMValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Casi di test}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} \textbf{\#} & \textbf{Combinazione di input} & \textbf{Esito previsto}  \\ \hline
+1 & \makecell{LM2} & \makecell{Creazione ticket effettuata con successo} \\ \hline
+2 & \makecell{LM1} & \makecell{Creazione ticket fallita: \\ lunghezza messaggio non corretta} \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Risposta ticket}
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Parametro: Messaggio} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\cellcolor[HTML]{C0C0C0}Categoria & Scelte \\ \hline
+
+Lunghezza messaggio (LM) & \begin{minipage}{10cm}
+\begin{enumerate}
+\item \verb+Lunghezza < 16 || Lunghezza > 1024+ [property \textbf{invalidLMValue}]
+\item Formato corretto [property \textbf{validLMValue}]
+\end{enumerate}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Casi di test}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} \textbf{\#} & \textbf{Combinazione di input} & \textbf{Esito previsto}  \\ \hline
+1 & \makecell{LM2} & \makecell{Risposta ticket effettuata con successo} \\ \hline
+2 & \makecell{LM1} & \makecell{Risposta ticket fallita: \\ lunghezza messaggio non corretta} \\ \hline
+\end{tabular}
+\end{center}
+
+\end{document}
