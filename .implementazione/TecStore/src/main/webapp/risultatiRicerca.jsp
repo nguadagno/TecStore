@@ -10,7 +10,7 @@
 	<div align="center">
 		<h3>Ricerca Articolo</h3>
 		<form action="ricercaArticolo" method="post">
-			<input type="text" name="nome" maxlength="35" required> <input
+			<input type="text" name="testo" maxlength="35" required> <input
 				type="submit" value="Cerca">
 		</form>
 	</div>
