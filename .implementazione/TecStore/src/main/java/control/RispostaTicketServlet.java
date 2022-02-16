@@ -51,7 +51,7 @@ public class RispostaTicketServlet extends HttpServlet {
 					request.getParameter("messaggio"))) {
 				if (session.getAttribute("tipologia").toString().equals("2")
 						&& model.cambiaStato(request.getParameter("IDTicket"), "InAttesaCliente")) {
-					session.setAttribute("successo", "rispostaTicket");
+					session.setAttribute("successo", "rispostaTicketCentralinista");
 					redirect = "/successo.jsp";
 				}
 				if (session.getAttribute("tipologia").toString().equals("1")

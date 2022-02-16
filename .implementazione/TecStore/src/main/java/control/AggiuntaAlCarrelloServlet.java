@@ -50,7 +50,7 @@ public class AggiuntaAlCarrelloServlet extends HttpServlet {
 					session.setAttribute("successo", "aggiuntaCarrello");
 					redirect = "/successo.jsp";
 				} else {
-					session.setAttribute("errore", "arroreAggiuntaCarrello");
+					session.setAttribute("errore", "erroreAggiuntaCarrello");
 					redirect = "/errore.jsp";
 				}
 

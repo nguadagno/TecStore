@@ -46,11 +46,11 @@ public class AnnullamentoVenditaServlet extends HttpServlet {
 
 		try {
 			if (model.rimozioneArticolo(session.getAttribute("CF").toString(), request.getParameter("IDArticolo"))) {
-				session.setAttribute("successo", "rimozioneArticolo");
+				session.setAttribute("successo", "annullamentoVendita");
 				redirect = "/successo.jsp";
 
 			} else {
-				session.setAttribute("errore", "rimozioneArticolo");
+				session.setAttribute("errore", "annullamentoVendita");
 				redirect = "/errore.jsp";
 			}
 		} catch (SQLException e) {

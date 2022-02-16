@@ -55,7 +55,7 @@ public class ConfermaOrdineServlet extends HttpServlet {
 					}
 				}
 			} else {
-				session.setAttribute("errore", "cambiastato_tracking");
+				session.setAttribute("errore", "confermaOrdine");
 				redirect = "/errore.jsp";
 			}
 		} catch (SQLException e) {

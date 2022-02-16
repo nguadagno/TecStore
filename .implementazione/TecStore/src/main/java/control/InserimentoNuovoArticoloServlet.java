@@ -69,7 +69,7 @@ public class InserimentoNuovoArticoloServlet extends HttpServlet {
 				session.setAttribute("IDArticolo", IDArticolo);
 				redirect = "/inserimentoImmagini.jsp";
 			} else {
-				session.setAttribute("errore", "inserimentoImmagini");
+				session.setAttribute("errore", "erroreInserimentoImmagini");
 				redirect = "/errore.jsp";
 			}
 		} catch (SQLException e) {
