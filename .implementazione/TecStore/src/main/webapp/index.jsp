@@ -14,9 +14,9 @@
 
 		<form action="ricercaArticolo" method="post">
 			<p>
-				<br> <input type="text" name="testo" maxlength="45"
+				<br> <input type="text" name="testo" maxlength="25"
 					placeholder="Cerca..." required> <select name="limit">
-					<option value="10">10</option>
+					<option value="10" selected>10</option>
 					<option value="20">20</option>
 					<option value="50">50</option>
 				</select> <input type="submit" value="Conferma">
@@ -82,7 +82,7 @@
 		</div>
 		<div>
 			<form action="Deautenticazione" method="post">
-				<input type="submit" value="LogOut">
+				<input id="logout" type="submit" value="LogOut">
 			</form>
 		</div>
 	</div>

@@ -10,7 +10,7 @@
 	<div align="center">
 		<h3>Ricerca Articolo</h3>
 		<form action="ricercaArticolo" method="post">
-			<input type="text" name="testo" maxlength="35" required> <input
+			<input type="text" name="testo" maxlength="25" required> <input
 				type="submit" value="Cerca">
 		</form>
 	</div>
@@ -20,7 +20,7 @@
 	ArrayList<FotoBean> foto = (ArrayList<FotoBean>) session.getAttribute("foto");
 	if (risultati == null || foto == null || risultati.size() == 0) {
 	%>
-	<h3>Nessun Articolo Trovato!</h3>
+	<h3 id="esito">Nessun Articolo Trovato!</h3>
 	<%
 	return;
 	} else {

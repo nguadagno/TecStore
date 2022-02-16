@@ -32,11 +32,10 @@ return;
 	ArrayList<ArticoloBean> carrello = (ArrayList<ArticoloBean>) session.getAttribute("carrello");
 	ArrayList<FotoBean> foto = (ArrayList<FotoBean>) session.getAttribute("foto");
 	float totale = 0;
-	if (carrello == null) {
+	if (carrello == null || carrello.size() == 0) {
 	%>
 	<h3>Il Carrello &egrave; Vuoto!</h3>
 	<%
-	return;
 	} else {
 	%>
 	<table>
@@ -71,10 +70,16 @@ return;
 						value="Aggiorna">
 				</form>
 			</td>
-			<%
-			}
-			%>
 		</tr>
+		<%
+		}
+		%>
+		<tr></tr>
+		<tr>
+			<td><b>Totale</b></td>
+			<td><%=totale%>&euro;</td>
+		</tr>
+
 	</table>
 	<form action="CreazioneOrdine" method="post">
 		<input type="submit" id="carrello-acquista" value="Acquista!">
@@ -88,12 +93,6 @@ return;
 	<br>
 	<hr>
 	<div>
-
-		<h6>
-			Totale:
-			<%=totale%>&euro;
-		</h6>
-
 		<a href="paginainiziale.jsp" id="carrello-tornaAllaHome"><button>Torna
 				Alla Home</button></a>
 	</div>
