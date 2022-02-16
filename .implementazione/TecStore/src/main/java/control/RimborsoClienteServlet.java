@@ -46,10 +46,13 @@ public class RimborsoClienteServlet extends HttpServlet {
 
 		try {
 
-			if (model.cambiaStato(request.getParameter("IDOrdine"), "InAttesaRimborso"))
+			if (model.cambiaStato(request.getParameter("IDOrdine"), "InAttesaRimborso")) {
+				session.setAttribute("successo", "richiestaRimborso");
 				redirect = "/successo.jsp";
-			else
+			} else {
+				session.setAttribute("errore", "richiestaRimborso");
 				redirect = "/errore.jsp";
+			}
 
 		} catch (SQLException e) {
 			response.setStatus(500);

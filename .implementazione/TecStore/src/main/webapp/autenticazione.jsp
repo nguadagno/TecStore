@@ -22,17 +22,19 @@
 		<form action="Autenticazione" method="post">
 
 			<p>
-				<input type="text" name="email">
+				<input type="text" id="autenticazione-email" name="email">
 			</p>
 			<p>
-				<input type="password" name="password">
+				<input type="password" id="autenticazione-password" name="password">
 			</p>
 			<p>
-				<input type="submit" value="Accedi">
+				<input type="submit" id="autenticazione-accedi" value="Accedi">
 			</p>
 		</form>
-		<a href="/passwordDimenticata.jsp">Password dimenticata?</a> <br>
-		<br> <a href="/registrazione.jsp">Non hai un account?
+		<a href="/passwordDimenticata.jsp"
+			id="autenticazione-passwordDimenticata">Password dimenticata?</a> <br>
+		<br> <a href="/registrazione.jsp"
+			id="autenticazione-registrazione">Non hai un account?
 			Registrati!</a> <br>
 	</div>
 </body>

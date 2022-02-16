@@ -54,7 +54,7 @@ public class ModificaUtenteServlet extends HttpServlet {
 				password = request.getParameter("password");
 			else
 				password = oldUtente.getPassword();
-      
+
 			int tipologia = 1;
 
 			if (session.getAttribute("tipologiaUtente") != null)
@@ -85,8 +85,10 @@ public class ModificaUtenteServlet extends HttpServlet {
 					session.setAttribute("passwordUtente", password);
 					session.setAttribute("emailUtente", request.getParameter("email"));
 				}
+				session.setAttribute("successo", "modificaUtente");
 				redirect = "/successo.jsp";
 			} else {
+				session.setAttribute("errore", "modificaUtente");
 				redirect = "/errore.jsp";
 			}
 		} catch (Exception e) {

@@ -6,8 +6,7 @@
 <meta charset="ISO-8859-1">
 <%
 int tipologia = -1;
-if (session.getAttribute("tipologia") == null
-		|| session.getAttribute("tipologia").toString().isEmpty()) {
+if (session.getAttribute("tipologia") == null || session.getAttribute("tipologia").toString().isEmpty()) {
 %>
 <meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
 <%
@@ -29,7 +28,7 @@ return;
 <body>
 	<div align=center>
 		<form action="ElencoRimborsiMagazziniere" method="post">
-			<select name="limit">
+			<select name="limit" id="elencoRimborsiMagaziniere-ricercaLimit">
 				<option value="10">10</option>
 				<option value="20">20</option>
 				<option value="50">50</option>
@@ -57,9 +56,9 @@ return;
 				<td><%=a.getData().toString()%></td>
 				<td>
 					<form action="DettagliOrdine" method="post">
-						<input type="hidden" name="operazione" value="rimborso">
-						<input type="hidden" name="IDOrdine" value="<%=a.getID()%>">
-						<input type="submit" value="Dettagli">
+						<input type="hidden" name="operazione" value="rimborso"> <input
+							type="hidden" name="IDOrdine" value="<%=a.getID()%>"> <input
+							type="submit" value="Dettagli">
 					</form>
 				</td>
 				<%

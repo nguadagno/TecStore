@@ -35,21 +35,23 @@ return;
 	<form action="CreazioneTicket" method="post">
 		<div align="center">
 			<label for="tipologia"> <b>Seleziona il tipo di ticket</b>
-			</label> <select name="tipologia" id="tipologia" required>
+			</label> <select name="tipologia" id="tipologia"
+				id="creazioneTicket-tipologia" required>
 				<option value="Amministrativo">Amministrativo</option>
 				<option value="Ordini">Ordini</option>
 				<option value="Spedizione">Spedizione</option>
 				<option value="Rimborso">Rimborso</option>
 				<option value="Profilo">Profilo</option>
-			</select> <BR> <BR> <BR> <input type="text" name="messaggio"
+			</select> <BR> <BR> <BR> <input type="text"
+				id="creazioneTicket-messaggio" name="messaggio"
 				style="width: 300px; height: 300px;" required>
 		</div>
 		<br> <br> <br>
 		<hr>
 		<br>
 		<div>
-			<input type="submit" value="Conferma"> <a
-				href="dettagliArticolo.jsp">
+			<input type="submit" value="Conferma" id="creazioneTicket-conferma">
+			<a href="dettagliArticolo.jsp" id="creazioneTicket-Annulla">
 				<button>Annulla</button>
 			</a>
 		</div>

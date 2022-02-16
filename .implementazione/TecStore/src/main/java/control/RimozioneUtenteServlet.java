@@ -44,8 +44,10 @@ public class RimozioneUtenteServlet extends HttpServlet {
 		session.setAttribute("operazione", "rimozioneUtente");
 		try {
 			if (model.eliminaUtente(session.getAttribute("CF").toString(), request.getParameter("CF"))) {
+				session.setAttribute("successo", "eliminaUtente");
 				redirect = "/successo.jsp";
 			} else {
+				session.setAttribute("errore", "eliminaUtente");
 				redirect = "/errore.jsp";
 			}
 		} catch (SQLException e) {

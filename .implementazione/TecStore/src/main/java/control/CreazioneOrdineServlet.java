@@ -53,10 +53,13 @@ public class CreazioneOrdineServlet extends HttpServlet {
 			if (u.getCartaDiCredito() == null) {
 				redirect = "/inserimentoCartaDiCredito.jsp";
 			} else {
-				if (model.creazioneOrdine(session.getAttribute("CF").toString()))
+				if (model.creazioneOrdine(session.getAttribute("CF").toString())) {
+					session.setAttribute("successo", "creazioneOrdine");
 					redirect = "/successo.jsp";
-				else
+				} else {
+					session.setAttribute("errore", "creazioneOrdine");
 					redirect = "/errore.jsp";
+				}
 			}
 		} catch (SQLException e) {
 			response.setStatus(500);

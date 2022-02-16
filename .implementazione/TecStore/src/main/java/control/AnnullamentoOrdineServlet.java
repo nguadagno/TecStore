@@ -45,11 +45,13 @@ public class AnnullamentoOrdineServlet extends HttpServlet {
 		session.setAttribute("operazione", "annullamentoOrdine");
 
 		try {
-			if (model.cambiaStato(request.getParameter("IDOrdine"), "Annullato"))
+			if (model.cambiaStato(request.getParameter("IDOrdine"), "Annullato")) {
+				session.setAttribute("successo", "annullamentoOrdine");
 				redirect = "/successo.jsp";
-			else
+			} else {
+				session.setAttribute("errore", "annullamentoOrdine");
 				redirect = "/errore.jsp";
-
+			}
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");

@@ -45,10 +45,14 @@ public class AnnullamentoVenditaServlet extends HttpServlet {
 		session.setAttribute("operazione", "annullamentoVendita");
 
 		try {
-			if (model.rimozioneArticolo(session.getAttribute("CF").toString(), request.getParameter("IDArticolo")))
+			if (model.rimozioneArticolo(session.getAttribute("CF").toString(), request.getParameter("IDArticolo"))) {
+				session.setAttribute("successo", "annullamentoVendita");
 				redirect = "/successo.jsp";
-			else
+
+			} else {
+				session.setAttribute("errore", "annullamentoVendita");
 				redirect = "/errore.jsp";
+			}
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");

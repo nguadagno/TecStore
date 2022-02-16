@@ -47,9 +47,10 @@ public class RimozioneDalCarrelloServlet extends HttpServlet {
 			if (model.rimozioneArticolo(session.getAttribute("CF").toString(), request.getParameter("IDArticolo"))) {
 				session.setAttribute("carrello", model.GetCarrello(session.getAttribute("CF").toString()));
 				redirect = "/carrello.jsp";
-			} else
+			} else {
+				session.setAttribute("errore", "rimozioneArticoloCarrello");
 				redirect = "/errore.jsp";
-
+			}
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");

@@ -57,11 +57,11 @@ public class ModificaArticoloServlet extends HttpServlet {
 				: Boolean.parseBoolean(request.getParameter("rimborsabile"));
 		@SuppressWarnings("unchecked")
 		ArrayList<FotoBean> foto = (ArrayList<FotoBean>) request.getAttribute("foto");
-		
+
 		if (IDArticolo == null || nome == null || descrizione == null || IDVenditore == null || rimborsabile == null
 				|| IDArticolo.isEmpty() || nome.isEmpty() || descrizione.isEmpty() || IDVenditore.isEmpty()
 				|| quantita < 1 || prezzo < 0.01) {
-			session.setAttribute("errore", "Errore Parametri Null");
+			session.setAttribute("errore", "erroreParametriNull");
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
@@ -71,10 +71,11 @@ public class ModificaArticoloServlet extends HttpServlet {
 		try {
 			if (model.modificaArticolo(IDArticolo, nome, descrizione, IDVenditore, quantita, prezzo, rimborsabile)
 			// && model.sovrascritturaFoto(IDArticolo, foto)
-			)
+			) {
+				session.setAttribute("successo", "modificaArticolo");
 				redirect = "/successo.jsp";
-			else {
-				session.setAttribute("errore", "ErroreModel");
+			} else {
+				session.setAttribute("errore", "modificaArticolo");
 				redirect = "/errore.jsp";
 			}
 

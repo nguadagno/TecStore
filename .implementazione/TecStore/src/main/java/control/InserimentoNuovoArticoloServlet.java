@@ -55,6 +55,7 @@ public class InserimentoNuovoArticoloServlet extends HttpServlet {
 
 		if (nome == null || descrizione == null || IDVenditore == null || rimborsabile == null || nome.isEmpty()
 				|| descrizione.isEmpty() || IDVenditore.isEmpty() || quantita < 1 || prezzo < 0.01) {
+			session.setAttribute("errore", "inserimentoCampiArticolo");
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
@@ -67,8 +68,10 @@ public class InserimentoNuovoArticoloServlet extends HttpServlet {
 			if (!IDArticolo.isEmpty()) {
 				session.setAttribute("IDArticolo", IDArticolo);
 				redirect = "/inserimentoImmagini.jsp";
-			} else
+			} else {
+				session.setAttribute("errore", "erroreInserimentoImmagini");
 				redirect = "/errore.jsp";
+			}
 		} catch (SQLException e) {
 			response.setStatus(500);
 			session.setAttribute("errore", "erroreSQL");

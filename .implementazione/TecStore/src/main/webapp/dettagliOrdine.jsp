@@ -148,13 +148,16 @@ return;
 				<form action="ConfermaOrdine" method="post">
 					<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
 					<input type=hidden name=stato value="Spedito"> <input
-						type=text max=15 name=Tracking> <BR> <input
-						type="submit" value="Conferma spedizione">
+						type=text max=15 name=Tracking
+						id="dettagliOrdine-confermaSpedizioneTracking"> <BR>
+					<input type="submit" value="Conferma spedizione"
+						id="dettagliOrdine-confermaSpedizione">
 				</form>
 				<form action="ConfermaOrdine" method="post">
 					<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
 					<input type=hidden name=stato value="Annullato"><input
-						type="submit" value="Annulla ordine">
+						type="submit" value="Annulla ordine"
+						id="dettagliOrdine-annullaOrdine">
 				</form>
 			</div>
 		</div>
@@ -194,12 +197,14 @@ return;
 			<form action="RimborsoMagazziniere" method="post">
 				<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
 				<input type=hidden name=stato value="Rimborsato"><input
-					type="submit" value="Conferma rimborso">
+					type="submit" value="Conferma rimborso"
+					id="dettagliOrdine-confermaRimborso">
 			</form>
 			<form action="RimborsoMagazziniere" method="post">
 				<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
 				<input type=hidden name=stato value="RimborsoRifiutato"> <input
-					type="submit" value="Rifiuta rimborso">
+					type="submit" value="Rifiuta rimborso"
+					id="dettagliOrdine-rifiutaRimborso">
 			</form>
 		</div>
 	</div>
@@ -239,7 +244,8 @@ return;
 		%>
 		<form action="RimborsoCliente" method="post">
 			<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
-			<input type="submit" value="Richiedi rimborso">
+			<input type="submit" value="Richiedi rimborso"
+				id="dettagliOrdine-richiediRimborso">
 		</form>
 		<%
 		}
@@ -248,7 +254,8 @@ return;
 		%>
 		<form action="AnnullamentoOrdine" method="post">
 			<input type=hidden name=IDOrdine value="<%=ordine.getID()%>">
-			<input type="submit" value="Richiedi annullamento ordine">
+			<input type="submit" value="Richiedi annullamento ordine"
+				id="dettagliOrdine-annullamentoOrdine">
 		</form>
 		<%
 		}

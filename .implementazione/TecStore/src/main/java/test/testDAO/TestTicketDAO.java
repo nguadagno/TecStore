@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.FileNotFoundException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -17,15 +16,12 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.runners.MethodSorters;
 
-import Bean.ArticoloBean;
 import Bean.MessaggioBean;
-import Bean.OrdineBean;
 import Bean.TicketBean;
 import Bean.UtenteBean;
 import model.DriverManagerConnectionPool;
 import model.GestioneAccount;
 import model.GestioneAssistenza;
-import model.GestioneVendita;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -214,10 +210,10 @@ class TestTicketDAO {
 
 		ArrayList<MessaggioBean> elenco3 = new ArrayList<MessaggioBean>();
 
-		elenco3.add(new MessaggioBean(IDTicket, CF, "1", null));
-		elenco3.add(new MessaggioBean(IDTicket, CF, "2", null));
-		elenco3.add(new MessaggioBean(IDTicket, CF, "3", null));
-		elenco3.add(new MessaggioBean(IDTicket, CF, "4", null));
+		elenco3.add(new MessaggioBean(IDTicket, CF, "1", null, null));
+		elenco3.add(new MessaggioBean(IDTicket, CF, "2", null, null));
+		elenco3.add(new MessaggioBean(IDTicket, CF, "3", null, null));
+		elenco3.add(new MessaggioBean(IDTicket, CF, "4", null, null));
 
 		ArrayList<MessaggioBean> elenco2 = gestioneAssistenza.elencoMessaggiTicket(IDTicket);
 
@@ -249,10 +245,10 @@ class TestTicketDAO {
 
 		ArrayList<MessaggioBean> elenco3 = new ArrayList<MessaggioBean>();
 
-		elenco3.add(new MessaggioBean("IDTicket", CF, "1", null));
-		elenco3.add(new MessaggioBean("IDTicket", CF, "2", null));
-		elenco3.add(new MessaggioBean("IDTicket", CF, "3", null));
-		elenco3.add(new MessaggioBean("IDTicket", CF, "4", null));
+		elenco3.add(new MessaggioBean(IDTicket, CF, "1", null, null));
+		elenco3.add(new MessaggioBean(IDTicket, CF, "2", null, null));
+		elenco3.add(new MessaggioBean(IDTicket, CF, "3", null, null));
+		elenco3.add(new MessaggioBean(IDTicket, CF, "4", null, null));
 
 		ArrayList<MessaggioBean> elenco2 = gestioneAssistenza.elencoMessaggiTicket(IDTicket);
 
