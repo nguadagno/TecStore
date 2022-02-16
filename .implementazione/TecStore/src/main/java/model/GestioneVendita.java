@@ -172,7 +172,7 @@ public class GestioneVendita {
 			for (FotoBean f : foto) {
 				PreparedStatement preparedStatement = connection.prepareStatement(insertFotoQuery);
 				preparedStatement.setString(1, IDArticolo);
-				preparedStatement.setBlob(2, f.getFoto());
+				preparedStatement.setBytes(2, f.getFoto());
 				preparedStatement.execute();
 				connection.commit();
 			}
