@@ -23,7 +23,7 @@
 		<%
 		break;
 
-		case "erroeSQL":
+		case "erroreSQL":
 		%>
 		<h4>Errore DataBase</h4>
 		<%
@@ -164,12 +164,20 @@
 		case "rimozioneArticoloCarello":
 		%>
 		<h4>L'articolo non &egrave; stato rimosso correttamente</h4>
+
 		<%
 		break;
 
 		case "eliminaUtente":
 		%>
 		<h4>L'utente non &egrave; stato eliminato correttamente</h4>
+
+		<%
+		break;
+
+		case "autenticazione":
+		%>
+		<h4>I dati inseriti non sono validi, riprova</h4>
 		<%
 		break;
 

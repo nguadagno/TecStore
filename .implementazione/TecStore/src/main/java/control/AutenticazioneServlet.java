@@ -43,7 +43,7 @@ public class AutenticazioneServlet extends HttpServlet {
 				session.setAttribute("tipologia", utente.getTipologia());
 				redirect = "/paginainiziale.jsp";
 			} else {
-				session.setAttribute("errore", "autentizacione");
+				session.setAttribute("errore", "autenticazione");
 				redirect = "/errore.jsp";
 			}
 		} catch (SQLException e) {
