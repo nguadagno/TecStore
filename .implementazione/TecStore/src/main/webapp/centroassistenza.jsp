@@ -30,7 +30,7 @@ return;
 	ArrayList<TicketBean> elenco = (ArrayList<TicketBean>) session.getAttribute("elenco");
 	%>
 	<div>
-		<a href="creazioneTicket.jsp">
+		<a href="creazioneTicket.jsp" id="centroAssistenza-creazioneTicket">
 			<button>Nuovo Ticket</button>
 		</a>
 	</div>
@@ -69,6 +69,7 @@ return;
 			<td><%=ticket.getDataUltimoMessaggio()%></td>
 			<td><form action="DettagliTicket" method="post">
 					<input type="hidden" name="IDTicket"
+						id="centroAssistenza-dettagliTicket"
 						value=<%=ticket.getIDTicket()%>><input type="submit"
 						value="Dettagli">
 

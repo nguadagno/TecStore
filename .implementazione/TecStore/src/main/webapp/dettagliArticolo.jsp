@@ -75,9 +75,9 @@ return;
 	%>
 	<div align="center">
 		<form action="ricercaArticolo" method="post">
-			<input type="text" name="testo" maxlength="35" id="testo"
-				placeholder="Titolo..." required> <input type="submit"
-				value="Cerca">
+			<input type="text" name="testo" id="dettagliArticolo-ricercaArticolo"
+				maxlength="35" id="testo" placeholder="Titolo..." required>
+			<input type="submit" id="dettagliArticolo-cerca" value="Cerca">
 		</form>
 	</div>
 	<%
@@ -89,7 +89,8 @@ return;
 	if (risultato == null) {
 	%>
 	<h3>Articolo non Trovato!</h3>
-	<a href=paginainiziale.jsp>Torna indietro</a>
+	<a href=paginainiziale.jsp id="dettagliArticolo-tornaIndietro">Torna
+		indietro</a>
 	<%
 	return;
 	}
@@ -160,7 +161,7 @@ return;
 			<input type="hidden" name="prezzo" value="<%=risultato.getPrezzo()%>">
 			<input type="hidden" name="rimborsabile"
 				value="<%=risultato.isRimborsabile()%>"> <input
-				type="submit" value="Modifica">
+				type="submit" value="Modifica" id="dettagliArticolo-modifica">
 		</form>
 	</div>
 	<%
@@ -170,10 +171,12 @@ return;
 	%>
 	<div align="right">
 		<form action="AggiuntaAlCarrello" method="post">
-			<input type="submit" value="Aggiungi al Carrello"> <input
+			<input type="submit" value="Aggiungi al Carrello"
+				id="dettagliArticolo-aggiungiAlCarrello"> <input
 				type="hidden" name="IDArticolo" value="<%=risultato.getID()%>">
-			<input type="number" name="quantita" style="width: 50px;" value="1"
-				step="1" min="1"
+			<input type="number" name="quantita"
+				id="dettagliArticolo-aggiungiAlCarrelloQuantita"
+				style="width: 50px;" value="1" step="1" min="1"
 				max="<%=10 > risultato.getQuantita() ? risultato.getQuantita() : 10%>"
 				required>
 		</form>
@@ -186,8 +189,10 @@ return;
 	<div align="right">
 		<form action="AutorizzazioneVendita" method="post">
 			<label><b>Conferma Vendita</b></label> <input type="radio"
-				name="stato" value="InVendita"><br> <label><b>Rifiuta
-					Vendita</b></label> <input type="radio" name="stato" value="Rifiutato">
+				name="stato" value="InVendita"
+				id="dettagliArticolo-autorizzaVenditaConferma"><br> <label><b>Rifiuta
+					Vendita</b></label> <input type="radio" name="stato"
+				id="dettagliArticolo-autorizzaVenditaRifiuta" value="Rifiutato">
 			<br> <br> <input type="submit" value="Conferma">
 		</form>
 	</div>
@@ -200,7 +205,8 @@ return;
 		<form action="autenticazione.jsp" method="post">
 			<h4>Per aggiungere articoli al carrello è necessario essere
 				autenticati.</h4>
-			<input type="submit" value="Autenticazione">
+			<input type="submit" value="Autenticazione"
+				id="dettagliArticolo-autenticazione">
 		</form>
 	</div>
 	<%

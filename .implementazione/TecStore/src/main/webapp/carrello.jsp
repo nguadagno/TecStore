@@ -56,8 +56,8 @@ return;
 			<td><%=a.getPrezzo()%></td>
 			<td>
 				<form action="rimozioneDalCarrello" method="post">
-					<input type="submit" value="Rimuovi"> <input
-						value="<%=a.getID()%>" type="hidden" name="IDArticolo">
+					<input type="submit" id="carrello-rimuovi" value="Rimuovi">
+					<input value="<%=a.getID()%>" type="hidden" name="IDArticolo">
 
 				</form>
 			</td>
@@ -65,8 +65,9 @@ return;
 				<form action="aggiornamentoQuantitaCarrello" name="aggiornamento"
 					method="post">
 					<input value="<%=a.getID()%>" type="hidden" name="IDArticolo">
-					<input type="number" min=1 max=10 name="quantita"
-						value="<%=a.getQuantita()%>"> <input type="submit"
+					<input type="number" min=1 max=10 id="carrello-aggiornaQuantita"
+						name="quantita" value="<%=a.getQuantita()%>"> <input
+						type="submit" id="carrello-aggiornaQuantitaAggiorna"
 						value="Aggiorna">
 				</form>
 			</td>
@@ -88,9 +89,10 @@ return;
 			<%=totale%>&euro;
 		</h6>
 		<form action="CreazioneOrdine" method="post">
-			<input type="submit" value="Acquista!">
+			<input type="submit" id="carrello-acquista" value="Acquista!">
 		</form>
-		<a href="paginainiziale.jsp"><button>Torna Alla Home</button></a>
+		<a href="paginainiziale.jsp" id="carrello-tornaAllaHome"><button>Torna
+				Alla Home</button></a>
 	</div>
 </body>
 </html>

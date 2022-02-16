@@ -32,16 +32,17 @@ return;
 
 	<div align="center">
 		<form action="RicercaVendita" method="post">
-			<input type="text" name="nome" maxlength="35" id="testo"
-				placeholder="Cerca vendita..." required> <input
-				type="submit" value="Cerca">
+			<input type="text" name="nome" id="areaVenditori-ricercaTesto"
+				maxlength="35" placeholder="Cerca vendita..." required> <input
+				type="submit" id="areaVenditori-ricercaCerca" value="Cerca">
 		</form>
 	</div>
 	<br>
 	<br>
 	<hr>
 	<div>
-		<form action="nuovaVendita.jsp" method="post">
+		<form action="nuovaVendita.jsp" id="areaVenditori-nuovoArticolo"
+			method="post">
 			<input type="submit" value="Nuovo Articolo">
 		</form>
 	</div>
@@ -71,7 +72,8 @@ return;
 
 				<td><form action="DettagliArticolo" method="post">
 						<input type="hidden" name="IDArticolo" value="<%=a.getID()%>">
-						<input type="submit" value="Dettagli">
+						<input type="submit" id="areaVenditori-dettagliArticolo"
+							value="Dettagli">
 					</form></td>
 
 			</tr>

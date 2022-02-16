@@ -71,12 +71,14 @@ return;
 			}
 			%>
 		</table>
-		<br> <br> <br> <a href="rispostaTicket.jsp">
+		<br> <br> <br> <a href="rispostaTicket.jsp"
+			id="dettagliTicket-rispostaTicket">
 			<button>Rispondi</button>
 		</a>
 		<form action="ChiusuraTicket" method=post>
 			<input type=hidden name=IDTicket value=<%=IDTicket%>> <input
-				type=submit value="Chiusura ticket">
+				type=submit value="Chiusura ticket"
+				id="dettagliTicket-chiusuraTicket">
 		</form>
 	</div>
 </body>

@@ -11,6 +11,11 @@
 	
 	
 	
+	
+	
+	
+	
+	
 var password = document.getElementById("password"), confermapassword = document.getElementById("confermapassword");
 
 function validatePassword(){
@@ -23,6 +28,11 @@ function validatePassword(){
 
 password.onchange = validatePassword;
 confermapassword.onkeyup = validatePassword;
+
+
+
+
+
 
 
 
@@ -79,12 +89,13 @@ return;
 				<i>Dati Autenticazione</i>
 			</h3>
 			<label for="email">E-mail</label><br> <input type="email"
-				name="email" required value=<%=utente.getEmail()%>> <br>
-			<br>
+				name="email" id="dettagliUtente-email" required
+				value=<%=utente.getEmail()%>> <br> <br>
 			<%
 			if (tipologia == 1) {
 			%>
-			<a href="modificaPassword.jsp">Modifica Password</a>
+			<a href="modificaPassword.jsp" id="dettagliUtente-modificaPassword">Modifica
+				Password</a>
 			<%
 			}
 			%>
@@ -95,28 +106,31 @@ return;
 			<label for="CF">Codice Fiscale</label><br> <input type="text"
 				name="CF" id="CF" maxlength="16" required value=<%=utente.getCF()%>>
 			<br> <br> <label for="nome">Nome</label><br> <input
-				type="text" name="nome" id="nome" required
+				type="text" name="nome" id="nome" id="dettagliUtente-nome" required
 				value=<%=utente.getNome()%>> <br> <br> <label
 				for="cognome">Cognome</label><br> <input type="text"
-				name="cognome" id="cognome" required value=<%=utente.getCognome()%>>
-			<br> <br> <br>
+				name="cognome" id="cognome" id="dettagliUtente-cognome" required
+				value=<%=utente.getCognome()%>> <br> <br> <br>
 
 			<h3>
 				<i>Indirizzo</i>
 			</h3>
 			<label for="citta">Città</label><br> <input type="text"
-				name="citta" maxlength="35" id="citta" required
-				value=<%=utente.getCitta()%>> <br> <br> <label
+				id="dettagliUtente-citta" name="citta" maxlength="35" id="citta"
+				required value=<%=utente.getCitta()%>> <br> <br> <label
 				for="via">Via</label><br> <input type="text" name="via"
-				id="via" required value=<%=utente.getVia()%>> <br> <br>
-			<label for="provincia">Provincia</label><br> <input type="text"
-				name="provincia" maxlength="2" id="provincia" required
+				id="dettagliUtente-via" id="via" required value=<%=utente.getVia()%>>
+			<br> <br> <label for="provincia">Provincia</label><br>
+			<input type="text" id="dettagliUtente-provincia" name="provincia"
+				maxlength="2" id="provincia" required
 				value=<%=utente.getProvincia()%>> <br> <br> <label
 				for="numeroCivico">Numero civico</label><br> <input
-				type="number" name="numeroCivico" id="numeroCivico" required
+				type="number" name="numeroCivico" id="numeroCivico"
+				id="dettagliUtente-numeroCivico" required
 				value=<%=utente.getNumeroCivico()%>> <br> <br> <label
 				for="CAP">CAP</label><br> <input type="number" name="CAP"
-				maxlength="5" id="CAP" required value=<%=utente.getCAP()%>>
+				maxlength="5" id="CAP" id="dettagliUtente-cap" required
+				value=<%=utente.getCAP()%>>
 			<p>
 				<%
 				if (tipologia == 5) {
@@ -126,7 +140,8 @@ return;
 				<i>Tipologia dipendente</i>
 			</h3>
 
-			<BR> <select id="tipologiaUtente" name="tipologiaUtente">
+			<BR> <select id="tipologiaUtente" name="tipologiaUtente"
+				id="dettagliUtente-tipologiaUtente">
 				<option value="2" <%=utente.getTipologia() == 2 ? "selected" : ""%>>Centralinista</option>
 				<option value="3" <%=utente.getTipologia() == 3 ? "selected" : ""%>>Magazziniere</option>
 				<option value="4" <%=utente.getTipologia() == 4 ? "selected" : ""%>>Amministratore
@@ -137,7 +152,8 @@ return;
 			<%
 			}
 			%>
-			<BR> <BR> <input type=submit value="Conferma modifica">
+			<BR> <BR> <input type=submit value="Conferma modifica"
+				id="dettagliUtente-confermaModifica">
 		</form>
 	</div>
 
