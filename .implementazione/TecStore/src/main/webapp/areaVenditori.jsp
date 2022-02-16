@@ -46,42 +46,46 @@ return;
 			<input type="submit" value="Nuovo Articolo">
 		</form>
 	</div>
-	<div>
+
+	<%
+	if (elencoVendite == null || foto == null || elencoVendite.size() == 0) {
+	%>
+	<br>
+	<br>
+	<h3>Non hai nessun oggetto in vendita</h3>
+	<%
+	} else {
+	%>
+	<table>
+		<tr>
+			<th>Nome</th>
+			<th>Descrizione</th>
+			<th>Prezzo</th>
+			<th>ID</th>
+			<th></th>
+		</tr>
+
 		<%
-		if (elencoVendite == null || foto == null) {
-			return;
-		} else {
+		for (ArticoloBean a : elencoVendite) {
 		%>
-		<table>
-			<tr>
-				<th>Nome</th>
-				<th>Descrizione</th>
-				<th>Prezzo</th>
-				<th>ID</th>
-				<th></th>
-			</tr>
+		<tr>
+			<td><%=a.getNome()%></td>
+			<td><%=a.getDescrizione()%></td>
+			<td><%=a.getPrezzo()%></td>
+			<td><%=a.getID()%></td>
 
-			<%
-			for (ArticoloBean a : elencoVendite) {
-			%>
-			<tr>
-				<td><%=a.getNome()%></td>
-				<td><%=a.getDescrizione()%></td>
-				<td><%=a.getPrezzo()%></td>
-				<td><%=a.getID()%></td>
+			<td><form action="DettagliArticolo" method="post">
+					<input type="hidden" name="IDArticolo" value="<%=a.getID()%>">
+					<input type="submit" id="areaVenditori-dettagliArticolo"
+						value="Dettagli">
+				</form></td>
 
-				<td><form action="DettagliArticolo" method="post">
-						<input type="hidden" name="IDArticolo" value="<%=a.getID()%>">
-						<input type="submit" id="areaVenditori-dettagliArticolo"
-							value="Dettagli">
-					</form></td>
+		</tr>
 
-			</tr>
-
-			<%
-			}
-			}
-			%>
-		</table>
+		<%
+		}
+		}
+		%>
+	</table>
 </body>
 </html>

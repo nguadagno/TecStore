@@ -73,11 +73,16 @@ return;
 			</td>
 			<%
 			}
-			}
 			%>
-
 		</tr>
 	</table>
+	<form action="CreazioneOrdine" method="post">
+		<input type="submit" id="carrello-acquista" value="Acquista!">
+	</form>
+	<%
+	}
+	%>
+
 	<br>
 	<br>
 	<br>
@@ -88,9 +93,7 @@ return;
 			Totale:
 			<%=totale%>&euro;
 		</h6>
-		<form action="CreazioneOrdine" method="post">
-			<input type="submit" id="carrello-acquista" value="Acquista!">
-		</form>
+
 		<a href="paginainiziale.jsp" id="carrello-tornaAllaHome"><button>Torna
 				Alla Home</button></a>
 	</div>
