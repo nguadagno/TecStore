@@ -1,0 +1,975 @@
+{
+  "id": "ccfa427b-6b73-45a4-9d38-0b81712a76e8",
+  "version": "2.0",
+  "name": "TecStore",
+  "url": "http://localhost:8080/TecStore",
+  "tests": [{
+    "id": "285844fb-0022-43a1-a705-d5312883bdd4",
+    "name": "AutenticazioneUtente",
+    "commands": [{
+      "id": "0d90cf97-c71e-4285-9c30-7a47726a3932",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8c08cfe3-88ff-47e1-a130-bfb7f2879b8b",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1920x1080",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2349caaf-076c-4512-8724-90e3c23328b3",
+      "comment": "",
+      "command": "click",
+      "target": "css=html",
+      "targets": [
+        ["css=html", "css:finder"],
+        ["xpath=//html", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "be0b85aa-afb3-4f0e-b5d4-d2b9cdc310b6",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(2) > button",
+      "targets": [
+        ["css=a:nth-child(2) > button", "css:finder"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1b71b886-941d-4af0-a01e-92a6919686ec",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "93592e89-1ab9-4b01-8eca-a3d3c257c903",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1@email.tld"
+    }, {
+      "id": "a284560a-1659-413b-b289-ca033c278b33",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "f4198f55-7553-48ae-91e3-52cb7e8fcc23",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "53f6e2e5-3bd1-4735-9cc3-52bdf382f516",
+      "comment": "Check se utente è autenticato",
+      "command": "assertText",
+      "target": "css=i",
+      "targets": [
+        ["css=i", "css:finder"],
+        ["xpath=//i", "xpath:position"]
+      ],
+      "value": "nome1 cognome1"
+    }, {
+      "id": "d22eca54-9cf1-4e2b-8c6b-25f00e7ea700",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//input[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[4]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2e2126df-6e55-4c60-8f2f-dcc2eed67803",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "name=testo",
+      "targets": [
+        ["name=testo", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='testo']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "00ad3e8a-602a-4b67-aebf-d2886ca10d95",
+      "comment": "",
+      "command": "close",
+      "target": "/TecStore/index.jsp",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "1475e6e2-992e-4650-84a1-9bc89d9fef98",
+    "name": "AutenticazioneUtentePasswordSbagliata",
+    "commands": [{
+      "id": "11cc243e-7922-4cb3-8b5f-4c4124561f7b",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2d0a23e0-74e6-4676-ba08-175a61d4c995",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1920x1080",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1748796d-afaf-4d6b-851b-0501e9f94a9f",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(2) > button",
+      "targets": [
+        ["css=a:nth-child(2) > button", "css:finder"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4df0a3ee-c81c-4ac6-a6fe-3e2bb540eeda",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c6352422-80b4-4255-a9e5-c1f854eab60e",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1@email.tld"
+    }, {
+      "id": "5bfc747b-e8ad-4ce7-9431-f9345dac3fac",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "password"
+    }, {
+      "id": "8d673cb4-fcfc-45f7-bb4d-7c5a85ccd54d",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ab0bb857-4414-407f-be20-2fb4a95cde2c",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h4",
+      "targets": [
+        ["css=h4", "css:finder"],
+        ["xpath=//h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'I dati inseriti non sono validi, riprova')]", "xpath:innerText"]
+      ],
+      "value": "I dati inseriti non sono validi, riprova"
+    }, {
+      "id": "b2d73ac8-9c02-41a2-bf0d-c487bbfeaac1",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Continua')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "11507cde-397d-4831-9f39-a81a7fed9fb6",
+      "comment": "",
+      "command": "close",
+      "target": "/TecStore/index.jsp",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "459dc043-8a9c-44eb-a37a-34a3354c5c3d",
+    "name": "AutenticazioneUtenteEmailSbagliata",
+    "commands": [{
+      "id": "f466b0f9-4bb6-4576-a08c-f2b50a63502a",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e38f340f-a30f-419e-a95c-63b3754b5bb7",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1920x1080",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1bd35e45-909a-4d41-91f5-fba57b5715d6",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(2) > button",
+      "targets": [
+        ["css=a:nth-child(2) > button", "css:finder"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "957063fc-6d44-47b0-82f5-12a8e408250c",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "240168e5-ed6d-4e71-b2c2-f3ffaff0d459",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email"
+    }, {
+      "id": "4c1c9f94-36ef-40c6-8f86-f4a835f48320",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "7fbb70f7-cbcd-481d-b68c-74eef6f29947",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7bf61313-2cb0-4641-95b2-1c57ac58795a",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h4",
+      "targets": [
+        ["css=h4", "css:finder"],
+        ["xpath=//h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'I dati inseriti non sono validi, riprova')]", "xpath:innerText"]
+      ],
+      "value": "I dati inseriti non sono validi, riprova"
+    }, {
+      "id": "c50d2ffe-fa7b-4916-98ac-4257cb4c13ff",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Continua')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f8cfe8b0-2b42-48e3-b1e5-ae6f4b7e1621",
+      "comment": "",
+      "command": "close",
+      "target": "/TecStore/index.jsp",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "83a3ab84-06b9-43b9-96a2-27b216a961e5",
+    "name": "RicercaArticolo",
+    "commands": [{
+      "id": "2f5d48ad-18fc-4446-a7d5-264fd4942a7b",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7f185fa8-6642-4c94-a0aa-3e033a853ee0",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1920x1080",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1a9b3270-38ed-4d5b-8e5a-2a26b95b6a42",
+      "comment": "",
+      "command": "click",
+      "target": "name=testo",
+      "targets": [
+        ["name=testo", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='testo']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9107b607-acd6-41a7-b55a-7f620bc629ec",
+      "comment": "",
+      "command": "type",
+      "target": "name=testo",
+      "targets": [
+        ["name=testo", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='testo']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "art"
+    }, {
+      "id": "f1da96d1-fe60-4b5b-8b7e-bb35408f37cc",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(4)",
+      "targets": [
+        ["css=input:nth-child(4)", "css:finder"],
+        ["xpath=//input[@value='Conferma']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3e65fded-1e96-478b-b731-a590f377486e",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Ricerca Articolo",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8a8282b7-a312-40cd-9f36-f45e5655ae22",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=tr:nth-child(2) > td:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(2) > td:nth-child(2)", "css:finder"],
+        ["xpath=//td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'art10')]", "xpath:innerText"]
+      ],
+      "value": "art10"
+    }, {
+      "id": "a1b49206-7bb6-4bf2-8354-7f6d7c1573bd",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=tr:nth-child(3) > td:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(3) > td:nth-child(2)", "css:finder"],
+        ["xpath=//tr[3]/td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'art20')]", "xpath:innerText"]
+      ],
+      "value": "art20"
+    }, {
+      "id": "935e2c18-fac4-44f0-a3e0-93125d8ba05d",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=tr:nth-child(4) > td:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(4) > td:nth-child(2)", "css:finder"],
+        ["xpath=//tr[4]/td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'art30')]", "xpath:innerText"]
+      ],
+      "value": "art30"
+    }, {
+      "id": "697332f7-55f6-4fdc-859b-d0df2ee8c42f",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "9b6c6de8-68b7-4672-81c5-4f52530cab3d",
+    "name": "RicercaArticoloNoInput",
+    "commands": [{
+      "id": "71328588-e8fb-4aa2-9ff1-18b6ebfe4312",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8ac0ccdb-4f3a-4a00-b23d-034aa10d02c9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1920x1080",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "032eabe2-16ba-4202-8d2b-e703b87b19c2",
+      "comment": "",
+      "command": "click",
+      "target": "name=testo",
+      "targets": [
+        ["name=testo", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='testo']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0d5276b9-80d8-479a-95fd-6a817dbefeaf",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(4)",
+      "targets": [
+        ["css=input:nth-child(4)", "css:finder"],
+        ["xpath=//input[@value='Conferma']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6bea860b-ccd4-408b-9da8-18e07b295c5c",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Pagina Iniziale",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6502ade6-27e3-4244-a722-874892116229",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "84827eff-605a-4750-bd02-597d6f97a210",
+    "name": "RicercaArticoloInesistente",
+    "commands": [{
+      "id": "41a61385-6ffe-4d52-9472-d8a725fafe38",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d3293687-0a75-498e-a281-aaa6936bdea9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1920x1080",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5721becc-907d-4282-9ff5-58701e043efa",
+      "comment": "",
+      "command": "click",
+      "target": "name=testo",
+      "targets": [
+        ["name=testo", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='testo']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e3d8e05c-5c04-4a01-9d0f-e37641de1035",
+      "comment": "",
+      "command": "type",
+      "target": "name=testo",
+      "targets": [
+        ["name=testo", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='testo']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "articolo inesistente"
+    }, {
+      "id": "bca0a754-fb0c-4fee-b585-8a9d9d9babca",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(4)",
+      "targets": [
+        ["css=input:nth-child(4)", "css:finder"],
+        ["xpath=//input[@value='Conferma']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "001d45ed-7ac7-44b4-98bc-ac73fd8ce8c7",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Ricerca Articolo",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e04a97b2-ee36-41aa-a4b6-947c7b13dd1b",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=esito",
+      "targets": [
+        ["id=esito", "id"],
+        ["css=#esito", "css:finder"],
+        ["xpath=//h3[@id='esito']", "xpath:attributes"],
+        ["xpath=//body/h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Nessun Articolo Trovato!')]", "xpath:innerText"]
+      ],
+      "value": "Nessun Articolo Trovato!"
+    }, {
+      "id": "e376ef2c-49e7-4aea-b871-d2e9f2b9c115",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "669e9297-e814-4cfd-a13b-7b02cbdb8c35",
+    "name": "RicercaArticoloInputLungo",
+    "commands": [{
+      "id": "db943b54-f48f-4549-80b9-5eeff92a9130",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5e44739d-70e4-42a2-b029-012cb2447c88",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1920x1080",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "805f6065-6b4a-4cca-b8c9-e3beede6c6d8",
+      "comment": "",
+      "command": "click",
+      "target": "name=testo",
+      "targets": [
+        ["name=testo", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='testo']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6a69bc4e-39d7-4f04-81fc-05dabfab10c3",
+      "comment": "",
+      "command": "type",
+      "target": "name=testo",
+      "targets": [
+        ["name=testo", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='testo']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "articoloarticoloarticoloarticoloarticoloarticoloarticoloarticolo"
+    }, {
+      "id": "70ba73e0-7aac-4647-88eb-4aa48d5045fb",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(4)",
+      "targets": [
+        ["css=input:nth-child(4)", "css:finder"],
+        ["xpath=//input[@value='Conferma']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e2f7715f-6f4f-43a6-ac42-7e3d911a5887",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=esito",
+      "targets": [
+        ["id=esito", "id"],
+        ["css=#esito", "css:finder"],
+        ["xpath=//h3[@id='esito']", "xpath:attributes"],
+        ["xpath=//body/h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Nessun Articolo Trovato!')]", "xpath:innerText"]
+      ],
+      "value": "Nessun Articolo Trovato!"
+    }, {
+      "id": "fb3e921e-0e41-4829-a81e-553ef1691ba2",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Ricerca Articolo",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7e98a174-e651-417d-805c-0dbd997f0023",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "9ab1c464-4e6c-42a7-b2fd-88e9db1d6ca5",
+    "name": "CarrelloGet",
+    "commands": [{
+      "id": "5b3edfd9-2e00-4890-ab75-9d1b2c4c3233",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "881122c2-d35f-445b-a8b2-bbed88230b4a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1459x1317",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "986e0244-4971-4815-864d-4fdbc02a287e",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(2) > button",
+      "targets": [
+        ["css=a:nth-child(2) > button", "css:finder"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1f680f34-cae2-47ed-99af-b74e8f02f3f6",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7af018ab-e4c5-4e18-85b5-73e6cd97e4af",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1@email.tld"
+    }, {
+      "id": "6d1f0d45-5b54-4167-bf41-38769fa3e12f",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "2c1b02dd-7c44-4d72-8337-807e93786c88",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3ae776cb-c6df-4c5b-8e85-46a0b3934455",
+      "comment": "",
+      "command": "click",
+      "target": "css=div:nth-child(3) input",
+      "targets": [
+        ["css=div:nth-child(3) input", "css:finder"],
+        ["xpath=//input[@value='Carrello']", "xpath:attributes"],
+        ["xpath=//div[2]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "04bfa34e-d965-49ca-ad12-bf15a945d41f",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h3",
+      "targets": [
+        ["css=h3", "css:finder"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Il Carrello è Vuoto!')]", "xpath:innerText"]
+      ],
+      "value": "Il Carrello è Vuoto!"
+    }, {
+      "id": "6a6a9510-8976-4c1c-8325-1fe80ab21fde",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//a[@id='carrello-tornaAllaHome']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1a5ed357-173d-4f87-afe0-f7bebfdb1d1d",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//input[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[4]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ea972d27-849b-47eb-b78f-38799fcdf1df",
+      "comment": "",
+      "command": "close",
+      "target": "/TecStore/index.jsp",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "c72ef628-dfd6-49b2-bc80-7723fed153f3",
+    "name": "CarrelloAggiunta",
+    "commands": []
+  }, {
+    "id": "902f10b3-30d6-438e-9200-33d78e1774a7",
+    "name": "CarrelloRimozione",
+    "commands": []
+  }, {
+    "id": "0536adc2-f051-4313-a811-28171c6c7b6d",
+    "name": "CarrelloAggiornamento",
+    "commands": []
+  }, {
+    "id": "e5198484-111f-4f43-a9e6-dd19b7bcf524",
+    "name": "CarrelloOrdine",
+    "commands": []
+  }, {
+    "id": "5f46eab7-0903-4d7e-9f86-66c8f4b0aa18",
+    "name": "CarrelloGetVuoto",
+    "commands": [{
+      "id": "48cc7bcb-c81a-4fc1-9a03-038122a29b55",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7c50df71-9adf-4621-9b7a-acf3d299e2a9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1459x1317",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "85541e25-89cb-421d-bc28-e9284cef15cd",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(2) > button",
+      "targets": [
+        ["css=a:nth-child(2) > button", "css:finder"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5e3ead19-f586-40eb-a4b4-b6d35630103f",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "83e44aa2-155d-4851-812e-e3ad49b43b2b",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1@email.tld"
+    }, {
+      "id": "c3677df6-f629-4fcb-8256-5f2a30c89a85",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "e9495bda-fd7c-43b9-90cd-bcb2535ff2ab",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cad8b994-78ec-4e58-9daf-adf3b01b41dd",
+      "comment": "",
+      "command": "click",
+      "target": "css=div:nth-child(3) input",
+      "targets": [
+        ["css=div:nth-child(3) input", "css:finder"],
+        ["xpath=//input[@value='Carrello']", "xpath:attributes"],
+        ["xpath=//div[2]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ae246140-2024-4d6e-83b7-06e00420d543",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h3",
+      "targets": [
+        ["css=h3", "css:finder"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Il Carrello è Vuoto!')]", "xpath:innerText"]
+      ],
+      "value": "Il Carrello è Vuoto!"
+    }, {
+      "id": "eff7aec8-5745-4b73-bd29-ca1a8e6f66be",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//a[@id='carrello-tornaAllaHome']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d9b593bb-04d3-4d2c-8940-c6b1fef8b1c1",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//input[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[4]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "649fb6e4-3e1a-4cc1-b2b7-ecf651884ac9",
+      "comment": "",
+      "command": "close",
+      "target": "/TecStore/index.jsp",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "03a12d2a-0daa-4c59-bcfc-6214778dfa83",
+    "name": "Autenticazione",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 30,
+    "tests": ["285844fb-0022-43a1-a705-d5312883bdd4", "459dc043-8a9c-44eb-a37a-34a3354c5c3d", "1475e6e2-992e-4650-84a1-9bc89d9fef98"]
+  }, {
+    "id": "bce2189e-2df4-47fe-86e7-d7d2cd3422c1",
+    "name": "RicercaArticolo",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["83a3ab84-06b9-43b9-96a2-27b216a961e5", "669e9297-e814-4cfd-a13b-7b02cbdb8c35", "84827eff-605a-4750-bd02-597d6f97a210", "9b6c6de8-68b7-4672-81c5-4f52530cab3d"]
+  }, {
+    "id": "4ec19757-c45c-4f3b-9065-2de4ffbf047d",
+    "name": "Carrello",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://localhost:8080/", "http://localhost:8080/TecStore"],
+  "plugins": []
+}
