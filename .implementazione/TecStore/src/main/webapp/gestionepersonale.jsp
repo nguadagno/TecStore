@@ -77,7 +77,7 @@ return;
 				<td>
 					<form action="DettagliUtente" method="post">
 						<input type="hidden" name="CF" value="<%=a.getCF()%>"> <input
-							type="submit" value="Dettagli">
+							type="submit" value="Dettagli" id="gestionePersonale-dettagli">
 					</form>
 				</td>
 				<%

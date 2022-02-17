@@ -55,15 +55,17 @@
 					style="width: 200px" inputmode="numeric" id="numeroCarta"
 					pattern="[0-9\s]{16}" autocomplete="cc-number" maxlength="16"
 					placeholder="xxxx xxxx xxxx xxxx" name="numeroCarta"
-					onchange="checkCard()"><br> <br> <label>
-					<b> Data di Scadenza: </b>
-				</label> <input type="month" min=1 max=12 id="mese" name="mese"> <input
-					type="number" min="" max="" step="1" value="" id="anno" name="anno" /><br>
-				<br> CVV: <input type="number" maxlength="3" name="CVV">
+					onchange="checkCard()" id="inserimentoCarta-Numero"><br>
+				<br> <label> <b> Data di Scadenza: </b>
+				</label> <input type="month" id="inserimentoCarta-Data" min=1 max=12
+					id="mese" name="mese"> <input type="number" min="" max=""
+					step="1" value="" id="anno" name="anno" /><br> <br> CVV:
+				<input type="number" id="inserimentoCarta-Cvv" maxlength="3"
+					name="CVV">
 			</p>
 		</div>
 		<div align="right">
-			<input type="submit" value="Conferma">
+			<input type="submit" value="Conferma" id="inserimentoCarta-Conferma">
 		</div>
 	</Form>
 </body>

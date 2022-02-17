@@ -28,13 +28,13 @@
 				<i>Dati Autenticazione</i>
 			</h3>
 			<label for="email">E-mail</label><br> <input type="email"
-				name="email" required> <br> <br>
+				name="email" id="registrazione-email" required> <br> <br>
 			<%
 			if (tipologia != 5) {
 			%>
 			<label for="password">Password</label><br> <input
-				type="password" name="password" required> <br> <br>
-			<br>
+				type="password" name="password" id="registrazione-password" required>
+			<br> <br> <br>
 			<%
 			} else {
 			%>
@@ -46,11 +46,11 @@
 			<h3>
 				<i>Dati Anagrafici</i>
 			</h3>
-			<label for="codicefiscale">Codice Fiscale</label><br> <input
-				type="text" name="CF" id="CF" maxlength="16" required> <br>
-			<br> <label for="nome">Nome</label><br> <input type="text"
-				name="nome" id="nome" required> <br> <br> <label
-				for="cognome">Cognome</label><br> <input type="text"
+			<label for="registrazione-CF">Codice Fiscale</label><br> <input
+				type="text" name="CF" id="registrazione-CF" maxlength="16" required>
+			<br> <br> <label for="nome">Nome</label><br> <input
+				type="text" name="nome" id="nome" required> <br> <br>
+			<label for="cognome">Cognome</label><br> <input type="text"
 				name="cognome" id="cognome" required> <br> <br> <br>
 
 			<h3>

@@ -28,7 +28,7 @@ return;
 <body>
 
 	<form action="ElencoVenditeCentralinista" method="post">
-		<select name="limit">
+		<select name="limit" id="elencoVenditeCentralinista-limit">
 			<option value="10">10</option>
 			<option value="20">20</option>
 			<option value="50">50</option>
@@ -60,7 +60,8 @@ return;
 			<td><%=articolo.getNome()%></td>
 			<td><form action="DettagliArticolo" method="post">
 					<input type="hidden" name="IDArticolo" value=<%=articolo.getID()%>><input
-						type="submit" value="Dettagli">
+						type="submit" value="Dettagli"
+						id="elencoVenditeCentralinista-dettagli">
 				</form></td>
 		</tr>
 		<%

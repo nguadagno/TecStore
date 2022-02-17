@@ -15,11 +15,12 @@
 		<form action="ricercaArticolo" method="post">
 			<p>
 				<br> <input type="text" name="testo" maxlength="25"
-					placeholder="Cerca..." required> <select name="limit">
+					id="index-testoRicerca" placeholder="Cerca..." required> <select
+					name="limit" id="index-testoLimit">
 					<option value="10" selected>10</option>
 					<option value="20">20</option>
 					<option value="50">50</option>
-				</select> <input type="submit" value="Conferma">
+				</select> <input type="submit" value="Conferma" id="index-ricerca">
 			</p>
 		</form>
 		<h5>
@@ -39,8 +40,8 @@
 	%>
 	<div align="right">
 		<p>
-			<a href="registrazione.jsp"><button>Registrati</button></a> <a
-				href="autenticazione.jsp"><button>Autenticati</button></a>
+			<a href="registrazione.jsp" id="index-registrazione"><button>Registrati</button></a>
+			<a href="autenticazione.jsp" id="index-autenticazione"><button>Autenticati</button></a>
 		</p>
 	</div>
 	<%
@@ -59,26 +60,29 @@
 				<%=((UtenteBean) session.getAttribute("utente")).getCognome()%> <BR>
 			</i>
 		<div>
-			<a href="areaVenditori.jsp"><button>Area Venditori</button></a>
+			<a href="areaVenditori.jsp" id="index-areaVenditori"><button>Area
+					Venditori</button></a>
 			<form action="DettagliUtente" method="post">
-				<input type="submit" value="Dettagli Utente">
+				<input type="submit" value="Dettagli Utente"
+					id="index-dettagliUtente">
 			</form>
 		</div>
 		<div>
 			<form action="getCarrello" method="post">
-				<input type="submit" value="Carrello">
+				<input type="submit" value="Carrello" id="index-cerrello">
 			</form>
 		</div>
 		<div>
-      
+
 			<form action="ElencoOrdiniCliente" method="post">
-				<input type="submit" value="Storico Ordini">
-      </form> 
-      
-			<form action="ElencoTicketCliente" method="post">
-				<input type="submit" value="Servizio Clienti">
+				<input type="submit" value="Storico Ordini" id="index-storicoOrdini">
 			</form>
-        
+
+			<form action="ElencoTicketCliente" method="post">
+				<input type="submit" value="Servizio Clienti"
+					id="index-servizioClienti">
+			</form>
+
 		</div>
 		<div>
 			<form action="Deautenticazione" method="post">

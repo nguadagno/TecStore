@@ -10,8 +10,9 @@
 	<div align="center">
 		<h3>Ricerca Articolo</h3>
 		<form action="ricercaArticolo" method="post">
-			<input type="text" name="testo" maxlength="25" required> <input
-				type="submit" value="Cerca">
+			<input type="text" name="testo" id="risultatiRicerca-testoRicerca"
+				maxlength="25" required> <input type="submit" value="Cerca"
+				id="risultatiRicerca-Ricerca">
 		</form>
 	</div>
 
@@ -52,7 +53,8 @@
 			<td>
 				<form action="DettagliArticolo" method="post">
 					<input type="hidden" name="IDArticolo" value="<%=a.getID()%>">
-					<input type="submit" value="Dettagli">
+					<input type="submit" value="Dettagli"
+						id="risultatiRicerca-dettagliArticolo">
 				</form>
 			</td>
 			<%

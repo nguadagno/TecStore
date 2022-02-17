@@ -7,8 +7,7 @@
 <meta charset="ISO-8859-1">
 <%
 int tipologia = -1;
-if (session.getAttribute("tipologia") == null
-		|| session.getAttribute("tipologia").toString().isEmpty()) {
+if (session.getAttribute("tipologia") == null || session.getAttribute("tipologia").toString().isEmpty()) {
 %>
 <meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
 <%
@@ -30,7 +29,7 @@ return;
 <body>
 	<div align="center">
 		<form action="ElencoTicketCentralinista" method="post">
-			<select name="limit">
+			<select name="limit" id="gestioneAssistenza-limit">
 				<option value="10">10</option>
 				<option value="20">20</option>
 				<option value="50">50</option>
@@ -63,7 +62,7 @@ return;
 				<td><form action="DettagliTicket" method="post">
 						<input type="hidden" name="IDTicket"
 							value=<%=ticket.getIDTicket()%>><input type="submit"
-							value="Dettagli">
+							value="Dettagli" id="elencoVenditeCentralinista-dettagli">
 					</form></td>
 			</tr>
 			<%

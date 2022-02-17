@@ -11,11 +11,12 @@
 	<form action="ElencoOrdiniCliente" method="post">
 		<p>
 			<br> <input type="text" name="testo" maxlength="45"
-				placeholder="Cerca..." required> <select name="limit">
+				placeholder="Cerca..." id="storicoOrdini-testoRicerca" required>
+			<select name="limit">
 				<option value="10">10</option>
 				<option value="20">20</option>
 				<option value="50">50</option>
-			</select> <input type="submit" value="Conferma">
+			</select> <input type="submit" value="Conferma" id="storicoOrdini-Ricerca">
 		</p>
 	</form>
 
@@ -62,7 +63,7 @@
 				<form action="DettagliOrdine" method="post">
 					<input type="hidden" name="IDOrdine"
 						value="<%=ordini.get(i).getID()%>"> <input type="submit"
-						value="Dettagli">
+						value="Dettagli" id="storicoOrdini-dettagliOrdine">
 				</form>
 			</td>
 			<%

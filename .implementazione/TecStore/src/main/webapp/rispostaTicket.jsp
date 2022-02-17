@@ -6,8 +6,7 @@
 <meta charset="ISO-8859-1">
 <%
 int tipologia = -1;
-if (session.getAttribute("tipologia") == null
-		|| session.getAttribute("tipologia").toString().isEmpty()
+if (session.getAttribute("tipologia") == null || session.getAttribute("tipologia").toString().isEmpty()
 		|| session.getAttribute("IDTicket") == null) {
 %>
 <meta http-equiv="refresh" content="0; URL='paginainiziale.jsp'" />
@@ -45,14 +44,15 @@ return;
 		<div align="center">
 			<input type="hidden" name="IDTicket"
 				value="<%=session.getAttribute("IDTicket").toString()%>"> <input
-				type="text" name="messaggio" style="width: 300px; height: 300px;"
-				required>
+				type="text" id="rispostaTicket-messaggio" name="messaggio"
+				style="width: 300px; height: 300px;" required>
 		</div>
 		<br> <br> <br>
 		<hr>
 		<br>
 		<div>
-			<input type="submit" value="Conferma"> <a href="index.jsp">
+			<input type="submit" value="Conferma" id="rispostaTicket-conferma">
+			<a href="index.jsp" id="rispostaTicket-annulla">
 				<button>Annulla</button>
 			</a>
 		</div>

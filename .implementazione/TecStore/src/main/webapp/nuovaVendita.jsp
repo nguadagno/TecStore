@@ -34,20 +34,22 @@ return;
 			<form action="InserimentoArticolo" method="post">
 				<div>
 					<label><b>Nome</b></label> <br> <input type="text" name="nome"
-						required> <br> <br> <label><b>Descrizione</b></label>
+						id="nuovaVendita-Nome" required> <br> <br> <label><b>Descrizione</b></label>
 					<br> <input type="text" name="descrizione"
-						style="width: 300px; height: 200px;"> <br> <br>
-					<label><b>Quantità</b></label> <br> <input type="number"
-						name="quantita" required> <br> <br> <label><b>Prezzo</b></label>
-					<br> <input type="number" name="prezzo" required> <br>
-					<br> <br> <label><b>Rimborsabile</b></label> <br> <label><b>Si</b></label>
-					<input type="radio" name="rimborsabile" value="1"> <br>
-					<label><b>No</b></label> <input type="radio" name="rimborsabile"
-						value="0">
+						id="nuovaVendita-descrizione" style="width: 300px; height: 200px;">
+					<br> <br> <label><b>Quantità</b></label> <br> <input
+						type="number" id="nuovaVendita-quantita" name="quantita" required>
+					<br> <br> <label><b>Prezzo</b></label> <br> <input
+						type="number" name="prezzo" id="nuovaVendita-prezzo" required>
+					<br> <br> <br> <label><b>Rimborsabile</b></label> <br>
+					<label><b>Si</b></label> <input type="radio" name="rimborsabile"
+						id="nuovaVendita-rimborsabileSI" value="1"> <br> <label><b>No</b></label>
+					<input type="radio" name="rimborsabile"
+						id="nuovaVendita-rimborsabileNO" value="0">
 				</div>
 				<div align="right">
-					<a href="areaVenditori.jsp"><button>Annulla</button></a> <input
-						type="submit" value="Continua">
+					<a href="areaVenditori.jsp" id="nuovaVendita-annulla"><button>Annulla</button></a>
+					<input type="submit" value="Continua" id="nuovaVendita-conferma">
 				</div>
 			</form>
 		</div>

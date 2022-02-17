@@ -11,11 +11,13 @@
 		<h3>Utilizza questa pagina per caricare le foto per il tuo
 			articolo!</h3>
 		<form action=img method=post enctype="multipart/form-data">
-			<input type="file" name="foto" accept="image/png, image/jpeg">
-			<input type="submit" value="Carica foto">
+			<input type="file" id="inserimentoImmagini-foto" name="foto"
+				accept="image/png, image/jpeg"> <input type="submit"
+				value="Carica foto" id="inserimentoImmagini-carica">
 		</form>
 		<form action="paginainiziale.jsp">
-			<input type=submit value="Torna alla pagina iniziale">
+			<input type=submit value="Torna alla pagina iniziale"
+				id="inserimentoImmagini-torna">
 		</form>
 	</div>
 

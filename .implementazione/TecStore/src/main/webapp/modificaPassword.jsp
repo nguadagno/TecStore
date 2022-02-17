@@ -28,7 +28,8 @@
 			type="password" name="confermapassword" value=""><br> <br>
 
 	</form>
-	<button onclick="checkPassword()">Conferma</button>
-	<a href="paginaIniziale.jsp"><button>Torna Alla Home</button></a>
+	<button onclick="checkPassword()" id="modificaPassword-Conferma">Conferma</button>
+	<a href="paginaIniziale.jsp" id="modificaPassword-Indietro"><button>Torna
+			Alla Home</button></a>
 </body>
 </html>
