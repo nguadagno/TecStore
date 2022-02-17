@@ -42,17 +42,25 @@
       ],
       "value": ""
     }, {
-      "id": "1b71b886-941d-4af0-a01e-92a6919686ec",
+      "id": "f5db5b0d-68c3-4818-99f3-d6568399c179",
       "comment": "",
-      "command": "click",
+      "command": "assertElementPresent",
       "target": "id=autenticazione-email",
-      "targets": [
-        ["id=autenticazione-email", "id"],
-        ["name=email", "name"],
-        ["css=#autenticazione-email", "css:finder"],
-        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
-        ["xpath=//input", "xpath:position"]
-      ],
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6af5801b-6b15-49de-8d02-236ec5d87fcd",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=autenticazione-password",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "41bd557e-8997-46f9-bfd2-f51d620f536e",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=autenticazione-accedi",
+      "targets": [],
       "value": ""
     }, {
       "id": "93592e89-1ab9-4b01-8eca-a3d3c257c903",
@@ -94,7 +102,7 @@
       "value": ""
     }, {
       "id": "53f6e2e5-3bd1-4735-9cc3-52bdf382f516",
-      "comment": "Check se utente è autenticato",
+      "comment": "",
       "command": "assertText",
       "target": "css=i",
       "targets": [
@@ -163,17 +171,25 @@
       ],
       "value": ""
     }, {
-      "id": "4df0a3ee-c81c-4ac6-a6fe-3e2bb540eeda",
+      "id": "a8a28706-f578-45d0-b883-94ec42c61ee1",
       "comment": "",
-      "command": "click",
+      "command": "assertElementPresent",
       "target": "id=autenticazione-email",
-      "targets": [
-        ["id=autenticazione-email", "id"],
-        ["name=email", "name"],
-        ["css=#autenticazione-email", "css:finder"],
-        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
-        ["xpath=//input", "xpath:position"]
-      ],
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9f633233-6765-436a-97f3-07af8a28982a",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=autenticazione-password",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "979ce63b-ec2e-4295-91a2-05f2ffcb11af",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=autenticazione-accedi",
+      "targets": [],
       "value": ""
     }, {
       "id": "c6352422-80b4-4255-a9e5-c1f854eab60e",
@@ -236,6 +252,18 @@
       ],
       "value": ""
     }, {
+      "id": "6de9decb-8b22-4c14-9751-89869e618492",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "name=testo",
+      "targets": [
+        ["name=testo", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='testo']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
       "id": "11507cde-397d-4831-9f39-a81a7fed9fb6",
       "comment": "",
       "command": "close",
@@ -272,17 +300,25 @@
       ],
       "value": ""
     }, {
-      "id": "957063fc-6d44-47b0-82f5-12a8e408250c",
+      "id": "dc7953cf-90a2-464d-bdf0-3f3ffbbb0840",
       "comment": "",
-      "command": "click",
+      "command": "assertElementPresent",
       "target": "id=autenticazione-email",
-      "targets": [
-        ["id=autenticazione-email", "id"],
-        ["name=email", "name"],
-        ["css=#autenticazione-email", "css:finder"],
-        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
-        ["xpath=//input", "xpath:position"]
-      ],
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4e848772-ece0-4388-ad30-209502983a4c",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=autenticazione-password",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1a7b7a91-3243-4ee8-9e6f-1714b5142d28",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=autenticazione-accedi",
+      "targets": [],
       "value": ""
     }, {
       "id": "240168e5-ed6d-4e71-b2c2-f3ffaff0d459",
@@ -344,6 +380,18 @@
         ["xpath=//button[contains(.,'Continua')]", "xpath:innerText"]
       ],
       "value": ""
+    }, {
+      "id": "ee73711e-eeea-469b-be3c-72177a5b5949",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "name=testo",
+      "targets": [
+        ["name=testo", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='testo']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "30000"
     }, {
       "id": "f8cfe8b0-2b42-48e3-b1e5-ae6f4b7e1621",
       "comment": "",
@@ -678,10 +726,10 @@
       "targets": [],
       "value": ""
     }, {
-      "id": "881122c2-d35f-445b-a8b2-bbed88230b4a",
+      "id": "23f43f11-24d6-44d8-9c7f-251c7c494946",
       "comment": "",
       "command": "setWindowSize",
-      "target": "1459x1317",
+      "target": "1920x1080",
       "targets": [],
       "value": ""
     }, {
@@ -760,13 +808,9 @@
     }, {
       "id": "04bfa34e-d965-49ca-ad12-bf15a945d41f",
       "comment": "",
-      "command": "assertText",
-      "target": "css=h3",
-      "targets": [
-        ["css=h3", "css:finder"],
-        ["xpath=//h3", "xpath:position"],
-        ["xpath=//h3[contains(.,'Il Carrello è Vuoto!')]", "xpath:innerText"]
-      ],
+      "command": "assertTitle",
+      "target": "Carrello",
+      "targets": [],
       "value": "Il Carrello è Vuoto!"
     }, {
       "id": "6a6a9510-8976-4c1c-8325-1fe80ab21fde",
@@ -792,6 +836,18 @@
       ],
       "value": ""
     }, {
+      "id": "8c8266ce-ca29-4e75-bb23-258831c0caea",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "name=testo",
+      "targets": [
+        ["name=testo", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='testo']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
       "id": "ea972d27-849b-47eb-b78f-38799fcdf1df",
       "comment": "",
       "command": "close",
@@ -801,39 +857,23 @@
     }]
   }, {
     "id": "c72ef628-dfd6-49b2-bc80-7723fed153f3",
-    "name": "CarrelloAggiunta",
-    "commands": []
-  }, {
-    "id": "902f10b3-30d6-438e-9200-33d78e1774a7",
-    "name": "CarrelloRimozione",
-    "commands": []
-  }, {
-    "id": "0536adc2-f051-4313-a811-28171c6c7b6d",
-    "name": "CarrelloAggiornamento",
-    "commands": []
-  }, {
-    "id": "e5198484-111f-4f43-a9e6-dd19b7bcf524",
-    "name": "CarrelloOrdine",
-    "commands": []
-  }, {
-    "id": "5f46eab7-0903-4d7e-9f86-66c8f4b0aa18",
-    "name": "CarrelloGetVuoto",
+    "name": "CarrelloAggiuntaERimozione",
     "commands": [{
-      "id": "48cc7bcb-c81a-4fc1-9a03-038122a29b55",
+      "id": "b56c4059-abc3-4d48-823d-64651fd18f05",
       "comment": "",
       "command": "open",
       "target": "http://localhost:8080/TecStore/",
       "targets": [],
       "value": ""
     }, {
-      "id": "7c50df71-9adf-4621-9b7a-acf3d299e2a9",
+      "id": "1dedfdef-cde9-49c6-8f7a-fed42e94bbfb",
       "comment": "",
       "command": "setWindowSize",
-      "target": "1459x1317",
+      "target": "1920x1080",
       "targets": [],
       "value": ""
     }, {
-      "id": "85541e25-89cb-421d-bc28-e9284cef15cd",
+      "id": "9a5dc78c-fd05-4169-a975-9b21115c63db",
       "comment": "",
       "command": "click",
       "target": "css=a:nth-child(2) > button",
@@ -844,7 +884,7 @@
       ],
       "value": ""
     }, {
-      "id": "5e3ead19-f586-40eb-a4b4-b6d35630103f",
+      "id": "7025ba5d-ddcb-4238-b57b-ca5f197ae2c7",
       "comment": "",
       "command": "click",
       "target": "id=autenticazione-email",
@@ -857,7 +897,7 @@
       ],
       "value": ""
     }, {
-      "id": "83e44aa2-155d-4851-812e-e3ad49b43b2b",
+      "id": "34a9b0a3-30b7-462b-a043-c30859c02ec8",
       "comment": "",
       "command": "type",
       "target": "id=autenticazione-email",
@@ -870,7 +910,7 @@
       ],
       "value": "email1@email.tld"
     }, {
-      "id": "c3677df6-f629-4fcb-8256-5f2a30c89a85",
+      "id": "95551043-0fd3-45c4-a327-bd674561fcf2",
       "comment": "",
       "command": "type",
       "target": "id=autenticazione-password",
@@ -883,7 +923,7 @@
       ],
       "value": "01234567890"
     }, {
-      "id": "e9495bda-fd7c-43b9-90cd-bcb2535ff2ab",
+      "id": "4eaba56b-519a-4548-a3e4-46d9cc19a39b",
       "comment": "",
       "command": "click",
       "target": "id=autenticazione-accedi",
@@ -895,7 +935,89 @@
       ],
       "value": ""
     }, {
-      "id": "cad8b994-78ec-4e58-9daf-adf3b01b41dd",
+      "id": "c45bc348-1612-4fdd-863a-bf198c2c1170",
+      "comment": "",
+      "command": "click",
+      "target": "name=testo",
+      "targets": [
+        ["name=testo", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='testo']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "884be6f2-4ac2-4e8d-b9f2-0f0480b1d437",
+      "comment": "",
+      "command": "type",
+      "target": "name=testo",
+      "targets": [
+        ["name=testo", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='testo']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "art30"
+    }, {
+      "id": "58fc0236-6df1-46e7-8e9d-c5922e79056f",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(4)",
+      "targets": [
+        ["css=input:nth-child(4)", "css:finder"],
+        ["xpath=//input[@value='Conferma']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ae301ba4-2258-44ab-b016-ba0f7092519b",
+      "comment": "",
+      "command": "click",
+      "target": "css=form:nth-child(1) > input:nth-child(2)",
+      "targets": [
+        ["css=form:nth-child(1) > input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@value='Dettagli']", "xpath:attributes"],
+        ["xpath=//td[5]/form/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9e5280b2-eb55-4cb3-a9f8-5908f4a2f102",
+      "comment": "",
+      "command": "type",
+      "target": "id=dettagliArticolo-aggiungiAlCarrelloQuantita",
+      "targets": [
+        ["id=dettagliArticolo-aggiungiAlCarrelloQuantita", "id"],
+        ["name=quantita", "name"],
+        ["css=#dettagliArticolo-aggiungiAlCarrelloQuantita", "css:finder"],
+        ["xpath=//input[@id='dettagliArticolo-aggiungiAlCarrelloQuantita']", "xpath:attributes"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": "3"
+    }, {
+      "id": "8c493487-bc53-4070-84ef-34fa9a8cd0d0",
+      "comment": "",
+      "command": "click",
+      "target": "id=dettagliArticolo-aggiungiAlCarrello",
+      "targets": [
+        ["id=dettagliArticolo-aggiungiAlCarrello", "id"],
+        ["css=#dettagliArticolo-aggiungiAlCarrello", "css:finder"],
+        ["xpath=//input[@id='dettagliArticolo-aggiungiAlCarrello']", "xpath:attributes"],
+        ["xpath=//div[9]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3c1f1b8b-ffef-4d76-8dc4-0249d0a6e6a4",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Continua')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1af37b9a-4ed8-4834-b67b-87f6fefc83d6",
       "comment": "",
       "command": "click",
       "target": "css=div:nth-child(3) input",
@@ -906,7 +1028,19 @@
       ],
       "value": ""
     }, {
-      "id": "ae246140-2024-4d6e-83b7-06e00420d543",
+      "id": "b4e18dbd-0387-464c-8ec9-cba973d42735",
+      "comment": "",
+      "command": "click",
+      "target": "id=carrello-rimuovi",
+      "targets": [
+        ["id=carrello-rimuovi", "id"],
+        ["css=#carrello-rimuovi", "css:finder"],
+        ["xpath=//input[@id='carrello-rimuovi']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bfe6f3c5-dfab-4881-bd6f-16dcc940a47a",
       "comment": "",
       "command": "assertText",
       "target": "css=h3",
@@ -917,7 +1051,7 @@
       ],
       "value": "Il Carrello è Vuoto!"
     }, {
-      "id": "eff7aec8-5745-4b73-bd29-ca1a8e6f66be",
+      "id": "cedb2a5a-1845-4205-9cdc-1a7c8fb22630",
       "comment": "",
       "command": "click",
       "target": "css=button",
@@ -928,7 +1062,7 @@
       ],
       "value": ""
     }, {
-      "id": "d9b593bb-04d3-4d2c-8940-c6b1fef8b1c1",
+      "id": "8545fa18-0d70-4041-98cb-8b265063f4e5",
       "comment": "",
       "command": "click",
       "target": "id=logout",
@@ -940,13 +1074,31 @@
       ],
       "value": ""
     }, {
-      "id": "649fb6e4-3e1a-4cc1-b2b7-ecf651884ac9",
+      "id": "44be93a7-8f70-4c6c-b398-a67974298a1d",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=h5",
+      "targets": [
+        ["css=h5", "css:finder"],
+        ["xpath=//h5", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "5b6ed2d1-5d59-4c3a-a0d1-8a0a993a3721",
       "comment": "",
       "command": "close",
-      "target": "/TecStore/index.jsp",
+      "target": "",
       "targets": [],
       "value": ""
     }]
+  }, {
+    "id": "902f10b3-30d6-438e-9200-33d78e1774a7",
+    "name": "CarrelloRimozione",
+    "commands": []
+  }, {
+    "id": "e5198484-111f-4f43-a9e6-dd19b7bcf524",
+    "name": "CarrelloOrdine",
+    "commands": []
   }, {
     "id": "a8af280b-c072-45e0-a98f-e5967e2438d5",
     "name": "AutenticazioneCentralinista",
@@ -976,17 +1128,25 @@
       ],
       "value": ""
     }, {
-      "id": "0529a445-f53c-4022-9024-bde57cac97cd",
+      "id": "557a142f-5fad-46e6-a628-516a2ec87bde",
       "comment": "",
-      "command": "click",
+      "command": "assertElementPresent",
       "target": "id=autenticazione-email",
-      "targets": [
-        ["id=autenticazione-email", "id"],
-        ["name=email", "name"],
-        ["css=#autenticazione-email", "css:finder"],
-        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
-        ["xpath=//input", "xpath:position"]
-      ],
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "29013940-f69a-4b0a-b0e4-1f7d3a7d90a5",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=autenticazione-password",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e462ab28-6d2b-4797-a54b-9ee9726698d0",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=autenticazione-accedi",
+      "targets": [],
       "value": ""
     }, {
       "id": "5a94821a-497a-4c63-9460-fd8c362f3ff7",
@@ -1048,14 +1208,9 @@
     }, {
       "id": "c7a0abff-ad06-4051-8564-f2ffc09435e9",
       "comment": "",
-      "command": "assertText",
+      "command": "assertElementPresent",
       "target": "id=gestionevendite",
-      "targets": [
-        ["id=gestionevendite", "id"],
-        ["css=#gestionevendite", "css:finder"],
-        ["xpath=//input[@id='gestionevendite']", "xpath:attributes"],
-        ["xpath=//form[2]/input", "xpath:position"]
-      ],
+      "targets": [],
       "value": ""
     }, {
       "id": "828f1fc5-6bff-46b2-856f-c9e20aef935c",
@@ -1118,17 +1273,25 @@
       ],
       "value": ""
     }, {
-      "id": "81f251b4-34bf-4896-8c2a-304a5b3e34c4",
+      "id": "9462deb3-d050-4699-b0f2-94ad0cffe9b8",
       "comment": "",
-      "command": "click",
+      "command": "assertElementPresent",
       "target": "id=autenticazione-email",
-      "targets": [
-        ["id=autenticazione-email", "id"],
-        ["name=email", "name"],
-        ["css=#autenticazione-email", "css:finder"],
-        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
-        ["xpath=//input", "xpath:position"]
-      ],
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "32fb6fac-c2c6-4694-9292-9018a31f75dd",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=autenticazione-password",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ea164152-232f-4b74-bab3-f49f3e39f37a",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=autenticazione-accedi",
+      "targets": [],
       "value": ""
     }, {
       "id": "a847aaf5-4514-430e-80a0-3d26a0fb28d5",
@@ -1190,14 +1353,9 @@
     }, {
       "id": "baf42a31-f040-466b-b617-ab145bd1ad7d",
       "comment": "",
-      "command": "assertText",
+      "command": "assertElementPresent",
       "target": "id=gestioneordini",
-      "targets": [
-        ["id=gestioneordini", "id"],
-        ["css=#gestioneordini", "css:finder"],
-        ["xpath=//input[@id='gestioneordini']", "xpath:attributes"],
-        ["xpath=//form[2]/input", "xpath:position"]
-      ],
+      "targets": [],
       "value": ""
     }, {
       "id": "ed557fc5-34a4-46a1-a410-29fc602f1353",
@@ -1260,17 +1418,25 @@
       ],
       "value": ""
     }, {
-      "id": "a24c6a41-ec88-406a-b35a-440b22da14fe",
+      "id": "ae4e79f5-2574-44bc-b413-656897eee8ab",
       "comment": "",
-      "command": "click",
+      "command": "assertElementPresent",
       "target": "id=autenticazione-email",
-      "targets": [
-        ["id=autenticazione-email", "id"],
-        ["name=email", "name"],
-        ["css=#autenticazione-email", "css:finder"],
-        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
-        ["xpath=//input", "xpath:position"]
-      ],
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5e0f429c-a4b4-49e8-b36e-a71eca92d913",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=autenticazione-password",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5e02ed6d-8b2e-401b-9f2e-b6686b29c4f6",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=autenticazione-accedi",
+      "targets": [],
       "value": ""
     }, {
       "id": "f6409563-5c22-46c1-b294-5b050994ab4f",
@@ -1333,8 +1499,8 @@
     }, {
       "id": "815b7d04-9dcc-4dac-bd4f-0bc7bc11cc72",
       "comment": "",
-      "command": "assertText",
-      "target": "id=nuovaodipendente",
+      "command": "assertElementPresent",
+      "target": "id=nuovodipendente",
       "targets": [
         ["id=nuovaodipendente", "id"],
         ["css=#nuovaodipendente", "css:finder"],
@@ -1403,17 +1569,25 @@
       ],
       "value": ""
     }, {
-      "id": "b2b183f3-e04a-4f2d-b581-862c1ca0e6fa",
+      "id": "3495fe8b-dca3-4965-b3c0-446d19ef2c29",
       "comment": "",
-      "command": "click",
+      "command": "assertElementPresent",
       "target": "id=autenticazione-email",
-      "targets": [
-        ["id=autenticazione-email", "id"],
-        ["name=email", "name"],
-        ["css=#autenticazione-email", "css:finder"],
-        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
-        ["xpath=//input", "xpath:position"]
-      ],
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b62e9950-0f62-4910-8a9a-0ec347e62450",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=autenticazione-password",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c370811c-f4cd-4361-aa59-0e4a88723955",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=autenticazione-accedi",
+      "targets": [],
       "value": ""
     }, {
       "id": "02eae3e4-6675-495e-9c8f-6d4210a248f5",
@@ -1476,7 +1650,7 @@
     }, {
       "id": "ad22368e-ed70-4d9d-9cb2-0dd7158940dc",
       "comment": "",
-      "command": "assertText",
+      "command": "assertElementPresent",
       "target": "css=form:nth-child(2) > input",
       "targets": [
         ["css=form:nth-child(2) > input", "css:finder"],
@@ -1516,6 +1690,370 @@
       "targets": [],
       "value": ""
     }]
+  }, {
+    "id": "9cc86970-4944-4c34-94d2-d8d2c0091ef1",
+    "name": "CarrelloAggiornamentoQuantita",
+    "commands": [{
+      "id": "0e1e38db-af6a-4894-8caa-31f184b821c1",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d9edcba3-48d2-404d-9cb1-8d6307b236ce",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1920x1080",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e5fa48d0-c846-41ed-9d6c-c4f15d8badc1",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(2) > button",
+      "targets": [
+        ["css=a:nth-child(2) > button", "css:finder"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e41d5af1-a82e-4496-a9be-498bc373e779",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4a419ff1-8936-4dfb-9e68-ceda6adcff32",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1@email.tld"
+    }, {
+      "id": "9f8bc179-c5e2-410e-9ac4-984b3c74c486",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "be865a22-d3bc-4b7e-b13c-6e1f274da6b9",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "161f53b2-4c5f-473f-98b3-8917411793f8",
+      "comment": "",
+      "command": "click",
+      "target": "name=testo",
+      "targets": [
+        ["name=testo", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='testo']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1de1d10a-00e4-4d21-9c51-6ac68c86f3c2",
+      "comment": "",
+      "command": "type",
+      "target": "name=testo",
+      "targets": [
+        ["name=testo", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='testo']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "art"
+    }, {
+      "id": "2d1e7f86-a212-484c-b09d-5052c5e0ab8d",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(4)",
+      "targets": [
+        ["css=input:nth-child(4)", "css:finder"],
+        ["xpath=//input[@value='Conferma']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a9f64743-7986-4fb6-95e2-ba8f126e1ae4",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(2) input:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(2) input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@value='Dettagli']", "xpath:attributes"],
+        ["xpath=//td[5]/form/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "82a7f260-db9b-4b18-9913-359c7586a4b6",
+      "comment": "",
+      "command": "click",
+      "target": "id=dettagliArticolo-aggiungiAlCarrelloQuantita",
+      "targets": [
+        ["id=dettagliArticolo-aggiungiAlCarrelloQuantita", "id"],
+        ["name=quantita", "name"],
+        ["css=#dettagliArticolo-aggiungiAlCarrelloQuantita", "css:finder"],
+        ["xpath=//input[@id='dettagliArticolo-aggiungiAlCarrelloQuantita']", "xpath:attributes"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "79ab7b7b-6569-4e0b-a9d4-9da7db5986c2",
+      "comment": "",
+      "command": "type",
+      "target": "id=dettagliArticolo-aggiungiAlCarrelloQuantita",
+      "targets": [
+        ["id=dettagliArticolo-aggiungiAlCarrelloQuantita", "id"],
+        ["name=quantita", "name"],
+        ["css=#dettagliArticolo-aggiungiAlCarrelloQuantita", "css:finder"],
+        ["xpath=//input[@id='dettagliArticolo-aggiungiAlCarrelloQuantita']", "xpath:attributes"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": "3"
+    }, {
+      "id": "317e31d9-a085-4718-8369-60d5b8a9d284",
+      "comment": "",
+      "command": "click",
+      "target": "id=dettagliArticolo-aggiungiAlCarrello",
+      "targets": [
+        ["id=dettagliArticolo-aggiungiAlCarrello", "id"],
+        ["css=#dettagliArticolo-aggiungiAlCarrello", "css:finder"],
+        ["xpath=//input[@id='dettagliArticolo-aggiungiAlCarrello']", "xpath:attributes"],
+        ["xpath=//div[9]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "18bb07a2-68df-4e82-8810-5fdd75471641",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Continua')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a6c73a81-28a8-4b50-89ef-1c578f60fc3d",
+      "comment": "",
+      "command": "click",
+      "target": "css=div:nth-child(3) input",
+      "targets": [
+        ["css=div:nth-child(3) input", "css:finder"],
+        ["xpath=//input[@value='Carrello']", "xpath:attributes"],
+        ["xpath=//div[2]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "048ac07d-30c0-467b-ad59-50ce93db5919",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Carrello",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e3f7e99c-1ad9-4ba0-b43e-a40da337e1ec",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=tr:nth-child(2) > td:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(2) > td:nth-child(1)", "css:finder"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'art10')]", "xpath:innerText"]
+      ],
+      "value": "art10"
+    }, {
+      "id": "9986efd4-3261-40dc-b3ee-2daddfab49a4",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=tr:nth-child(2) > td:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(2) > td:nth-child(2)", "css:finder"],
+        ["xpath=//td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'15.5')]", "xpath:innerText"]
+      ],
+      "value": "15.5€"
+    }, {
+      "id": "abdca019-c59f-45b3-83cd-7b941d97d2ea",
+      "comment": "",
+      "command": "assertValue",
+      "target": "id=carrello-aggiornaQuantita",
+      "targets": [],
+      "value": "3"
+    }, {
+      "id": "76838b42-fae2-4816-9c26-eb4ad42b7f1e",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=tr:nth-child(4) > td:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(4) > td:nth-child(2)", "css:finder"],
+        ["xpath=//tr[4]/td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'46.5€')]", "xpath:innerText"]
+      ],
+      "value": "46.5€"
+    }, {
+      "id": "a8ba38b7-ca08-47d5-9e8b-02a21bfb3bb0",
+      "comment": "",
+      "command": "assertValue",
+      "target": "id=carrello-acquista",
+      "targets": [],
+      "value": "Acquista!"
+    }, {
+      "id": "6a24cb6f-37d0-4085-a689-bc523fdfe91d",
+      "comment": "",
+      "command": "type",
+      "target": "id=carrello-aggiornaQuantita",
+      "targets": [
+        ["id=carrello-aggiornaQuantita", "id"],
+        ["name=quantita", "name"],
+        ["css=#carrello-aggiornaQuantita", "css:finder"],
+        ["xpath=//input[@id='carrello-aggiornaQuantita']", "xpath:attributes"],
+        ["xpath=//td[4]/form/input[2]", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "5065f836-69f5-42c9-8354-579e8a7c30f3",
+      "comment": "",
+      "command": "click",
+      "target": "id=carrello-aggiornaQuantita",
+      "targets": [
+        ["id=carrello-aggiornaQuantita", "id"],
+        ["name=quantita", "name"],
+        ["css=#carrello-aggiornaQuantita", "css:finder"],
+        ["xpath=//input[@id='carrello-aggiornaQuantita']", "xpath:attributes"],
+        ["xpath=//td[4]/form/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ca06f8a3-a7fe-4869-8ef5-4f6e46be0cf3",
+      "comment": "",
+      "command": "click",
+      "target": "id=carrello-aggiornaQuantitaAggiorna",
+      "targets": [
+        ["id=carrello-aggiornaQuantitaAggiorna", "id"],
+        ["css=#carrello-aggiornaQuantitaAggiorna", "css:finder"],
+        ["xpath=//input[@id='carrello-aggiornaQuantitaAggiorna']", "xpath:attributes"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "94aebf78-00ed-4b70-9d35-bb20d579c115",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=tr:nth-child(2) > td:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(2) > td:nth-child(2)", "css:finder"],
+        ["xpath=//td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'15.5€')]", "xpath:innerText"]
+      ],
+      "value": "15.5€"
+    }, {
+      "id": "31c4301a-9816-42f3-bdbe-13991762996d",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=tr:nth-child(2) > td:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(2) > td:nth-child(1)", "css:finder"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'art10')]", "xpath:innerText"]
+      ],
+      "value": "art10"
+    }, {
+      "id": "c1b58743-6033-450e-b7bd-b1db880e8d57",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=tr:nth-child(4) > td:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(4) > td:nth-child(2)", "css:finder"],
+        ["xpath=//tr[4]/td[2]", "xpath:position"]
+      ],
+      "value": "15.5€"
+    }, {
+      "id": "6bc709d1-bb76-42d4-a9a0-27455773134f",
+      "comment": "",
+      "command": "click",
+      "target": "id=carrello-rimuovi",
+      "targets": [
+        ["id=carrello-rimuovi", "id"],
+        ["css=#carrello-rimuovi", "css:finder"],
+        ["xpath=//input[@id='carrello-rimuovi']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "05ddc3af-047c-477a-a2c6-3b353a3512b6",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//a[@id='carrello-tornaAllaHome']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1220a921-8a0c-473b-b3d7-7a447cfb8ed4",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//input[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[4]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d7570d28-b69a-49ab-bc4d-525453df08cc",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "name=testo",
+      "targets": [
+        ["name=testo", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='testo']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "325018e3-8f17-49c5-8a26-84be064b6ac1",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "03a12d2a-0daa-4c59-bcfc-6214778dfa83",
@@ -1523,7 +2061,7 @@
     "persistSession": false,
     "parallel": false,
     "timeout": 30,
-    "tests": ["285844fb-0022-43a1-a705-d5312883bdd4", "459dc043-8a9c-44eb-a37a-34a3354c5c3d", "1475e6e2-992e-4650-84a1-9bc89d9fef98", "a8af280b-c072-45e0-a98f-e5967e2438d5", "0ee46652-8a6a-436c-b6f0-1121eee92845"]
+    "tests": ["285844fb-0022-43a1-a705-d5312883bdd4", "459dc043-8a9c-44eb-a37a-34a3354c5c3d", "1475e6e2-992e-4650-84a1-9bc89d9fef98", "a8af280b-c072-45e0-a98f-e5967e2438d5", "0ee46652-8a6a-436c-b6f0-1121eee92845", "4ce72d06-01a6-47f1-b29d-544a6229900a", "32a092ad-251e-4eeb-bbaf-42508ee33ad4"]
   }, {
     "id": "bce2189e-2df4-47fe-86e7-d7d2cd3422c1",
     "name": "RicercaArticolo",
@@ -1537,7 +2075,7 @@
     "persistSession": false,
     "parallel": false,
     "timeout": 300,
-    "tests": ["0536adc2-f051-4313-a811-28171c6c7b6d", "c72ef628-dfd6-49b2-bc80-7723fed153f3", "9ab1c464-4e6c-42a7-b2fd-88e9db1d6ca5", "5f46eab7-0903-4d7e-9f86-66c8f4b0aa18", "e5198484-111f-4f43-a9e6-dd19b7bcf524", "902f10b3-30d6-438e-9200-33d78e1774a7"]
+    "tests": ["c72ef628-dfd6-49b2-bc80-7723fed153f3", "9ab1c464-4e6c-42a7-b2fd-88e9db1d6ca5", "e5198484-111f-4f43-a9e6-dd19b7bcf524", "902f10b3-30d6-438e-9200-33d78e1774a7", "9cc86970-4944-4c34-94d2-d8d2c0091ef1"]
   }],
   "urls": ["http://localhost:8080/", "http://localhost:8080/TecStore"],
   "plugins": []
