@@ -52,7 +52,7 @@ return;
 		%>
 		<tr>
 			<td><%=a.getNome()%></td>
-			<td><%=a.getPrezzo()%></td>
+			<td><%=a.getPrezzo()%>&euro;</td>
 			<td>
 				<form action="rimozioneDalCarrello" method="post">
 					<input type="submit" id="carrello-rimuovi" value="Rimuovi">

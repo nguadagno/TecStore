@@ -25,6 +25,7 @@ public class RimozioneDalCarrelloServlet extends HttpServlet {
 			throws ServletException, IOException {
 	}
 
+	@SuppressWarnings("static-access")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		GestioneCarrello model = new GestioneCarrello();
