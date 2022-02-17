@@ -37,10 +37,10 @@ return;
 		if (tipologia == 2) { // centralinista
 		%>
 		<form action="ElencoTicketCentralinista" method="post">
-			<input type="submit" value="Gestione Ticket">
+			<input id="gestioneticket" type="submit" value="Gestione Ticket">
 		</form>
 		<form action="ElencoVenditeCentralinista" method="post">
-			<input type="submit" value="Gestione Vendite">
+			<input id="gestionevendite" type="submit" value="Gestione Vendite">
 		</form>
 
 		<%
@@ -48,17 +48,17 @@ return;
 		%>
 
 		<form action="ElencoRimborsiMagazziniere" method="post">
-			<input type="submit" value="Gestione Rimborsi">
+			<input id="gestionerimborsi" type="submit" value="Gestione Rimborsi">
 		</form>
 
 		<form action="ElencoOrdiniMagazziniere" method="post">
-			<input type="submit" value="Gestione Ordini">
+			<input id="gestioneordini" type="submit" value="Gestione Ordini">
 		</form>
 		<%
 		} else if (tipologia == 4) { // amministratore catalogo
 		%>
 		<form action="RicercaVendita" method="post">
-			<input type="text" name="nome" placeholder="Ricerca vendite...">
+			<input id="ricercavendita" type="text" name="nome" placeholder="Ricerca vendite...">
 			<input type="submit">
 		</form>
 
@@ -70,12 +70,12 @@ return;
 		} else if (tipologia == 5) { // amministratore personale
 		%>
 		<form action="RicercaPersonale" method="post">
-			<input type="text" name="testo" placeholder="Ricerca dipendenti...">
+			<input id="ricercapersonale" type="text" name="testo" placeholder="Ricerca dipendenti...">
 			<input type="submit">
 		</form>
 
 		<form action="registrazione.jsp" method="post">
-			<input type="submit" value="Nuovo Dipendente">
+			<input id="nuovaodipendente" type="submit" value="Nuovo Dipendente">
 		</form>
 		<%
 		}
@@ -83,7 +83,7 @@ return;
 	</div>
 	<div>
 		<form action="Deautenticazione" method="post">
-			<input type="submit" value="LogOut">
+			<input id="logout" type="submit" value="LogOut">
 		</form>
 	</div>
 </body>
