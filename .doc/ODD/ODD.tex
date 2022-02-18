@@ -1,0 +1,742 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage[table]{xcolor}
+\usepackage{xcolor,colortbl}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\author{Natale Guadagno, Paolo Patrone}
+\title{Object Design Document - TecStore}
+\renewcommand{\contentsname}{Contenuti}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+        citecolor=blue,
+    filecolor=blue,
+    linkcolor=blue,
+    urlcolor=blue,
+    linktocpage
+}
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\newgeometry{top=0.5in,bottom=0.5in,right=0.5in,left=0.5in}
+\section*{Partecipanti}
+\begin{center}
+\begin{tabular} {|c|c|}
+\hline
+\textbf{Nome} & \textbf{Matricola} \\
+\hline
+Guadagno Natale & 0512106546 \\
+Patrone Paolo & 0512106153 \\
+\hline
+\end{tabular}
+\end{center}
+\newpage
+
+\section{Trade-off}
+\subsection{Leggibilit\`a del codice e sicurezza vs tempo di sviluppo}
+Se \`e vero che nel System Design Document sono state identificate le necessit\`a di avere codice facilmente leggibile ed espandibile, i ristretti tempi di sviluppo impongono una minor attenzione a tale requisito, pur mantenendo un livello minimo. Ci\`o non deve avvenire a discapito della sicurezza del sistema, che deve rispettare i parametri identificati in precedenza.
+
+\subsection{Prestazioni vs Requisiti hardware}
+Nonostante i potenziali \emph{drawback} del salvataggio delle immagini all'interno del database MySQL, come l'aumento dei tempi di backup e l'aumento dell'uso di memoria RAM, si è scelto di semplificare l'implementazione e utilizzare tale tecnica.
+
+\subsection{Prestazioni vs Tempi di sviluppo}
+Sebbene si sia identificato in precedenza il requisito di poter gestire dinamicamente il carico attraverso più nodi provvisti di \emph{load balancer}, a causa dei tempi ristretti di sviluppo di è deciso di non dare priorità a tale requisito per evitare ulteriori ostacoli e rallentamenti durante lo sviluppo. Rimane un elemento importante che andrebbe aggiunto in una successiva revisione del sistema.
+
+
+\section{Convenzioni per la stesura del codice}
+
+\subsection{Naming convention}
+\`E richiesto utilizzare nomi di variabili, classi e metodi che siano:
+
+\begin{itemize}
+\item Descrittivi del loro utilizzo, evitando quanto più possibile ambiguità e nomi poco descrittivi (e.g. ``a", ``abc", e così via).
+\item Pronunciabili, evitando il più possibile abbreviazioni ed evitando di utilizzare lingue diverse (e.s. unione italiano ed inglese nello stesso nome)
+\item Di lunghezza medio-corta (preferibilmente meno di 12 caratteri), per facilitare la lettura e la scrittura.
+\item Usando la pratica del ``camel case" per tutti i nomi composti da pi\`u di una parola, con la prima lettera della prima parola minuscola per la prima parola e maiuscola per tutte le parole successive per i nomi di variabili e metodi, e tutte le parole con la prima lettera maiuscola per tutti i nomi delle classi.
+\
+
+\end{itemize}
+
+\subsection{Commenti}
+Eventuali commenti devono essere raggruppati all'inizio della funzione per facilitare la lettura della funzione stessa.
+
+\newpage
+
+\subsection{Classi}
+I nomi delle classi devono essere immediatamente riconoscibili e riconducibili al loro utilizzo e ogni classe deve essere racchiusa in un file separato. \\
+
+La stesura delle classi deve seguire il seguente ordine:
+\begin{enumerate}
+\item Dichiarazione del package
+\item Import di librerie e classi necessarie
+\item Dichiarazione di classe pubblica
+\item Dichiarazione di costanti
+\item Dichiarazione di variabili di classe
+\item Dichiarazione di variabili d'istanza
+\item Dichiarazione del costruttore
+\item Dichiarazione di metodi pubblici
+\item Dichiarazione di Setter e Getter
+\item Dichiarazione di metodi privati
+\end{enumerate}
+
+\newpage
+
+\section{Packages}
+\subsection{Backend}
+L'implementazione del sistema è divisa in più \emph{package} per semplificare la distinzione tra le classi:
+\begin{itemize}
+\item bean
+\item control
+\item model
+\item util
+\end{itemize}
+
+\subsubsection{bean}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\rowcolor[HTML]{C0C0C0}
+\rowcolor[HTML]{C0C0C0} Classe & Descrizione  \\ \hline
+ArticoloBean & \begin{minipage}{10cm} \vspace{5pt}
+Rappresentazione di un articolo, con informazioni sul nome, prezzo, quantità disponibile e altre informazioni rilevanti \vspace{5pt}
+\end{minipage} \\ \hline
+FotoBean & \begin{minipage}{10cm} \vspace{5pt}  Rappresentazione di una foto, contenente oltre alla foto stessa il riferimento all'articolo a cui fa riferimento  \vspace{5pt} \end{minipage}  \\ \hline
+MessaggioBean & \begin{minipage}{10cm} \vspace{5pt} Rappresentazione di una risposta ad un ticket, contenente tutte le informazioni rilevanti, come l'autore e il ticket a cui fa riferimento  \vspace{5pt} \end{minipage}  \\ \hline
+OrdineBean & \begin{minipage}{10cm} \vspace{5pt} Rappresentazione di un ordine, contenente le informazioni rilevanti come il cliente, la quantità, il codice del \emph{tracking}  \vspace{5pt} \end{minipage}  \\ \hline
+TicketBean & \begin{minipage}{10cm} \vspace{5pt} Rappresentazione di un ticket, contenente le informazioni rilevanti \vspace{5pt} \end{minipage}  \\ \hline
+UtenteBean & \begin{minipage}{10cm} \vspace{5pt} Rappresentazione di un utente, contenente varie informazioni necessarie  \vspace{5pt} \end{minipage}  \\ \hline
+\end{tabular}
+\end{center}
+
+\subsubsection{control}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Carrello} \\ \hline
+\rowcolor[HTML]{C0C0C0}  \multicolumn{1}{|c|}{\cellcolor[HTML]{C0C0C0}Classe}  &  Descrizione \\ \hline
+
+AggiornamentoQuantitaCarrelloServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita all'aggiornamento della quantità di un articolo presente nel carrello \vspace{5pt}
+\end{minipage} \\ \hline
+
+AggiuntaAlCarrelloServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita all'aggiunta di un articolo al carrello \vspace{5pt}
+\end{minipage} \\ \hline
+
+GetCarrelloServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita al recupero dell'elenco degli articoli nel carrello \vspace{5pt}
+\end{minipage} \\ \hline
+
+RimozioneDalCarrelloServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla rimozione di un articolo dal carrello \vspace{5pt}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Ordine} \\ \hline
+\rowcolor[HTML]{C0C0C0}  \multicolumn{1}{|c|}{\cellcolor[HTML]{C0C0C0}Classe}  &  Descrizione \\ \hline
+
+AnnullamentoOrdineServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita all'annullamento di un ordine \vspace{5pt}
+\end{minipage} \\ \hline
+
+ConfermaOrdineServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla conferma della spedizione di un ordine \vspace{5pt}
+\end{minipage} \\ \hline
+
+CreazioneOrdineServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla conversione degli articoli presenti nel carrello in ordini \vspace{5pt}
+\end{minipage} \\ \hline
+
+DettagliOrdineServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita al recupero dei dettagli di un ordine \vspace{5pt}
+\end{minipage} \\ \hline
+
+ElencoOrdiniMagazziniereServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita al recupero dell'elenco degli ordini non ancora spediti \vspace{5pt}
+\end{minipage} \\ \hline
+
+ElencoOrdiniMagazziniereServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita al recupero dell'elenco degli ordini per cui è stato richiesto un rimborso \vspace{5pt}
+\end{minipage} \\ \hline
+
+RicercaOrdiniClienteServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita al recupero dello storico ordini di un cliente \vspace{5pt}
+\end{minipage} \\ \hline
+
+RimborsoClienteServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla gestione di una richiesta di rimborso effettuata da un cliente \vspace{5pt}
+\end{minipage} \\ \hline
+
+RimborsoMgazziniereServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla conferma o al rifiuto di un rimborso da parte di un magazziniere \vspace{5pt}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Ticket} \\ \hline
+\rowcolor[HTML]{C0C0C0}  \multicolumn{1}{|c|}{\cellcolor[HTML]{C0C0C0}Classe}  &  Descrizione \\ \hline
+
+ChiusuraTicketServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla chiusura di un ticket \vspace{5pt}
+\end{minipage} \\ \hline
+
+CreazioneTicketServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla creazione di un ticket \vspace{5pt}
+\end{minipage} \\ \hline
+
+DettagliTicketServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita al recupero dei dettagli di un ticket \vspace{5pt}
+\end{minipage} \\ \hline
+
+ElencoTicketCentralinistaServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita al recupero dell'elenco dei ticket in attesa di risposta \vspace{5pt}
+\end{minipage} \\ \hline
+
+ElencoTicketClienteServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita al recupero dell'elenco dei ticket per un cliente \vspace{5pt}
+\end{minipage} \\ \hline
+
+RispostaTicketServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla gestione dei nuovi messaggi relativi ad un ticket \vspace{5pt}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Utente} \\ \hline
+\rowcolor[HTML]{C0C0C0}  \multicolumn{1}{|c|}{\cellcolor[HTML]{C0C0C0}Classe}  &  Descrizione \\ \hline
+
+AutenticazioneServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita all'autenticazione di un utente \vspace{5pt}
+\end{minipage} \\ \hline
+
+Deautenticazione & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla deautenticazione di un utente \vspace{5pt}
+\end{minipage} \\ \hline
+
+DettagliUtenteServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita al recupero dei dettagli di un utente \vspace{5pt}
+\end{minipage} \\ \hline
+
+ModificaUtenteServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla modifica dei dettagli di un utente \vspace{5pt}
+\end{minipage} \\ \hline
+
+RegistrazioneUtenteServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla creazione di un nuovo utente \vspace{5pt}
+\end{minipage} \\ \hline
+
+RicercaPersonaleServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla ricerca tra i dipendenti della piattaforma \vspace{5pt}
+\end{minipage} \\ \hline
+
+RimozioneUtenteServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla rimozione dei dettagli di un utente \vspace{5pt}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{2}{|c|}{\cellcolor[HTML]{C0C0C0}Vendita} \\ \hline
+\rowcolor[HTML]{C0C0C0}  \multicolumn{1}{|c|}{\cellcolor[HTML]{C0C0C0}Classe}  &  Descrizione \\ \hline
+
+AnnullamentoVenditaServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita all'annullamento di una vendita \vspace{5pt}
+\end{minipage} \\ \hline
+
+AutorizzazioneVenditaServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita all'autorizzazione di una vendita da parte di un centralinista \vspace{5pt}
+\end{minipage} \\ \hline
+
+DettagliArticoloServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita al recupero dei dettagli di un articolo \vspace{5pt}
+\end{minipage} \\ \hline
+
+DettagliVenditaServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita al recupero dei dettagli di una vendita \vspace{5pt}
+\end{minipage} \\ \hline
+
+ElencoVenditeCentralinistaServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita al recupero dell'elenco delle vendite in attesa di autorizzazione \vspace{5pt}
+\end{minipage} \\ \hline
+
+ImmaginiServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita al recupero e all'inserimento delle immagini per gli articoli  \vspace{5pt}
+\end{minipage} \\ \hline
+
+InserimentoNuovoArticoloServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla creazione di un nuovo articolo \vspace{5pt}
+\end{minipage} \\ \hline
+
+ModificaArticoloServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla modifica dei dati di un articolo \vspace{5pt}
+\end{minipage} \\ \hline
+
+RicercaArticoloServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla ricerca di un articolo \vspace{5pt}
+\end{minipage} \\ \hline
+
+RicercaVenditaServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla ricerca di un articolo in vendita per un particolare utente \vspace{5pt}
+\end{minipage} \\ \hline
+
+RimozioneArticoloServlet & \begin{minipage}{10cm} \vspace{5pt}
+Servlet adibita alla rimozione di un articolo \vspace{5pt}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Model}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\rowcolor[HTML]{C0C0C0}  \multicolumn{1}{|c|}{\cellcolor[HTML]{C0C0C0}Classe}  &  Descrizione \\ \hline
+
+GestioneAccount & \begin{minipage}{10cm} \vspace{5pt}
+Insieme di funzioni relative alla gestione degli account \vspace{5pt}
+\end{minipage} \\ \hline
+
+GestioneAssistenza & \begin{minipage}{10cm} \vspace{5pt}
+Insieme di funzioni relative alla gestione dei ticket e dei messaggi \vspace{5pt}
+\end{minipage} \\ \hline
+
+GestioneCarrello & \begin{minipage}{10cm} \vspace{5pt}
+Insieme di funzioni relative alla gestione del carrello \vspace{5pt}
+\end{minipage} \\ \hline
+
+GestioneOrdine & \begin{minipage}{10cm} \vspace{5pt}
+Insieme di funzioni relative alla gestione degli ordini \vspace{5pt}
+\end{minipage} \\ \hline
+
+GestioneOrdine & \begin{minipage}{10cm} \vspace{5pt}
+Insieme di funzioni relative alla gestione degli articoli e delle vendite \vspace{5pt}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+\newpage 
+
+\subsubsection{Metodi delle classi}
+
+
+Tutte le servlet descritte rispondono unicamente a richieste di tipo POST, ignorando totalmente le richieste di tipo GET, fatta eccezione per la servlet ``ImmaginiServlet", che risponde con il file dell'immagine richiesta (se esiste) per le richieste GET e gestisce l'inserimento per le richieste POST.
+
+Pertanto, l'interfaccia di tutte le classi Servlet è del tipo
+
+\begin{lstlisting}[language=Java]
+package control.<>;
+
+import ...;
+
+@WebServlet("/<nomeServlet>")
+
+public class <NomeClasse> extends HttpServlet{
+	protected void doGet(HttpServletRequest request, 
+					HttpServletResponse response)
+			throws ServletException, IOException 
+		{
+			...
+			...
+			...
+		}
+	
+	protected void doPost(HttpServletRequest request,
+					HttpServletResponse response)
+			throws ServletException, IOException 
+		{
+			...
+			...
+			...
+		}
+}
+\end{lstlisting}
+
+\newpage
+
+Ogni model implementa più funzioni e, in alcuni casi, più versioni della stessa funzione, con diversi parametri di input o altre modifiche di lieve entità. Per brevità, sarà riportata solo la versione principale di ciascuna di queste funzioni.
+
+\begin{lstlisting}[language=Java]
+package model;
+
+import ...;
+
+public class GestioneAccount {
+	// Dato un codice fiscale, 
+	// restituisce true se esiste nel database
+	public boolean exists(String) { }
+	
+	// Dati email e password,
+	// restituisce true se esistono nel database e coincidono
+	public boolean autenticazione(String, String) { }
+	
+	// Data una stringa, 
+	// ne restituisce la sua versione cifrata
+	public String encryptString(String) { }
+	
+	// Data una stringa, 
+	// ne restituisce la sua versione decifrata
+	public String decryptString(String) { }
+	
+	// Dato un codice fiscale,
+	// ne restituisce l'UtenteBean completo
+	public UtenteBean dettagliUtente(String) { }
+	
+	// Dato il codice fiscale di chi sta compiendo l'operazione
+	// e il codice fiscale dell'utente da eliminare,
+	// restituisce true se l'eliminazione va a buon fine
+	public boolean eliminaUtente(String, String) { }
+	
+	// Data una lunghezza,
+	// restituisce una stringa alfanumerica pseudocasuale
+	public String generatePassword(int) { }
+	
+	// Dato un codice fiscale,
+	// restituisce la tipologia utente
+	public int getTipologia(String) { }
+	
+	// Dato il codice fiscale di chi sta compiendo l'operazione
+	// e i nuovi dettagli,
+	// restituisce true se la modifica dell'utente va a buon fine	
+	public boolean modificaUtente(String, UtenteBean) { }
+	
+	// Dati i dettagli dell'utnete da registrare,
+	// restituisce true se la registrazione dell'utente va a buon fine
+	public boolean registrazioneUtente(UtenteBean) { }
+	
+
+	
+	
+	
+	// Dato il nome, cognome o il codice fiscale di un dipendente,
+	// restituisce un elenco di dipendenti corrispondenti
+	public ArrayList<UtenteBean> ricercaDipendenti(String) { }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java]
+package model;
+
+import ...;
+
+public class GestioneAssistenza {
+	// Dato l'ID di un ticket e il nuovo stato, 
+	// restituisce true se il cambiamento di stato va a buon fine
+	public boolean cambiaStato(String, String) { }
+	
+	// Dato il codice fiscale del creatore, la tipologia di ticket
+	// e il primo messaggio
+	// restituisce true se la creazione del ticket va a buon fine
+	public boolean creazioneTicket(String, String, String) { }
+	
+	// Dato l'ID di un ticket, 
+	// ne restituisce i dettagli
+	public TicketBean dettagliTicket(String) { }
+	
+	// Dato l'ID di un ticket, 
+	// ne restituisce i messaggi associati
+	public ArrayList<MessaggioBean> elencoMessaggiTicket(String) { }
+	
+	// Dato il limite di risultati da ottenere,
+	// restituisce l'elenco dei ticket in attesa di risposta
+	public ArrayList<TicketBean> elencoTicketCentralinista(int) { }
+	
+	// Dato un codice fiscale e il limite di risultati da ottenere,
+	// restituisce l'elenco dei ticket di un cliente
+	public ArrayList<TicketBean> elencoTicketCliente(String, int) { }
+	
+	// Dato l'ID di un ticket,
+	// il codice fiscale di chi scrive e un messaggio
+	// restituisce true se l'inserimento del messaggio va a buon fine
+	public boolean rispostaTicket(String, String, String) { }
+
+}
+\end{lstlisting}
+
+\newpage
+
+\begin{lstlisting}[language=Java]
+package model;
+
+import ...;
+
+public class GestioneCarrello {
+	// Dati il codice fiscale dell'utente,
+	// l'ID dell'articolo e la nuova quantita',
+	// restituisce true se l'aggiornamento del carrello va a buon fine
+	public boolean aggiornamentoQuantita(String, String, int) { }
+	
+	// Dati il codice fiscale dell'utente,
+	// l'ID dell'articolo e la nuova quantita',
+	// restituisce true se l'aggiunta al carrello va a buon fine
+	public boolean aggiuntaArticolo(String, String, int) { }
+	
+	// Dato il codice fiscale dell'utente,
+	// restituisce l'elenco degli articoli nel carrello
+	public static ArrayList<ArticoloBean> GetCarrello(String) { }
+	
+	
+	// Dati il codice fiscale dell'utente e
+	// l'ID dell'articolo 
+	// restituisce true se la rimozione va a buon fine
+	public boolean rimozioneArticolo(String, String)  { }
+}
+\end{lstlisting}
+
+\newpage
+
+\begin{lstlisting}[language=Java]
+package model;
+
+import ...;
+
+public class GestioneOrdine {
+	// Dato l'ID di un ordine e il nuovo stato, 
+	// restituisce true se il cambiamento di stato va a buon fine
+	public boolean cambiaStato(String, String) { }
+
+	// Dato il codice fiscale di un utente,
+	// restituisce true se gli ordini vengono creati correttamente
+	public boolean creazioneOrdine(String) { }
+	
+	// Dato l'ID di un ordine,
+	// ne restituisce i dettagli
+	public OrdineBean dettagliOrdine(String) { }
+	
+	// Restituisce l'elenco degli ordini in attesa di spedizione
+	public ArrayList<OrdineBean> elencoOrdiniMagazziniere() { }
+	
+	// Dato il limite di risultati da ottenere,
+	// restituisce l'elenco degli ordini in attesa di rimborso
+	public ArrayList<OrdineBean> elencoRimborsi(int) { }
+	
+	// Dati il codice fiscale del cliente,
+	// il nome dell'articolo interessato e 
+	// il limite di risultati da ottenere,
+	// restituisce l'elenco degli articoli ordinati corrispondenti
+	public ArrayList<OrdineBean> ricercaOrdiniCliente
+					(String, String, int) { }
+	
+	// Dati l'ID dell'ordine e il codice del tracking,
+	// restituisce true se l'inserimento va a buon fine
+	public boolean setCodiceTracciamento(String, String) { }
+}
+\end{lstlisting}
+
+\newpage
+
+\begin{lstlisting}[language=Java]
+package model;
+
+import ...;
+
+public class GestioneVendita {
+	// Dato l'ID di un articolo e il nuovo stato, 
+	// restituisce true se il cambiamento di stato va a buon fine
+	public boolean cambiaStato(String, String) { }
+	
+	// Dato l'ID di un articolo,
+	// ne restituisce i dettagli
+	public ArticoloBean dettagliArticolo(String) { }
+	
+	// Dato il limite di risultati da ottenere,
+	// restituisce l'elenco degli articoli in attesa di approvazione
+	public ArrayList<ArticoloBean> elencoVenditeCentralinista(int) { }
+	
+	// Dato l'ID di una foto,
+	// restituisce la foto stessa
+	public byte[] getFoto(String) { }
+	
+	// Dato l'ID di un articolo e una foto,
+	// restituisce true se l'inserimento va a buon fine
+	public boolean inserimentoFoto(String, InputStream) { }
+	
+	// Dati i dettagli di un nuovo articolo,
+	// restituisce l'ID del nuovo articolo se l'inserimento va a buon fine
+	public String inserimentoNuovoArticolo(ArticoloBean) { }
+	
+	// Dati i dettagli dell'articolo,
+	// restituisce true se la modifica va a buon fine
+	public String modificaArticolo(ArticoloBean) { }
+	
+	// Data una parola chiave,
+	// restituisce l'elenco degli articoli in vendita corrispondenti
+	public ArrayList<ArticoloBean> ricercaArticolo(String) { }
+	
+	// Dato il codice fiscale di chi esegue l'operazione e
+	// l'ID dell'articolo,
+	// restituisce true se la rimozione va a buon fine
+	public boolean rimozioneArticolo(String, String) { }
+	
+	// Dato l'ID dell'articolo,
+	// restituisce true se la rimozione delle foto va a buon fine
+	public boolean rimozioneFoto(String) { }
+}
+\end{lstlisting}
+
+
+\newpage
+
+\subsection{Frontend}
+Tutte le pagine sono racchiuse nel package di default, ``webapp".
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\rowcolor[HTML]{C0C0C0}  \multicolumn{1}{|c|}{\cellcolor[HTML]{C0C0C0}File}  &  Descrizione \\ \hline
+
+areaVenditori & \begin{minipage}{10cm} \vspace{5pt}
+Pagina iniziale per un cliente che vuole vendere un articolo o visualizzare i dettagli di un articolo messo in vendita in precedenza \vspace{5pt}
+\end{minipage} \\ \hline
+
+autenticazione & \begin{minipage}{10cm} \vspace{5pt}
+Modulo per l'autenticazione di un utente \vspace{5pt}
+\end{minipage} \\ \hline
+
+carrello & \begin{minipage}{10cm} \vspace{5pt}
+Pagina per la visualizzazione del contenuto del carrello \vspace{5pt}
+\end{minipage} \\ \hline
+
+centroassistenza & \begin{minipage}{10cm} \vspace{5pt}
+Pagina per la visualizzazione dell'elenco dei ticket aperti \vspace{5pt}
+\end{minipage} \\ \hline
+
+creazioneTicket & \begin{minipage}{10cm} \vspace{5pt}
+Pagina per la creazione di un nuovo ticket \vspace{5pt}
+\end{minipage} \\ \hline
+
+dettagliArticolo & \begin{minipage}{10cm} \vspace{5pt}
+Pagina per la visualizzazione dei dettagli di un articolo \vspace{5pt}
+\end{minipage} \\ \hline
+
+dettagliOrdine & \begin{minipage}{10cm} \vspace{5pt}
+Pagina per la visualizzazione dei dettagli di un ordine \vspace{5pt}
+\end{minipage} \\ \hline
+
+dettagliutente & \begin{minipage}{10cm} \vspace{5pt}
+Pagina per la visualizzazione dei dettagli di un utente, con possibilità di modifica \vspace{5pt}
+\end{minipage} \\ \hline
+
+elencoOrdiniMagazziniere & \begin{minipage}{10cm} \vspace{5pt}
+Pagina per la visualizzazione dell'elenco degli ordini in attesa di spedizione \vspace{5pt}
+\end{minipage} \\ \hline
+
+elencoRimborsiMagazziniere & \begin{minipage}{10cm} \vspace{5pt}
+Pagina per la visualizzazione dell'elenco dei rimborsi in attesa di conferma \vspace{5pt}
+\end{minipage} \\ \hline
+
+elencoVenditeCentralinista & \begin{minipage}{10cm} \vspace{5pt}
+Pagina per la visualizzazione dell'elenco delle vendite in attesa di approvazione \vspace{5pt}
+\end{minipage} \\ \hline
+
+errore & \begin{minipage}{10cm} \vspace{5pt}
+Pagina per la visualizzazione di un messaggio di errore \vspace{5pt}
+\end{minipage} \\ \hline
+
+gestioneAssistenza & \begin{minipage}{10cm} \vspace{5pt}
+Pagina per la visualizzazione dell'elenco dei ticket in attesa di risposta\vspace{5pt}
+\end{minipage} \\ \hline
+
+gestionepersonale & \begin{minipage}{10cm} \vspace{5pt}
+Pagina iniziale per un amministratore del personale, da cui ricercare un dipendente \vspace{5pt}
+\end{minipage} \\ \hline
+
+index & \begin{minipage}{10cm} \vspace{5pt}
+Pagina iniziale per un cliente, da cui può accedere a tutte le funzioni \vspace{5pt}
+\end{minipage} \\ \hline
+
+inserimentoCartaDiCredito & \begin{minipage}{10cm} \vspace{5pt}
+Modulo per l'inserimento dei dati della carta di credito da utilizzare per pagare gli ordini \vspace{5pt}
+\end{minipage} \\ \hline
+
+inserimentoImmagini & \begin{minipage}{10cm} \vspace{5pt}
+Modulo per l'inserimento di foto dopo la creazione di una vendita \vspace{5pt}
+\end{minipage} \\ \hline
+
+modificaArticolo & \begin{minipage}{10cm} \vspace{5pt}
+Modulo per la modifica di un articolo in vendita \vspace{5pt}
+\end{minipage} \\ \hline
+
+modificaPassword & \begin{minipage}{10cm} \vspace{5pt}
+Modulo per la modifica della password di un cliente \vspace{5pt}
+\end{minipage} \\ \hline
+
+nuovaVendita & \begin{minipage}{10cm} \vspace{5pt}
+Modulo per la creazione di una nuova vendita \vspace{5pt}
+\end{minipage} \\ \hline
+
+paginainiziale & \begin{minipage}{10cm} \vspace{5pt}
+Pagina iniziale per i dipendenti della piattaforma \vspace{5pt}
+\end{minipage} \\ \hline
+
+registrazione & \begin{minipage}{10cm} \vspace{5pt}
+Modulo per la registrazione di un utente \vspace{5pt}
+\end{minipage} \\ \hline
+
+rispostaTicket & \begin{minipage}{10cm} \vspace{5pt}
+Modulo per l'inserimento di una risposta ad un ticket \vspace{5pt}
+\end{minipage} \\ \hline
+
+risultatiRicerca & \begin{minipage}{10cm} \vspace{5pt}
+Pagina per la visualizzazione dei risultati di una ricerca \vspace{5pt}
+\end{minipage} \\ \hline
+
+storicoOrdini & \begin{minipage}{10cm} \vspace{5pt}
+Pagina per la visualizzazione dello storico degli ordini per un cliente \vspace{5pt}
+\end{minipage} \\ \hline
+
+successo & \begin{minipage}{10cm} \vspace{5pt}
+Pagina per la visualizzazione dei messaggi di conferma per alcune operazioni \vspace{5pt}
+\end{minipage} \\ \hline
+
+\end{tabular}
+\end{center}
+
+\end{document}
