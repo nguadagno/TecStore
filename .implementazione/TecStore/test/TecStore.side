@@ -2,7 +2,7 @@
   "id": "ccfa427b-6b73-45a4-9d38-0b81712a76e8",
   "version": "2.0",
   "name": "TecStore",
-  "url": "http://localhost:8080/TecStore",
+  "url": "https://tecstore.gdgn.xyz/TecStore",
   "tests": [{
     "id": "285844fb-0022-43a1-a705-d5312883bdd4",
     "name": "AutenticazioneUtente",
@@ -2054,6 +2054,1507 @@
       "targets": [],
       "value": ""
     }]
+  }, {
+    "id": "8a324b42-20a2-456b-8bab-4bd0ac3692c3",
+    "name": "RegistrazioneCliente",
+    "commands": [{
+      "id": "1e18a181-658d-44ca-9b14-13fb75dd253d",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4cb8f494-1428-4fb4-90b0-28d188d11209",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1052x732",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "eb285e86-57bc-48aa-9419-626472f62a92",
+      "comment": "",
+      "command": "click",
+      "target": "css=#index-registrazione > button",
+      "targets": [
+        ["css=#index-registrazione > button", "css:finder"],
+        ["xpath=//a[@id='index-registrazione']/button", "xpath:idRelative"],
+        ["xpath=//p/a/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Registrati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e858bc0c-672d-4f45-a86e-465732e5c825",
+      "comment": "",
+      "command": "type",
+      "target": "id=registrazione-email",
+      "targets": [
+        ["id=registrazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#registrazione-email", "css:finder"],
+        ["xpath=//input[@id='registrazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email@12.it"
+    }, {
+      "id": "103422cd-49d4-4801-bf85-7f7f78731044",
+      "comment": "",
+      "command": "type",
+      "target": "id=registrazione-password",
+      "targets": [
+        ["id=registrazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#registrazione-password", "css:finder"],
+        ["xpath=//input[@id='registrazione-password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "eb2019dd-8c88-470a-a913-8190aefb1f7d",
+      "comment": "",
+      "command": "type",
+      "target": "id=registrazione-CF",
+      "targets": [
+        ["id=registrazione-CF", "id"],
+        ["name=CF", "name"],
+        ["css=#registrazione-CF", "css:finder"],
+        ["xpath=//input[@id='registrazione-CF']", "xpath:attributes"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": "PTRRTA80A01H703I"
+    }, {
+      "id": "5846e3c6-939d-4a96-ae9a-1149d904175d",
+      "comment": "",
+      "command": "type",
+      "target": "id=nome",
+      "targets": [
+        ["id=nome", "id"],
+        ["name=nome", "name"],
+        ["css=#nome", "css:finder"],
+        ["xpath=//input[@id='nome']", "xpath:attributes"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": "nome"
+    }, {
+      "id": "be2038cb-1331-490c-af83-a7ce13b5ef06",
+      "comment": "",
+      "command": "type",
+      "target": "id=cognome",
+      "targets": [
+        ["id=cognome", "id"],
+        ["name=cognome", "name"],
+        ["css=#cognome", "css:finder"],
+        ["xpath=//input[@id='cognome']", "xpath:attributes"],
+        ["xpath=//input[5]", "xpath:position"]
+      ],
+      "value": "cognome"
+    }, {
+      "id": "8086672a-288c-4899-afff-3aa0e3f4bbb2",
+      "comment": "",
+      "command": "type",
+      "target": "id=citta",
+      "targets": [
+        ["id=citta", "id"],
+        ["name=citta", "name"],
+        ["css=#citta", "css:finder"],
+        ["xpath=//input[@id='citta']", "xpath:attributes"],
+        ["xpath=//input[6]", "xpath:position"]
+      ],
+      "value": "rome"
+    }, {
+      "id": "7d63f2c6-161e-4173-91fb-3a8f052996fa",
+      "comment": "",
+      "command": "type",
+      "target": "id=via",
+      "targets": [
+        ["id=via", "id"],
+        ["name=via", "name"],
+        ["css=#via", "css:finder"],
+        ["xpath=//input[@id='via']", "xpath:attributes"],
+        ["xpath=//input[7]", "xpath:position"]
+      ],
+      "value": "roma"
+    }, {
+      "id": "cf15ecb4-80c6-4f3f-af97-a4a5e8680270",
+      "comment": "",
+      "command": "type",
+      "target": "id=provincia",
+      "targets": [
+        ["id=provincia", "id"],
+        ["name=provincia", "name"],
+        ["css=#provincia", "css:finder"],
+        ["xpath=//input[@id='provincia']", "xpath:attributes"],
+        ["xpath=//input[8]", "xpath:position"]
+      ],
+      "value": "rm"
+    }, {
+      "id": "a160681b-ae12-4cc8-a6c0-3820f7e5e449",
+      "comment": "",
+      "command": "type",
+      "target": "id=numerocivico",
+      "targets": [
+        ["id=numerocivico", "id"],
+        ["name=numerocivico", "name"],
+        ["css=#numerocivico", "css:finder"],
+        ["xpath=//input[@id='numerocivico']", "xpath:attributes"],
+        ["xpath=//input[9]", "xpath:position"]
+      ],
+      "value": "12"
+    }, {
+      "id": "72e3f997-9231-4717-a9bf-79d4e0d0e706",
+      "comment": "",
+      "command": "type",
+      "target": "id=CAP",
+      "targets": [
+        ["id=CAP", "id"],
+        ["name=CAP", "name"],
+        ["css=#CAP", "css:finder"],
+        ["xpath=//input[@id='CAP']", "xpath:attributes"],
+        ["xpath=//input[10]", "xpath:position"]
+      ],
+      "value": "12345"
+    }, {
+      "id": "1434891f-a0ad-4c68-bcc1-23df87f0ec11",
+      "comment": "",
+      "command": "click",
+      "target": "id=conferma",
+      "targets": [
+        ["id=conferma", "id"],
+        ["name=submit", "name"],
+        ["css=#conferma", "css:finder"],
+        ["xpath=//input[@id='conferma']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c206a56b-848a-4d53-bd8e-d4bf3fa8a6af",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h4",
+      "targets": [
+        ["css=h4", "css:finder"],
+        ["xpath=//h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Registazione effettuata')]", "xpath:innerText"]
+      ],
+      "value": "Registazione effettuata"
+    }, {
+      "id": "963b3fa4-2aed-46f3-82ac-1caa5c691c08",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Continua')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d4773801-d0b7-44a1-b1a2-3c486cd320e8",
+      "comment": "",
+      "command": "click",
+      "target": "css=#index-autenticazione > button",
+      "targets": [
+        ["css=#index-autenticazione > button", "css:finder"],
+        ["xpath=//a[@id='index-autenticazione']/button", "xpath:idRelative"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5390d049-2cd8-4535-81f1-f9b5d89c3e65",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email@12.it"
+    }, {
+      "id": "9fad749d-6acf-4e31-b4cb-9de34f23085b",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "2ee87b06-b46a-4b2e-8294-ae8d54bd0572",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5eae4bba-316f-4c7c-953a-517a3d95204e",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=i",
+      "targets": [
+        ["css=i", "css:finder"],
+        ["xpath=//i", "xpath:position"]
+      ],
+      "value": "nome cognome"
+    }, {
+      "id": "257d0f6c-029e-4b4f-93f3-7284aadc2645",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Pagina Iniziale",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "880bf38b-bea2-489b-a293-92be75073cd0",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//input[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[4]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "314a57b2-f206-44a2-a8e2-b996422765a4",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=h5",
+      "targets": [
+        ["css=h5", "css:finder"],
+        ["xpath=//h5", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "c58ae6f2-362d-4372-9344-58ac55abc47e",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "a3ec99a0-f666-49f1-bd10-638941581bbd",
+    "name": "RegistrazioneDipendente",
+    "commands": [{
+      "id": "068c987d-9d3e-4db2-bf8c-9eb0ccacfd5a",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0a0ef6e0-2d5e-41cf-bba5-6add4cf677ec",
+      "comment": "",
+      "command": "click",
+      "target": "css=#index-autenticazione > button",
+      "targets": [
+        ["css=#index-autenticazione > button", "css:finder"],
+        ["xpath=//a[@id='index-autenticazione']/button", "xpath:idRelative"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "fe3f184a-a86f-4730-b25d-789767184001",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email5@email.tld"
+    }, {
+      "id": "731b1b77-885b-4ff2-9ea6-210bba5313da",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "3c2b540f-d901-4ccf-bd00-0984c08db537",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a85099a8-19c9-40cf-87cb-4d29fdff77fe",
+      "comment": "",
+      "command": "click",
+      "target": "id=nuovodipendente",
+      "targets": [
+        ["id=nuovodipendente", "id"],
+        ["css=#nuovodipendente", "css:finder"],
+        ["xpath=//input[@id='nuovodipendente']", "xpath:attributes"],
+        ["xpath=//form[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "62629c8e-111e-41c9-a643-2d05cf4b7b18",
+      "comment": "",
+      "command": "type",
+      "target": "id=registrazione-email",
+      "targets": [
+        ["id=registrazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#registrazione-email", "css:finder"],
+        ["xpath=//input[@id='registrazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email12@email.tld"
+    }, {
+      "id": "a2e72951-0f5a-4f1c-81b1-a1ea13e65328",
+      "comment": "",
+      "command": "type",
+      "target": "id=registrazione-CF",
+      "targets": [
+        ["id=registrazione-CF", "id"],
+        ["name=CF", "name"],
+        ["css=#registrazione-CF", "css:finder"],
+        ["xpath=//input[@id='registrazione-CF']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "PTRRTA80A01H703I"
+    }, {
+      "id": "4fffacb5-aaa5-4d9b-950f-cf151b617b35",
+      "comment": "",
+      "command": "type",
+      "target": "id=nome",
+      "targets": [
+        ["id=nome", "id"],
+        ["name=nome", "name"],
+        ["css=#nome", "css:finder"],
+        ["xpath=//input[@id='nome']", "xpath:attributes"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": "nome"
+    }, {
+      "id": "de658474-aec3-4241-9eba-8796716c5250",
+      "comment": "",
+      "command": "type",
+      "target": "id=cognome",
+      "targets": [
+        ["id=cognome", "id"],
+        ["name=cognome", "name"],
+        ["css=#cognome", "css:finder"],
+        ["xpath=//input[@id='cognome']", "xpath:attributes"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": "cognome"
+    }, {
+      "id": "922d468b-e9e8-472e-b294-cf09e8ab1a62",
+      "comment": "",
+      "command": "type",
+      "target": "id=citta",
+      "targets": [
+        ["id=citta", "id"],
+        ["name=citta", "name"],
+        ["css=#citta", "css:finder"],
+        ["xpath=//input[@id='citta']", "xpath:attributes"],
+        ["xpath=//input[5]", "xpath:position"]
+      ],
+      "value": "roma"
+    }, {
+      "id": "f632494e-abb8-4ae2-bb3e-00eed650f329",
+      "comment": "",
+      "command": "type",
+      "target": "id=via",
+      "targets": [
+        ["id=via", "id"],
+        ["name=via", "name"],
+        ["css=#via", "css:finder"],
+        ["xpath=//input[@id='via']", "xpath:attributes"],
+        ["xpath=//input[6]", "xpath:position"]
+      ],
+      "value": "roma"
+    }, {
+      "id": "946dfff2-6e0e-44e8-85ac-db1fd3cec951",
+      "comment": "",
+      "command": "type",
+      "target": "id=provincia",
+      "targets": [
+        ["id=provincia", "id"],
+        ["name=provincia", "name"],
+        ["css=#provincia", "css:finder"],
+        ["xpath=//input[@id='provincia']", "xpath:attributes"],
+        ["xpath=//input[7]", "xpath:position"]
+      ],
+      "value": "rm"
+    }, {
+      "id": "eaa9a374-bcc4-43fd-a192-ff823350e1f2",
+      "comment": "",
+      "command": "type",
+      "target": "id=numerocivico",
+      "targets": [
+        ["id=numerocivico", "id"],
+        ["name=numerocivico", "name"],
+        ["css=#numerocivico", "css:finder"],
+        ["xpath=//input[@id='numerocivico']", "xpath:attributes"],
+        ["xpath=//input[8]", "xpath:position"]
+      ],
+      "value": "12"
+    }, {
+      "id": "11550416-94db-47b7-bdd9-af7af61cb176",
+      "comment": "",
+      "command": "type",
+      "target": "id=CAP",
+      "targets": [
+        ["id=CAP", "id"],
+        ["name=CAP", "name"],
+        ["css=#CAP", "css:finder"],
+        ["xpath=//input[@id='CAP']", "xpath:attributes"],
+        ["xpath=//input[9]", "xpath:position"]
+      ],
+      "value": "1213123123"
+    }, {
+      "id": "8a3dbe68-a6fa-40e6-9350-57ab2025f04f",
+      "comment": "",
+      "command": "click",
+      "target": "id=conferma",
+      "targets": [
+        ["id=conferma", "id"],
+        ["name=submit", "name"],
+        ["css=#conferma", "css:finder"],
+        ["xpath=//input[@id='conferma']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c0e213e2-8c98-49d3-8828-fca3152847f7",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h4",
+      "targets": [
+        ["css=h4", "css:finder"],
+        ["xpath=//h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Registazione effettuata')]", "xpath:innerText"]
+      ],
+      "value": "Registazione effettuata"
+    }, {
+      "id": "ccd10e56-68ca-483c-ab80-273325c6488b",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Continua')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7f554d3b-de99-4777-bf9d-27eb04a081a3",
+      "comment": "",
+      "command": "click",
+      "target": "id=ricercapersonale",
+      "targets": [
+        ["id=ricercapersonale", "id"],
+        ["name=testo", "name"],
+        ["css=#ricercapersonale", "css:finder"],
+        ["xpath=//input[@id='ricercapersonale']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7f743da2-4a7c-47c3-8f02-3a79738db9a4",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(2)",
+      "targets": [
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@type='submit']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0480a2c4-7d5c-41bd-83ce-12de5e4c77f2",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=tr:nth-child(4) > td:nth-child(1)",
+      "targets": [],
+      "value": "nome"
+    }, {
+      "id": "4257f0c8-69d9-48ae-bbd7-3d8849de298d",
+      "comment": "",
+      "command": "",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "80c491f6-dc1e-4f1d-ae8d-d7e0c2b3b8cb",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//a[@id='gestionePersonale-torna']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3fe69499-4d01-48e4-a555-75b055baa89e",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//input[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[2]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5b28bde0-351d-4ded-a2d5-e70f4174cc46",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "c4aebe2c-9385-4e70-aae5-78aced6ebc77",
+    "name": "ModificaCliente",
+    "commands": [{
+      "id": "4260899a-3590-4918-b036-f879273c4b0d",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/DatiProva?q=1",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0536b866-237e-4726-9c20-246baec3138c",
+      "comment": "",
+      "command": "click",
+      "target": "css=#index-autenticazione > button",
+      "targets": [
+        ["css=#index-autenticazione > button", "css:finder"],
+        ["xpath=//a[@id='index-autenticazione']/button", "xpath:idRelative"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a5287331-fb9c-479b-b14b-afbc855d5f5c",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1@email.tld"
+    }, {
+      "id": "784472a3-e0fb-4ef6-a1b7-a87c76a69e7f",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "eab18023-36fa-4884-b027-9c3422abbf0b",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "059d59cd-654f-4ae2-b486-9d21824f8a1b",
+      "comment": "",
+      "command": "click",
+      "target": "id=index-dettagliUtente",
+      "targets": [
+        ["id=index-dettagliUtente", "id"],
+        ["css=#index-dettagliUtente", "css:finder"],
+        ["xpath=//input[@id='index-dettagliUtente']", "xpath:attributes"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d0aa9106-b6d7-46ed-b6df-ed50d2e7a284",
+      "comment": "",
+      "command": "type",
+      "target": "id=dettagliUtente-email",
+      "targets": [
+        ["id=dettagliUtente-email", "id"],
+        ["name=email", "name"],
+        ["css=#dettagliUtente-email", "css:finder"],
+        ["xpath=//input[@id='dettagliUtente-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1@email.tld"
+    }, {
+      "id": "0718f3cf-cd86-43b1-b6d9-86fc917626f1",
+      "comment": "",
+      "command": "type",
+      "target": "id=nome",
+      "targets": [
+        ["id=nome", "id"],
+        ["name=nome", "name"],
+        ["css=#nome", "css:finder"],
+        ["xpath=//input[@id='nome']", "xpath:attributes"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": "nome1"
+    }, {
+      "id": "ad93d5bc-76c7-41f8-b899-4801a680bbb9",
+      "comment": "",
+      "command": "type",
+      "target": "id=cognome",
+      "targets": [
+        ["id=cognome", "id"],
+        ["name=cognome", "name"],
+        ["css=#cognome", "css:finder"],
+        ["xpath=//input[@id='cognome']", "xpath:attributes"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": "cognome"
+    }, {
+      "id": "4fcfd99f-61f7-4b69-8dd9-8593b0d76d28",
+      "comment": "",
+      "command": "type",
+      "target": "id=dettagliUtente-citta",
+      "targets": [
+        ["id=dettagliUtente-citta", "id"],
+        ["name=citta", "name"],
+        ["css=#dettagliUtente-citta", "css:finder"],
+        ["xpath=//input[@id='dettagliUtente-citta']", "xpath:attributes"],
+        ["xpath=//input[5]", "xpath:position"]
+      ],
+      "value": "viaroma"
+    }, {
+      "id": "1cc33619-993c-493f-abe0-e36477d3c9e1",
+      "comment": "",
+      "command": "type",
+      "target": "id=dettagliUtente-via",
+      "targets": [
+        ["id=dettagliUtente-via", "id"],
+        ["name=via", "name"],
+        ["css=#dettagliUtente-via", "css:finder"],
+        ["xpath=//input[@id='dettagliUtente-via']", "xpath:attributes"],
+        ["xpath=//input[6]", "xpath:position"]
+      ],
+      "value": "via"
+    }, {
+      "id": "d2fc3ce8-58ea-4318-b906-9bf4edeeea67",
+      "comment": "",
+      "command": "type",
+      "target": "id=dettagliUtente-provincia",
+      "targets": [
+        ["id=dettagliUtente-provincia", "id"],
+        ["name=provincia", "name"],
+        ["css=#dettagliUtente-provincia", "css:finder"],
+        ["xpath=//input[@id='dettagliUtente-provincia']", "xpath:attributes"],
+        ["xpath=//input[7]", "xpath:position"]
+      ],
+      "value": "pd"
+    }, {
+      "id": "f042088c-209e-4dd9-b192-ff43b96ae058",
+      "comment": "",
+      "command": "type",
+      "target": "id=numeroCivico",
+      "targets": [
+        ["id=numeroCivico", "id"],
+        ["name=numeroCivico", "name"],
+        ["css=#numeroCivico", "css:finder"],
+        ["xpath=//input[@id='numeroCivico']", "xpath:attributes"],
+        ["xpath=//input[8]", "xpath:position"]
+      ],
+      "value": "12"
+    }, {
+      "id": "dbdaa475-4f7e-4e26-bee1-7152b54a2648",
+      "comment": "",
+      "command": "type",
+      "target": "id=CAP",
+      "targets": [
+        ["id=CAP", "id"],
+        ["name=CAP", "name"],
+        ["css=#CAP", "css:finder"],
+        ["xpath=//input[@id='CAP']", "xpath:attributes"],
+        ["xpath=//input[9]", "xpath:position"]
+      ],
+      "value": "12123"
+    }, {
+      "id": "d8a86f3c-7ed7-439a-9735-dd678db45981",
+      "comment": "",
+      "command": "click",
+      "target": "id=dettagliUtente-confermaModifica",
+      "targets": [
+        ["id=dettagliUtente-confermaModifica", "id"],
+        ["css=#dettagliUtente-confermaModifica", "css:finder"],
+        ["xpath=//input[@id='dettagliUtente-confermaModifica']", "xpath:attributes"],
+        ["xpath=//p/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "57ad66dd-1c61-41e1-aeee-8d89cbd209e8",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h4",
+      "targets": [
+        ["css=h4", "css:finder"],
+        ["xpath=//h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'La modifica non è stata apportata')]", "xpath:innerText"]
+      ],
+      "value": "Il profilo è stato modificato correttamente!"
+    }, {
+      "id": "a4f0aa32-6f5d-48fc-8676-17483ab1fe7c",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Continua')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1b105053-807e-4491-a03f-877982a7661e",
+      "comment": "",
+      "command": "click",
+      "target": "id=index-dettagliUtente",
+      "targets": [
+        ["id=index-dettagliUtente", "id"],
+        ["css=#index-dettagliUtente", "css:finder"],
+        ["xpath=//input[@id='index-dettagliUtente']", "xpath:attributes"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d2212c4b-420e-4579-92f0-6104e8b69823",
+      "comment": "",
+      "command": "assertEditable",
+      "target": "id=dettagliUtente-email",
+      "targets": [],
+      "value": "email1@email.tld"
+    }, {
+      "id": "2bb41711-2082-44cd-9b4e-7f7675d366c5",
+      "comment": "",
+      "command": "assertEditable",
+      "target": "id=nome",
+      "targets": [],
+      "value": "nome1"
+    }, {
+      "id": "443e5fa3-fc31-4bd5-af64-37c50dde4bd7",
+      "comment": "",
+      "command": "assertEditable",
+      "target": "id=cognome",
+      "targets": [],
+      "value": "cognome"
+    }, {
+      "id": "83bffaa0-2448-44fb-8e03-2ed825b2acd3",
+      "comment": "",
+      "command": "assertEditable",
+      "target": "id=dettagliUtente-citta",
+      "targets": [
+        ["id=dettagliUtente-citta", "id"],
+        ["name=citta", "name"],
+        ["css=#dettagliUtente-citta", "css:finder"],
+        ["xpath=//input[@id='dettagliUtente-citta']", "xpath:attributes"],
+        ["xpath=//input[5]", "xpath:position"]
+      ],
+      "value": "viaroma"
+    }, {
+      "id": "62a47b50-6ab4-4fd1-b4a0-87ba10427f51",
+      "comment": "",
+      "command": "assertEditable",
+      "target": "id=dettagliUtente-via",
+      "targets": [
+        ["id=dettagliUtente-via", "id"],
+        ["name=via", "name"],
+        ["css=#dettagliUtente-via", "css:finder"],
+        ["xpath=//input[@id='dettagliUtente-via']", "xpath:attributes"],
+        ["xpath=//input[6]", "xpath:position"]
+      ],
+      "value": "via"
+    }, {
+      "id": "a11d7d33-60ab-409a-b4ba-0101f1db36db",
+      "comment": "",
+      "command": "assertEditable",
+      "target": "id=dettagliUtente-provincia",
+      "targets": [
+        ["id=dettagliUtente-provincia", "id"],
+        ["name=provincia", "name"],
+        ["css=#dettagliUtente-provincia", "css:finder"],
+        ["xpath=//input[@id='dettagliUtente-provincia']", "xpath:attributes"],
+        ["xpath=//input[7]", "xpath:position"]
+      ],
+      "value": "pd"
+    }, {
+      "id": "c9b9a59a-4384-45ec-b025-d9f30d88c865",
+      "comment": "",
+      "command": "assertEditable",
+      "target": "id=numeroCivico",
+      "targets": [
+        ["id=numeroCivico", "id"],
+        ["name=numeroCivico", "name"],
+        ["css=#numeroCivico", "css:finder"],
+        ["xpath=//input[@id='numeroCivico']", "xpath:attributes"],
+        ["xpath=//input[8]", "xpath:position"]
+      ],
+      "value": "12"
+    }, {
+      "id": "8aae0c31-f87b-4b5b-8218-274c31079014",
+      "comment": "",
+      "command": "assertEditable",
+      "target": "id=CAP",
+      "targets": [
+        ["id=CAP", "id"],
+        ["name=CAP", "name"],
+        ["css=#CAP", "css:finder"],
+        ["xpath=//input[@id='CAP']", "xpath:attributes"],
+        ["xpath=//input[9]", "xpath:position"]
+      ],
+      "value": "12123"
+    }, {
+      "id": "dbe2948b-d733-4cce-b82b-a3c0343f457c",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Torna Alla Home')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d5a2a1ca-4a76-49e4-b197-78b50cb42d24",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//input[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[4]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4fc4e8c0-dd92-48e5-b873-23b1359741e8",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=h5",
+      "targets": [
+        ["css=h5", "css:finder"],
+        ["xpath=//h5", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "01cbbeed-b4e5-45ad-9bb9-145be9b4d144",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "dc8548fa-cca1-47dd-852d-25cf8ef09cd9",
+    "name": "RegistrazioneClienteEmailEsistente",
+    "commands": [{
+      "id": "222fa92b-6235-4bb4-b28f-664563f0d88f",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "efec9220-fd4c-43ca-9c2b-29655c18ea81",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1052x732",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "82bfffcf-c66b-45ac-a6d0-89bd86bc015e",
+      "comment": "",
+      "command": "click",
+      "target": "css=#index-registrazione > button",
+      "targets": [
+        ["css=#index-registrazione > button", "css:finder"],
+        ["xpath=//a[@id='index-registrazione']/button", "xpath:idRelative"],
+        ["xpath=//p/a/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Registrati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "81833196-5ed4-47d9-a67c-3a03c14c0970",
+      "comment": "",
+      "command": "type",
+      "target": "id=registrazione-email",
+      "targets": [
+        ["id=registrazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#registrazione-email", "css:finder"],
+        ["xpath=//input[@id='registrazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1@email.tld"
+    }, {
+      "id": "975b337d-743b-4e6b-82f1-4cadf9c68b21",
+      "comment": "",
+      "command": "type",
+      "target": "id=registrazione-password",
+      "targets": [
+        ["id=registrazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#registrazione-password", "css:finder"],
+        ["xpath=//input[@id='registrazione-password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "85342319-e7bc-4986-a49f-feab59741004",
+      "comment": "",
+      "command": "type",
+      "target": "id=registrazione-CF",
+      "targets": [
+        ["id=registrazione-CF", "id"],
+        ["name=CF", "name"],
+        ["css=#registrazione-CF", "css:finder"],
+        ["xpath=//input[@id='registrazione-CF']", "xpath:attributes"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": "PTRRTA80A01H703I"
+    }, {
+      "id": "a8c872dc-5ea4-4b6d-a19a-1fbf81be07ee",
+      "comment": "",
+      "command": "type",
+      "target": "id=nome",
+      "targets": [
+        ["id=nome", "id"],
+        ["name=nome", "name"],
+        ["css=#nome", "css:finder"],
+        ["xpath=//input[@id='nome']", "xpath:attributes"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": "nome"
+    }, {
+      "id": "35f57556-4ebe-4ae3-95ff-b13902734e42",
+      "comment": "",
+      "command": "type",
+      "target": "id=cognome",
+      "targets": [
+        ["id=cognome", "id"],
+        ["name=cognome", "name"],
+        ["css=#cognome", "css:finder"],
+        ["xpath=//input[@id='cognome']", "xpath:attributes"],
+        ["xpath=//input[5]", "xpath:position"]
+      ],
+      "value": "cognome"
+    }, {
+      "id": "8f06197d-644b-4c4a-9456-0c40c610d73b",
+      "comment": "",
+      "command": "type",
+      "target": "id=citta",
+      "targets": [
+        ["id=citta", "id"],
+        ["name=citta", "name"],
+        ["css=#citta", "css:finder"],
+        ["xpath=//input[@id='citta']", "xpath:attributes"],
+        ["xpath=//input[6]", "xpath:position"]
+      ],
+      "value": "rome"
+    }, {
+      "id": "768e7501-2e66-4a80-82a3-056a097c7cdd",
+      "comment": "",
+      "command": "type",
+      "target": "id=via",
+      "targets": [
+        ["id=via", "id"],
+        ["name=via", "name"],
+        ["css=#via", "css:finder"],
+        ["xpath=//input[@id='via']", "xpath:attributes"],
+        ["xpath=//input[7]", "xpath:position"]
+      ],
+      "value": "roma"
+    }, {
+      "id": "dda69aaf-3cb4-4828-ab6f-6a57d41e676d",
+      "comment": "",
+      "command": "type",
+      "target": "id=provincia",
+      "targets": [
+        ["id=provincia", "id"],
+        ["name=provincia", "name"],
+        ["css=#provincia", "css:finder"],
+        ["xpath=//input[@id='provincia']", "xpath:attributes"],
+        ["xpath=//input[8]", "xpath:position"]
+      ],
+      "value": "rm"
+    }, {
+      "id": "36e4d1cd-5542-4c2a-8a42-118fa017f44f",
+      "comment": "",
+      "command": "type",
+      "target": "id=numerocivico",
+      "targets": [
+        ["id=numerocivico", "id"],
+        ["name=numerocivico", "name"],
+        ["css=#numerocivico", "css:finder"],
+        ["xpath=//input[@id='numerocivico']", "xpath:attributes"],
+        ["xpath=//input[9]", "xpath:position"]
+      ],
+      "value": "12"
+    }, {
+      "id": "3ac42079-ff92-4548-873b-d0f03dbb0aa5",
+      "comment": "",
+      "command": "type",
+      "target": "id=CAP",
+      "targets": [
+        ["id=CAP", "id"],
+        ["name=CAP", "name"],
+        ["css=#CAP", "css:finder"],
+        ["xpath=//input[@id='CAP']", "xpath:attributes"],
+        ["xpath=//input[10]", "xpath:position"]
+      ],
+      "value": "12345"
+    }, {
+      "id": "f797bfc7-34e0-4c9c-adb6-f9c9c31ba08a",
+      "comment": "",
+      "command": "click",
+      "target": "id=conferma",
+      "targets": [
+        ["id=conferma", "id"],
+        ["name=submit", "name"],
+        ["css=#conferma", "css:finder"],
+        ["xpath=//input[@id='conferma']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3ba2f640-381d-450f-87e6-7f16cd913a5d",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Errore",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e5a04cff-a0cd-48c3-a454-6bc7938ca258",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h4",
+      "targets": [
+        ["css=h4", "css:finder"],
+        ["xpath=//h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'La registrazione non è andata a buon fine')]", "xpath:innerText"]
+      ],
+      "value": "La registrazione non è andata a buon fine"
+    }, {
+      "id": "4dd6a408-cba8-477e-8b52-4a6205fd4e74",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Continua')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "00da4ae6-d5d5-4103-ae12-dbf4be9f4bbe",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "css=h5",
+      "targets": [
+        ["css=h5", "css:finder"],
+        ["xpath=//h5", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "543e81ce-019a-4722-b9f4-9e7eba4d69d9",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "a76ac65b-4dd5-45a0-a635-1d957ad6e606",
+    "name": "ModificaClienteEmailGiaEsistente",
+    "commands": [{
+      "id": "e83476cb-41d6-4709-bfbd-c2cbb524d250",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/DatiProva?q=1",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "10c9c0b4-091c-465f-826a-e5321b1997e6",
+      "comment": "",
+      "command": "click",
+      "target": "css=#index-autenticazione > button",
+      "targets": [
+        ["css=#index-autenticazione > button", "css:finder"],
+        ["xpath=//a[@id='index-autenticazione']/button", "xpath:idRelative"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ee2acd2e-e950-4d3d-99a3-4f3832586f27",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1@email.tld"
+    }, {
+      "id": "30eac901-4a2c-4a5a-9da1-63b16d20f367",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "7f6ebd77-5e43-40cc-8a77-00b67622b0f2",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b71c499f-fedf-47e9-a5f5-1d62f42638b3",
+      "comment": "",
+      "command": "click",
+      "target": "id=index-dettagliUtente",
+      "targets": [
+        ["id=index-dettagliUtente", "id"],
+        ["css=#index-dettagliUtente", "css:finder"],
+        ["xpath=//input[@id='index-dettagliUtente']", "xpath:attributes"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3a33db0a-4ac8-422e-bc26-631ce511a017",
+      "comment": "",
+      "command": "type",
+      "target": "id=dettagliUtente-email",
+      "targets": [
+        ["id=dettagliUtente-email", "id"],
+        ["name=email", "name"],
+        ["css=#dettagliUtente-email", "css:finder"],
+        ["xpath=//input[@id='dettagliUtente-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email5@email.tld"
+    }, {
+      "id": "d1033a71-2d82-454e-8070-84d62ddff5f1",
+      "comment": "",
+      "command": "type",
+      "target": "id=nome",
+      "targets": [
+        ["id=nome", "id"],
+        ["name=nome", "name"],
+        ["css=#nome", "css:finder"],
+        ["xpath=//input[@id='nome']", "xpath:attributes"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": "nome1"
+    }, {
+      "id": "3e91f719-ee26-42f6-a3f1-d812ea37e5b2",
+      "comment": "",
+      "command": "type",
+      "target": "id=cognome",
+      "targets": [
+        ["id=cognome", "id"],
+        ["name=cognome", "name"],
+        ["css=#cognome", "css:finder"],
+        ["xpath=//input[@id='cognome']", "xpath:attributes"],
+        ["xpath=//input[4]", "xpath:position"]
+      ],
+      "value": "cognome"
+    }, {
+      "id": "bf343579-4348-4f65-980e-87f8e68c4341",
+      "comment": "",
+      "command": "type",
+      "target": "id=dettagliUtente-citta",
+      "targets": [
+        ["id=dettagliUtente-citta", "id"],
+        ["name=citta", "name"],
+        ["css=#dettagliUtente-citta", "css:finder"],
+        ["xpath=//input[@id='dettagliUtente-citta']", "xpath:attributes"],
+        ["xpath=//input[5]", "xpath:position"]
+      ],
+      "value": "viaroma"
+    }, {
+      "id": "8fed6eee-3d55-4b94-b1f5-8aac6182eecc",
+      "comment": "",
+      "command": "type",
+      "target": "id=dettagliUtente-via",
+      "targets": [
+        ["id=dettagliUtente-via", "id"],
+        ["name=via", "name"],
+        ["css=#dettagliUtente-via", "css:finder"],
+        ["xpath=//input[@id='dettagliUtente-via']", "xpath:attributes"],
+        ["xpath=//input[6]", "xpath:position"]
+      ],
+      "value": "via"
+    }, {
+      "id": "202a8660-6acd-4db6-92da-b2a9e144b944",
+      "comment": "",
+      "command": "type",
+      "target": "id=dettagliUtente-provincia",
+      "targets": [
+        ["id=dettagliUtente-provincia", "id"],
+        ["name=provincia", "name"],
+        ["css=#dettagliUtente-provincia", "css:finder"],
+        ["xpath=//input[@id='dettagliUtente-provincia']", "xpath:attributes"],
+        ["xpath=//input[7]", "xpath:position"]
+      ],
+      "value": "pd"
+    }, {
+      "id": "8c35c577-c14c-47fc-87fd-c424cd6f3f75",
+      "comment": "",
+      "command": "type",
+      "target": "id=numeroCivico",
+      "targets": [
+        ["id=numeroCivico", "id"],
+        ["name=numeroCivico", "name"],
+        ["css=#numeroCivico", "css:finder"],
+        ["xpath=//input[@id='numeroCivico']", "xpath:attributes"],
+        ["xpath=//input[8]", "xpath:position"]
+      ],
+      "value": "12"
+    }, {
+      "id": "e219adcf-ae6e-4221-90a7-b1e8e2922874",
+      "comment": "",
+      "command": "type",
+      "target": "id=CAP",
+      "targets": [
+        ["id=CAP", "id"],
+        ["name=CAP", "name"],
+        ["css=#CAP", "css:finder"],
+        ["xpath=//input[@id='CAP']", "xpath:attributes"],
+        ["xpath=//input[9]", "xpath:position"]
+      ],
+      "value": "12123"
+    }, {
+      "id": "e040eecd-43e2-4e94-8097-91e1451e139a",
+      "comment": "",
+      "command": "click",
+      "target": "id=dettagliUtente-confermaModifica",
+      "targets": [
+        ["id=dettagliUtente-confermaModifica", "id"],
+        ["css=#dettagliUtente-confermaModifica", "css:finder"],
+        ["xpath=//input[@id='dettagliUtente-confermaModifica']", "xpath:attributes"],
+        ["xpath=//p/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c16f47a7-b7a7-4d3d-a32b-e0c30cd9e23b",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h4",
+      "targets": [
+        ["css=h4", "css:finder"],
+        ["xpath=//h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'La modifica non è stata apportata')]", "xpath:innerText"]
+      ],
+      "value": "La modifica non è stata apportata"
+    }, {
+      "id": "1f7a0d73-b916-40e5-ba9e-37f9ea2b92ee",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Continua')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "05167f64-0976-44e4-a919-4c44987fb801",
+      "comment": "",
+      "command": "click",
+      "target": "id=index-dettagliUtente",
+      "targets": [
+        ["id=index-dettagliUtente", "id"],
+        ["css=#index-dettagliUtente", "css:finder"],
+        ["xpath=//input[@id='index-dettagliUtente']", "xpath:attributes"],
+        ["xpath=//form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1425b25f-a3e7-44b3-b345-0e098356a520",
+      "comment": "",
+      "command": "assertEditable",
+      "target": "id=dettagliUtente-email",
+      "targets": [],
+      "value": "email1@email.tld"
+    }, {
+      "id": "0258d880-11b5-421d-81bf-867ba7348a2a",
+      "comment": "",
+      "command": "assertEditable",
+      "target": "id=nome",
+      "targets": [],
+      "value": "nome1"
+    }, {
+      "id": "5c37b0b9-ca67-428e-8d19-02c69623969e",
+      "comment": "",
+      "command": "assertEditable",
+      "target": "id=cognome",
+      "targets": [],
+      "value": "cognome"
+    }, {
+      "id": "15d1e11d-c091-4c39-bac1-73ca304556b9",
+      "comment": "",
+      "command": "assertEditable",
+      "target": "id=dettagliUtente-citta",
+      "targets": [
+        ["id=dettagliUtente-citta", "id"],
+        ["name=citta", "name"],
+        ["css=#dettagliUtente-citta", "css:finder"],
+        ["xpath=//input[@id='dettagliUtente-citta']", "xpath:attributes"],
+        ["xpath=//input[5]", "xpath:position"]
+      ],
+      "value": "viaroma"
+    }, {
+      "id": "bdff1bfa-6000-49fb-9a00-82f816cea458",
+      "comment": "",
+      "command": "assertEditable",
+      "target": "id=dettagliUtente-via",
+      "targets": [
+        ["id=dettagliUtente-via", "id"],
+        ["name=via", "name"],
+        ["css=#dettagliUtente-via", "css:finder"],
+        ["xpath=//input[@id='dettagliUtente-via']", "xpath:attributes"],
+        ["xpath=//input[6]", "xpath:position"]
+      ],
+      "value": "via"
+    }, {
+      "id": "f4546ec1-034b-49b1-9089-d3703b04c33a",
+      "comment": "",
+      "command": "assertEditable",
+      "target": "id=dettagliUtente-provincia",
+      "targets": [
+        ["id=dettagliUtente-provincia", "id"],
+        ["name=provincia", "name"],
+        ["css=#dettagliUtente-provincia", "css:finder"],
+        ["xpath=//input[@id='dettagliUtente-provincia']", "xpath:attributes"],
+        ["xpath=//input[7]", "xpath:position"]
+      ],
+      "value": "pd"
+    }, {
+      "id": "f93f3da4-1fda-414d-b2ec-861974c80a92",
+      "comment": "",
+      "command": "assertEditable",
+      "target": "id=numeroCivico",
+      "targets": [
+        ["id=numeroCivico", "id"],
+        ["name=numeroCivico", "name"],
+        ["css=#numeroCivico", "css:finder"],
+        ["xpath=//input[@id='numeroCivico']", "xpath:attributes"],
+        ["xpath=//input[8]", "xpath:position"]
+      ],
+      "value": "12"
+    }, {
+      "id": "2963ee3e-2259-43fa-82b3-76e0e692ba9c",
+      "comment": "",
+      "command": "assertEditable",
+      "target": "id=CAP",
+      "targets": [
+        ["id=CAP", "id"],
+        ["name=CAP", "name"],
+        ["css=#CAP", "css:finder"],
+        ["xpath=//input[@id='CAP']", "xpath:attributes"],
+        ["xpath=//input[9]", "xpath:position"]
+      ],
+      "value": "12123"
+    }, {
+      "id": "bb003905-6fbf-4efb-8fd3-45c9dea15c51",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Torna Alla Home')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "dd739e0b-9caa-41e4-90c0-ad83d2fe7508",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//input[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[4]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b83de915-9614-445f-a0a6-29bb01002730",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=h5",
+      "targets": [
+        ["css=h5", "css:finder"],
+        ["xpath=//h5", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "cdf4540e-3fb1-45b9-90ca-d0dfde114d5a",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "03a12d2a-0daa-4c59-bcfc-6214778dfa83",
@@ -2076,7 +3577,35 @@
     "parallel": false,
     "timeout": 300,
     "tests": ["c72ef628-dfd6-49b2-bc80-7723fed153f3", "9ab1c464-4e6c-42a7-b2fd-88e9db1d6ca5", "e5198484-111f-4f43-a9e6-dd19b7bcf524", "902f10b3-30d6-438e-9200-33d78e1774a7", "9cc86970-4944-4c34-94d2-d8d2c0091ef1"]
+  }, {
+    "id": "17128c2d-6ad0-4d21-b8ef-f73a7e6e7c5b",
+    "name": "ModificaCliente",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["c4aebe2c-9385-4e70-aae5-78aced6ebc77", "a76ac65b-4dd5-45a0-a635-1d957ad6e606"]
+  }, {
+    "id": "650b9edd-a70e-4706-a2a0-68e5bbf1ba15",
+    "name": "ModificaDipendente",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }, {
+    "id": "1bed79cd-3e70-4866-bb58-542eeac1274d",
+    "name": "RegistrazioneCliente",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["8a324b42-20a2-456b-8bab-4bd0ac3692c3", "dc8548fa-cca1-47dd-852d-25cf8ef09cd9"]
+  }, {
+    "id": "017546b2-382b-480d-8af3-6ab618f257a5",
+    "name": "RegistrazioneDipendente",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["a3ec99a0-f666-49f1-bd10-638941581bbd"]
   }],
-  "urls": ["http://localhost:8080/", "http://localhost:8080/TecStore"],
+  "urls": ["http://localhost:8080/", "http://localhost:8080/TecStore", "https://tecstore.gdgn.xyz/TecStore", "https://tecstore.gdgn.xyz/TecStore"],
   "plugins": []
 }
