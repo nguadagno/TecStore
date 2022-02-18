@@ -15,6 +15,9 @@
 				accept="image/png, image/jpeg"> <input type="submit"
 				value="Carica foto" id="inserimentoImmagini-carica">
 		</form>
+		<form action="DettagliArticolo" method=post>
+			<input type=submit value="Dettagli Articolo">
+		</form>
 		<form action="paginainiziale.jsp">
 			<input type=submit value="Torna alla pagina iniziale"
 				id="inserimentoImmagini-torna">
