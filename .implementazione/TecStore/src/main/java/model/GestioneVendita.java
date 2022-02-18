@@ -139,6 +139,31 @@ public class GestioneVendita {
 			preparedStatement.setString(1, IDArticolo);
 			preparedStatement.execute();
 			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		return false;
+	}
+
+	public boolean rimozioneFoto(String IDArticolo, String IDFoto) throws SQLException {
+		String rimozioneFotoQuery = "DELETE FROM foto WHERE IDArticolo = ? AND ID = ?;";
+		Connection connection = null;
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
+			PreparedStatement preparedStatement = connection.prepareStatement(rimozioneFotoQuery);
+			preparedStatement.setString(1, IDArticolo);
+			preparedStatement.setString(2, IDFoto);
+			preparedStatement.execute();
+			return true;
 		} finally {
 			try {
 				if (connection != null) {
