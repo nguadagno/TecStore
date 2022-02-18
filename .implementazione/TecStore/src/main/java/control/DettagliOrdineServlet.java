@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import Bean.FotoBean;
-import Bean.OrdineBean;
+import bean.FotoBean;
+import bean.OrdineBean;
 import model.GestioneAccount;
 import model.GestioneOrdine;
 import model.GestioneVendita;

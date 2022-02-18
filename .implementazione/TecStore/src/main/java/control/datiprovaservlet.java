@@ -7,8 +7,8 @@ import java.io.InputStream;
 import java.nio.file.FileSystems;
 import java.util.ArrayList;
 
-import Bean.ArticoloBean;
-import Bean.OrdineBean;
+import bean.ArticoloBean;
+import bean.OrdineBean;
 import model.GestioneAccount;
 import model.GestioneAssistenza;
 import model.GestioneCarrello;

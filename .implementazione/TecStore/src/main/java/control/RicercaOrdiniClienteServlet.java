@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import Bean.ArticoloBean;
-import Bean.FotoBean;
-import Bean.OrdineBean;
+import bean.ArticoloBean;
+import bean.FotoBean;
+import bean.OrdineBean;
 import model.GestioneOrdine;
 import model.GestioneVendita;
 import jakarta.servlet.RequestDispatcher;

@@ -12,9 +12,9 @@ import java.util.Random;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.mindrot.jbcrypt.BCrypt;
-
-import Bean.UtenteBean;
+import bean.UtenteBean;
+import util.BCrypt;
+import util.DriverManagerConnectionPool;
 
 public class GestioneAccount {
 	String key = "9z$C&F)J@NcRfUjX";

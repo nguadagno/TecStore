@@ -2,7 +2,7 @@ package control;
 
 import java.io.IOException;
 
-import Bean.UtenteBean;
+import bean.UtenteBean;
 import model.*;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

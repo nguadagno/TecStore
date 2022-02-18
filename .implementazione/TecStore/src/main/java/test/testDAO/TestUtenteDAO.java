@@ -8,9 +8,8 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import Bean.UtenteBean;
-import model.DriverManagerConnectionPool;
 import model.GestioneAccount;
+import util.DriverManagerConnectionPool;
 
 import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.AfterAll;
@@ -19,6 +18,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.runners.MethodSorters;
+
+import bean.UtenteBean;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

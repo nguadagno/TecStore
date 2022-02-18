@@ -8,9 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Set;
 
-import Bean.ArticoloBean;
-import Bean.FotoBean;
-import Bean.OrdineBean;
+import bean.ArticoloBean;
+import bean.FotoBean;
+import bean.OrdineBean;
+import util.DriverManagerConnectionPool;
 
 public class GestioneVendita {
 

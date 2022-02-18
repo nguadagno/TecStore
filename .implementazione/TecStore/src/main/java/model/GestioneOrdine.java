@@ -7,9 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Set;
 
-import Bean.ArticoloBean;
-import Bean.OrdineBean;
-import Bean.UtenteBean;
+import bean.ArticoloBean;
+import bean.OrdineBean;
+import bean.UtenteBean;
+import util.DriverManagerConnectionPool;
 
 public class GestioneOrdine {
 	public boolean creazioneOrdine(UtenteBean utente) throws SQLException {

@@ -6,8 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import Bean.ArticoloBean;
-import Bean.UtenteBean;
+import bean.ArticoloBean;
+import bean.UtenteBean;
+import util.DriverManagerConnectionPool;
 
 public class GestioneCarrello {
 

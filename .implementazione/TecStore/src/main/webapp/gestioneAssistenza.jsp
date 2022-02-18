@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"
-	import="java.util.ArrayList, Bean.TicketBean, java.util.Enumeration"%>
+	import="java.util.ArrayList,bean.TicketBean, java.util.Enumeration"%>
 <!DOCTYPE html>
 <html>
 <head>

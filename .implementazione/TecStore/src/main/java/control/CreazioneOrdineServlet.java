@@ -3,7 +3,7 @@ package control;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import Bean.UtenteBean;
+import bean.UtenteBean;
 import model.GestioneAccount;
 import model.GestioneOrdine;
 import jakarta.servlet.RequestDispatcher;

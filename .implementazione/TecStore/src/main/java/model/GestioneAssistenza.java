@@ -4,9 +4,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Set;
 
-import Bean.MessaggioBean;
-import Bean.TicketBean;
-import Bean.UtenteBean;
+import bean.MessaggioBean;
+import bean.TicketBean;
+import bean.UtenteBean;
+import util.DriverManagerConnectionPool;
 
 public class GestioneAssistenza {
 	public ArrayList<TicketBean> elencoTicketCliente(UtenteBean c, int limit) throws SQLException {

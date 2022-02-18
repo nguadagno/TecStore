@@ -3,7 +3,7 @@ package control;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import Bean.ArticoloBean;
+import bean.ArticoloBean;
 import model.GestioneCarrello;
 import model.GestioneVendita;
 import jakarta.servlet.RequestDispatcher;

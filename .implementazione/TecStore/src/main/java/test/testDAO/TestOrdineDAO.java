@@ -13,14 +13,14 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.runners.MethodSorters;
 
-import Bean.ArticoloBean;
-import Bean.OrdineBean;
-import Bean.UtenteBean;
-import model.DriverManagerConnectionPool;
+import bean.ArticoloBean;
+import bean.OrdineBean;
+import bean.UtenteBean;
 import model.GestioneAccount;
 import model.GestioneCarrello;
 import model.GestioneOrdine;
 import model.GestioneVendita;
+import util.DriverManagerConnectionPool;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

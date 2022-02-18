@@ -16,12 +16,12 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.runners.MethodSorters;
 
-import Bean.MessaggioBean;
-import Bean.TicketBean;
-import Bean.UtenteBean;
-import model.DriverManagerConnectionPool;
+import bean.MessaggioBean;
+import bean.TicketBean;
+import bean.UtenteBean;
 import model.GestioneAccount;
 import model.GestioneAssistenza;
+import util.DriverManagerConnectionPool;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

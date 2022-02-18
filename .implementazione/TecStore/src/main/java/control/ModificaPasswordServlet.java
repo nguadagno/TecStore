@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
-import Bean.UtenteBean;
+import bean.UtenteBean;
 import model.GestioneAccount;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

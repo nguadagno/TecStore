@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import Bean.UtenteBean;
+import bean.UtenteBean;
 import model.GestioneAccount;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

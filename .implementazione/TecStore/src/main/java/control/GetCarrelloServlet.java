@@ -3,9 +3,10 @@ package control;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Bean.ArticoloBean;
-import Bean.FotoBean;
-import Bean.UtenteBean;
+
+import bean.ArticoloBean;
+import bean.FotoBean;
+import bean.UtenteBean;
 import model.GestioneCarrello;
 import model.GestioneVendita;
 import jakarta.servlet.RequestDispatcher;

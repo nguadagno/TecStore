@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import Bean.TicketBean;
+import bean.TicketBean;
 import model.GestioneAssistenza;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
