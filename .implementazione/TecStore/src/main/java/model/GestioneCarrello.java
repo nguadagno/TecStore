@@ -187,7 +187,7 @@ public class GestioneCarrello {
 		String aggiornamentoCarrelloQuery = "UPDATE carrello SET quantita = ? WHERE IDCliente = ? AND IDArticolo = ?";
 		String getQuantitaCarrelloQuery = "SELECT quantita FROM carrello WHERE IDCliente = ? AND IDArticolo = ?;";
 
-		int quantitaCarrelloOld = 0, quantitaArticoliOld = 0;
+		int quantitaCarrelloOld = 0;
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");

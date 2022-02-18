@@ -3,10 +3,6 @@ package control;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.FileSystems;
-import java.util.ArrayList;
-
 import bean.ArticoloBean;
 import bean.OrdineBean;
 import model.GestioneAccount;
@@ -71,11 +67,16 @@ public class datiprovaservlet extends HttpServlet {
 			ArticoloBean a3 = gestioneVendita.ricercaArticolo("art30", 10).get(0);
 			ArticoloBean a4 = gestioneVendita.ricercaArticolo("art40", 10).get(0);
 
-			gestioneVendita.inserimentoFoto(a1.getID(), new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F1.png")));
-			gestioneVendita.inserimentoFoto(a1.getID(), new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F2.png")));
-			gestioneVendita.inserimentoFoto(a1.getID(), new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F3.png")));
-			gestioneVendita.inserimentoFoto(a2.getID(), new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F2.png")));
-			gestioneVendita.inserimentoFoto(a3.getID(), new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F3.png")));
+			gestioneVendita.inserimentoFoto(a1.getID(),
+					new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F1.png")));
+			gestioneVendita.inserimentoFoto(a1.getID(),
+					new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F2.png")));
+			gestioneVendita.inserimentoFoto(a1.getID(),
+					new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F3.png")));
+			gestioneVendita.inserimentoFoto(a2.getID(),
+					new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F2.png")));
+			gestioneVendita.inserimentoFoto(a3.getID(),
+					new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F3.png")));
 
 			gestioneCarrello.aggiuntaArticolo("KXBCFY80S51D296C", a1.getID(), 2);
 			gestioneCarrello.aggiuntaArticolo("KXBCFY80S51D296C", a2.getID(), 4);

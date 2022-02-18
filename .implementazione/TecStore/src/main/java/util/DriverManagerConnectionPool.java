@@ -68,6 +68,7 @@ public class DriverManagerConnectionPool {
 	// Reference:
 	// https://stackoverflow.com/questions/1497569/how-to-execute-sql-script-file-using-jdbc
 	public static void importSQL(Connection conn, InputStream in) throws SQLException {
+		@SuppressWarnings("resource")
 		Scanner s = new Scanner(in);
 		s.useDelimiter("(;(\r)?\n)|(--\n)");
 		Statement st = null;

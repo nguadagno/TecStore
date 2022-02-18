@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import bean.ArticoloBean;
 import bean.FotoBean;
-import bean.UtenteBean;
 import model.GestioneCarrello;
 import model.GestioneVendita;
 import jakarta.servlet.RequestDispatcher;
@@ -51,6 +50,7 @@ public class GetCarrelloServlet extends HttpServlet {
 		session.setAttribute("operazione", "GetCarrello");
 
 		try {
+			@SuppressWarnings("static-access")
 			ArrayList<ArticoloBean> carrello = model.GetCarrello(session.getAttribute("CF").toString());
 			ArrayList<FotoBean> foto = model1.getFoto(carrello);
 

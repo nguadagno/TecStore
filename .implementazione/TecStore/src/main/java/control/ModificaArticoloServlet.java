@@ -55,7 +55,7 @@ public class ModificaArticoloServlet extends HttpServlet {
 		float prezzo = request.getParameter("prezzo") == null ? -1 : Float.parseFloat(request.getParameter("prezzo"));
 		Boolean rimborsabile = request.getParameter("rimborsabile") == null ? null
 				: Boolean.parseBoolean(request.getParameter("rimborsabile"));
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "unused" })
 		ArrayList<FotoBean> foto = (ArrayList<FotoBean>) request.getAttribute("foto");
 
 		if (IDArticolo == null || nome == null || descrizione == null || IDVenditore == null || rimborsabile == null
