@@ -29,7 +29,7 @@ return;
 	<div align=center>
 		<%
 		ArrayList<UtenteBean> elenco = (ArrayList<UtenteBean>) session.getAttribute("risultati");
-		if (elenco == null) {
+		if (elenco == null || elenco.size() == 0) {
 		%>
 		<h3>Nessun Dipendente</h3>
 		<%

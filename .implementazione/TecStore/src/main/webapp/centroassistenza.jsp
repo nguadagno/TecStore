@@ -36,7 +36,7 @@ return;
 	</div>
 
 	<%
-	if (elenco == null) {
+	if (elenco == null || elenco.size() == 0) {
 	%>
 	<h3>Non ci sono Ticket aperti...</h3>
 	<h2>Puoi creare un ticket cliccando su "Nuovo Ticket"</h2>
