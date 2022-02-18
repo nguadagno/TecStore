@@ -77,7 +77,7 @@ class TestCarrelloDAO {
 			newQuantita = gestioneVendita.dettagliArticolo(articolo.getID()).getQuantita();
 		}
 		if (status)
-			assertEquals(newQuantita - oldQuantita, 2);
+			assertEquals(-(newQuantita - oldQuantita), 2);
 		else
 			assertEquals(false, true);
 	}
