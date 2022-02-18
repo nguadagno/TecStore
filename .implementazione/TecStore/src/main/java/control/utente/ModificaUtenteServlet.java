@@ -44,16 +44,17 @@ public class ModificaUtenteServlet extends HttpServlet {
 		session.setAttribute("operazione", "modificaUtente");
 
 		try {
-			UtenteBean oldUtente = model.dettagliUtente(session.getAttribute("CF").toString());
+			UtenteBean oldUtente = model.dettagliUtente(request.getParameter("CF"));
 			String password = "";
 			if (session.getAttribute("tipologia") != null && session.getAttribute("tipologia").toString().equals("5"))
 				password = model.generatePassword(15);
 			else if (session.getAttribute("tipologia") != null
 					&& session.getAttribute("tipologia").toString().equals("1")
-					&& request.getParameter("numeroCarta") == null)
+					&& request.getParameter("numeroCarta") == null && request.getParameter("password") != null)
 				password = request.getParameter("password");
 			else
 				password = oldUtente.getPassword();
+			System.out.println(password);
 
 			int tipologia = 1;
 

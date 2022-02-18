@@ -70,5 +70,12 @@ return;
 			%>
 		</table>
 	</div>
+	<br>
+	<br>
+	<hr>
+	<div align="left">
+		<a href="paginainiziale.jsp" id="gestionePersonale-torna"><button>Torna
+				Alla Home</button></a>
+	</div>
 </body>
 </html>

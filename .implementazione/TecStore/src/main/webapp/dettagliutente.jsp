@@ -16,6 +16,9 @@
 	
 	
 	
+	
+	
+	
 var password = document.getElementById("password"), confermapassword = document.getElementById("confermapassword");
 
 function validatePassword(){
@@ -28,6 +31,9 @@ function validatePassword(){
 
 password.onchange = validatePassword;
 confermapassword.onkeyup = validatePassword;
+
+
+
 
 
 
@@ -103,10 +109,10 @@ return;
 			<h3>
 				<i>Dati Anagrafici</i>
 			</h3>
-			<label for="CF">Codice Fiscale</label><br> <input type="text"
-				name="CF" id="CF" maxlength="16" required value=<%=utente.getCF()%>>
-			<br> <br> <label for="nome">Nome</label><br> <input
-				type="text" name="nome" id="nome" id="dettagliUtente-nome" required
+			<br> <input type="hidden" name="CF" id="CF" maxlength="16"
+				required value=<%=utente.getCF()%>> <br> <br> <label
+				for="nome">Nome</label><br> <input type="text" name="nome"
+				id="nome" id="dettagliUtente-nome" required
 				value=<%=utente.getNome()%>> <br> <br> <label
 				for="cognome">Cognome</label><br> <input type="text"
 				name="cognome" id="cognome" id="dettagliUtente-cognome" required
@@ -155,6 +161,9 @@ return;
 			<BR> <BR> <input type=submit value="Conferma modifica"
 				id="dettagliUtente-confermaModifica">
 		</form>
+	</div>
+	<div align="Left">
+		<a href="index.jsp"><button>Torna Alla Home</button></a>
 	</div>
 
 </body>
