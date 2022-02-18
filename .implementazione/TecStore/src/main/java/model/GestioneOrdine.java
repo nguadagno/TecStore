@@ -249,30 +249,7 @@ public class GestioneOrdine {
 	}
 
 	public String getStatoOrdine(String ID) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		String cambiaStatoQuery = "SELECT stato FROM ordine WHERE ID = ?;";
-
-		try {
-			connection = DriverManagerConnectionPool.getConnection("magazziniere", "magazziniere");
-
-			preparedStatement = connection.prepareStatement(cambiaStatoQuery);
-			preparedStatement.setString(1, ID);
-			ResultSet rs = preparedStatement.executeQuery();
-			if (rs.next())
-				return rs.getString("stato");
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (connection != null) {
-					connection.close();
-				}
-			} finally {
-				DriverManagerConnectionPool.releaseConnection(connection);
-			}
-		}
-		return "";
+		return dettagliOrdineByID(ID).getStato();
 	}
 
 	public boolean setCodiceTracciamento(String IDOrdine, String codiceTracking) throws SQLException {
