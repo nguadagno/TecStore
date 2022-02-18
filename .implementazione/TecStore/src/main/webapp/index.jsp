@@ -60,8 +60,10 @@
 				<%=((UtenteBean) session.getAttribute("utente")).getCognome()%> <BR>
 			</i>
 		<div>
-			<a href="areaVenditori.jsp" id="index-areaVenditori"><button>Area
-					Venditori</button></a>
+			<form action="RicercaVendita" id="index-areaVenditori" method="post">
+				<button>Area Venditori</button>
+			</form>
+
 			<form action="DettagliUtente" method="post">
 				<input type="submit" value="Dettagli Utente"
 					id="index-dettagliUtente">

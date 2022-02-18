@@ -19,6 +19,7 @@
 	<%
 	ArrayList<ArticoloBean> risultati = (ArrayList<ArticoloBean>) session.getAttribute("risultati");
 	ArrayList<FotoBean> foto = (ArrayList<FotoBean>) session.getAttribute("foto");
+
 	if (risultati == null || foto == null || risultati.size() == 0) {
 	%>
 	<h3 id="esito">Nessun Articolo Trovato!</h3>

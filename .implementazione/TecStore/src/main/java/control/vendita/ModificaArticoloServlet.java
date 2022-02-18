@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import bean.ArticoloBean;
 import bean.FotoBean;
 import model.GestioneVendita;
 import jakarta.servlet.RequestDispatcher;
@@ -28,6 +29,7 @@ public class ModificaArticoloServlet extends HttpServlet {
 			throws ServletException, IOException {
 	}
 
+	@SuppressWarnings("unused")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		GestioneVendita model = new GestioneVendita();
@@ -46,16 +48,32 @@ public class ModificaArticoloServlet extends HttpServlet {
 
 		session.setAttribute("operazione", "modificaArticolo");
 
-		String IDArticolo = request.getParameter("IDArticolo");
-		String nome = request.getParameter("nome");
-		String descrizione = request.getParameter("descrizione");
-		String IDVenditore = session.getAttribute("CF") == null ? null : session.getAttribute("CF").toString();
-		int quantita = request.getParameter("quantita") == null ? -1
-				: Integer.parseInt(request.getParameter("quantita"));
-		float prezzo = request.getParameter("prezzo") == null ? -1 : Float.parseFloat(request.getParameter("prezzo"));
-		Boolean rimborsabile = request.getParameter("rimborsabile") == null ? null
-				: Boolean.parseBoolean(request.getParameter("rimborsabile"));
-		@SuppressWarnings({ "unchecked", "unused" })
+		String IDArticolo = session.getAttribute("dettagliArticolo") == null ? request.getParameter("IDArticolo")
+				: ((ArticoloBean) session.getAttribute("dettagliArticolo")).getID();
+
+		String nome = session.getAttribute("dettagliArticolo") == null ? request.getParameter("nome")
+				: ((ArticoloBean) session.getAttribute("dettagliArticolo")).getNome();
+
+		String descrizione = session.getAttribute("dettagliArticolo") == null ? request.getParameter("descrizione")
+				: ((ArticoloBean) session.getAttribute("dettagliArticolo")).getDescrizione();
+
+		String IDVenditore = session.getAttribute("dettagliArticolo") == null ? request.getParameter("IDVenditore")
+				: ((ArticoloBean) session.getAttribute("dettagliArticolo")).getIDVenditore();
+
+		int quantita = session.getAttribute("dettagliArticolo") == null
+				? request.getParameter("quantita") == null ? -1 : Integer.parseInt(request.getParameter("quantita"))
+				: ((ArticoloBean) session.getAttribute("dettagliArticolo")).getQuantita();
+
+		float prezzo = session.getAttribute("dettagliArticolo") == null
+				? request.getParameter("quantitprezzoa") == null ? -1 : Integer.parseInt(request.getParameter("prezzo"))
+				: ((ArticoloBean) session.getAttribute("dettagliArticolo")).getPrezzo();
+
+		Boolean rimborsabile = session.getAttribute("dettagliArticolo") == null
+				? request.getParameter("rimborsabile") == null ? null
+						: Boolean.parseBoolean(request.getParameter("rimborsabile"))
+				: ((ArticoloBean) session.getAttribute("dettagliArticolo")).isRimborsabile();
+
+		@SuppressWarnings({ "unchecked" })
 		ArrayList<FotoBean> foto = (ArrayList<FotoBean>) request.getAttribute("foto");
 
 		if (IDArticolo == null || nome == null || descrizione == null || IDVenditore == null || rimborsabile == null
@@ -68,28 +86,40 @@ public class ModificaArticoloServlet extends HttpServlet {
 			return;
 		}
 
-		try {
-			if (model.modificaArticolo(IDArticolo, nome, descrizione, IDVenditore, quantita, prezzo, rimborsabile)
-			// && model.sovrascritturaFoto(IDArticolo, foto)
-			) {
-				session.setAttribute("successo", "modificaArticolo");
-				redirect = "/successo.jsp";
-			} else {
-				session.setAttribute("errore", "modificaArticolo");
-				redirect = "/errore.jsp";
+		if (IDArticolo != null) {
+			try {
+				session.setAttribute("dettagliArticolo", model.dettagliArticolo(IDArticolo));
+				session.setAttribute("fotoArticolo", model.getAllFoto(IDArticolo));
+				redirect = "/modificaArticolo.jsp";
+				dd = request.getRequestDispatcher(redirect);
+				dd.forward(request, response);
+				return;
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
+		} else {
+			try {
+				if (model.modificaArticolo(IDArticolo, nome, descrizione, IDVenditore, quantita, prezzo,
+						rimborsabile)) {
+					session.setAttribute("successo", "modificaArticolo");
+					redirect = "/successo.jsp";
+				} else {
+					session.setAttribute("errore", "modificaArticolo");
+					redirect = "/errore.jsp";
+				}
 
-		} catch (SQLException e) {
-			response.setStatus(500);
-			session.setAttribute("errore", "erroreSQL");
-			redirect = "/errore.jsp";
+			} catch (SQLException e) {
+				response.setStatus(500);
+				session.setAttribute("errore", "erroreSQL");
+				redirect = "/errore.jsp";
+				dd = request.getRequestDispatcher(redirect);
+				dd.forward(request, response);
+				e.printStackTrace();
+				return;
+			}
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
-			e.printStackTrace();
 			return;
 		}
-		dd = request.getRequestDispatcher(redirect);
-		dd.forward(request, response);
-		return;
 	}
 }

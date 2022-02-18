@@ -44,16 +44,19 @@ public class RicercaVenditaServlet extends HttpServlet {
 			return;
 		}
 
-		session.setAttribute("operazione", "ricercaArticolo");
+		session.setAttribute("operazione", "ricercaVendita");
 		try {
-
 			int limit = 10;
 			if (request.getAttribute("limit") != null)
 				limit = Integer.parseInt(request.getParameter("limit"));
+
+			String nome = "";
+			if (request.getParameter("nome") != null)
+				nome = request.getParameter("nome");
+
 			ArrayList<ArticoloBean> risultati;
 			if (session.getAttribute("tipologia").toString().equals("1"))
-				risultati = model.elencoVenditeCF(session.getAttribute("CF").toString(), request.getParameter("nome"),
-						limit);
+				risultati = model.elencoVenditeCF(session.getAttribute("CF").toString(), nome, limit);
 			else
 				risultati = model.elencoVenditeTipologia(session.getAttribute("tipologia").toString(),
 						request.getParameter("nome"), limit);
@@ -63,7 +66,7 @@ public class RicercaVenditaServlet extends HttpServlet {
 			session.setAttribute("risultati", risultati);
 			session.setAttribute("foto", foto);
 
-			redirect = "/risultatiRicerca.jsp";
+			redirect = "/areaVenditori.jsp";
 
 		} catch (SQLException e) {
 			response.setStatus(500);
@@ -71,7 +74,6 @@ public class RicercaVenditaServlet extends HttpServlet {
 			redirect = "/errore.jsp";
 			e.printStackTrace();
 		}
-
 		dd = request.getRequestDispatcher(redirect);
 		dd.forward(request, response);
 		return;

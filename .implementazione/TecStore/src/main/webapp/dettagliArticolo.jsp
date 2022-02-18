@@ -105,6 +105,10 @@ return;
 					<a href="img?id=<%=f.getID()%>" data-lightbox="photos"><img
 						style="max-width: 50px" class="img-fluid"
 						src="img?id=<%=f.getID()%>"></a>
+
+					<form action="img?del=<%=f.getID()%>" method=get>
+						<input type=submit value="Rimuovi immagine">
+					</form>
 				</div>
 				<%
 				}
@@ -113,6 +117,13 @@ return;
 		</div>
 	</div>
 
+	<form action="img?del=all" method=get>
+		<input type=submit value="Rimuovi tutte le immagini">
+	</form>
+
+	<form action="inserimentoImmagini.jsp" method=get>
+		<input type=submit value="Inserisci nuove immagini">
+	</form>
 
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -147,27 +158,17 @@ return;
 	</div>
 	<%
 	if (tipologia == 1 || tipologia == 4) {
-		if ((session.getAttribute("CF").toString().equals(request.getParameter("IDVenditore"))) || tipologia == 4) {
+		if ((session.getAttribute("CF").toString()
+		.equals(((ArticoloBean) session.getAttribute("dettagliArticolo")).getIDVenditore())) || tipologia == 4) {
 	%>
 	<div align="right">
-		<form action="modificaArticolo.jsp" method="post">
+		<form action="ModificaArticolo" method="post">
 			<input type="hidden" name="IDArticolo" value="<%=risultato.getID()%>">
-			<input type="hidden" name="nome" value="<%=risultato.getNome()%>">
-			<input type="hidden" name="descrizione"
-				value="<%=risultato.getDescrizione()%>"> <input
-				type="hidden" name="IDVenditore"
-				value="<%=risultato.getIDVenditore()%>"> <input
-				type="hidden" name="quantita" value="<%=risultato.getQuantita()%>">
-			<input type="hidden" name="prezzo" value="<%=risultato.getPrezzo()%>">
-			<input type="hidden" name="rimborsabile"
-				value="<%=risultato.isRimborsabile()%>"> <input
-				type="submit" value="Modifica" id="dettagliArticolo-modifica">
+			<input type="submit" value="Modifica" id="dettagliArticolo-modifica">
 		</form>
 	</div>
 	<%
-	}
-
-	else {
+	} else {
 	%>
 	<div align="right">
 		<form action="AggiuntaAlCarrello" method="post">

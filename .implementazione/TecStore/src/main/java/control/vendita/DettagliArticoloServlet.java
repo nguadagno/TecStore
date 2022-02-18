@@ -49,11 +49,14 @@ public class DettagliArticoloServlet extends HttpServlet {
 		session.setAttribute("operazione", "dettagliArticolo");
 
 		try {
-			ArticoloBean articolo = model.dettagliArticolo(request.getParameter("IDArticolo"));
-			ArrayList<FotoBean> foto = model.getAllFoto(request.getParameter("IDArticolo"));
+			ArticoloBean articolo;
+			if (request.getParameter("IDArticolo") != null)
+				articolo = model.dettagliArticolo(request.getParameter("IDArticolo"));
+			else
+				articolo = (ArticoloBean) session.getAttribute("dettagliArticolo");
 
 			session.setAttribute("dettagliArticolo", articolo);
-			session.setAttribute("fotoArticolo", foto);
+			session.setAttribute("fotoArticolo", model.getAllFoto(request.getParameter("IDArticolo")));
 
 			if (session.getAttribute("tipologia") != null && session.getAttribute("tipologia").toString().equals("2"))
 				model.cambiaStato(articolo.getID(), "InElaborazione");
