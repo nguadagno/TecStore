@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `tecstore`.`utente` (
   `CF` CHAR(16) NOT NULL,
   `Nome` VARCHAR(45) NOT NULL,
   `Cognome` VARCHAR(45) NOT NULL,
-  `Email` VARCHAR(45) NOT NULL,
+  `Email` VARCHAR(45) NOT NULL UNIQUE,
   `Password` VARCHAR(60) NOT NULL,
   `Via` VARCHAR(45) NOT NULL,
   `NumeroCivico` VARCHAR(8) NOT NULL,
