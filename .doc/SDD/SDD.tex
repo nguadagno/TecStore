@@ -129,7 +129,7 @@ I motivi per la scelta di un'architettura client/server sono principalmente:
 \item Riusabilità: il sistema è facilmente riadattabile ad altre realtà di e-commerce.
 \item Tolleranza agli errori: il sistema prevede ridondanze sufficienti per restare operativo anche in caso di criticità di uno o più componenti.
 \item Riutilizzo di componenti: il sistema riutilizza più componenti in più punti per semplificare lo sviluppo.
-\item Basso costo: il sistema punta a ridurre i costi di sviluppo, manutenzione e gestione utilizzando metodologie di sviluppo e hardware minimale, pur rispettando i requisiti di tolleranza agli errori e affidabilità. 
+\item Basso costo: il sistema punta a ridurre i costi di sviluppo, manutenzione e gestione utilizzando metodologie di sviluppo di facile espandibilità e requisiti hardware minimali, pur rispettando i requisiti di tolleranza agli errori e affidabilità. 
 \end{itemize}
 
 \newpage
@@ -259,14 +259,13 @@ ticket(\underline{ID}, IDCliente(cliente), tipologia, stato)
 messaggio(IDTicket(ticket), CF(cliente), contenuto, data)
 
 \noindent
-ordine(ID, IDArticolo(articolo), quantità, data, stato, codiceTracciamento)
+ordine(\underline{ID}, IDArticolo(articolo), quantità, data, stato, codiceTracciamento)
 
 \noindent
-articolo(ID, nome, descrizione, IDVenditore(utente), quantita, prezzo, stato, IDCentralinista(utente), data, rimborsabile)
+articolo(\underline{ID}, nome, descrizione, IDVenditore(utente), quantita, prezzo, stato, IDCentralinista(utente), data, rimborsabile)
 
 \noindent
-foto(ID, IDArticolo(articolo), path) \\
-
+foto(\underline{ID}, IDArticolo(articolo), byte[]) \\
 
 \noindent
 Durante l'analisi si è scelto di usare un DBMS relazionale basato su MySQL per svariati motivi:
@@ -280,26 +279,21 @@ Durante l'analisi si è scelto di usare un DBMS relazionale basato su MySQL per 
 \item Affidabilità dei dati, permessa dalla facilità di backup e ripristino dei dati.
 \end{itemize}
 
-% TODO ristrutturazione
-% articolo/vendita
-% separazione utenti
-% foto/articolo come file e non nel db e non come lista di path
-
 \newpage
 
 \section{Boundary Condition}
 \subsection{Avvio del sistema}
 Per l'avvio del sistema è necessario che almeno un'istanza del webserver e del database siano attive.
-All'avvio del sistema operativo i due servizi devono essere quindi avviati automaticamente senza intervento manuale.
+All'avvio del sistema operativo del server i due servizi devono essere quindi avviati automaticamente senza intervento manuale.
 
 \subsection{Spegnimento del sistema}
-Nell'eventualità in cui sia richiesto che uno dei server vada offline per qualsiasi motivo, deve essere previsto che almeno un'altra istanza del DBMS e del webserver siano attive. Se non lo sono, l'intero sistema può andare offline per un tempo indefinito.
+Nell'eventualità in cui sia richiesto che uno dei server vada offline per manutenzione o per qualsiasi motivo, deve essere previsto che almeno un'altra istanza del DBMS e del webserver siano attive e disponibili con una copia aggiornata del database. Se ciò non accade, l'intero sistema può andare \emph{offline} per un tempo indefinito.
 
 \subsection{Fallimenti del sistema}
 Ci sono più scenari in cui il sistema può subire un fallimento. Partendo da quelli non critici:
 \begin{enumerate}
-\item Fallimento o spegnimento di uno dei server, che può essere causato dalla perdita di connessione ad internet, blackout o un guasto hardware. Se le ridondanze sono attive, riduce le prestazioni del sistema se ci sono più utenti, ma non è un errore critico.
-\item Fallimento, spegnimento o perdita di connessione ad internet del dispositivo client, che deve essere correttamente gestito, quindi evitando, ad esempio, ordini duplicati. Il sistema deve mantenere le informazioni informazioni inserite dall'utente fino a quel momento.
+\item Fallimento o spegnimento di uno dei server, che può essere causato dalla perdita di connessione ad internet, blackout o un guasto hardware. Se le ridondanze sono attive, in base al tipo di guasto, possono ridursi le prestazioni del sistema o, in casi critici, il sistema può andare totalmente offline.
+\item Fallimento, spegnimento o perdita di connessione ad internet del dispositivo client, che deve essere correttamente gestito, quindi evitando, ad esempio, ordini duplicati o inserimento di dati parziali nel sistema. Il sistema deve mantenere le informazioni informazioni inserite dall'utente fino a quel momento.
 \end{enumerate}
 
 Tra i fallimenti critici ci sono:
@@ -358,135 +352,5 @@ Tra i fallimenti critici ci sono:
 \item Conferma vendita
 \item Elenco vendite
 \end{itemize}
-
-\subsection{Casi d'uso}
-% TODO rivedere
-\subsubsection{Configurazione di un nuovo sistema}
-\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
-\hline
-\textbf{ID} & UC1 NuovoServer \\
-\hline
-\textbf{Descrizione} & Un sysadmin aggiunge un nuovo server.  \\
-\hline
-\textbf{Partecipanti} & Sysadmin \\
-\hline
-\textbf{Condizione d'ingresso} & Un sysadmin ha accesso ad un nuovo server. \\
-\hline
-\textbf{Flusso di eventi} &
-\begin{minipage}{12cm}
-\begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Sysadmin} & \textbf{Sistema} \\
-Dà i comandi per installare Java, Tomcat e MariaDB. \\
-	& Installa i software richiesti. \\
-Utilizza lo script ad-hoc per la configurazione di un nuovo server. \\
-	& Scarica e configura i sorgenti nelle cartelle opportune e imposta i servizi per essere avviati automaticamente all'avvio del sistema operativo. \\
-Aggiunge l'indirizzo IP del nuovo server al load balancer. \\
-\end{tabular}
-\end{minipage} \\
-\hline
-\textbf{Condizione d'uscita} & Il nuovo server è operativo e risponde alle richieste degli utenti. \\
-\hline
-\end {tabular}
-\\
-
-\subsubsection{Avvio di un server}
-\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
-\hline
-\textbf{ID} & UC2 AvvioServer \\
-\hline
-\textbf{Descrizione} & Un sysadmin avvia un server.  \\
-\hline
-\textbf{Partecipanti} & Sysadmin \\
-\hline
-\textbf{Condizione d'ingresso} & Un sysadmin accede al server. \\
-\hline
-\textbf{Flusso di eventi} &
-\begin{minipage}{12cm}
-\begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Sysadmin} & \textbf{Sistema} \\
-Avvia il server attraverso il tasto dedicato. \\
-	& Avvia il sistema operativo, sincronizza il database con gli altri nodi e avvia i servizi necessari. \\
-\end{tabular}
-\end{minipage} \\
-\hline
-\textbf{Condizione d'uscita} & Il nuovo server è operativo e risponde alle richieste degli utenti. \\
-\hline
-\end {tabular}
-\\
-
-\subsubsection{Avvio del sistema}
-\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
-\hline
-\textbf{ID} & UC3 AvvioSistema \\
-\hline
-\textbf{Descrizione} & Un sysadmin avvia il sistema.  \\
-\hline
-\textbf{Partecipanti} & Sysadmin \\
-\hline
-\textbf{Condizione d'ingresso} & Un sysadmin accede a uno o più server. \\
-\hline
-\textbf{Flusso di eventi} &
-\begin{minipage}{12cm}
-\begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Sysadmin} & \textbf{Sistema} \\
-Avvia uno o più server attraverso il tasto dedicato. \\
-	& Avvia il sistema operativo, sincronizza il database con gli altri nodi e avvia i servizi necessari. \\
-\end{tabular}
-\end{minipage} \\
-\hline
-\textbf{Condizione d'uscita} & Il sistema è operativo e risponde alle richieste degli utenti. \\
-\hline
-\end {tabular}
-\\
-
-\subsubsection{Spegnimento di un server}
-\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
-\hline
-\textbf{ID} & UC4 StopServer \\
-\hline
-\textbf{Descrizione} & Un sysadmin spegne un server.  \\
-\hline
-\textbf{Partecipanti} & Sysadmin \\
-\hline
-\textbf{Condizione d'ingresso} & Un sysadmin accede al server. \\
-\hline
-\textbf{Flusso di eventi} &
-\begin{minipage}{12cm}
-\begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Sysadmin} & \textbf{Sistema} \\
-Spegne il server attraverso il tasto dedicato. \\
-	& Salva le informazioni temporanee su disco, disattiva i servizi e il sistema operativo. \\
-\end{tabular}
-\end{minipage} \\
-\hline
-\textbf{Condizione d'uscita} & Il server è offline. \\
-\hline
-\end {tabular}
-\\
-
-\subsubsection{Spegnimento del sistema}
-\begin{tabular}{|>{\columncolor[gray]{0.8}}c|p{12cm}|}
-\hline
-\textbf{ID} & UC5 StopSistema \\
-\hline
-\textbf{Descrizione} & Un sysadmin spegne il sistema.  \\
-\hline
-\textbf{Partecipanti} & Sysadmin \\
-\hline
-\textbf{Condizione d'ingresso} & Un sysadmin accede al server. \\
-\hline
-\textbf{Flusso di eventi} &
-\begin{minipage}{12cm}
-\begin{tabular}{p{5.5cm} p{5.5cm}}
-\textbf{Sysadmin} & \textbf{Sistema} \\
-Spegne tutti i server attraverso il tasto dedicato. \\
-	& Salva le informazioni temporanee su disco, disattiva i servizi e il sistema operativo. \\
-\end{tabular}
-\end{minipage} \\
-\hline
-\textbf{Condizione d'uscita} & Il sistema è offline. \\
-\hline
-\end {tabular}
-\\
 
 \end{document}
