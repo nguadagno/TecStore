@@ -48,8 +48,11 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 
 		UtenteBean utente = new UtenteBean(request.getParameter("CF"), request.getParameter("nome"),
 				request.getParameter("cognome"), request.getParameter("email"), password, request.getParameter("via"),
-				Integer.parseInt(request.getParameter("numerocivico")), request.getParameter("citta"),
-				request.getParameter("provincia"), Integer.parseInt(request.getParameter("CAP")), tipologia, "");
+				request.getParameter("numerocivico") != null ? Integer.parseInt(request.getParameter("numerocivico"))
+						: null,
+				request.getParameter("citta"), request.getParameter("provincia"),
+				request.getParameter("CAP") != null ? Integer.parseInt(request.getParameter("CAP")) : null, tipologia,
+				"");
 
 		session.setAttribute("operazione", "registrazioneUtente");
 		try {
