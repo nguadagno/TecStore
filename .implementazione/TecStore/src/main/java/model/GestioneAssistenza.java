@@ -83,16 +83,22 @@ public class GestioneAssistenza {
 	public boolean creazioneTicket(String CF, String tipologia, String messaggio) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		
 
-		String insertTicketQuery = "INSERT INTO ticket (IDCliente, Tipologia, Stato) VALUES (?,?,?);";
-		String getIDTicketQuery = "SELECT IDTicket FROM ticket WHERE IDCliente = ? AND Tipologia = ? LIMIT 1;";
+		final Set<String> tipologieTicket = Set.of("Amministrativo", "Ordini", "Spedizione", "Rimborso", "Profilo" );
+		
+		if (messaggio == null || messaggio.length() < 15 || messaggio.length() > 1024 || !tipologieTicket.contains(tipologia)) {
+			return false;
+		}
+
+		String insertTicketQuery = "INSERT INTO ticket (IDCliente, Tipologia) VALUES (?,?);";
+		String getIDTicketQuery = "SELECT IDTicket FROM ticket WHERE IDCliente = ? AND Tipologia = ? ORDER BY DataCreazione DESC LIMIT 1;";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
 			preparedStatement = connection.prepareStatement(insertTicketQuery);
 			preparedStatement.setString(1, CF);
 			preparedStatement.setString(2, tipologia);
-			preparedStatement.setString(3, "InAttesa");
 
 			preparedStatement.execute();
 
@@ -102,12 +108,13 @@ public class GestioneAssistenza {
 
 			ResultSet rs = preparedStatement.executeQuery();
 
-			connection.commit();
-
-			if (rs.next())
+			if (rs.next()) {
+				connection.commit();
 				return rispostaTicket(rs.getString("IDTicket"), CF, messaggio);
-			else
+			} else {
+				connection.rollback();
 				return false;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

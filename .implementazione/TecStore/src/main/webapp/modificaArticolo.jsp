@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="java.util.*,bean.*" session="true"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" import="java.util.*,bean.*" session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Modifica Articolo</title>
 <style>
 .photo-gallery {
@@ -48,7 +48,7 @@
 	padding-bottom: 30px;
 }
 </style>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
@@ -121,7 +121,7 @@ return;
 						type="text" id="modificaArticolo-descrizione" name="descrizione"
 						value="<%=risultato.getDescrizione()%>"
 						style="width: 300px; height: 200px;" required> <br> <br>
-					<label><b>Quantità</b></label> <br> <input type="number"
+					<label><b>QuantitÃ </b></label> <br> <input type="number"
 						id="modificaArticolo-quantita" name="quantita"
 						value="<%=risultato.getQuantita()%>" required> <br> <br>
 					<label><b>Prezzo</b></label> <br> <input type="number"
