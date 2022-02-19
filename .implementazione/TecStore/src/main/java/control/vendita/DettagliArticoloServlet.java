@@ -49,12 +49,7 @@ public class DettagliArticoloServlet extends HttpServlet {
 		session.setAttribute("operazione", "dettagliArticolo");
 
 		try {
-			ArticoloBean articolo;
-			if (request.getParameter("IDArticolo") != null)
-				articolo = model.dettagliArticolo(request.getParameter("IDArticolo"));
-			else
-				articolo = (ArticoloBean) session.getAttribute("dettagliArticolo");
-
+			ArticoloBean articolo = model.dettagliArticolo(request.getParameter("IDArticolo"));
 			session.setAttribute("dettagliArticolo", articolo);
 			session.setAttribute("fotoArticolo", model.getAllFoto(request.getParameter("IDArticolo")));
 

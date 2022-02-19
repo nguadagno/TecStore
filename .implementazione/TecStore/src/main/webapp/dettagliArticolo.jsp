@@ -106,8 +106,9 @@ return;
 						style="max-width: 50px" class="img-fluid"
 						src="img?id=<%=f.getID()%>"></a>
 
-					<form action="img?del=<%=f.getID()%>" method=get>
-						<input type=submit value="Rimuovi immagine">
+					<form action="img" method=get>
+						<input type=hidden name=del value=<%=f.getID()%>> <input
+							type=submit value="Rimuovi immagine">
 					</form>
 				</div>
 				<%
@@ -117,10 +118,17 @@ return;
 		</div>
 	</div>
 
-	<form action="img?del=all" method=get>
-		<input type=submit value="Rimuovi tutte le immagini">
+	<%
+	if (foto.size() != 0) {
+	%>
+	<form action="img" method=get>
+		<input type=hidden name=del value=all> <input type=submit
+			value="Rimuovi tutte le immagini">
 	</form>
 
+	<%
+	}
+	%>
 	<form action="inserimentoImmagini.jsp" method=get>
 		<input type=submit value="Inserisci nuove immagini">
 	</form>

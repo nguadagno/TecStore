@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"
+	import="java.util.*,bean.*, control.*, model.*" session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,8 @@
 				value="Carica foto" id="inserimentoImmagini-carica">
 		</form>
 		<form action="DettagliArticolo" method=post>
+			<input type=hidden name=IDArticolo
+				value=<%=((ArticoloBean) session.getAttribute("dettagliArticolo")).getID()%>>
 			<input type=submit value="Dettagli Articolo">
 		</form>
 		<form action="paginainiziale.jsp">

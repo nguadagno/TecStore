@@ -138,6 +138,7 @@ public class GestioneVendita {
 			PreparedStatement preparedStatement = connection.prepareStatement(rimozioneFotoQuery);
 			preparedStatement.setString(1, IDArticolo);
 			preparedStatement.execute();
+			connection.commit();
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -163,7 +164,10 @@ public class GestioneVendita {
 			preparedStatement.setString(1, IDArticolo);
 			preparedStatement.setString(2, IDFoto);
 			preparedStatement.execute();
+			connection.commit();
 			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (connection != null) {
@@ -173,6 +177,7 @@ public class GestioneVendita {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+		return false;
 	}
 
 	public boolean sovrascritturaFoto(String IDArticolo, ArrayList<FotoBean> foto) throws SQLException {

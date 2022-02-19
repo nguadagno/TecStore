@@ -30,57 +30,55 @@ public class ImmaginiServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
-		try {
-			// Reference:
-			// https://codebun.com/how-to-upload-and-retrieve-image-from-mysql-in-jsp-and-servlet/
-			if (request.getParameter("id") != null) {
+		if (request.getParameter("id") != null && !request.getParameter("id").isEmpty()) {
+			try {
+				// Reference:
+				// https://codebun.com/how-to-upload-and-retrieve-image-from-mysql-in-jsp-and-servlet/
+				System.out.println("get immagine");
 				OutputStream os = response.getOutputStream();
 				os.write(gestioneVendita.getFoto(request.getParameter("id")));
 				os.flush();
 				os.close();
+			} catch (SQLException e) {
+				response.setStatus(500);
+				session.setAttribute("errore", "erroreRicercaImmagine");
+				RequestDispatcher dd = request.getRequestDispatcher("/errore.jsp");
+				dd.forward(request, response);
+				e.printStackTrace();
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
+				return;
 			}
-			return;
-		} catch (SQLException e) {
-			response.setStatus(500);
-			session.setAttribute("errore", "erroreRicercaImmagine");
-			RequestDispatcher dd = request.getRequestDispatcher("/errore.jsp");
-			dd.forward(request, response);
-			e.printStackTrace();
-			response.getOutputStream().flush();
-			response.getOutputStream().close();
-		}
+		} else if (request.getParameter("del") != null && !request.getParameter("del").isEmpty()) {
+			try {
+				if (request.getParameter("del").equals("all"))
+					gestioneVendita.rimozioneFoto(((ArticoloBean) session.getAttribute("dettagliArticolo")).getID());
+				else
+					gestioneVendita.rimozioneFoto(((ArticoloBean) session.getAttribute("dettagliArticolo")).getID(),
+							request.getParameter("del"));
 
-		try {
-			if (request.getParameter("del") != null) {
-				if (request.getParameter("del").equals("all") && gestioneVendita
-						.rimozioneFoto(((ArticoloBean) session.getAttribute("dettagliArticolo")).getID())) {
-					RequestDispatcher dd = request.getRequestDispatcher("/dettagliArticolo.jsp");
-					dd.forward(request, response);
-					return;
-				} else if (gestioneVendita.rimozioneFoto(
-						((ArticoloBean) session.getAttribute("dettagliArticolo")).getID(),
-						request.getParameter("del"))) {
+				System.out.println(session.getAttribute("fotoArticolo"));
 
-					RequestDispatcher dd = request.getRequestDispatcher("/inserimentoImmagini.jsp");
-					dd.forward(request, response);
-					return;
-				} else {
-					response.setStatus(500);
-					session.setAttribute("errore", "erroreEliminazioneImmagini");
-					RequestDispatcher dd = request.getRequestDispatcher("/errore.jsp");
-					dd.forward(request, response);
-				}
+				session.setAttribute("fotoArticolo",
+						gestioneVendita.getAllFoto(((ArticoloBean) session.getAttribute("dettagliArticolo")).getID()));
+
+				System.out.println(session.getAttribute("fotoArticolo"));
+				session.setAttribute("operazione", "rimozioneImg");
+				RequestDispatcher dd = request.getRequestDispatcher("/dettagliArticolo.jsp");
+				dd.forward(request, response);
+				return;
+			} catch (SQLException e) {
+				response.setStatus(500);
+				session.setAttribute("errore", "erroreRimozioneImmagine");
+				RequestDispatcher dd = request.getRequestDispatcher("/errore.jsp");
+				dd.forward(request, response);
+				e.printStackTrace();
+				response.getOutputStream().flush();
+				response.getOutputStream().close();
 			}
-			return;
-		} catch (SQLException e) {
-			response.setStatus(500);
-			session.setAttribute("errore", "erroreRimozioneImmagine");
-			RequestDispatcher dd = request.getRequestDispatcher("/errore.jsp");
-			dd.forward(request, response);
-			e.printStackTrace();
-			response.getOutputStream().flush();
-			response.getOutputStream().close();
 		}
+		return;
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -92,7 +90,8 @@ public class ImmaginiServlet extends HttpServlet {
 		if (part != null) {
 			InputStream inputStream = part.getInputStream();
 			try {
-				if (gestioneVendita.inserimentoFoto(session.getAttribute("IDArticolo").toString(), inputStream))
+				if (gestioneVendita.inserimentoFoto(((ArticoloBean) session.getAttribute("dettagliArticolo")).getID(),
+						inputStream))
 					redirect = "inserimentoImmagini.jsp";
 				else {
 					response.setStatus(500);
