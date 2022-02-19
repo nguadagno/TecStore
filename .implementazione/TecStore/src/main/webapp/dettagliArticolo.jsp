@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="java.util.*,bean.*, control.*"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" import="java.util.*,bean.*, control.*"
 	session="true"%>
 <!DOCTYPE html>
 <html>
@@ -47,7 +47,7 @@
 	padding-bottom: 30px;
 }
 </style>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
@@ -212,7 +212,7 @@ return;
 	%>
 	<div align="right">
 		<form action="autenticazione.jsp" method="post">
-			<h4>Per aggiungere articoli al carrello è necessario essere
+			<h4>Per aggiungere articoli al carrello Ã¨ necessario essere
 				autenticati.</h4>
 			<input type="submit" value="Autenticazione"
 				id="dettagliArticolo-autenticazione">

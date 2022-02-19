@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <%
 int tipologia = -1;
 if (session.getAttribute("tipologia") == null || session.getAttribute("tipologia").toString().isEmpty()) {
@@ -37,7 +37,7 @@ return;
 						id="nuovaVendita-Nome" required> <br> <br> <label><b>Descrizione</b></label>
 					<br> <input type="text" name="descrizione"
 						id="nuovaVendita-descrizione" style="width: 300px; height: 200px;">
-					<br> <br> <label><b>Quantità</b></label> <br> <input
+					<br> <br> <label><b>QuantitÃ </b></label> <br> <input
 						type="number" id="nuovaVendita-quantita" name="quantita" required>
 					<br> <br> <label><b>Prezzo</b></label> <br> <input
 						type="number" name="prezzo" id="nuovaVendita-prezzo" required>

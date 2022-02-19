@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +50,7 @@
 			<%
 			} else {
 			%>
-			<h5>La password per l'utente verr‡ generata automaticamente al
+			<h5>La password per l'utente verr√† generata automaticamente al
 				momento della registrazione.</h5>
 			<%
 			}
@@ -69,7 +69,7 @@
 				<i>Indirizzo</i>
 			</h3>
 
-			<label for="citta">Citt‡</label><br> <input type="text"
+			<label for="citta">Citt√†</label><br> <input type="text"
 				name="citta" maxlength="35" id="citta" required> <br> <br>
 
 			<label for="via">Via</label><br> <input type="text" name="via"
