@@ -63,13 +63,19 @@ public class InserimentoNuovoArticoloServlet extends HttpServlet {
 		}
 
 		try {
-			String IDArticolo = model.inserimentoNuovoArticolo(nome, descrizione, IDVenditore, quantita, prezzo,
-					rimborsabile);
-			if (!IDArticolo.isEmpty()) {
-				session.setAttribute("IDArticolo", IDArticolo);
-				redirect = "/inserimentoImmagini.jsp";
+			if (!(nome.length() <= 5)) {
+				String IDArticolo = model.inserimentoNuovoArticolo(nome, descrizione, IDVenditore, quantita, prezzo,
+						rimborsabile);
+
+				if (!IDArticolo.isEmpty()) {
+					session.setAttribute("dettagliArticolo", model.dettagliArticolo(IDArticolo));
+					redirect = "/inserimentoImmagini.jsp";
+				} else {
+					session.setAttribute("errore", "erroreInserimentoImmagini");
+					redirect = "/errore.jsp";
+				}
 			} else {
-				session.setAttribute("errore", "erroreInserimentoImmagini");
+				session.setAttribute("errore", "inserimentoCampiArticolo");
 				redirect = "/errore.jsp";
 			}
 		} catch (SQLException e) {

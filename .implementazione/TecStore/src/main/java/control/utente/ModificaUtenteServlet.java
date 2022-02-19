@@ -59,37 +59,43 @@ public class ModificaUtenteServlet extends HttpServlet {
 
 			if (session.getAttribute("tipologiaUtente") != null)
 				tipologia = Integer.parseInt(request.getParameter("tipologiaUtente"));
-
-			String CF = request.getParameter("CF") == null ? oldUtente.getCF() : request.getParameter("CF");
-			String nome = request.getParameter("nome") == null ? oldUtente.getNome() : request.getParameter("nome");
-			String cognome = request.getParameter("cognome") == null ? oldUtente.getCognome()
-					: request.getParameter("cognome");
-			String email = request.getParameter("email") == null ? oldUtente.getEmail() : request.getParameter("email");
-			String via = request.getParameter("via") == null ? oldUtente.getVia() : request.getParameter("via");
-			String citta = request.getParameter("citta") == null ? oldUtente.getCitta() : request.getParameter("citta");
-			String provincia = request.getParameter("provincia") == null ? oldUtente.getProvincia()
-					: request.getParameter("provincia");
-			int CAP = request.getParameter("CAP") == null ? oldUtente.getCAP()
-					: Integer.parseInt(request.getParameter("CAP"));
-			int numeroCivico = request.getParameter("numeroCivico") == null ? oldUtente.getNumeroCivico()
-					: Integer.parseInt(request.getParameter("numeroCivico"));
-			String cartaDiCredito = request.getParameter("numeroCarta") == null || request.getParameter("CVV") == null
-					|| request.getParameter("anno") == null || request.getParameter("mese") == null
-							? oldUtente.getCartaDiCredito()
-							: model.encryptString(request.getParameter("numeroCarta") + request.getParameter("CVV")
-									+ request.getParameter("anno") + request.getParameter("mese"));
-
-			if (model.modificaUtente(session.getAttribute("CF").toString(), new UtenteBean(CF, nome, cognome, email,
-					password, via, numeroCivico, citta, provincia, CAP, tipologia, cartaDiCredito))) {
-				if (session.getAttribute("tipologia").toString().equals("5")) {
-					session.setAttribute("passwordUtente", password);
-					session.setAttribute("emailUtente", request.getParameter("email"));
-				}
-				session.setAttribute("successo", "modificaUtente");
-				redirect = "/successo.jsp";
-			} else {
+			if (tipologia != 2 || tipologia != 3 || tipologia != 4 || tipologia != 5) {
 				session.setAttribute("errore", "modificaUtente");
 				redirect = "/errore.jsp";
+			} else {
+				String CF = request.getParameter("CF") == null ? oldUtente.getCF() : request.getParameter("CF");
+				String nome = request.getParameter("nome") == null ? oldUtente.getNome() : request.getParameter("nome");
+				String cognome = request.getParameter("cognome") == null ? oldUtente.getCognome()
+						: request.getParameter("cognome");
+				String email = request.getParameter("email") == null ? oldUtente.getEmail()
+						: request.getParameter("email");
+				String via = request.getParameter("via") == null ? oldUtente.getVia() : request.getParameter("via");
+				String citta = request.getParameter("citta") == null ? oldUtente.getCitta()
+						: request.getParameter("citta");
+				String provincia = request.getParameter("provincia") == null ? oldUtente.getProvincia()
+						: request.getParameter("provincia");
+				int CAP = request.getParameter("CAP") == null ? oldUtente.getCAP()
+						: Integer.parseInt(request.getParameter("CAP"));
+				int numeroCivico = request.getParameter("numeroCivico") == null ? oldUtente.getNumeroCivico()
+						: Integer.parseInt(request.getParameter("numeroCivico"));
+				String cartaDiCredito = request.getParameter("numeroCarta") == null
+						|| request.getParameter("CVV") == null || request.getParameter("anno") == null
+						|| request.getParameter("mese") == null ? oldUtente.getCartaDiCredito()
+								: model.encryptString(request.getParameter("numeroCarta") + request.getParameter("CVV")
+										+ request.getParameter("anno") + request.getParameter("mese"));
+
+				if (model.modificaUtente(session.getAttribute("CF").toString(), new UtenteBean(CF, nome, cognome, email,
+						password, via, numeroCivico, citta, provincia, CAP, tipologia, cartaDiCredito))) {
+					if (session.getAttribute("tipologia").toString().equals("5")) {
+						session.setAttribute("passwordUtente", password);
+						session.setAttribute("emailUtente", request.getParameter("email"));
+					}
+					session.setAttribute("successo", "modificaUtente");
+					redirect = "/successo.jsp";
+				} else {
+					session.setAttribute("errore", "modificaUtente");
+					redirect = "/errore.jsp";
+				}
 			}
 		} catch (Exception e) {
 			response.setStatus(500);

@@ -140,25 +140,25 @@ return;
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
 
-	<div align="center">
+	<div align="center" id="dettagliArticolo-nome">
 		<h2>Nome:</h2>
 		<h4>
 			<%=risultato.getNome()%>
 		</h4>
 	</div>
-	<div align="center">
+	<div align="center" id="dettagliArticolo-prezzo">
 		<h2>Prezzo:</h2>
 		<h4>
 			<%=risultato.getPrezzo()%>
 		</h4>
 	</div>
-	<div align="center">
+	<div align="center" id="dettagliArticolo-quantita">
 		<h2>Quantita disponibile:</h2>
 		<h4>
 			<%=risultato.getQuantita()%>
 		</h4>
 	</div>
-	<div align="center">
+	<div align="center" id="dettagliArticolo-descrizione">
 		<h2>Descrizione:</h2>
 		<h4>
 			<%=risultato.getDescrizione()%>
@@ -221,5 +221,11 @@ return;
 	<%
 	}
 	%>
+	<div align="center">
+		<form action="paginainiziale.jsp">
+			<input type=submit value="Torna alla pagina iniziale"
+				id="inserimentoImmagini-torna">
+		</form>
+	</div>
 </body>
 </html>
