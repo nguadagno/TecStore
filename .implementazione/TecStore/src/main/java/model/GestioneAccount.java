@@ -151,9 +151,9 @@ public class GestioneAccount {
 		String updateUtenteQuery = "UPDATE utente SET NOME = ?, COGNOME = ?, EMAIL = ?, PASSWORD = ?,"
 				+ " VIA = ?, CAP = ?, NUMEROCIVICO = ?, CITTA = ?, PROVINCIA = ?, CARTADICREDITO = ? WHERE CF = ?;";
 		try {
-			if (u.getTipologia() == 1)
+			if (dettagliUtente(CF).getTipologia() == 1)
 				connection = DriverManagerConnectionPool.getConnection("cliente", "cliente");
-			else if (u.getTipologia() == 5)
+			else if (dettagliUtente(CF).getTipologia() == 5)
 				connection = DriverManagerConnectionPool.getConnection("ammpersonale", "ammpersonale");
 			else
 				return false;

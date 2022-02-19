@@ -19,6 +19,7 @@
 	
 	
 	
+	
 var password = document.getElementById("password"), confermapassword = document.getElementById("confermapassword");
 
 function validatePassword(){
@@ -31,6 +32,7 @@ function validatePassword(){
 
 password.onchange = validatePassword;
 confermapassword.onkeyup = validatePassword;
+
 
 
 
@@ -110,7 +112,7 @@ return;
 				<i>Dati Anagrafici</i>
 			</h3>
 			<br> <input type="hidden" name="CF" id="CF" maxlength="16"
-				required value=<%=utente.getCF()%>> <br> <br> <label
+				value=<%=utente.getCF()%>> <br> <br> <label
 				for="nome">Nome</label><br> <input type="text" name="nome"
 				id="nome" id="dettagliUtente-nome" required
 				value=<%=utente.getNome()%>> <br> <br> <label

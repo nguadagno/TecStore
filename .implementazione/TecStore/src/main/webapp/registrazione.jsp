@@ -3,6 +3,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript">
+	var checkPassword1 = function() {
+		password1 = document.getElementById("ps1");
+		password2 = document.getElementById("ps2");
+
+		if (password1.value === password2.value) {
+			document.getElementById("f1").submit();
+		} else
+			alert("Le password non coincidono!");
+	}
+</script>
 <title>Registrazione</title>
 </head>
 <nav
@@ -23,7 +34,7 @@
 		<h1>Registrazione</h1>
 
 		<h3>Compila i campi per continuare</h3>
-		<form action="Registrazione" method="post">
+		<form action="Registrazione" id="f1" method="post">
 			<h3>
 				<i>Dati Autenticazione</i>
 			</h3>
@@ -32,9 +43,10 @@
 			<%
 			if (tipologia != 5) {
 			%>
-			<label for="password">Password</label><br> <input
-				type="password" name="password" id="registrazione-password" required>
-			<br> <br> <br>
+			<label for="password">Password</label> <br> <input id="ps1"
+				maxlength="64" type="password" name="password" required value="">
+			<br> <label for="confermapassword">Conferma password</label> <br>
+			<input maxlength="64" id="ps2" type="password">
 			<%
 			} else {
 			%>
@@ -86,12 +98,20 @@
 			<%
 			}
 			%>
-			<div align="center">
-				<br> <input class="final" id="conferma" type="submit"
-					name="submit" value="Conferma"> <input id="resetta"
-					class="final" type="reset" name="reset" value="Reset">
+			<div align="right">
+				<br> <input id="resetta" class="final" type="reset"
+					name="reset" value="Reset">
 			</div>
 		</form>
+	</div>
+	<br>
+	<br>
+	<br>
+	<div align="center">
+		<a>
+			<button onclick="checkPassword1()" id="registrazione-Conferma">Conferma</button>
+		</a> <a href="paginainiziale.jsp" id="registrazione-Indietro"><button>Torna
+				Alla Home</button></a>
 	</div>
 </body>
 <br>
