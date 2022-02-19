@@ -10,7 +10,7 @@
       "id": "0d90cf97-c71e-4285-9c30-7a47726a3932",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TecStore/",
+      "target": "https://tecstore.gdgn.xyz/TecStore",
       "targets": [],
       "value": ""
     }, {
@@ -149,7 +149,7 @@
       "id": "11cc243e-7922-4cb3-8b5f-4c4124561f7b",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TecStore/",
+      "target": "https://tecstore.gdgn.xyz/TecStore",
       "targets": [],
       "value": ""
     }, {
@@ -278,7 +278,7 @@
       "id": "f466b0f9-4bb6-4576-a08c-f2b50a63502a",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TecStore/",
+      "target": "https://tecstore.gdgn.xyz/TecStore",
       "targets": [],
       "value": ""
     }, {
@@ -407,7 +407,7 @@
       "id": "2f5d48ad-18fc-4446-a7d5-264fd4942a7b",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TecStore/",
+      "target": "https://tecstore.gdgn.xyz/TecStore",
       "targets": [],
       "value": ""
     }, {
@@ -507,7 +507,7 @@
       "id": "71328588-e8fb-4aa2-9ff1-18b6ebfe4312",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TecStore/",
+      "target": "https://tecstore.gdgn.xyz/TecStore",
       "targets": [],
       "value": ""
     }, {
@@ -562,7 +562,7 @@
       "id": "41a61385-6ffe-4d52-9472-d8a725fafe38",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TecStore/",
+      "target": "https://tecstore.gdgn.xyz/TecStore",
       "targets": [],
       "value": ""
     }, {
@@ -642,7 +642,7 @@
       "id": "db943b54-f48f-4549-80b9-5eeff92a9130",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TecStore/",
+      "target": "https://tecstore.gdgn.xyz/TecStore",
       "targets": [],
       "value": ""
     }, {
@@ -722,7 +722,7 @@
       "id": "5b3edfd9-2e00-4890-ab75-9d1b2c4c3233",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TecStore/",
+      "target": "https://tecstore.gdgn.xyz/TecStore",
       "targets": [],
       "value": ""
     }, {
@@ -862,7 +862,7 @@
       "id": "b56c4059-abc3-4d48-823d-64651fd18f05",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TecStore/",
+      "target": "https://tecstore.gdgn.xyz/TecStore",
       "targets": [],
       "value": ""
     }, {
@@ -1106,7 +1106,7 @@
       "id": "a720806e-e5e8-456d-abee-ba4d959fbe04",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TecStore/",
+      "target": "https://tecstore.gdgn.xyz/TecStore",
       "targets": [],
       "value": ""
     }, {
@@ -1251,7 +1251,7 @@
       "id": "77b88b3b-6d31-43d6-8c81-9f2913a666f8",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TecStore/",
+      "target": "https://tecstore.gdgn.xyz/TecStore",
       "targets": [],
       "value": ""
     }, {
@@ -1396,7 +1396,7 @@
       "id": "e4a4e22c-6772-4443-8bda-f17b4e02c694",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TecStore/",
+      "target": "https://tecstore.gdgn.xyz/TecStore",
       "targets": [],
       "value": ""
     }, {
@@ -1547,7 +1547,7 @@
       "id": "67179452-b073-4610-b5ec-a463d28ea038",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TecStore/",
+      "target": "https://tecstore.gdgn.xyz/TecStore",
       "targets": [],
       "value": ""
     }, {
@@ -1697,7 +1697,7 @@
       "id": "0e1e38db-af6a-4894-8caa-31f184b821c1",
       "comment": "",
       "command": "open",
-      "target": "http://localhost:8080/TecStore/",
+      "target": "https://tecstore.gdgn.xyz/TecStore",
       "targets": [],
       "value": ""
     }, {
@@ -2671,7 +2671,7 @@
       "id": "4260899a-3590-4918-b036-f879273c4b0d",
       "comment": "",
       "command": "open",
-      "target": "https://tecstore.gdgn.xyz/TecStore/DatiProva?q=1",
+      "target": "https://tecstore.gdgn.xyz/TecStore",
       "targets": [],
       "value": ""
     }, {
@@ -3246,7 +3246,7 @@
       "id": "e83476cb-41d6-4709-bfbd-c2cbb524d250",
       "comment": "",
       "command": "open",
-      "target": "https://tecstore.gdgn.xyz/TecStore/DatiProva?q=1",
+      "target": "https://tecstore.gdgn.xyz/TecStore",
       "targets": [],
       "value": ""
     }, {
@@ -3589,13 +3589,780 @@
       "value": ""
     }]
   }, {
+    "id": "92ef1a44-4491-4864-a485-f43bc0013fff",
+    "name": "TicketCreazione",
+    "commands": [{
+      "id": "6f5192ab-e7e5-4cc1-910f-188935162a96",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c12dfdb6-0e84-4933-8025-cb7b6e2e7e84",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1458x1153",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f9fcec98-0937-4c7b-ba14-c6b08d2e85f5",
+      "comment": "",
+      "command": "click",
+      "target": "css=#index-autenticazione > button",
+      "targets": [
+        ["css=#index-autenticazione > button", "css:finder"],
+        ["xpath=//a[@id='index-autenticazione']/button", "xpath:idRelative"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "761aa3bc-2c24-4bc2-864f-50dd95e64bbf",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d374b897-67c3-4476-b856-522fcbbe1786",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "aede4b9c-096d-4ebf-94ea-9a050904bb98",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1@email.tld"
+    }, {
+      "id": "08ee4672-8ea2-4fa6-8a81-8e89dd369153",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e877fd45-6475-4b2d-8b92-340fa33d690a",
+      "comment": "",
+      "command": "click",
+      "target": "id=index-servizioClienti",
+      "targets": [
+        ["id=index-servizioClienti", "id"],
+        ["css=#index-servizioClienti", "css:finder"],
+        ["xpath=//input[@id='index-servizioClienti']", "xpath:attributes"],
+        ["xpath=//div[3]/form[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4de1f239-d363-44d0-a475-22bc573c802a",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//a[@id='centroAssistenza-creazioneTicket']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Nuovo Ticket')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3671a677-03c7-4d02-86b6-37500de93f34",
+      "comment": "",
+      "command": "click",
+      "target": "id=tipologia",
+      "targets": [
+        ["id=tipologia", "id"],
+        ["name=tipologia", "name"],
+        ["css=#tipologia", "css:finder"],
+        ["xpath=//select[@id='tipologia']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5e390234-344a-4103-8ba7-611016a6b305",
+      "comment": "",
+      "command": "select",
+      "target": "id=tipologia",
+      "targets": [],
+      "value": "label=Spedizione"
+    }, {
+      "id": "770df72f-34ae-4273-ab76-2e1e1c0bf8dd",
+      "comment": "",
+      "command": "click",
+      "target": "css=option:nth-child(3)",
+      "targets": [
+        ["css=option:nth-child(3)", "css:finder"],
+        ["xpath=//option[@value='Spedizione']", "xpath:attributes"],
+        ["xpath=//select[@id='tipologia']/option[3]", "xpath:idRelative"],
+        ["xpath=//option[3]", "xpath:position"],
+        ["xpath=//option[contains(.,'Spedizione')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "709b168b-508a-4e04-a7ea-631629a8ffce",
+      "comment": "",
+      "command": "click",
+      "target": "id=creazioneTicket-messaggio",
+      "targets": [
+        ["id=creazioneTicket-messaggio", "id"],
+        ["name=messaggio", "name"],
+        ["css=#creazioneTicket-messaggio", "css:finder"],
+        ["xpath=//input[@id='creazioneTicket-messaggio']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4dab1b83-2d9f-44f4-8e72-d80820dc7a97",
+      "comment": "",
+      "command": "type",
+      "target": "id=creazioneTicket-messaggio",
+      "targets": [
+        ["id=creazioneTicket-messaggio", "id"],
+        ["name=messaggio", "name"],
+        ["css=#creazioneTicket-messaggio", "css:finder"],
+        ["xpath=//input[@id='creazioneTicket-messaggio']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Il mio pacco non è ancora arrivato!"
+    }, {
+      "id": "2a357863-83b2-4c22-ab87-4fca10e22265",
+      "comment": "",
+      "command": "click",
+      "target": "id=creazioneTicket-conferma",
+      "targets": [
+        ["id=creazioneTicket-conferma", "id"],
+        ["css=#creazioneTicket-conferma", "css:finder"],
+        ["xpath=//input[@id='creazioneTicket-conferma']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "88c60bdf-d284-4594-a457-c6e9a6a97cd2",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h2",
+      "targets": [
+        ["css=h2", "css:finder"],
+        ["xpath=//h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Operazione avvenuta con successo')]", "xpath:innerText"]
+      ],
+      "value": "Operazione avvenuta con successo"
+    }, {
+      "id": "1d23da39-7edb-4aee-88e2-49645526866a",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Continua')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8dfa4a3c-1e97-43f1-b882-92c087668240",
+      "comment": "",
+      "command": "click",
+      "target": "id=index-servizioClienti",
+      "targets": [
+        ["id=index-servizioClienti", "id"],
+        ["css=#index-servizioClienti", "css:finder"],
+        ["xpath=//input[@id='index-servizioClienti']", "xpath:attributes"],
+        ["xpath=//div[3]/form[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "14746851-b2be-413c-9c62-0925da278792",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=tr:nth-child(2) > td:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(2) > td:nth-child(1)", "css:finder"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'In Attesa di Risposta')]", "xpath:innerText"]
+      ],
+      "value": "In Attesa di Risposta"
+    }, {
+      "id": "dabe7088-6f57-4297-89ba-b999a66d4f53",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(2) input:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(2) input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@value='Dettagli']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Spedizione"
+    }, {
+      "id": "3b00f127-c989-44a6-982a-af90fc5189a0",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=td:nth-child(1)",
+      "targets": [
+        ["css=td:nth-child(1)", "css:finder"],
+        ["xpath=//td", "xpath:position"]
+      ],
+      "value": "nome1 cognome1\\n(Cliente) "
+    }, {
+      "id": "036fed22-dddf-4a03-b77e-57812ddd2bfe",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=td:nth-child(2)",
+      "targets": [
+        ["css=td:nth-child(2)", "css:finder"],
+        ["xpath=//td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'Il mio pacco non è ancora arrivato!')]", "xpath:innerText"]
+      ],
+      "value": " \tIl mio pacco non è ancora arrivato!"
+    }, {
+      "id": "7d8d8b8d-b3e0-4cd1-997c-b7f2ccd110e8",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f522fd5b-9b1c-42da-bc48-a953bdc2b0a4",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//input[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[4]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bc6cb270-3dda-4356-b6d2-bcc0f3001a73",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=h5",
+      "targets": [
+        ["css=h5", "css:finder"],
+        ["xpath=//h5", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "5b8b2b63-7a26-4fad-8dc5-18209827ddb4",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "d7777fc4-e6cb-4883-aca3-fc220c16f538",
+    "name": "TicketRispostaCliente",
+    "commands": [{
+      "id": "69ac9f97-6f7c-40fb-a06e-f9f83ab5228f",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8c7afdd2-28c9-427c-a3cc-9811dcf8ee08",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1458x1154",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "227a7b34-765d-4329-89c3-e180253014ce",
+      "comment": "",
+      "command": "click",
+      "target": "css=#index-autenticazione > button",
+      "targets": [
+        ["css=#index-autenticazione > button", "css:finder"],
+        ["xpath=//a[@id='index-autenticazione']/button", "xpath:idRelative"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0d3b0685-4ea2-4f8e-8b82-e3a302aa17bd",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b5f46d70-f283-49a5-a218-dfc01a36cec9",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "ad683b5b-1faa-4813-ae21-b9d4cd8a8942",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1@email.tld"
+    }, {
+      "id": "55d023f4-3ae7-4e02-bd5e-3c67ee69d57e",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5b49922f-d59f-4de4-9d65-d7a0c0aa0dee",
+      "comment": "",
+      "command": "click",
+      "target": "id=index-servizioClienti",
+      "targets": [
+        ["id=index-servizioClienti", "id"],
+        ["css=#index-servizioClienti", "css:finder"],
+        ["xpath=//input[@id='index-servizioClienti']", "xpath:attributes"],
+        ["xpath=//div[3]/form[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "044ec4dc-e278-4477-9018-6695040e792e",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(2) input:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(2) input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@value='Dettagli']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2dda70ba-8541-498c-8c6f-e04592b6ee2c",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//a[@id='dettagliTicket-rispostaTicket']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Rispondi')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f7291a73-7fdf-4562-8300-ec4ba465a22e",
+      "comment": "",
+      "command": "click",
+      "target": "id=rispostaTicket-messaggio",
+      "targets": [
+        ["id=rispostaTicket-messaggio", "id"],
+        ["name=messaggio", "name"],
+        ["css=#rispostaTicket-messaggio", "css:finder"],
+        ["xpath=//input[@id='rispostaTicket-messaggio']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "383599fb-4cbb-44dc-984e-ccc4d567b5bc",
+      "comment": "",
+      "command": "type",
+      "target": "id=rispostaTicket-messaggio",
+      "targets": [
+        ["id=rispostaTicket-messaggio", "id"],
+        ["name=messaggio", "name"],
+        ["css=#rispostaTicket-messaggio", "css:finder"],
+        ["xpath=//input[@id='rispostaTicket-messaggio']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Ora è arrivato."
+    }, {
+      "id": "6cc606d2-d630-4f89-a9d3-5ac3a9550d07",
+      "comment": "",
+      "command": "click",
+      "target": "id=rispostaTicket-conferma",
+      "targets": [
+        ["id=rispostaTicket-conferma", "id"],
+        ["css=#rispostaTicket-conferma", "css:finder"],
+        ["xpath=//input[@id='rispostaTicket-conferma']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0d046c19-7866-4bc3-a7d9-be99346c4be7",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h2",
+      "targets": [
+        ["css=h2", "css:finder"],
+        ["xpath=//h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Operazione avvenuta con successo')]", "xpath:innerText"]
+      ],
+      "value": "Operazione avvenuta con successo"
+    }, {
+      "id": "3041e94c-6787-4d1b-a91f-29c4b359ba21",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Continua')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "59f2d46c-0a81-4c25-b08e-1b42423a554f",
+      "comment": "",
+      "command": "click",
+      "target": "id=index-servizioClienti",
+      "targets": [
+        ["id=index-servizioClienti", "id"],
+        ["css=#index-servizioClienti", "css:finder"],
+        ["xpath=//input[@id='index-servizioClienti']", "xpath:attributes"],
+        ["xpath=//div[3]/form[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b4d5659f-82d2-4599-a2e3-c4e9baf3584e",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(2) input:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(2) input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@value='Dettagli']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0a0e65c9-0f80-469d-ba5b-5e94c9551274",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=tr:nth-child(3) > td:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(3) > td:nth-child(1)", "css:finder"],
+        ["xpath=//tr[3]/td", "xpath:position"]
+      ],
+      "value": "nome1 cognome1\\n(Cliente) "
+    }, {
+      "id": "b874aef6-82b2-40e9-8ec2-02a314621eca",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=tr:nth-child(3) > td:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(3) > td:nth-child(2)", "css:finder"],
+        ["xpath=//tr[3]/td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'Ora è arrivato.')]", "xpath:innerText"]
+      ],
+      "value": "Ora è arrivato."
+    }, {
+      "id": "5000db04-0c6f-4653-9be2-5ca41569972e",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2e253221-5718-46a8-a6ab-a18e4ee761a1",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//input[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[4]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "50e8d1be-1310-4e37-b137-041e64520c94",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=h5",
+      "targets": [
+        ["css=h5", "css:finder"],
+        ["xpath=//h5", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "18a70dad-2e28-481c-81ee-13985e3e043b",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "7fcac882-82c3-45fe-9639-0f1f2467beff",
+    "name": "TicketChiusura",
+    "commands": [{
+      "id": "de06a8c1-22a3-4ed7-b9f2-52ed5ef641c0",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e73757cf-5edc-4ae6-ae4e-9d3128d105cc",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1458x1154",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "31281736-f40a-434c-a7d1-06173b61f267",
+      "comment": "",
+      "command": "click",
+      "target": "css=#index-autenticazione > button",
+      "targets": [
+        ["css=#index-autenticazione > button", "css:finder"],
+        ["xpath=//a[@id='index-autenticazione']/button", "xpath:idRelative"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2154635b-2969-44ae-839f-e01f4605cb6d",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cfb6d460-c237-4b1b-ba8a-2df3a99eaac3",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "dd6ff899-0cb7-4b91-9bd4-1a62582c13ef",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1@email.tld"
+    }, {
+      "id": "d1c3605b-76ee-4d0d-be22-f1f6c9ce0d1e",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "09d5350e-9969-4818-810f-f6a479265e7f",
+      "comment": "",
+      "command": "click",
+      "target": "id=index-servizioClienti",
+      "targets": [
+        ["id=index-servizioClienti", "id"],
+        ["css=#index-servizioClienti", "css:finder"],
+        ["xpath=//input[@id='index-servizioClienti']", "xpath:attributes"],
+        ["xpath=//div[3]/form[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8ead032d-cd90-47a8-a47d-9a4da5966e5c",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(2)",
+      "targets": [
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@value='Dettagli']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d207c61c-570e-44e4-a43d-a264e2ce8365",
+      "comment": "",
+      "command": "click",
+      "target": "id=dettagliTicket-chiusuraTicket",
+      "targets": [
+        ["id=dettagliTicket-chiusuraTicket", "id"],
+        ["css=#dettagliTicket-chiusuraTicket", "css:finder"],
+        ["xpath=//input[@id='dettagliTicket-chiusuraTicket']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a2b4e3a8-801a-424b-9a32-0fa54b914e2c",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Continua')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0a02a2bc-2fc8-447c-a59c-372bc6ac2c74",
+      "comment": "",
+      "command": "click",
+      "target": "id=index-servizioClienti",
+      "targets": [
+        ["id=index-servizioClienti", "id"],
+        ["css=#index-servizioClienti", "css:finder"],
+        ["xpath=//input[@id='index-servizioClienti']", "xpath:attributes"],
+        ["xpath=//div[3]/form[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f40f6fcc-9957-4dc5-849a-b53eb5d47291",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=td:nth-child(1)",
+      "targets": [
+        ["css=td:nth-child(1)", "css:finder"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'Chiuso')]", "xpath:innerText"]
+      ],
+      "value": "Chiuso"
+    }, {
+      "id": "fb5116d1-83f7-49d5-b65a-6a29231bbc40",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "069c5d00-f81b-4ee1-8793-d38d783db7ea",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//input[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[4]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c522f117-3e84-4fb9-99d6-b75e806c3b51",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=h5",
+      "targets": [
+        ["css=h5", "css:finder"],
+        ["xpath=//h5", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "7e34ef54-7b73-4397-a5a6-94048343287f",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "03a12d2a-0daa-4c59-bcfc-6214778dfa83",
+    "name": "Autenticazione",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 30,
+    "tests": ["285844fb-0022-43a1-a705-d5312883bdd4", "459dc043-8a9c-44eb-a37a-34a3354c5c3d", "1475e6e2-992e-4650-84a1-9bc89d9fef98", "a8af280b-c072-45e0-a98f-e5967e2438d5", "0ee46652-8a6a-436c-b6f0-1121eee92845", "4ce72d06-01a6-47f1-b29d-544a6229900a", "32a092ad-251e-4eeb-bbaf-42508ee33ad4"]
+  }, {
+    "id": "bce2189e-2df4-47fe-86e7-d7d2cd3422c1",
+    "name": "RicercaArticolo",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["83a3ab84-06b9-43b9-96a2-27b216a961e5", "669e9297-e814-4cfd-a13b-7b02cbdb8c35", "84827eff-605a-4750-bd02-597d6f97a210", "9b6c6de8-68b7-4672-81c5-4f52530cab3d"]
+  }, {
+    "id": "4ec19757-c45c-4f3b-9065-2de4ffbf047d",
+    "name": "Carrello",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["c72ef628-dfd6-49b2-bc80-7723fed153f3", "9ab1c464-4e6c-42a7-b2fd-88e9db1d6ca5", "e5198484-111f-4f43-a9e6-dd19b7bcf524", "902f10b3-30d6-438e-9200-33d78e1774a7", "9cc86970-4944-4c34-94d2-d8d2c0091ef1"]
+  }, {
+    "id": "17128c2d-6ad0-4d21-b8ef-f73a7e6e7c5b",
+    "name": "ModificaCliente",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["c4aebe2c-9385-4e70-aae5-78aced6ebc77", "a76ac65b-4dd5-45a0-a635-1d957ad6e606"]
+  }, {
+    "id": "650b9edd-a70e-4706-a2a0-68e5bbf1ba15",
+    "name": "ModificaDipendente",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }, {
     "id": "7b53b1c0-e6af-401b-ac32-9db5d67a6786",
     "name": "ModificaClientePasswordNonCoincidono",
     "commands": [{
       "id": "cef3808a-1877-4a45-9df2-02f82d289b81",
       "comment": "",
       "command": "open",
-      "target": "https://tecstore.gdgn.xyz/TecStore/DatiProva?q=1",
+      "target": "https://tecstore.gdgn.xyz/TecStore",
       "targets": [],
       "value": ""
     }, {
@@ -6275,7 +7042,15 @@
     "parallel": false,
     "timeout": 300,
     "tests": ["44375023-b4c7-4ac4-ae42-9090a5dc06a9", "351cb4aa-fd71-4a63-82a4-cfd59d2bd7ed", "c887c5c4-e82b-4c40-9339-714470392f05", "8629967e-0a61-4a2a-81e0-17c3b5a3e27a"]
+  }, {
+    "id": "14362b39-419a-449a-a07c-c2a3dc816b38",
+    "name": "TicketCliente",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["d7777fc4-e6cb-4883-aca3-fc220c16f538", "92ef1a44-4491-4864-a485-f43bc0013fff", "7fcac882-82c3-45fe-9639-0f1f2467beff"]
+
   }],
-  "urls": ["http://localhost:8080/", "http://localhost:8080/TecStore", "https://tecstore.gdgn.xyz/TecStore", "https://tecstore.gdgn.xyz/TecStore"],
+  "urls": ["https://tecstore.gdgn.xyz/TecStore/", "https://tecstore.gdgn.xyz/TecStore/TecStore", "https://tecstore.gdgn.xyz/TecStore"],
   "plugins": []
 }

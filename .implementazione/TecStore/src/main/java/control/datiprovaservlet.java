@@ -1,4 +1,4 @@
-package control;
+ package control;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,7 +44,7 @@ public class datiprovaservlet extends HttpServlet {
 			gestioneAccount.registrazioneUtente("PKCSZL43R26C890I", "nome5", "cognome5", "email5@email.tld",
 					"01234567890", "v5", 5, "v5", "p5", 5, 5);
 
-			gestioneAssistenza.creazioneTicket("KXBCFY80S51D296C", "asd", "R0");
+			gestioneAssistenza.creazioneTicket("KXBCFY80S51D296C", "Spedizione", "R0");
 
 			String IDTicket = gestioneAssistenza.elencoTicketCentralinista(1).get(0).getIDTicket();
 

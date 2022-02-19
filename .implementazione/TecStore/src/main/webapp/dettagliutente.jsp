@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="java.util.*,bean.*" session="true"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" import="java.util.*,bean.*" session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <script type="application/javascript">
 	
 	
@@ -123,7 +123,7 @@ return;
 			<h3>
 				<i>Indirizzo</i>
 			</h3>
-			<label for="citta">Città</label><br> <input type="text"
+			<label for="citta">CittÃ </label><br> <input type="text"
 				id="dettagliUtente-citta" name="citta" maxlength="35" id="citta"
 				required value=<%=utente.getCitta()%>> <br> <br> <label
 				for="via">Via</label><br> <input type="text" name="via"
