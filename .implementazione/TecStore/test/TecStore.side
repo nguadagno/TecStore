@@ -4319,6 +4319,885 @@
       "targets": [],
       "value": ""
     }]
+  }, {
+    "id": "5801d68f-701b-4931-807a-31cb951c2b80",
+    "name": "ModificaClientePasswordNonCorrispondenti",
+    "commands": [{
+      "id": "c77b14e9-b60b-42bc-9452-d2bb55aca74f",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f6acf5a6-0f71-4a96-bed0-3f6c14161a92",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1458x980",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "634598cc-77d0-4687-affb-eeeb01f30b39",
+      "comment": "",
+      "command": "click",
+      "target": "css=#index-autenticazione > button",
+      "targets": [
+        ["css=#index-autenticazione > button", "css:finder"],
+        ["xpath=//a[@id='index-autenticazione']/button", "xpath:idRelative"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "29462b09-cdf1-4bc3-8360-54ed7d438d3b",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e65f1fdf-572a-4145-b23d-03be9bd3d2ec",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "b700f2f7-f6ab-46a7-9f74-6b6059789905",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1@email.tld"
+    }, {
+      "id": "508bb874-be57-404d-8523-498931030b8d",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6f6d2f14-a8b9-45c3-8cd6-c4460ca1c633",
+      "comment": "",
+      "command": "click",
+      "target": "id=index-dettagliUtente",
+      "targets": [
+        ["id=index-dettagliUtente", "id"],
+        ["css=#index-dettagliUtente", "css:finder"],
+        ["xpath=//input[@id='index-dettagliUtente']", "xpath:attributes"],
+        ["xpath=//form[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e487a3b2-f942-4121-9075-dcc53177990d",
+      "comment": "",
+      "command": "click",
+      "target": "id=dettagliUtente-modificaPassword",
+      "targets": [
+        ["id=dettagliUtente-modificaPassword", "id"],
+        ["css=#dettagliUtente-modificaPassword", "css:finder"],
+        ["xpath=//a[contains(text(),'Modifica\n\t\t\t\tPassword')]", "xpath:link"],
+        ["xpath=//a[@id='dettagliUtente-modificaPassword']", "xpath:attributes"],
+        ["xpath=//a[contains(@href, 'modificaPassword.jsp')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0457bfca-6acf-410a-ab62-b3fb2860de9e",
+      "comment": "",
+      "command": "type",
+      "target": "id=ps1",
+      "targets": [
+        ["id=ps1", "id"],
+        ["name=password", "name"],
+        ["css=#ps1", "css:finder"],
+        ["xpath=//input[@id='ps1']", "xpath:attributes"],
+        ["xpath=//form[@id='f1']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "passwordprova1"
+    }, {
+      "id": "8651b543-4b09-46f4-94a8-c49da7ae5431",
+      "comment": "",
+      "command": "type",
+      "target": "id=ps2",
+      "targets": [
+        ["id=ps2", "id"],
+        ["name=confermapassword", "name"],
+        ["css=#ps2", "css:finder"],
+        ["xpath=//input[@id='ps2']", "xpath:attributes"],
+        ["xpath=//form[@id='f1']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "passwordprova"
+    }, {
+      "id": "3fa6fc65-0f5b-46be-88a1-9c61199fe5ae",
+      "comment": "",
+      "command": "click",
+      "target": "id=modificaPassword-Conferma",
+      "targets": [
+        ["id=modificaPassword-Conferma", "id"],
+        ["css=#modificaPassword-Conferma", "css:finder"],
+        ["xpath=//button[@id='modificaPassword-Conferma']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Conferma')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3e5ee6bf-f0de-46ed-bd03-471cc1a4790b",
+      "comment": "",
+      "command": "assertAlert",
+      "target": "Le password non coincidono!",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "00a85609-9ae1-4db6-8563-db6f208d9b39",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "af8a3fd9-e90e-4ce8-948b-3eb70de74fa1",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//input[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[4]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b7e847f0-485e-4aa5-bb78-190d0d9cd0b2",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=h5",
+      "targets": [
+        ["css=h5", "css:finder"],
+        ["xpath=//h5", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "966f7ddf-a18c-46f0-a631-a1ac58dcb82a",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "07740830-7eb7-4586-a507-32206546c1dc",
+    "name": "ModificaClientePasswordTroppoCorta",
+    "commands": [{
+      "id": "5dd2db11-b927-4df4-9f63-2cf840051269",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a2a46432-244b-48e9-970a-0dd1ec6e2ce2",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1458x980",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "53ac4ab9-7934-4a20-8c98-04ffaf578461",
+      "comment": "",
+      "command": "click",
+      "target": "css=#index-autenticazione > button",
+      "targets": [
+        ["css=#index-autenticazione > button", "css:finder"],
+        ["xpath=//a[@id='index-autenticazione']/button", "xpath:idRelative"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e8b7360f-1305-47a5-9026-d4d578d034bc",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "95288b5c-9759-4795-8d7e-e65bfb19d616",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "5d1ed5de-f482-458c-9de3-c785b8c184b1",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1@email.tld"
+    }, {
+      "id": "76668213-d653-43d8-a2c3-7008499bf8d4",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2cf1859d-0879-4e0a-8818-9df78cee223d",
+      "comment": "",
+      "command": "click",
+      "target": "id=index-dettagliUtente",
+      "targets": [
+        ["id=index-dettagliUtente", "id"],
+        ["css=#index-dettagliUtente", "css:finder"],
+        ["xpath=//input[@id='index-dettagliUtente']", "xpath:attributes"],
+        ["xpath=//form[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "914ca2ef-982e-4b11-870c-6dcd98268b57",
+      "comment": "",
+      "command": "click",
+      "target": "id=dettagliUtente-modificaPassword",
+      "targets": [
+        ["id=dettagliUtente-modificaPassword", "id"],
+        ["css=#dettagliUtente-modificaPassword", "css:finder"],
+        ["xpath=//a[contains(text(),'Modifica\n\t\t\t\tPassword')]", "xpath:link"],
+        ["xpath=//a[@id='dettagliUtente-modificaPassword']", "xpath:attributes"],
+        ["xpath=//a[contains(@href, 'modificaPassword.jsp')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bf59dfbe-c2b2-486f-a717-f20131630dab",
+      "comment": "",
+      "command": "type",
+      "target": "id=ps1",
+      "targets": [
+        ["id=ps1", "id"],
+        ["name=password", "name"],
+        ["css=#ps1", "css:finder"],
+        ["xpath=//input[@id='ps1']", "xpath:attributes"],
+        ["xpath=//form[@id='f1']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "abcd"
+    }, {
+      "id": "3341ea1d-d361-4403-ac80-ded6d45b0bee",
+      "comment": "",
+      "command": "type",
+      "target": "id=ps2",
+      "targets": [
+        ["id=ps2", "id"],
+        ["name=confermapassword", "name"],
+        ["css=#ps2", "css:finder"],
+        ["xpath=//input[@id='ps2']", "xpath:attributes"],
+        ["xpath=//form[@id='f1']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "abcd"
+    }, {
+      "id": "bd68a1f5-0e6b-42a2-b258-347aa47651d7",
+      "comment": "",
+      "command": "click",
+      "target": "id=modificaPassword-Conferma",
+      "targets": [
+        ["id=modificaPassword-Conferma", "id"],
+        ["css=#modificaPassword-Conferma", "css:finder"],
+        ["xpath=//button[@id='modificaPassword-Conferma']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Conferma')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8f74d642-d58b-4662-8914-4ef598c74610",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h4",
+      "targets": [
+        ["css=h4", "css:finder"],
+        ["xpath=//h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Password non è stata modificata')]", "xpath:innerText"]
+      ],
+      "value": "Password non è stata modificata"
+    }, {
+      "id": "68267fe2-0440-4e63-9709-1c3fea365a38",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Continua')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d411d7f3-7169-4f8f-9baf-de44d717d76d",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//input[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[4]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7d605c6d-63bc-4017-89f7-e6ad72044043",
+      "comment": "",
+      "command": "click",
+      "target": "css=#index-autenticazione > button",
+      "targets": [
+        ["css=#index-autenticazione > button", "css:finder"],
+        ["xpath=//a[@id='index-autenticazione']/button", "xpath:idRelative"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ccf7ce0d-d94e-46a4-9612-555a437677ef",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4f114aa5-c499-4f01-9715-cd9c63d27f1e",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1"
+    }, {
+      "id": "25f1beda-9d35-4767-85e2-e350b5d5c53e",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "abcd"
+    }, {
+      "id": "a0eb8cc1-e44d-4592-887e-c0d0091deb38",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e5ca3700-1804-4cef-bbd3-8917562c1849",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h4",
+      "targets": [
+        ["css=h4", "css:finder"],
+        ["xpath=//h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'I dati inseriti non sono validi, riprova')]", "xpath:innerText"]
+      ],
+      "value": "I dati inseriti non sono validi, riprova"
+    }, {
+      "id": "22822829-2379-4849-a1b0-d028340f8a94",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "afb1b15e-0e37-44f9-a5b9-94faaaeb8559",
+    "name": "ModificaClientePasswordVuota",
+    "commands": [{
+      "id": "fa70894d-7301-48d7-a7b2-e51e0beb877d",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "064ec6db-bb56-49ac-a23d-f929a0c69ab6",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1458x980",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e71911ce-a6af-41cf-b976-9a672b27f5f2",
+      "comment": "",
+      "command": "click",
+      "target": "css=#index-autenticazione > button",
+      "targets": [
+        ["css=#index-autenticazione > button", "css:finder"],
+        ["xpath=//a[@id='index-autenticazione']/button", "xpath:idRelative"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "06a5cd7b-b049-4783-a99c-b6395dad2bc3",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f44361d1-768b-46c4-9290-90107624cdd5",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "beb1df67-4edd-4dbd-b307-29488639b1c8",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1@email.tld"
+    }, {
+      "id": "6f199ad1-e4c1-47eb-a71b-4f4b1fdd9deb",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b039baab-ea2a-46ef-82a4-b5a25903ce9c",
+      "comment": "",
+      "command": "click",
+      "target": "id=index-dettagliUtente",
+      "targets": [
+        ["id=index-dettagliUtente", "id"],
+        ["css=#index-dettagliUtente", "css:finder"],
+        ["xpath=//input[@id='index-dettagliUtente']", "xpath:attributes"],
+        ["xpath=//form[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "37d7bc20-de3a-4a65-8409-0ca52cf34b02",
+      "comment": "",
+      "command": "click",
+      "target": "id=dettagliUtente-modificaPassword",
+      "targets": [
+        ["id=dettagliUtente-modificaPassword", "id"],
+        ["css=#dettagliUtente-modificaPassword", "css:finder"],
+        ["xpath=//a[contains(text(),'Modifica\n\t\t\t\tPassword')]", "xpath:link"],
+        ["xpath=//a[@id='dettagliUtente-modificaPassword']", "xpath:attributes"],
+        ["xpath=//a[contains(@href, 'modificaPassword.jsp')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c6400898-6f3a-4d00-92ab-1ad0f1c64054",
+      "comment": "",
+      "command": "click",
+      "target": "id=modificaPassword-Conferma",
+      "targets": [
+        ["id=modificaPassword-Conferma", "id"],
+        ["css=#modificaPassword-Conferma", "css:finder"],
+        ["xpath=//button[@id='modificaPassword-Conferma']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Conferma')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1f40b7e6-a450-480c-97cb-f675a0c2be5d",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h4",
+      "targets": [
+        ["css=h4", "css:finder"],
+        ["xpath=//h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'Password non è stata modificata')]", "xpath:innerText"]
+      ],
+      "value": "Password non è stata modificata"
+    }, {
+      "id": "ddd059c7-5422-4950-937a-f538912b6a51",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5e29467e-4707-429b-b327-9ddc94717276",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//input[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[4]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1421bb21-61a4-45a9-87ae-373a0dd0ad7b",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=h5",
+      "targets": [
+        ["css=h5", "css:finder"],
+        ["xpath=//h5", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "ed023168-d888-4ac4-b0f3-37b2e46332e8",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "eec67e42-de5a-4b2e-986a-9a1cfedfc217",
+    "name": "ModificaClientePassword",
+    "commands": [{
+      "id": "04839c10-b542-4ad3-bcbd-4829979009cb",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "189c4435-cb23-4f8b-a43f-762febee9339",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1458x980",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1797251b-8cfc-4be1-91ec-30d558fa9937",
+      "comment": "",
+      "command": "click",
+      "target": "css=#index-autenticazione > button",
+      "targets": [
+        ["css=#index-autenticazione > button", "css:finder"],
+        ["xpath=//a[@id='index-autenticazione']/button", "xpath:idRelative"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5ab1252b-2704-481d-8bde-fbf35a36c52c",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "753750ba-3847-4d7b-a4ea-05963d397da5",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "abbfaaac-8688-483b-b83e-003f757275b6",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1@email.tld"
+    }, {
+      "id": "993bb093-5eac-447e-bd31-8ab3ec52c83c",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "98965830-fa1e-4608-ba3d-8c71f72ac3f6",
+      "comment": "",
+      "command": "click",
+      "target": "id=index-dettagliUtente",
+      "targets": [
+        ["id=index-dettagliUtente", "id"],
+        ["css=#index-dettagliUtente", "css:finder"],
+        ["xpath=//input[@id='index-dettagliUtente']", "xpath:attributes"],
+        ["xpath=//form[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f0360d6b-373c-4f08-8b33-4a787c107e8d",
+      "comment": "",
+      "command": "click",
+      "target": "id=dettagliUtente-modificaPassword",
+      "targets": [
+        ["id=dettagliUtente-modificaPassword", "id"],
+        ["css=#dettagliUtente-modificaPassword", "css:finder"],
+        ["xpath=//a[contains(text(),'Modifica\n\t\t\t\tPassword')]", "xpath:link"],
+        ["xpath=//a[@id='dettagliUtente-modificaPassword']", "xpath:attributes"],
+        ["xpath=//a[contains(@href, 'modificaPassword.jsp')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f594f011-79a0-441f-bdf0-a9c233656486",
+      "comment": "",
+      "command": "type",
+      "target": "id=ps1",
+      "targets": [
+        ["id=ps1", "id"],
+        ["name=password", "name"],
+        ["css=#ps1", "css:finder"],
+        ["xpath=//input[@id='ps1']", "xpath:attributes"],
+        ["xpath=//form[@id='f1']/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "passwordprova"
+    }, {
+      "id": "6ca1c99c-3b50-482f-a193-d728d2e15dd6",
+      "comment": "",
+      "command": "type",
+      "target": "id=ps2",
+      "targets": [
+        ["id=ps2", "id"],
+        ["name=confermapassword", "name"],
+        ["css=#ps2", "css:finder"],
+        ["xpath=//input[@id='ps2']", "xpath:attributes"],
+        ["xpath=//form[@id='f1']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "passwordprova"
+    }, {
+      "id": "fa0d7fa3-0f8e-4ef3-95b3-5d5be3081ec1",
+      "comment": "",
+      "command": "click",
+      "target": "id=modificaPassword-Conferma",
+      "targets": [
+        ["id=modificaPassword-Conferma", "id"],
+        ["css=#modificaPassword-Conferma", "css:finder"],
+        ["xpath=//button[@id='modificaPassword-Conferma']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Conferma')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f505341d-c3da-4f6e-96dd-9c24b170fd7c",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h4",
+      "targets": [
+        ["css=h4", "css:finder"],
+        ["xpath=//h4", "xpath:position"],
+        ["xpath=//h4[contains(.,'La password è stata modificata')]", "xpath:innerText"]
+      ],
+      "value": "La password è stata modificata"
+    }, {
+      "id": "982795df-8eb7-4c42-aeeb-0bb4e99309a8",
+      "comment": "",
+      "command": "open",
+      "target": "https://tecstore.gdgn.xyz/TecStore/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b8739c9a-5d62-4a51-b157-bee21c747c59",
+      "comment": "",
+      "command": "click",
+      "target": "id=logout",
+      "targets": [
+        ["id=logout", "id"],
+        ["css=#logout", "css:finder"],
+        ["xpath=//input[@id='logout']", "xpath:attributes"],
+        ["xpath=//div[4]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "63d727a5-045a-46f8-b1f6-2a6ac65844bc",
+      "comment": "",
+      "command": "click",
+      "target": "css=#index-autenticazione > button",
+      "targets": [
+        ["css=#index-autenticazione > button", "css:finder"],
+        ["xpath=//a[@id='index-autenticazione']/button", "xpath:idRelative"],
+        ["xpath=//a[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Autenticati')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b6bc0d5b-7844-4cda-9802-c0c54be2a45f",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "01234567890"
+    }, {
+      "id": "1f765389-8322-41e5-b87c-3c45a22e7fc2",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-email",
+      "targets": [
+        ["id=autenticazione-email", "id"],
+        ["name=email", "name"],
+        ["css=#autenticazione-email", "css:finder"],
+        ["xpath=//input[@id='autenticazione-email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "email1@email.tld"
+    }, {
+      "id": "f62ac055-c397-48df-a1f3-c2994931d55a",
+      "comment": "",
+      "command": "type",
+      "target": "id=autenticazione-password",
+      "targets": [
+        ["id=autenticazione-password", "id"],
+        ["name=password", "name"],
+        ["css=#autenticazione-password", "css:finder"],
+        ["xpath=//input[@id='autenticazione-password']", "xpath:attributes"],
+        ["xpath=//p[2]/input", "xpath:position"]
+      ],
+      "value": "passwordprova"
+    }, {
+      "id": "8c2c31b5-181f-44d7-98f9-52a1504da3f0",
+      "comment": "",
+      "command": "click",
+      "target": "id=autenticazione-accedi",
+      "targets": [
+        ["id=autenticazione-accedi", "id"],
+        ["css=#autenticazione-accedi", "css:finder"],
+        ["xpath=//input[@id='autenticazione-accedi']", "xpath:attributes"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "83f2fb0e-fbf2-492d-aa5e-d7831eee62b6",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h5",
+      "targets": [
+        ["css=h5", "css:finder"],
+        ["xpath=//h5", "xpath:position"]
+      ],
+      "value": "Benvenuto nella nostra pagina shopping! Qui potrai visualizzare tutti i prodotti disponibili.\\nChe aspetti? Inizia subito la tua elettrificante spesa! "
+    }, {
+      "id": "c72708bb-a507-4c91-99fb-8beb02a00ec5",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "6842e2ad-ab6d-48e7-9235-f0e8de15eef4",
@@ -4355,7 +5234,14 @@
     "parallel": false,
     "timeout": 300,
     "tests": ["83a3ab84-06b9-43b9-96a2-27b216a961e5", "84827eff-605a-4750-bd02-597d6f97a210", "669e9297-e814-4cfd-a13b-7b02cbdb8c35", "9b6c6de8-68b7-4672-81c5-4f52530cab3d"]
+  }, {
+    "id": "f6799d91-9c4d-4e19-80d5-a31c664df06f",
+    "name": "ModificaCliente",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["c4aebe2c-9385-4e70-aae5-78aced6ebc77", "a76ac65b-4dd5-45a0-a635-1d957ad6e606", "5801d68f-701b-4931-807a-31cb951c2b80", "07740830-7eb7-4586-a507-32206546c1dc", "afb1b15e-0e37-44f9-a5b9-94faaaeb8559"]
   }],
-  "urls": [],
+  "urls": ["https://tecstore.gdgn.xyz/TecStore"],
   "plugins": []
 }
