@@ -70,7 +70,7 @@ public class UtenteBean {
 		// https://web.archive.org/web/20220106162522/https://www.w3resource.com/javascript/form/email-validation.php
 		return email.matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$");
 	}
-	
+
 	public boolean checkCartaDiCredito(String cartaDiCredito) {
 		// Reference: https://stackoverflow.com/a/9315696
 		return cartaDiCredito.matches(
@@ -78,7 +78,7 @@ public class UtenteBean {
 	}
 
 	public boolean checkPassword(String password) {
-		return (password.length() >= 10) && (password.length() <= 64);
+		return password != null && (password.length() >= 10) && (password.length() <= 64);
 	}
 
 	@Override
@@ -139,9 +139,12 @@ public class UtenteBean {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		if (checkPassword(password))
+	public boolean setPassword(String password) {
+		if (checkPassword(password)) {
 			this.password = password;
+			return true;
+		}
+		return false;
 	}
 
 	public String getVia() {

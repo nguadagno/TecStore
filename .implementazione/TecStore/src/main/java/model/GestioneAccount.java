@@ -157,13 +157,15 @@ public class GestioneAccount {
 				connection = DriverManagerConnectionPool.getConnection("ammpersonale", "ammpersonale");
 			else
 				return false;
+
 			if (utente == null || (!utente.getEmail().equals(u.getEmail()) && !utente.checkEmail(utente.getEmail())))
 				return false;
 
-			if (!utente.getPassword().equals(u.getPassword())) {
-				if (utente.checkPassword(utente.getPassword())) {
-					utente.setPassword(encryptPassword(utente.getPassword()));
-				}
+			System.out.println(utente.getPassword());
+
+			if (utente.getPassword() != null && !utente.getPassword().equals(u.getPassword())) {
+				if (!utente.setPassword(encryptPassword(utente.getPassword())))
+					return false;
 			}
 
 			preparedStatement = connection.prepareStatement(updateUtenteQuery);

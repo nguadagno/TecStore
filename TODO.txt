@@ -1,0 +1,6 @@
+Java:
+modifica immagine: rimozione fix
+junit foto
+test selenium
+
+test result
