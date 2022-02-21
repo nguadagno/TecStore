@@ -20,6 +20,7 @@
 	
 	
 	
+	
 var password = document.getElementById("password"), confermapassword = document.getElementById("confermapassword");
 
 function validatePassword(){
@@ -32,6 +33,7 @@ function validatePassword(){
 
 password.onchange = validatePassword;
 confermapassword.onkeyup = validatePassword;
+
 
 
 
@@ -148,8 +150,7 @@ return;
 				<i>Tipologia dipendente</i>
 			</h3>
 
-			<BR> <select id="tipologiaUtente" name="tipologiaUtente"
-				id="dettagliUtente-tipologiaUtente">
+			<BR> <select id="tipologiaUtente" name="tipologiaUtente">
 				<option value="2" <%=utente.getTipologia() == 2 ? "selected" : ""%>>Centralinista</option>
 				<option value="3" <%=utente.getTipologia() == 3 ? "selected" : ""%>>Magazziniere</option>
 				<option value="4" <%=utente.getTipologia() == 4 ? "selected" : ""%>>Amministratore

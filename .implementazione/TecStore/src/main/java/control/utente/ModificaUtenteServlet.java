@@ -46,6 +46,10 @@ public class ModificaUtenteServlet extends HttpServlet {
 		try {
 			UtenteBean oldUtente = model.dettagliUtente(request.getParameter("CF"));
 			String password = "";
+
+			int tipologiaUtente = -1;
+			int tipologia = Integer.parseInt(session.getAttribute("tipologia").toString());
+
 			if (session.getAttribute("tipologia") != null && session.getAttribute("tipologia").toString().equals("5"))
 				password = model.generatePassword(15);
 			else if (session.getAttribute("tipologia") != null
@@ -55,11 +59,13 @@ public class ModificaUtenteServlet extends HttpServlet {
 			else
 				password = oldUtente.getPassword();
 
-			int tipologia = 1;
-
-			if (session.getAttribute("tipologiaUtente") != null)
-				tipologia = Integer.parseInt(request.getParameter("tipologiaUtente"));
-			if (tipologia != 2 || tipologia != 3 || tipologia != 4 || tipologia != 5) {
+			if (request.getParameter("tipologiaUtente") != null)
+				tipologiaUtente = Integer.parseInt(request.getParameter("tipologiaUtente"));
+			else {
+				session.setAttribute("errore", "modificaUtente");
+				redirect = "/errore.jsp";
+			}
+			if (tipologia == 5 && tipologiaUtente == 1) {
 				session.setAttribute("errore", "modificaUtente");
 				redirect = "/errore.jsp";
 			} else {
@@ -85,7 +91,7 @@ public class ModificaUtenteServlet extends HttpServlet {
 										+ request.getParameter("anno") + request.getParameter("mese"));
 
 				if (model.modificaUtente(session.getAttribute("CF").toString(), new UtenteBean(CF, nome, cognome, email,
-						password, via, numeroCivico, citta, provincia, CAP, tipologia, cartaDiCredito))) {
+						password, via, numeroCivico, citta, provincia, CAP, tipologiaUtente, cartaDiCredito))) {
 					if (session.getAttribute("tipologia").toString().equals("5")) {
 						session.setAttribute("passwordUtente", password);
 						session.setAttribute("emailUtente", request.getParameter("email"));

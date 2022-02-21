@@ -43,16 +43,20 @@ public class RegistrazioneUtenteServlet extends HttpServlet {
 		String password = session.getAttribute("tipologia") == null ? request.getParameter("password")
 				: model.generatePassword(15);
 
-		int tipologia = session.getAttribute("tipologia") == null ? 1
-				: Integer.parseInt(request.getParameter("tipologiaUtente"));
-
+		int tipologiaUtente;
+		if (request.getParameter("tipologiaUtente") != null && session.getAttribute("tipologia").toString().equals("5"))
+			tipologiaUtente = Integer.parseInt(request.getParameter("tipologiaUtente"));
+		else if (request.getParameter("tipologiaUtente") == null && session.getAttribute("tipologia") == null) {
+			tipologiaUtente = 1;
+		} else
+			tipologiaUtente = -1;
 		UtenteBean utente = new UtenteBean(request.getParameter("CF"), request.getParameter("nome"),
 				request.getParameter("cognome"), request.getParameter("email"), password, request.getParameter("via"),
 				request.getParameter("numerocivico") != null ? Integer.parseInt(request.getParameter("numerocivico"))
 						: null,
 				request.getParameter("citta"), request.getParameter("provincia"),
-				request.getParameter("CAP") != null ? Integer.parseInt(request.getParameter("CAP")) : null, tipologia,
-				"");
+				request.getParameter("CAP") != null ? Integer.parseInt(request.getParameter("CAP")) : null,
+				tipologiaUtente, "");
 
 		session.setAttribute("operazione", "registrazioneUtente");
 		try {

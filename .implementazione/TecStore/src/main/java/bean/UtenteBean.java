@@ -27,7 +27,7 @@ public class UtenteBean {
 
 	public UtenteBean(String CF, String nome, String cognome, String email, String password, String via,
 			int numeroCivico, String citta, String provincia, int CAP, int tipologia, String cartaDiCredito) {
-		if (this.checkCF(CF) && this.checkEmail(email) && this.checkPassword(password)) {
+		if (this.checkCF(CF) && this.checkEmail(email) && this.checkPassword(password) && tipologia > 0) {
 			this.CF = CF;
 			this.nome = nome;
 			this.cognome = cognome;

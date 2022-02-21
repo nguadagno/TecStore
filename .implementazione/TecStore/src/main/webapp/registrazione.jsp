@@ -94,7 +94,10 @@
 				<option value="3">Magazziniere</option>
 				<option value="4">Amministratore Catalogo</option>
 				<option value="5">Amministratore Personale</option>
-			</select>
+			</select><br> <br>
+			<div align="center">
+				<input type="submit" value="Conferma">
+			</div>
 			<%
 			}
 			%>
@@ -108,8 +111,13 @@
 	<br>
 	<br>
 	<div align="center">
-		<a>
+		<a> <%
+ if (tipologia == -1) {
+ %>
 			<button onclick="checkPassword1()" id="registrazione-Conferma">Conferma</button>
+			<%
+			}
+			%>
 		</a> <a href="paginainiziale.jsp" id="registrazione-Indietro"><button>Torna
 				Alla Home</button></a>
 	</div>
