@@ -11,6 +11,7 @@
 \usepackage{longtable}
 \usepackage{enumitem}
 \usepackage{fancyvrb}
+\usepackage{multicol}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{makecell}
@@ -79,9 +80,9 @@ Patrone Paolo & 0512106153 \\
 Si è scelto di dividere il testing in due fasi principali:
 \subsection{JUnit}
 Una volta raggiunta un'implementazione completa, ci si è adoperati per scrivere dei test JUnit che mettessero alla prova le funzioni principali dei model, in maniera tale da rilevare eventuali errori nel codice o nell'esecuzione di particolari operazioni. \\
-Si sono usati gli strumenti messi a disposizione da Eclipse IDE for Java EE per scrivere ed eseguire i test. \\ \\
+Si sono usati gli strumenti messi a disposizione da Eclipse IDE for Java EE per scrivere ed eseguire i test. \\
 
-Da questo testing sono emerse svariate problematiche legate alla logica interna di alcune funzioni, dei Bean e alla struttura del database, che sono state prontamente risolte. \\ \\
+Da questo testing sono emerse svariate problematiche legate alla logica interna di alcune funzioni, dei Bean e alla struttura del database, che sono state prontamente risolte. \\
 Poiché i test sono eseguiti sequenzialmente e un reset totale del database tra un test e l'altro rallenterebbe enormemente la fase di esecuzione dei test, è stato necessario rinominare alcuni dei test aggiungendo dei suffissi affinché, rispettando l'ordine alfabetico, l'ordine delle operazioni sia sempre possibile: ad esempio, se si tentasse di rimuovere un articolo o di modificarne le informazioni prima che venga inserito, ci sarebbero ovviamente degli errori.
 
 
@@ -89,11 +90,53 @@ Poiché i test sono eseguiti sequenzialmente e un reset totale del database tra 
 
 \subsection{Selenium}
 In seguito al testing JUnit e alle dovute modifiche al sistema, accertatisi della funzionalità quasi certa dei DAO si è usata la libreria Selenium per testare le servlet e le loro risposte. \\
-Si è usato lo strumento Selenium IDE, un'estensione per browser che ha permesso di velocizzare enormemente la fase di scrittura dei test, riducendo al minimo la necessità di scrivere ulteriore codice. \\ \\
+Si è usato lo strumento Selenium IDE, un'estensione per browser che ha permesso di velocizzare enormemente la fase di scrittura dei test, riducendo al minimo la necessità di scrivere ulteriore codice. \\
 
-Anche in questo caso sono emerse svariate criticità nell'esecuzione delle operazioni, che sono state risolte anche tramite la stesura dei test, che hanno velocizzato la fase di verifica del nuovo codice. \\ \\
+Anche in questo caso sono emerse svariate criticità nell'esecuzione delle operazioni, che sono state risolte anche tramite la stesura dei test, che hanno velocizzato la fase di verifica del nuovo codice. \\
 Come per i test JUnit, la sequenzialità delle operazioni è stato un fattore di cui si è tenuto conto nella stesura dei test, affinché, ammesso di partire da un database in cui esistono solo dei dati predefiniti, i test non falliscano a causa di dati estranei o imprevisti.
 
+\newpage
 
+\begin{multicols}{2}
+\includegraphics[scale=0.45]{autenticazione} \\
+
+
+\includegraphics[scale=0.45]{carrello} \\
+
+
+\includegraphics[scale=0.45]{inserimentoarticolo} \\
+
+ \includegraphics[scale=0.45]{modificaarticolo} \\
+ 
+ 
+\includegraphics[scale=0.45]{modificacliente} \\
+
+\columnbreak
+
+
+\includegraphics[scale=0.45]{ricercavendita} \\
+
+
+\includegraphics[scale=0.45]{ticketcliente} \\
+
+
+\includegraphics[scale=0.45]{ticketcentralinista} \\
+
+
+\includegraphics[scale=0.45]{venditacentralinista} \\
+
+\includegraphics[scale=0.45]{ricercaarticolo} \\
+
+\includegraphics[scale=0.45]{spedizione} \\
+
+\includegraphics[scale=0.45]{modificadipendente} \\
+
+\end{multicols} 
+
+\begin{center}
+
+
+
+\end{center}
 
 \end{document}
