@@ -52,31 +52,31 @@ public class datiprovaservlet extends HttpServlet {
 			gestioneAssistenza.rispostaTicket(IDTicket, "MJNVJN44D52G247I", "messaggio 3 ticket 1 prova");
 			gestioneAssistenza.rispostaTicket(IDTicket, "KXBCFY80S51D296C", "messaggio 4 ticket 1 prova");
 
-			gestioneVendita.inserimentoNuovoArticolo("art1", "descr1", "KXBCFY80S51D296C", 10, (float) 15.50, true);
-			gestioneVendita.inserimentoNuovoArticolo("art2", "descr2", "KXBCFY80S51D296C", 15, (float) 30.50, true);
-			gestioneVendita.inserimentoNuovoArticolo("art3", "descr3", "KXBCFY80S51D296C", 20, (float) 99.50, false);
-			gestioneVendita.inserimentoNuovoArticolo("art4", "descr4", "KXBCFY80S51D296C", 40, (float) 99.50, false);
+			gestioneVendita.inserimentoNuovoArticolo("articolo1", "descrizione articolo 1 ++++", "KXBCFY80S51D296C", 10, (float) 15.50, true);
+			gestioneVendita.inserimentoNuovoArticolo("articolo2", "descrizione articolo 2 ++++", "KXBCFY80S51D296C", 15, (float) 30.50, true);
+			gestioneVendita.inserimentoNuovoArticolo("articolo3", "descrizione articolo 3 ++++", "KXBCFY80S51D296C", 20, (float) 99.50, false);
+			gestioneVendita.inserimentoNuovoArticolo("articolo4", "descrizione articolo 4 ++++", "KXBCFY80S51D296C", 40, (float) 99.50, false);
 
-			gestioneVendita.inserimentoNuovoArticolo("art10", "descr1", "RTDCXV27L46E405N", 10, (float) 15.50, true);
-			gestioneVendita.inserimentoNuovoArticolo("art20", "descr2", "RTDCXV27L46E405N", 15, (float) 30.50, true);
-			gestioneVendita.inserimentoNuovoArticolo("art30", "descr3", "RTDCXV27L46E405N", 20, (float) 99.50, false);
-			gestioneVendita.inserimentoNuovoArticolo("art40", "descr4", "RTDCXV27L46E405N", 40, (float) 99.50, false);
+			gestioneVendita.inserimentoNuovoArticolo("articolo10", "descrizione articolo 10 ++++", "RTDCXV27L46E405N", 10, (float) 15.50, true);
+			gestioneVendita.inserimentoNuovoArticolo("articolo20", "descrizione articolo 20 ++++", "RTDCXV27L46E405N", 15, (float) 30.50, true);
+			gestioneVendita.inserimentoNuovoArticolo("articolo30", "descrizione articolo 30 ++++", "RTDCXV27L46E405N", 20, (float) 99.50, false);
+			gestioneVendita.inserimentoNuovoArticolo("articolo40", "descrizione articolo 40 ++++", "RTDCXV27L46E405N", 40, (float) 99.50, false);
 
 			ArticoloBean a1 = gestioneVendita.ricercaArticolo("art10", 10).get(0);
 			ArticoloBean a2 = gestioneVendita.ricercaArticolo("art20", 10).get(0);
 			ArticoloBean a3 = gestioneVendita.ricercaArticolo("art30", 10).get(0);
 			ArticoloBean a4 = gestioneVendita.ricercaArticolo("art40", 10).get(0);
 
-			gestioneVendita.inserimentoFoto(a1.getID(),
-					new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F1.png")));
-			gestioneVendita.inserimentoFoto(a1.getID(),
-					new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F2.png")));
-			gestioneVendita.inserimentoFoto(a1.getID(),
-					new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F3.png")));
-			gestioneVendita.inserimentoFoto(a2.getID(),
-					new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F2.png")));
-			gestioneVendita.inserimentoFoto(a3.getID(),
-					new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F3.png")));
+//			gestioneVendita.inserimentoFoto(a1.getID(),
+//					new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F1.png")));
+//			gestioneVendita.inserimentoFoto(a1.getID(),
+//					new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F2.png")));
+//			gestioneVendita.inserimentoFoto(a1.getID(),
+//					new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F3.png")));
+//			gestioneVendita.inserimentoFoto(a2.getID(),
+//					new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F2.png")));
+//			gestioneVendita.inserimentoFoto(a3.getID(),
+//					new FileInputStream(new File("D:/TecStore/.implementazione/TecStore/test/img/F3.png")));
 
 			gestioneCarrello.aggiuntaArticolo("KXBCFY80S51D296C", a1.getID(), 2);
 			gestioneCarrello.aggiuntaArticolo("KXBCFY80S51D296C", a2.getID(), 4);
