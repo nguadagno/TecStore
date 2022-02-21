@@ -51,10 +51,10 @@ return;
 		<br>
 		<div>
 			<input type="submit" value="Conferma" id="creazioneTicket-conferma">
-			<a href="dettagliArticolo.jsp" id="creazioneTicket-Annulla">
-				<button>Annulla</button>
-			</a>
 		</div>
 	</form>
+	<a href="index.jsp" id="creazioneTicket-Annulla">
+		<button>Annulla</button>
+	</a>
 </body>
 </html>

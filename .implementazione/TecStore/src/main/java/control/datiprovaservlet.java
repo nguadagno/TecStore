@@ -44,13 +44,13 @@ public class datiprovaservlet extends HttpServlet {
 			gestioneAccount.registrazioneUtente("PKCSZL43R26C890I", "nome5", "cognome5", "email5@email.tld",
 					"01234567890", "v5", 5, "v5", "p5", 5, 5);
 
-			gestioneAssistenza.creazioneTicket("KXBCFY80S51D296C", "Spedizione", "R0");
+			gestioneAssistenza.creazioneTicket("KXBCFY80S51D296C", "Spedizione", "messaggio 1 ticket 1 prova");
 
 			String IDTicket = gestioneAssistenza.elencoTicketCentralinista(1).get(0).getIDTicket();
 
-			gestioneAssistenza.rispostaTicket(IDTicket, "KXBCFY80S51D296C", "r1");
-			gestioneAssistenza.rispostaTicket(IDTicket, "MJNVJN44D52G247I", "r2");
-			gestioneAssistenza.rispostaTicket(IDTicket, "KXBCFY80S51D296C", "r3");
+			gestioneAssistenza.rispostaTicket(IDTicket, "KXBCFY80S51D296C", "messaggio 2 ticket 1 prova");
+			gestioneAssistenza.rispostaTicket(IDTicket, "MJNVJN44D52G247I", "messaggio 3 ticket 1 prova");
+			gestioneAssistenza.rispostaTicket(IDTicket, "KXBCFY80S51D296C", "messaggio 4 ticket 1 prova");
 
 			gestioneVendita.inserimentoNuovoArticolo("art1", "descr1", "KXBCFY80S51D296C", 10, (float) 15.50, true);
 			gestioneVendita.inserimentoNuovoArticolo("art2", "descr2", "KXBCFY80S51D296C", 15, (float) 30.50, true);

@@ -83,11 +83,11 @@ public class GestioneAssistenza {
 	public boolean creazioneTicket(String CF, String tipologia, String messaggio) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
 
-		final Set<String> tipologieTicket = Set.of("Amministrativo", "Ordini", "Spedizione", "Rimborso", "Profilo" );
-		
-		if (messaggio == null || messaggio.length() < 15 || messaggio.length() > 1024 || !tipologieTicket.contains(tipologia)) {
+		final Set<String> tipologieTicket = Set.of("Amministrativo", "Ordini", "Spedizione", "Rimborso", "Profilo");
+
+		if (messaggio == null || messaggio.length() < 15 || messaggio.length() > 1024
+				|| !tipologieTicket.contains(tipologia)) {
 			return false;
 		}
 
@@ -108,13 +108,13 @@ public class GestioneAssistenza {
 
 			ResultSet rs = preparedStatement.executeQuery();
 
-			if (rs.next()) {
+			if (rs.next() && rispostaTicket(rs.getString("IDTicket"), CF, messaggio)) {
 				connection.commit();
-				return rispostaTicket(rs.getString("IDTicket"), CF, messaggio);
-			} else {
-				connection.rollback();
-				return false;
+				return true;
 			}
+
+			connection.rollback();
+			return false;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -257,6 +257,10 @@ public class GestioneAssistenza {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
+		if (contenuto == null || contenuto.length() < 15 || contenuto.length() > 1024) {
+			return false;
+		}
+
 		String insertTicketQuery = "INSERT INTO messaggio (CF, IDTicket, Contenuto) VALUES (?, ?, ?);";
 
 		try {
@@ -271,7 +275,9 @@ public class GestioneAssistenza {
 			connection.commit();
 			return true;
 		} catch (Exception e) {
+			connection.rollback();
 			e.printStackTrace();
+			return false;
 		} finally {
 			try {
 				if (connection != null) {
@@ -281,7 +287,6 @@ public class GestioneAssistenza {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
-		return false;
 	}
 
 }
