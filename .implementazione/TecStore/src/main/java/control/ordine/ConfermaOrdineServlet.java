@@ -45,7 +45,8 @@ public class ConfermaOrdineServlet extends HttpServlet {
 
 		try {
 			if (model.cambiaStato(request.getParameter("IDOrdine"), request.getParameter("stato"))) {
-				session.setAttribute("successo", "confermaOrdine");
+				session.setAttribute("successo",
+						request.getParameter("stato").equals("Annullato") ? "annullaOrdine" : "confermaOrdine");
 				redirect = "/successo.jsp";
 				if (request.getParameter("stato").equals("Spedito")) {
 					if (!model.setCodiceTracciamento(request.getParameter("IDOrdine"),

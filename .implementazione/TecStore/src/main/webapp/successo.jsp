@@ -43,7 +43,12 @@
 		break;
 		case "confermaOrdine":
 		%>
-		<h4>Lo stato dell'ordine &egrave; stato confermato.</h4>
+		<h4>L'ordine &egrave; stato spedito.</h4>
+		<%
+		break;
+		case "annullaOrdine":
+		%>
+		<h4>L'ordine &egrave; stato annullato.</h4>
 		<%
 		break;
 		case "creazioneOrdine":
