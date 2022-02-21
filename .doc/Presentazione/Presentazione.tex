@@ -1,0 +1,130 @@
+\documentclass[12pt,a4paper]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\author{Natale Guadagno, Paolo Patrone}
+\title{Presentazione progetto - TecStore}
+\date {25 febbraio 2022}
+
+\setbeamertemplate{background}{\tikz[overlay,remember picture]\node[opacity=0.3]at (current page.center){\includegraphics[width=\textwidth]{../../Deliverables/Logo}};}
+\begin{document}
+
+
+\begin{frame}
+\maketitle
+\end{frame}
+
+\begin{frame}
+\frametitle{Partecipanti}
+\begin{center}
+\begin{tabular} {cc}
+\textbf{Nome} & \textbf{Matricola} \\
+Guadagno Natale & 0512106546 \\
+Patrone Paolo & 0512106153 \\
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Descrizione}
+\section{Cos'\`e ``TecStore"?}
+\begin{itemize}
+\item \`E una piattaforma di e-commerce, con focus su articoli di tecnologia, ispirata da altre piattaforme gi\`a esistenti
+\item Oltre alle funzionalit\`a rivolte ai clienti, mette a disposizione diverse funzionalit\`a riservate al personale, come  \\ \begin{minipage}{5cm}
+\begin{itemize}
+\item Gestione ticket
+\item Gestione spedizioni e rimborsi
+\item Gestione personale
+\item Gestione catalogo
+\end{itemize}
+\end{minipage}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tipologie di utenti}
+
+\begin{itemize}
+\item Cliente
+\item Centralinista
+\item Magazziniere
+\item Amministratore catalogo
+\item Amministratore personale
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Funzionalit\`a per i clienti}
+
+\begin{itemize}
+\item Ricerca articoli in vendita
+\item Possibilit\`a di acquisto di articoli
+\item Possibilit\`a di vendere i propri articoli$^1$
+\item Possibilit\`a di contattare il servizio clienti tramite i ticket
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Funzionalit\`a e ruoli dei dipendenti}
+
+\textbf{Centralinisti}
+\begin{itemize}
+\item Autorizzazione degli articoli messi in vendita dai clienti($^1$)
+\item Interazione coi clienti tramite i ticket
+\end{itemize}
+
+\textbf{Magazzinieri}
+\begin{itemize}
+\item Spedizione degli ordini creati dai clienti
+\item Autorizzazione dei rimborsi richiesti dai clienti
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Funzionalit\`a e ruoli dei dipendenti}
+
+\textbf{Amministratore catalogo}
+\begin{itemize}
+\item Creazione di articoli venduti dalla piattaforma
+\end{itemize}
+
+\textbf{Amministratore personale}
+\begin{itemize}
+\item Gestione dei profili degli altri dipendenti
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Linguaggi e strumenti utilizzati}
+\begin{columns}
+\column{0.5\textwidth}
+\textbf{Linguaggi}
+\begin{itemize}
+\item HTML5
+\item CSS
+\item JavaScript
+\item Java
+\item MySQL
+\end{itemize}
+\column{0.5\textwidth}
+\textbf{Strumenti}
+\begin{itemize}
+\item Eclipse IDE EE
+\item Selenium IDE
+\item MariaDB
+\item Tomcat 10
+\item Debian 10 buster
+\item GitHub
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+
+\end{frame}
+\end{document}
