@@ -34,7 +34,6 @@ public class ImmaginiServlet extends HttpServlet {
 			try {
 				// Reference:
 				// https://codebun.com/how-to-upload-and-retrieve-image-from-mysql-in-jsp-and-servlet/
-				System.out.println("get immagine");
 				OutputStream os = response.getOutputStream();
 				os.write(gestioneVendita.getFoto(request.getParameter("id")));
 				os.flush();
@@ -57,12 +56,9 @@ public class ImmaginiServlet extends HttpServlet {
 					gestioneVendita.rimozioneFoto(((ArticoloBean) session.getAttribute("dettagliArticolo")).getID(),
 							request.getParameter("del"));
 
-				System.out.println(session.getAttribute("fotoArticolo"));
-
 				session.setAttribute("fotoArticolo",
 						gestioneVendita.getAllFoto(((ArticoloBean) session.getAttribute("dettagliArticolo")).getID()));
 
-				System.out.println(session.getAttribute("fotoArticolo"));
 				session.setAttribute("operazione", "rimozioneImg");
 				RequestDispatcher dd = request.getRequestDispatcher("/dettagliArticolo.jsp");
 				dd.forward(request, response);
