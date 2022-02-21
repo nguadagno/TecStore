@@ -10,7 +10,7 @@
 <body>
 	<form action="ElencoOrdiniCliente" method="post">
 		<p>
-			<br> <input type="text" name="testo" maxlength="45"
+			<br> <input type="text" name="nome" maxlength="45"
 				placeholder="Cerca..." id="storicoOrdini-testoRicerca" required>
 			<select name="limit">
 				<option value="10">10</option>
@@ -29,6 +29,12 @@
 			|| foto == null) {
 	%>
 	<h3>Nessun Ordine effettuato</h3>
+	<br>
+	<br>
+	<br>
+	<div align="center">
+		<a href="paginainiziale.jsp" id="nuovaVendita-annulla"><button>Indietro</button></a>
+	</div>
 	<%
 	return;
 	} else {
@@ -45,16 +51,17 @@
 		for (int i = 0; i < ordini.size(); i++) {
 		%>
 		<tr>
-			<%
-			for (FotoBean f : foto) {
-				if (f.getIDArticolo().equals(ordini.get(i).getIDArticolo())) {
-			%>
-			<td><img style="max-width: 50px;" alt=<%=articoli.get(i).getNome() %> src="img?id=<%=f.getID()%>"></td>
-			<%
-			break;
-			}
-			}
-			%>
+			<td>
+				<%
+				for (FotoBean f : foto) {
+					if (f.getIDArticolo().equals(ordini.get(i).getIDArticolo())) {
+				%> <img style="max-width: 50px;" alt=<%=articoli.get(i).getNome()%>
+				src="img?id=<%=f.getID()%>"> <%
+ break;
+ }
+ }
+ %>
+			</td>
 			<td><%=articoli.get(i).getNome()%></td>
 			<td><%=ordini.get(i).getStato()%></td>
 			<td><%=ordini.get(i).getQuantita()%></td>
@@ -72,6 +79,12 @@
 			%>
 		</tr>
 	</table>
+	<br>
+	<br>
+	<br>
+	<div align="center">
+		<a href="paginainiziale.jsp" id="nuovaVendita-annulla"><button>Indietro</button></a>
+	</div>
 
 </body>
 </body>

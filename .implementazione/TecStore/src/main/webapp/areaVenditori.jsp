@@ -109,5 +109,12 @@ return;
 		}
 		%>
 	</table>
+	<br>
+	<br>
+	<br>
+	<div align="center">
+		<a href="paginainiziale.jsp" id="nuovaVendita-annulla"><button>Indietro</button></a>
+	</div>
+
 </body>
 </html>

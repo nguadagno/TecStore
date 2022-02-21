@@ -23,6 +23,12 @@
 	if (risultati == null || foto == null || risultati.size() == 0) {
 	%>
 	<h3 id="esito">Nessun Articolo Trovato!</h3>
+	<br>
+	<br>
+	<br>
+	<div align="center">
+		<a href="paginainiziale.jsp" id="nuovaVendita-annulla"><button>Indietro</button></a>
+	</div>
 	<%
 	return;
 	} else {
@@ -38,16 +44,16 @@
 		for (ArticoloBean a : risultati) {
 		%>
 		<tr>
-			<%
-			for (FotoBean f : foto) {
-				if (f.getIDArticolo().equals(a.getID())) {
-			%>
-			<td><img style="max-width: 50px;" src="img?id=<%=f.getID()%>"></td>
-			<%
-			break;
-			}
-			}
-			%>
+			<td>
+				<%
+				for (FotoBean f : foto) {
+					if (f.getIDArticolo().equals(a.getID())) {
+				%> <img style="max-width: 50px;" src="img?id=<%=f.getID()%>"> <%
+ break;
+ }
+ }
+ %>
+			</td>
 			<td><%=a.getNome()%></td>
 			<td><%=a.getQuantita() > 0 ? a.getQuantita() : "Non Disponibile"%></td>
 			<td><%=a.getPrezzo()%>&euro;</td>
@@ -64,6 +70,13 @@
 			%>
 		</tr>
 	</table>
+	<br>
+	<br>
+	<br>
+
+	<div align="center">
+		<a href="paginainiziale.jsp" id="nuovaVendita-annulla"><button>Indietro</button></a>
+	</div>
 
 </body>
 </body>

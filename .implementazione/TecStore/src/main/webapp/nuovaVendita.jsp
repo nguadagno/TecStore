@@ -48,11 +48,12 @@ return;
 						id="nuovaVendita-rimborsabileNO" value="0">
 				</div>
 				<div align="right">
-					<a href="areaVenditori.jsp" id="nuovaVendita-annulla"><button>Annulla</button></a>
+
 					<input type="submit" value="Continua" id="nuovaVendita-conferma">
 				</div>
 			</form>
 		</div>
+		<a href="areaVenditori.jsp" id="nuovaVendita-annulla"><button>Annulla</button></a>
 	</div>
 
 </body>
