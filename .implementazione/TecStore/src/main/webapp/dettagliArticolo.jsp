@@ -94,7 +94,34 @@ return;
 	<%
 	return;
 	}
+	if (session.getAttribute("errore") != null && session.getAttribute("errore").equals("modificaArticolo")) {
 	%>
+	<br>
+	<br>
+
+	<div align="center">
+		<h3 style="color: red;">Errore, Modifica non applicata!</h3>
+	</div>
+	<br>
+	<br>
+	<br>
+	<%
+	session.removeAttribute("errore");
+	}
+	if (session.getAttribute("successo") != null && session.getAttribute("successo").equals("modificaArticolo")) {
+	%>
+	<br>
+	<br>
+	<div align="center">
+		<h3 style="color: green;">La modifica &egrave; andata a buon
+			fine!</h3>
+		<br> <br> <br>
+	</div>
+	<%
+	session.removeAttribute("successo");
+	}
+	%>
+
 	<div class="photo-gallery">
 		<div class="container">
 			<div class="row photos">
@@ -203,7 +230,7 @@ return;
 		</h4>
 	</div>
 	<div align="right">
-		<form action="ModificaArticolo" method="post">
+		<form action="modificaArticolo.jsp" method="post">
 			<input type="hidden" name="IDArticolo" value="<%=risultato.getID()%>">
 			<input type="submit" value="Modifica" id="dettagliArticolo-modifica">
 		</form>

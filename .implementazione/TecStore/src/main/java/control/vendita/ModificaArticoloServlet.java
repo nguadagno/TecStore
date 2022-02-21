@@ -48,27 +48,25 @@ public class ModificaArticoloServlet extends HttpServlet {
 
 		session.setAttribute("operazione", "modificaArticolo");
 
-		String IDArticolo = session.getAttribute("dettagliArticolo") == null ? request.getParameter("IDArticolo")
-				: ((ArticoloBean) session.getAttribute("dettagliArticolo")).getID();
+		String IDArticolo = request.getParameter("IDArticolo");
 
-		String nome = session.getAttribute("dettagliArticolo") == null ? request.getParameter("nome")
+		String nome = request.getParameter("nome") != null ? request.getParameter("nome")
 				: ((ArticoloBean) session.getAttribute("dettagliArticolo")).getNome();
 
-		String descrizione = session.getAttribute("dettagliArticolo") == null ? request.getParameter("descrizione")
+		String descrizione = request.getParameter("descrizione") != null ? request.getParameter("descrizione")
 				: ((ArticoloBean) session.getAttribute("dettagliArticolo")).getDescrizione();
 
-		String IDVenditore = session.getAttribute("dettagliArticolo") == null ? request.getParameter("IDVenditore")
-				: ((ArticoloBean) session.getAttribute("dettagliArticolo")).getIDVenditore();
+		String IDVenditore = session.getAttribute("CF").toString();
 
-		int quantita = session.getAttribute("dettagliArticolo") == null
+		int quantita = request.getParameter("quantita") != null
 				? request.getParameter("quantita") == null ? -1 : Integer.parseInt(request.getParameter("quantita"))
 				: ((ArticoloBean) session.getAttribute("dettagliArticolo")).getQuantita();
 
-		float prezzo = session.getAttribute("dettagliArticolo") == null
-				? request.getParameter("quantitprezzoa") == null ? -1 : Integer.parseInt(request.getParameter("prezzo"))
+		float prezzo = request.getParameter("prezzo") != null
+				? request.getParameter("prezzo") == null ? -1 : Float.parseFloat(request.getParameter("prezzo"))
 				: ((ArticoloBean) session.getAttribute("dettagliArticolo")).getPrezzo();
 
-		Boolean rimborsabile = session.getAttribute("dettagliArticolo") == null
+		Boolean rimborsabile = request.getParameter("rimborsabile") != null
 				? request.getParameter("rimborsabile") == null ? null
 						: Boolean.parseBoolean(request.getParameter("rimborsabile"))
 				: ((ArticoloBean) session.getAttribute("dettagliArticolo")).isRimborsabile();
@@ -76,9 +74,8 @@ public class ModificaArticoloServlet extends HttpServlet {
 		@SuppressWarnings({ "unchecked" })
 		ArrayList<FotoBean> foto = (ArrayList<FotoBean>) request.getAttribute("foto");
 
-		if (IDArticolo == null || nome == null || descrizione == null || IDVenditore == null || rimborsabile == null
-				|| IDArticolo.isEmpty() || nome.isEmpty() || descrizione.isEmpty() || IDVenditore.isEmpty()
-				|| quantita < 1 || prezzo < 0.01) {
+		if (nome == null || descrizione == null || IDVenditore == null || rimborsabile == null || nome.isEmpty()
+				|| descrizione.isEmpty() || IDVenditore.isEmpty() || quantita < 1 || prezzo < 0.01) {
 			session.setAttribute("errore", "erroreParametriNull");
 			redirect = "/errore.jsp";
 			dd = request.getRequestDispatcher(redirect);
@@ -99,13 +96,16 @@ public class ModificaArticoloServlet extends HttpServlet {
 			}
 		} else {
 			try {
-				if (model.modificaArticolo(IDArticolo, nome, descrizione, IDVenditore, quantita, prezzo,
-						rimborsabile)) {
+				redirect = "/dettagliArticolo.jsp";
+				if (model.modificaArticolo(((ArticoloBean) session.getAttribute("dettagliArticolo")).getID(), nome,
+						descrizione, IDVenditore, quantita, prezzo, rimborsabile)) {
+					session.setAttribute("dettagliArticolo",
+							model.dettagliArticolo(((ArticoloBean) session.getAttribute("dettagliArticolo")).getID()));
+					session.setAttribute("fotoArticolo",
+							model.getAllFoto(((ArticoloBean) session.getAttribute("dettagliArticolo")).getID()));
 					session.setAttribute("successo", "modificaArticolo");
-					redirect = "/successo.jsp";
 				} else {
 					session.setAttribute("errore", "modificaArticolo");
-					redirect = "/errore.jsp";
 				}
 
 			} catch (SQLException e) {
