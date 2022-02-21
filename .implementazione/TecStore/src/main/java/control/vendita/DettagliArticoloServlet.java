@@ -1,10 +1,8 @@
 package control.vendita;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import bean.ArticoloBean;
-import bean.FotoBean;
 import model.GestioneVendita;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

@@ -108,13 +108,13 @@ public class GestioneAssistenza {
 
 			ResultSet rs = preparedStatement.executeQuery();
 
-			if (rs.next() && rispostaTicket(rs.getString("IDTicket"), CF, messaggio)) {
+			if (rs.next()) {
 				connection.commit();
-				return true;
+				return rispostaTicket(rs.getString("IDTicket"), CF, messaggio);
+			} else {
+				connection.rollback();
+				return false;
 			}
-
-			connection.rollback();
-			return false;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -270,12 +270,11 @@ public class GestioneAssistenza {
 			preparedStatement.setString(2, IDTicket);
 			preparedStatement.setString(3, contenuto);
 
-			preparedStatement.execute();
+			preparedStatement.executeUpdate();
 
 			connection.commit();
 			return true;
 		} catch (Exception e) {
-			connection.rollback();
 			e.printStackTrace();
 			return false;
 		} finally {

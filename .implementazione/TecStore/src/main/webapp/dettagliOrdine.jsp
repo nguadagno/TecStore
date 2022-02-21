@@ -235,6 +235,14 @@ return;
 		<label><b>Via:</b><%=cliente.getVia()%>, <b>N:</b> <%=cliente.getNumeroCivico()%>.</label><br>
 		<label><b>Citta:</b> <%=cliente.getCitta()%>, <%=cliente.getProvincia()%>,<b>
 				CAP:</b> <%=cliente.getCAP()%> </label><br> <br> <br>
+
+		<%
+		if (ordine.getStato().equals("Spedito")) {
+		%><label id=tracking><b>Codice tracking:</b> <%=ordine.getCodiceTracciamento()%>
+		</label>
+		<%
+		}
+		%>
 		<hr>
 		<br>
 	</div>

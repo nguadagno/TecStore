@@ -49,7 +49,7 @@
 			for (FotoBean f : foto) {
 				if (f.getIDArticolo().equals(ordini.get(i).getIDArticolo())) {
 			%>
-			<td><img style="max-width: 50px;" src="img?id=<%=f.getID()%>"></td>
+			<td><img style="max-width: 50px;" alt=<%=articoli.get(i).getNome() %> src="img?id=<%=f.getID()%>"></td>
 			<%
 			break;
 			}

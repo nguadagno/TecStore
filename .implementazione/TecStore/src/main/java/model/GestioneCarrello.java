@@ -16,7 +16,7 @@ public class GestioneCarrello {
 		return GetCarrello(u.getCF());
 	}
 
-	public static ArrayList<ArticoloBean> GetCarrello(String CF) throws SQLException {
+	public ArrayList<ArticoloBean> GetCarrello(String CF) throws SQLException {
 		ArrayList<ArticoloBean> carrello = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
