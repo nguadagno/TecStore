@@ -74,10 +74,11 @@ public class ModificaArticoloServlet extends HttpServlet {
 		@SuppressWarnings({ "unchecked" })
 		ArrayList<FotoBean> foto = (ArrayList<FotoBean>) request.getAttribute("foto");
 
-		if (nome == null || descrizione == null || IDVenditore == null || rimborsabile == null || nome.isEmpty()
-				|| descrizione.isEmpty() || IDVenditore.isEmpty() || quantita < 1 || prezzo < 0.01) {
-			session.setAttribute("errore", "erroreParametriNull");
-			redirect = "/errore.jsp";
+		if (nome == null || descrizione == null || IDVenditore == null || rimborsabile == null || nome.length() <= 5
+				|| descrizione.length() <= 25 || descrizione.length() >= 500 || IDVenditore.isEmpty() || quantita < 1
+				|| prezzo < 0.01) {
+			session.setAttribute("errore", "modificaArticolo");
+			redirect = "/dettagliArticolo.jsp";
 			dd = request.getRequestDispatcher(redirect);
 			dd.forward(request, response);
 			return;
