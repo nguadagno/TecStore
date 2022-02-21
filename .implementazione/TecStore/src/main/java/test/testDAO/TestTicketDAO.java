@@ -3,8 +3,6 @@ package test.testDAO;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.FileNotFoundException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -39,13 +37,16 @@ class TestTicketDAO {
 	}
 
 	@BeforeAll
-	public void setUp() throws NoSuchAlgorithmException, InvalidKeySpecException {
+	public void setUp() throws Exception {
 		try {
 			gestioneAccount.registrazioneUtente(utente);
-			gestioneAssistenza.creazioneTicket("RSSMRA84B02H501C", "Pagamento", "Vorrei info per 123");
-			IDTicket = gestioneAssistenza.elencoTicketCliente("RSSMRA84B02H501C", 1).get(0).getIDTicket();
-			ticket = gestioneAssistenza.dettagliTicket(IDTicket);
-		} catch (SQLException e) {
+			if (gestioneAssistenza.creazioneTicket("RSSMRA84B02H501C", "Amministrativo",
+					"Vorrei informazioni per quanto riguarda ...")) {
+				IDTicket = gestioneAssistenza.elencoTicketCliente("RSSMRA84B02H501C", 1).get(0).getIDTicket();
+				ticket = gestioneAssistenza.dettagliTicket(IDTicket);
+			} else
+				fail("Creazione ticket fallita");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -167,14 +168,15 @@ class TestTicketDAO {
 
 		ArrayList<MessaggioBean> elenco1 = gestioneAssistenza.elencoMessaggiTicket(IDTicket);
 
-		gestioneAssistenza.rispostaTicket(IDTicket, CF, "Siamo Occupati");
+		if (!gestioneAssistenza.rispostaTicket(IDTicket, CF, "C'è stato un problema con ..."))
+			fail("Errore inserimento risposta ticket");
 
 		ArrayList<MessaggioBean> elenco2 = gestioneAssistenza.elencoMessaggiTicket(IDTicket);
 
 		elenco2.removeAll(elenco1);
 
 		if (elenco2.size() == 1 && elenco2.get(0).getIDTicket().equals(IDTicket) && elenco2.get(0).getCF().equals(CF)
-				&& elenco2.get(0).getContenuto().equals("Siamo Occupati"))
+				&& elenco2.get(0).getContenuto().equals("C'è stato un problema con ..."))
 			status = true;
 
 		assertEquals(true, status);
