@@ -2544,12 +2544,11 @@
       "id": "8a3dbe68-a6fa-40e6-9350-57ab2025f04f",
       "comment": "",
       "command": "click",
-      "target": "id=conferma",
+      "target": "css=input:nth-child(1)",
       "targets": [
-        ["id=conferma", "id"],
-        ["name=submit", "name"],
-        ["css=#conferma", "css:finder"],
-        ["xpath=//input[@id='conferma']", "xpath:attributes"],
+        ["css=input:nth-child(1)", "css:finder"],
+        ["xpath=//input[@value='Conferma']", "xpath:attributes"],
+        ["xpath=//form[@id='f1']/div/input", "xpath:idRelative"],
         ["xpath=//div/input", "xpath:position"]
       ],
       "value": ""
@@ -2563,7 +2562,7 @@
         ["xpath=//h4", "xpath:position"],
         ["xpath=//h4[contains(.,'Registazione effettuata')]", "xpath:innerText"]
       ],
-      "value": "Registazione effettuata"
+      "value": "Registrazione effettuata"
     }, {
       "id": "ccd10e56-68ca-483c-ab80-273325c6488b",
       "comment": "",
@@ -2607,13 +2606,6 @@
       "targets": [],
       "value": "nome"
     }, {
-      "id": "4257f0c8-69d9-48ae-bbd7-3d8849de298d",
-      "comment": "",
-      "command": "",
-      "target": "",
-      "targets": [],
-      "value": ""
-    }, {
       "id": "80c491f6-dc1e-4f1d-ae8d-d7e0c2b3b8cb",
       "comment": "",
       "command": "click",
@@ -2636,6 +2628,16 @@
         ["xpath=//div[2]/form/input", "xpath:position"]
       ],
       "value": ""
+    }, {
+      "id": "feaf8c91-d2ef-4d21-bd2f-b1cc10049fd2",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=h5",
+      "targets": [
+        ["css=h5", "css:finder"],
+        ["xpath=//h5", "xpath:position"]
+      ],
+      "value": "30000"
     }, {
       "id": "5b28bde0-351d-4ded-a2d5-e70f4174cc46",
       "comment": "",
@@ -3952,11 +3954,11 @@
       "id": "044ec4dc-e278-4477-9018-6695040e792e",
       "comment": "",
       "command": "click",
-      "target": "css=tr:nth-child(2) input:nth-child(2)",
+      "target": "css=tr:nth-child(3) input:nth-child(2)",
       "targets": [
-        ["css=tr:nth-child(2) input:nth-child(2)", "css:finder"],
-        ["xpath=//input[@value='Dettagli']", "xpath:attributes"],
-        ["xpath=//input[2]", "xpath:position"]
+        ["css=tr:nth-child(3) input:nth-child(2)", "css:finder"],
+        ["xpath=(//input[@value='Dettagli'])[2]", "xpath:attributes"],
+        ["xpath=//tr[3]/td[4]/form/input[2]", "xpath:position"]
       ],
       "value": ""
     }, {
@@ -4047,7 +4049,7 @@
       "id": "b4d5659f-82d2-4599-a2e3-c4e9baf3584e",
       "comment": "",
       "command": "click",
-      "target": "css=tr:nth-child(2) input:nth-child(2)",
+      "target": "css=tr:nth-child(3) input:nth-child(2)",
       "targets": [
         ["css=tr:nth-child(2) input:nth-child(2)", "css:finder"],
         ["xpath=//input[@value='Dettagli']", "xpath:attributes"],
@@ -5631,7 +5633,7 @@
         ["xpath=//h4", "xpath:position"],
         ["xpath=//h4[contains(.,'Il ticket è stato chiuso.')]", "xpath:innerText"]
       ],
-      "value": "Il ticket è stato chiuso."
+      "value": "Il ticket è stato chiuso"
     }, {
       "id": "0c54b706-aa0c-422e-b1b9-5f06bc140e82",
       "comment": "",
@@ -6717,7 +6719,7 @@
         ["css=h4", "css:finder"],
         ["xpath=//h4", "xpath:position"]
       ],
-      "value": "L'ordine è stato spedito."
+      "value": "L'ordine è stato spedito"
     }, {
       "id": "ec058937-b6f1-4e45-bc4b-6eac6ba4f2bc",
       "comment": "",
@@ -6807,21 +6809,21 @@
       "id": "0b5a243d-4994-4331-a4e6-829e28c3f621",
       "comment": "",
       "command": "assertText",
-      "target": "css=tr:nth-child(2) > td:nth-child(1)",
+      "target": "css=tr:nth-child(3) > td:nth-child(2)",
       "targets": [
-        ["css=tr:nth-child(2) > td:nth-child(1)", "css:finder"],
-        ["xpath=//td", "xpath:position"],
-        ["xpath=//td[contains(.,'articolo10')]", "xpath:innerText"]
+        ["css=tr:nth-child(3) > td:nth-child(2)", "css:finder"],
+        ["xpath=//tr[3]/td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'articolo20')]", "xpath:innerText"]
       ],
-      "value": "articolo10"
+      "value": "articolo20"
     }, {
       "id": "0d06495b-d7d7-47ee-8d6c-0921b179cf78",
       "comment": "",
       "command": "assertText",
-      "target": "css=tr:nth-child(2) > td:nth-child(2)",
+      "target": "css=tr:nth-child(3) > td:nth-child(3)",
       "targets": [
-        ["css=tr:nth-child(2) > td:nth-child(2)", "css:finder"],
-        ["xpath=//td[2]", "xpath:position"],
+        ["css=tr:nth-child(3) > td:nth-child(3)", "css:finder"],
+        ["xpath=//tr[3]/td[3]", "xpath:position"],
         ["xpath=//td[contains(.,'Spedito')]", "xpath:innerText"]
       ],
       "value": "Spedito"
@@ -6829,12 +6831,11 @@
       "id": "24aa482f-d6ff-444c-9adf-0295378c7740",
       "comment": "",
       "command": "click",
-      "target": "id=storicoOrdini-dettagliOrdine",
+      "target": "css=tr:nth-child(3) #storicoOrdini-dettagliOrdine",
       "targets": [
-        ["id=storicoOrdini-dettagliOrdine", "id"],
-        ["css=tr:nth-child(2) #storicoOrdini-dettagliOrdine", "css:finder"],
-        ["xpath=//input[@id='storicoOrdini-dettagliOrdine']", "xpath:attributes"],
-        ["xpath=//form/input[2]", "xpath:position"]
+        ["css=tr:nth-child(3) #storicoOrdini-dettagliOrdine", "css:finder"],
+        ["xpath=(//input[@id='storicoOrdini-dettagliOrdine'])[2]", "xpath:attributes"],
+        ["xpath=//tr[3]/td[6]/form/input[2]", "xpath:position"]
       ],
       "value": ""
     }, {
@@ -6943,7 +6944,7 @@
       ],
       "value": "01234567890"
     }, {
-      "id": "832651e8-d518-4b98-b7e7-382c8f0da14f",
+      "id": "e0f66313-270e-4989-92b7-1a4f645ca491",
       "comment": "",
       "command": "sendKeys",
       "target": "id=autenticazione-password",
@@ -7000,7 +7001,7 @@
         ["css=h4", "css:finder"],
         ["xpath=//h4", "xpath:position"]
       ],
-      "value": "L'ordine è stato annullato."
+      "value": "L'ordine è stato annullato"
     }, {
       "id": "5bb701ef-b4a3-401c-8e5f-6361893aa22f",
       "comment": "",
@@ -7103,10 +7104,10 @@
       "id": "3adf5749-9dab-41d8-afb9-a7134fc62418",
       "comment": "",
       "command": "assertText",
-      "target": "css=tr:nth-child(2) > td:nth-child(1)",
+      "target": "css=tr:nth-child(2) > td:nth-child(2)",
       "targets": [
-        ["css=tr:nth-child(2) > td:nth-child(1)", "css:finder"],
-        ["xpath=//td", "xpath:position"],
+        ["css=tr:nth-child(2) > td:nth-child(2)", "css:finder"],
+        ["xpath=//td[2]", "xpath:position"],
         ["xpath=//td[contains(.,'articolo10')]", "xpath:innerText"]
       ],
       "value": "articolo10"
@@ -7114,11 +7115,11 @@
       "id": "f9076d35-2bf8-462a-a618-c4857ff6ae10",
       "comment": "",
       "command": "assertText",
-      "target": "css=tr:nth-child(2) > td:nth-child(2)",
+      "target": "css=tr:nth-child(2) > td:nth-child(3)",
       "targets": [
-        ["css=tr:nth-child(2) > td:nth-child(2)", "css:finder"],
-        ["xpath=//td[2]", "xpath:position"],
-        ["xpath=//td[contains(.,'Spedito')]", "xpath:innerText"]
+        ["css=tr:nth-child(2) > td:nth-child(3)", "css:finder"],
+        ["xpath=//td[3]", "xpath:position"],
+        ["xpath=//td[contains(.,'Annullato')]", "xpath:innerText"]
       ],
       "value": "Annullato"
     }, {
@@ -7700,12 +7701,11 @@
       "id": "e8b257bb-e948-4ff1-92be-ee5116285240",
       "comment": "",
       "command": "click",
-      "target": "id=areaVenditori-dettagliArticolo",
+      "target": "css=tr:nth-child(3) #areaVenditori-dettagliArticolo",
       "targets": [
-        ["id=areaVenditori-dettagliArticolo", "id"],
-        ["css=tr:nth-child(2) #areaVenditori-dettagliArticolo", "css:finder"],
-        ["xpath=//input[@id='areaVenditori-dettagliArticolo']", "xpath:attributes"],
-        ["xpath=//td[5]/form/input[2]", "xpath:position"]
+        ["css=tr:nth-child(3) #areaVenditori-dettagliArticolo", "css:finder"],
+        ["xpath=(//input[@id='areaVenditori-dettagliArticolo'])[2]", "xpath:attributes"],
+        ["xpath=//tr[3]/td[6]/form/input[2]", "xpath:position"]
       ],
       "value": ""
     }, {
@@ -9988,12 +9988,12 @@
       "id": "1af1a226-c7c5-4e1c-acdf-cde671a39220",
       "comment": "",
       "command": "click",
-      "target": "css=input:nth-child(55)",
+      "target": "css=input:nth-child(1)",
       "targets": [
-        ["css=input:nth-child(55)", "css:finder"],
+        ["css=input:nth-child(1)", "css:finder"],
         ["xpath=//input[@value='Conferma']", "xpath:attributes"],
-        ["xpath=//form[@id='f1']/input[10]", "xpath:idRelative"],
-        ["xpath=//input[10]", "xpath:position"]
+        ["xpath=//form[@id='f1']/div/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
       ],
       "value": ""
     }, {
@@ -11711,10 +11711,10 @@
       "id": "59080138-5ab4-436b-9611-df88c3cf1904",
       "comment": "",
       "command": "assertText",
-      "target": "css=td:nth-child(1)",
+      "target": "css=td:nth-child(2)",
       "targets": [
-        ["css=td:nth-child(1)", "css:finder"],
-        ["xpath=//td", "xpath:position"],
+        ["css=td:nth-child(2)", "css:finder"],
+        ["xpath=//td[2]", "xpath:position"],
         ["xpath=//td[contains(.,'articolo10')]", "xpath:innerText"]
       ],
       "value": "articolo10"
@@ -11938,7 +11938,7 @@
     "persistSession": false,
     "parallel": false,
     "timeout": 300,
-    "tests": ["7fcac882-82c3-45fe-9639-0f1f2467beff", "92ef1a44-4491-4864-a485-f43bc0013fff", "d7777fc4-e6cb-4883-aca3-fc220c16f538"]
+    "tests": ["92ef1a44-4491-4864-a485-f43bc0013fff", "d7777fc4-e6cb-4883-aca3-fc220c16f538", "7fcac882-82c3-45fe-9639-0f1f2467beff"]
   }, {
     "id": "ecd6676c-7b11-472c-a27d-605cd5f6109b",
     "name": "Carrello",
@@ -11966,14 +11966,14 @@
     "persistSession": false,
     "parallel": false,
     "timeout": 300,
-    "tests": ["f02f218a-10d7-41fd-9afd-c4f5ffedeec8", "b221818a-e323-48e9-8358-df8f83fc853a"]
+    "tests": ["b221818a-e323-48e9-8358-df8f83fc853a", "f02f218a-10d7-41fd-9afd-c4f5ffedeec8"]
   }, {
     "id": "090e8684-26ac-4bbd-bb44-94cbc2d34dfe",
     "name": "Spedizione",
     "persistSession": false,
     "parallel": false,
     "timeout": 300,
-    "tests": ["b5ac19d3-4750-490b-854b-061b84b0d647", "543f7177-25cb-431f-aec0-ac65320ed78d"]
+    "tests": ["543f7177-25cb-431f-aec0-ac65320ed78d", "b5ac19d3-4750-490b-854b-061b84b0d647"]
   }, {
     "id": "37a68f9b-c1b9-4346-ac32-4d9967736834",
     "name": "VenditaCentralinista",
