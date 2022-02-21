@@ -194,6 +194,10 @@ return;
 			%><%="In fase di elaborazione"%>
 			<%
 			break;
+			case "Rifiutato":
+			%><%="Articolo non ammesso"%>
+			<%
+			break;
 			}
 			%>
 		</h4>

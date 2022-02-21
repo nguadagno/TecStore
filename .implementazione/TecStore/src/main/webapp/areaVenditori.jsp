@@ -88,6 +88,9 @@ return;
  case "InElaborazione":
  %><%="In fase di elaborazione"%> <%
  break;
+ case "Rifiutato":
+ %><%="Articolo non ammesso"%> <%
+ break;
  }
  %>
 			</td>
