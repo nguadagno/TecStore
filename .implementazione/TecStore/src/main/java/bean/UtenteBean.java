@@ -40,7 +40,6 @@ public class UtenteBean {
 			this.CAP = CAP;
 			this.tipologia = tipologia;
 			this.cartaDiCredito = cartaDiCredito;
-
 		} else {
 			this.CF = null;
 			this.nome = null;
@@ -55,7 +54,6 @@ public class UtenteBean {
 			this.tipologia = -1;
 			this.cartaDiCredito = null;
 		}
-
 	}
 
 	public boolean checkCF(String CF) {

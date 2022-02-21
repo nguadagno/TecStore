@@ -4,50 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="application/javascript">
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-var password = document.getElementById("password"), confermapassword = document.getElementById("confermapassword");
-
-function validatePassword(){
-  if(password.value != confirm_password.value) {
-	  confermapassword.setCustomValidity("Le password non coincidono!");
-  } else {
-	  confermapassword.setCustomValidity('');
-  }
-}
-
-password.onchange = validatePassword;
-confermapassword.onkeyup = validatePassword;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</script>
 <%
 int tipologia = -1;
 if (session.getAttribute("tipologia") == null || session.getAttribute("tipologia").toString().isEmpty()

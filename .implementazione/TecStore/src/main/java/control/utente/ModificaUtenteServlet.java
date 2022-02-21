@@ -61,10 +61,13 @@ public class ModificaUtenteServlet extends HttpServlet {
 
 			if (request.getParameter("tipologiaUtente") != null)
 				tipologiaUtente = Integer.parseInt(request.getParameter("tipologiaUtente"));
+			else if (session.getAttribute("tipologia").toString().equals("1"))
+				tipologiaUtente = 1;
 			else {
 				session.setAttribute("errore", "modificaUtente");
 				redirect = "/errore.jsp";
 			}
+
 			if (tipologia == 5 && tipologiaUtente == 1) {
 				session.setAttribute("errore", "modificaUtente");
 				redirect = "/errore.jsp";
