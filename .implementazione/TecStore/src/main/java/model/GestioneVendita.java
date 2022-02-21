@@ -576,13 +576,12 @@ public class GestioneVendita {
 
 	public boolean cambiaStato(String IDArticolo, String stato) throws SQLException {
 		final Set<String> states = Set.of("InVendita", "InElaborazione", "Rifiutato");
-		if (!states.contains(stato))
+		if (IDArticolo == null || stato == null || !states.contains(stato))
 			return false;
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String cambiaStatoQuery = "UPDATE articolo SET stato = ? WHERE ID = ?;";
-
 		try {
 			connection = DriverManagerConnectionPool.getConnection("centralinista", "centralinista");
 			preparedStatement = connection.prepareStatement(cambiaStatoQuery);

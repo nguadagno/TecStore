@@ -118,14 +118,15 @@ return;
 		</div>
 	</div>
 
+
 	<%
-	if (foto.size() != 0) {
+	if (tipologia == 1 || tipologia == 4) {
+		if (foto.size() != 0) {
 	%>
 	<form action="img" method=get>
 		<input type=hidden name=del value=all> <input type=submit
 			value="Rimuovi tutte le immagini">
 	</form>
-
 	<%
 	}
 	%>
@@ -139,6 +140,9 @@ return;
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+	<%
+	}
+	%>
 
 	<div align="center" id="dettagliArticolo-nome">
 		<h2>Nome:</h2>
@@ -169,6 +173,31 @@ return;
 		if ((session.getAttribute("CF").toString()
 		.equals(((ArticoloBean) session.getAttribute("dettagliArticolo")).getIDVenditore())) || tipologia == 4) {
 	%>
+	<div align="center" id="statoArticolo">
+		<h2>Stato:</h2>
+		<h4>
+			<%
+			switch (risultato.getStato()) {
+			case "InAttesa":
+			%><%="In attesa di approvazione"%>
+			<%
+			break;
+			case "InVendita":
+			%><%="In vendita"%>
+			<%
+			break;
+			case "Annullato":
+			%><%="Annullato"%>
+			<%
+			break;
+			case "InElaborazione":
+			%><%="In fase di elaborazione"%>
+			<%
+			break;
+			}
+			%>
+		</h4>
+	</div>
 	<div align="right">
 		<form action="ModificaArticolo" method="post">
 			<input type="hidden" name="IDArticolo" value="<%=risultato.getID()%>">
@@ -197,12 +226,14 @@ return;
 	%>
 	<div align="right">
 		<form action="AutorizzazioneVendita" method="post">
-			<label><b>Conferma Vendita</b></label> <input type="radio"
-				name="stato" value="InVendita"
-				id="dettagliArticolo-autorizzaVenditaConferma"><br> <label><b>Rifiuta
-					Vendita</b></label> <input type="radio" name="stato"
-				id="dettagliArticolo-autorizzaVenditaRifiuta" value="Rifiutato">
-			<br> <br> <input type="submit" value="Conferma">
+			<input type=hidden name=IDArticolo id=IDArticolo
+				value=<%=risultato.getID()%>> <label><b>Conferma
+					Vendita</b></label> <input type="radio" name="stato" value="InVendita"
+				id="dettagliArticolo-autorizzaVenditaConferma" required><br>
+			<label><b>Rifiuta Vendita</b></label> <input type="radio"
+				name="stato" id="dettagliArticolo-autorizzaVenditaRifiuta"
+				value="Rifiutato" required> <br> <br> <input
+				type="submit" id="conferma" value="Conferma">
 		</form>
 	</div>
 	<%

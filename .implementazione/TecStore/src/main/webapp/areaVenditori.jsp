@@ -61,6 +61,7 @@ return;
 			<th>Nome</th>
 			<th>Descrizione</th>
 			<th>Prezzo</th>
+			<th>Stato</th>
 			<th>ID</th>
 			<th></th>
 		</tr>
@@ -72,6 +73,24 @@ return;
 			<td><%=a.getNome()%></td>
 			<td><%=a.getDescrizione()%></td>
 			<td><%=a.getPrezzo()%></td>
+			<td>
+				<%
+				switch (a.getStato()) {
+				case "InAttesa":
+				%><%="In attesa di approvazione"%> <%
+ break;
+ case "InVendita":
+ %><%="In vendita"%> <%
+ break;
+ case "Annullato":
+ %><%="Annullato"%> <%
+ break;
+ case "InElaborazione":
+ %><%="In fase di elaborazione"%> <%
+ break;
+ }
+ %>
+			</td>
 			<td><%=a.getID()%></td>
 
 			<td><form action="DettagliArticolo" method="post">
